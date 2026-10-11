@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-background" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Estudio Salsa - Control de asistencia</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary-container": "#006f67",
+            "on-primary-container": "#ffece7",
+            "error-container": "#ffdad6",
+            "inverse-on-surface": "#ffede8",
+            "surface-container-highest": "#f7ddd6",
+            "error": "#b91c1c",
+            "on-tertiary": "#ffffff",
+            "primary-fixed-dim": "#ffb59d",
+            "on-error-container": "#93000a",
+            "surface-container": "#ffe9e3",
+            "surface-container-high": "#fce3db",
+            "secondary-container": "#99efe5",
+            "surface-bright": "#fff8f6",
+            "on-secondary-fixed-variant": "#00504a",
+            "tertiary-container": "#0069de",
+            "outline-variant": "#e1bfb5",
+            "on-background": "#261814",
+            "inverse-primary": "#ffb59d",
+            "surface-tint": "#ac3400",
+            "secondary-fixed": "#9cf2e8",
+            "on-tertiary-container": "#ecf0ff",
+            "on-primary-fixed": "#390c00",
+            "secondary": "#006a63",
+            "surface-variant": "#f7ddd6",
+            "secondary-fixed-dim": "#80d5cb",
+            "on-secondary-fixed": "#00201d",
+            "primary-fixed": "#ffdbd0",
+            "on-secondary": "#ffffff",
+            "tertiary": "#b45309",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#fff1ed",
+            "inverse-surface": "#3c2d28",
+            "background": "#fff8f6",
+            "tertiary-fixed": "#d8e2ff",
+            "surface-dim": "#ede7e1",
+            "primary": "#9b2f00",
+            "on-primary-fixed-variant": "#832600",
+            "tertiary-fixed-dim": "#adc6ff",
+            "on-surface-variant": "#59413a",
+            "on-tertiary-fixed": "#001a41",
+            "on-primary": "#ffffff",
+            "on-tertiary-fixed-variant": "#004494",
+            "outline": "#8b8079",
+            "surface": "#ffffff",
+            "primary-container": "#c2410c",
+            "on-error": "#ffffff",
+            "on-surface": "#261814"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2rem",
+            "margin": "1rem",
+            "margin-desktop": "2rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "gutter-desktop": "1.5rem",
+            "gutter": "1rem",
+            "space-md": "1rem",
+            "space-2xl": "3rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "headline-sm": ["Outfit"],
+            "headline-md": ["Outfit"],
+            "metric": ["Outfit"],
+            "headline-lg": ["Outfit"],
+            "label": ["Inter"],
+            "label-tabular": ["Inter"],
+            "display-mobile": ["Outfit"],
+            "button-text": ["Inter"],
+            "body-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "body-lg": ["Inter"],
+            "display": ["Outfit"]
+          },
+          "fontSize": {
+            "headline-sm": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+            "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+            "metric": ["40px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+            "label": ["12px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600"}],
+            "label-tabular": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+            "display-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "button-text": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+            "body-md": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "body-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
+            "body-lg": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+            "display": ["34px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body class="h-full font-body-md text-on-surface antialiased bg-[#FAF7F4] selection:bg-surface-container selection:text-primary">
+<!-- SideNavBar Fixed 240px -->
+<aside class="fixed top-0 left-0 h-screen w-60 z-30 bg-surface-container-low flex flex-col justify-between p-4">
+<div class="flex flex-col gap-5">
+<!-- Header / Logo -->
+<div class="flex items-center gap-3 px-2 py-1">
+<div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-headline-sm shadow-sm">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">music_note</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-sm font-bold text-primary tracking-tight">Estudio Salsa</span>
+<span class="font-label text-label text-on-surface-variant font-medium">Gestión de Estudio</span>
+</div>
+</div>
+<!-- CTA Button -->
+<button class="w-full h-10 rounded-[10px] bg-primary text-on-primary font-button-text text-button-text flex items-center justify-center gap-2 hover:bg-primary-container active:scale-95 transition-all shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>Nueva Clase</span>
+</button>
+<!-- Navigation Links -->
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-body-md text-body-md hover:bg-surface-container hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">home</span>
+<span>Inicio</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-body-md text-body-md hover:bg-surface-container hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+<span>Calendario</span>
+</a>
+<!-- ACTIVE TAB: Clases -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-[#FDE8DD] text-[#C2410C] font-button-text text-button-text transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">sports_kabaddi</span>
+<span>Clases</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-body-md text-body-md hover:bg-surface-container hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">groups</span>
+<span>Alumnos</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-body-md text-body-md hover:bg-surface-container hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+<span>Facturación</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-body-md text-body-md hover:bg-surface-container hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span>Ajustes</span>
+</a>
+</nav>
+</div>
+<!-- Bottom Section: Studio Picker & System Links -->
+<div class="flex flex-col gap-3 pt-3">
+<!-- Studio Location Picker -->
+<div class="px-2.5 py-2 rounded-lg bg-surface-container-lowest/80 border border-outline-variant/40 flex items-center justify-between">
+<div class="flex items-center gap-2 overflow-hidden">
+<span class="material-symbols-outlined text-[18px] text-secondary">location_on</span>
+<div class="flex flex-col truncate">
+<span class="font-label text-[11px] text-on-surface-variant font-semibold">SEDE ACTIVA</span>
+<span class="font-body-sm text-[12px] font-medium text-on-surface truncate">Sede Centro - Gran Vía</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">unfold_more</span>
+</div>
+<div class="flex flex-col gap-0.5 border-t border-outline-variant/30 pt-2">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">help</span>
+<span>Ayuda y Soporte</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container hover:text-error transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+<span>Cerrar sesión</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- TopNavBar Fixed 64px -->
+<header class="fixed top-0 left-60 right-0 h-16 z-20 bg-surface-container-lowest shadow-sm flex items-center justify-between px-8">
+<!-- Breadcrumb & Search -->
+<div class="flex items-center gap-6">
+<nav class="flex items-center gap-2 font-label text-label text-on-surface-variant font-medium">
+<span>Clases</span>
+<span class="text-outline-variant">/</span>
+<span class="text-on-surface font-semibold">Control de asistencia</span>
+</nav>
+<!-- Quick Search Bar (Command + K) -->
+<div class="relative w-80">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline text-[18px]">search</span>
+</div>
+<input class="w-full h-9 pl-9 pr-12 text-[13px] font-body-sm bg-surface-container-low border border-outline-variant/50 rounded-md focus:bg-white focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-on-surface placeholder:text-outline transition-all" placeholder="Buscar alumno o nota..." type="text"/>
+<div class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none">
+<kbd class="px-1.5 py-0.5 text-[10px] font-label font-semibold text-on-surface-variant bg-surface-container rounded border border-outline-variant/60">⌘K</kbd>
+</div>
+</div>
+</div>
+<!-- Actions & User Profile -->
+<div class="flex items-center gap-4">
+<!-- Notification icon with badge -->
+<button aria-label="Notificaciones" class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary ring-2 ring-surface-container-lowest"></span>
+</button>
+<div class="h-6 w-px bg-outline-variant/40"></div>
+<!-- Instructor Avatar & Role -->
+<div class="flex items-center gap-3">
+<img class="w-9 h-9 rounded-full object-cover ring-1 ring-outline-variant/60" data-alt="Close-up professional portrait of a Hispanic dance teacher Marcos Delgado in his 30s with a warm approachable expression wearing a dark studio polo shirt in front of soft neutral studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyEh_gisL9MaROuDh6lV7uGS041asxoen1pVSvLRVi6cyFQd6xambZJ8kXdaaviC054yo7Ftr2rDEQ39kZ39GGsLoQUmRlmy8cG7kxzhs21LyQsFJsBBbkC6hO-zlos1DOql49yuShdoNvJLQtmRc4SXnzQIr1Et6znWHrpXL_vSsbDraCTw9xwXC1RGE_gDOj2p79QSzroxzWx8QClqbGHj-wq0EuSY9I1cmn5oPnvLMGtox0kUCSHNwzdQ1pVTMBfMeEjFku228"/>
+<div class="flex flex-col text-left">
+<span class="font-button-text text-[13px] text-on-surface font-semibold leading-tight">Marcos Delgado</span>
+<span class="font-label text-[11px] text-secondary font-medium">Profesor titular</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas (max-w 1280px, padding 32px) -->
+<main class="ml-60 pt-16 min-h-screen">
+<div class="max-w-[1280px] mx-auto p-8 flex flex-col gap-6">
+<!-- Breadcrumbs & Class Session Header Section -->
+<section class="bg-surface-container-lowest rounded-[14px] border border-[#E8E2DC] p-6 shadow-sm flex flex-col gap-5">
+<!-- Breadcrumb context -->
+<div class="flex items-center gap-1.5 font-label text-[12px] text-on-surface-variant font-medium">
+<a class="hover:text-primary transition-colors" href="#">Clases</a>
+<span class="material-symbols-outlined text-[14px] text-outline-variant">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Salsa Intermedio</a>
+<span class="material-symbols-outlined text-[14px] text-outline-variant">chevron_right</span>
+<span class="text-on-surface font-semibold">Control de asistencia</span>
+</div>
+<!-- Main Title & Style/Level Badges -->
+<div class="flex items-center justify-between flex-wrap gap-4">
+<div class="flex items-center gap-3 flex-wrap">
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">Salsa Intermedio</h1>
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-1 rounded-[6px] bg-surface-container text-on-surface-variant font-label text-[12px] font-medium border border-outline-variant/30">
+                Salsa en línea
+              </span>
+<span class="px-2.5 py-1 rounded-[6px] bg-[#FDE8DD] text-[#C2410C] font-label text-[12px] font-semibold border border-[#E1BFB5]/40">
+                Nivel Intermedio
+              </span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-label font-semibold bg-secondary-container/40 text-secondary">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+              Sesión en curso
+            </span>
+</div>
+</div>
+<!-- Session Metadata Bar (Tabular figures) -->
+<div class="grid grid-cols-2 md:grid-cols-5 gap-4 pt-4 border-t border-[#E8E2DC] text-on-surface-variant">
+<!-- Fecha -->
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">calendar_month</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label text-[11px] uppercase tracking-wider text-outline font-semibold">FECHA</span>
+<span class="font-label-tabular text-label-tabular font-semibold text-on-surface tabular-nums">martes, 13/10/2026</span>
+</div>
+</div>
+<!-- Horario -->
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label text-[11px] uppercase tracking-wider text-outline font-semibold">HORARIO</span>
+<span class="font-label-tabular text-label-tabular font-semibold text-on-surface tabular-nums">19:30 - 21:00 <span class="text-on-surface-variant font-normal">(90 min)</span></span>
+</div>
+</div>
+<!-- Ubicación -->
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">meeting_room</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label text-[11px] uppercase tracking-wider text-outline font-semibold">UBICACIÓN</span>
+<span class="font-label-tabular text-label-tabular font-semibold text-on-surface">Sala 1 (Planta principal)</span>
+</div>
+</div>
+<!-- Ocupación with Progress Bar -->
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">groups</span>
+</div>
+<div class="flex flex-col w-full max-w-[170px]">
+<div class="flex justify-between items-baseline">
+<span class="font-label text-[11px] uppercase tracking-wider text-outline font-semibold">OCUPACIÓN</span>
+<span class="font-label-tabular text-[12px] font-bold text-on-surface tabular-nums">12/16 (75%)</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden mt-1">
+<div class="bg-primary h-full rounded-full" style="width: 75%"></div>
+</div>
+</div>
+</div>
+<!-- Profesor Titular -->
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">person</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label text-[11px] uppercase tracking-wider text-outline font-semibold">PROFESOR TITULAR</span>
+<span class="font-label-tabular text-label-tabular font-semibold text-on-surface">Marcos Delgado</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Operational Card: Class List Table & Actions -->
+<section class="bg-surface-container-lowest rounded-[14px] border border-[#E8E2DC] shadow-sm overflow-hidden flex flex-col">
+<!-- Table Top Toolbar -->
+<div class="p-4 sm:p-5 flex items-center justify-between gap-4 border-b border-[#E8E2DC] flex-wrap bg-surface-container-lowest">
+<div class="flex items-center gap-4 flex-wrap">
+<!-- Left convocados badge -->
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-[8px] bg-surface-container font-label text-[13px] font-semibold text-on-surface">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>12 alumnos convocados</span>
+</div>
+<!-- Search Field -->
+<div class="relative w-72">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-[18px] text-outline">search</span>
+</span>
+<input class="w-full h-[44px] pl-9 pr-3 text-[13px] font-body-sm bg-surface-bright border border-[#E8E2DC] rounded-[6px] focus:bg-white focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-on-surface placeholder:text-outline transition-all" placeholder="Buscar por nombre, apellidos o email..." type="text"/>
+</div>
+<!-- Quick Filter by Payment / Type -->
+<div class="relative">
+<select class="h-[44px] pl-3 pr-8 text-[13px] font-body-sm font-medium bg-surface-bright border border-[#E8E2DC] rounded-[6px] text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary appearance-none cursor-pointer">
+<option value="all">Todos los estados de pago</option>
+<option value="paid">Solo Pagadas</option>
+<option value="pending">Solo Pendientes</option>
+<option value="bono">Solo Bonos</option>
+<option value="suelta">Solo Clases Sueltas</option>
+</select>
+<div class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-[18px]">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Right Toolbar Action Buttons -->
+<div class="flex items-center gap-3">
+<button class="h-[44px] px-4 rounded-[10px] border border-[#E8E2DC] bg-white text-on-surface font-button-text text-button-text flex items-center gap-2 hover:bg-surface-container-low transition-all shadow-sm active:scale-95">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+<span>Añadir alumno</span>
+</button>
+<button class="h-[44px] px-4 rounded-[10px] bg-[#C2410C] text-white font-button-text text-button-text flex items-center gap-2 hover:bg-primary transition-all shadow-sm active:scale-95">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+<span>Cerrar lista</span>
+</button>
+</div>
+</div>
+<!-- Attendance Roster Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/70 border-b border-[#E8E2DC] text-outline font-label text-[11px] tracking-wider uppercase select-none">
+<th class="py-3 px-5 font-semibold w-[280px]">ALUMNO</th>
+<th class="py-3 px-4 font-semibold w-[110px]">TIPO</th>
+<th class="py-3 px-4 font-semibold w-[130px]">ESTADO PAGO</th>
+<th class="py-3 px-4 font-semibold w-[260px]">ASISTENCIA</th>
+<th class="py-3 px-5 font-semibold">NOTAS</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#E8E2DC]/80 font-body-sm text-[13px]">
+<!-- Row 1: Lucía Mendoza -->
+<tr class="hover:bg-surface-container-low/40 transition-colors h-[54px]">
+<td class="py-2.5 px-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant font-semibold flex items-center justify-center text-xs">LM</div>
+<div class="flex flex-col">
+<span class="font-button-text font-semibold text-on-surface text-[13px]">Lucía Mendoza</span>
+<span class="text-[12px] text-outline font-normal">lucia.mendoza@email.com</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-4">
+<span class="px-2 py-0.5 rounded-[6px] bg-surface-container text-on-surface-variant font-label text-[11px] font-medium border border-outline-variant/30">Bono</span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-[6px] bg-[#CCFBF1] text-[#0F766E] font-label text-[11px] font-semibold">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    Pagada
+                  </span>
+</td>
+<td class="py-2.5 px-4">
+<!-- Segmented Control Compact -->
+<div class="inline-flex p-0.5 bg-surface-container-low border border-[#E8E2DC] rounded-[8px]">
+<button class="px-2.5 py-1 text-[11px] font-button-text font-semibold rounded-[6px] bg-[#CCFBF1] text-[#0F766E] shadow-sm">Presente</button>
+<button class="px-2.5 py-1 text-[11px] font-label text-outline hover:text-on-surface rounded-[6px]">Retraso</button>
+<button class="px-2.5 py-1 text-[11px] font-label text-outline hover:text-on-surface rounded-[6px]">Ausente</button>
+</div>
+</td>
+<td class="py-2.5 px-5">
+<div class="flex items-center gap-1.5 text-on-surface-variant text-[12px]">
+<span class="material-symbols-outlined text-[16px] text-tertiary">edit_note</span>
+<span class="truncate max-w-[280px]">Avisa que llega 5 min tarde por tráfico</span>
+</div>
+</td>
+</tr>
+<!-- Row 2: Carlos Rivera -->
+<tr class="hover:bg-surface-container-low/40 transition-colors h-[54px]">
+<td class="py-2.5 px-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant font-semibold flex items-center justify-center text-xs">CR</div>
+<div class="flex flex-col">
+<span class="font-button-text font-semibold text-on-surface text-[13px]">Carlos Rivera</span>
+<span class="text-[12px] text-outline font-normal">carlos.rivera@email.com</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-4">
+<span class="px-2 py-0.5 rounded-[6px] bg-surface-container text-on-surface-variant font-label text-[11px] font-medium border border-outline-variant/30">Bono</span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-[6px] bg-[#CCFBF1] text-[#0F766E] font-label text-[11px] font-semibold">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    Pagada
+                  </span>
+</td>
+<td class="py-2.5 px-4">
+<div class="inline-flex p-0.5 bg-surface-container-low border border-[#E8E2DC] rounded-[8px]">
+<button class="px-2.5 py-1 text-[11px] font-button-text font-semibold rounded-[6px] bg-[#CCFBF1] text-[#0F766E] shadow-sm">Presente</button>
+<button class="px-2.5 py-1 text-[11px] font-label text-outline hover:text-on-surface rounded-[6px]">Retraso</button>
+<button class="px-2.5 py-1 text-[11px] font-label text-outline hover:text-on-surface rounded-[6px]">Ausente</button>
+</div>
+</td>
+<td class="py-2.5 px-5">
+<button class="flex items-center gap-1 text-outline hover:text-primary transition-colors text-[12px]">
+<span class="material-symbols-outlined text-[16px]">add_comment</span>
+<span>Añadir nota</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Elena Salgado -->
+<tr class="hover:bg-surface-container-low/40 transition-colors h-[54px]">
+<td class="py-2.5 px-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant font-semibold flex items-center justify-center text-xs">ES</div>
+<div class="flex flex-col">
+<span class="font-button-text font-semibold text-on-surface text-[13px]">Elena Salgado</span>
+<span class="text-[12px] text-outline font-normal">elena.salgado@email.com</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-4">
+<span class="px-2 py-0.5 rounded-[6px] bg-surface-container text-on-surface-variant font-label text-[11px] font-medium border border-outline-variant/30">Suelta</span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-[6px] bg-[#CCFBF1] text-[#0F766E] font-label text-[11px] font-semibold">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    Pagada
+                  </span>
+</td>
+<td class="py-2.5 px-4">
+<div class="inline-flex p-0.5 bg-surface-container-low border border-[#E8E2DC] rounded-[8px]">
+<button class="px-2.5 py-1 text-[11px] font-button-text font-semibold rounded-[6px] bg-[#CCFBF1] text-[#0F766E] shadow-sm">Presente</button>
+<button class="px-2.5 py-1 text-[11px] font-label text-outline hover:text-on-surface rounded-[6px]">Retraso</button>
+<button class="px-2.5 py-1 text-[11px] font-label text-outline hover:text-on-surface rounded-[6px]">Ausente</button>
+</div>
+</td>
+<td class="py-2.5 px-5">
+<button class="flex items-center gap-1 text-outline hover:text-primary transition-colors text-[12px]">
+<span class="material-symbols-outlined text-[16px]">add_comment</span>
+<span>Añadir nota</span>
+</button>
+</td>
+</tr>
+<!-- Row 4: Javier Sanz (Retraso MARCADO ÁMBAR) -->
+<tr class="hover:bg-surface-container-low/40 transition-colors h-[54px] bg-[#FFFBEB]/40">
+<td class="py-2.5 px-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-[#FEF3C7] text-[#B45309] font-semibold flex items-center justify-center text-xs">JS</div>
+<div class="flex flex-col">
+<span class="font-button-text font-semibold text-on-surface text-[13px]">Javier Sanz</span>
+<span class="text-[12px] text-outline font-normal">javier.sanz@email.com</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-4">
+<span class="px-2 py-0.5 rounded-[6px] bg-surface-container text-on-surface-variant font-label text-[11px] font-medium border border-outline-variant/30">Bono</span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-[6px] bg-[#FEF3C7] text-[#B45309] font-label text-[11px] font-semibold">
+<span class="material-symbols-outlined text-[13px]">pending</span>
+                    Pendiente
+                  </span>
+</td>
+<td class="py-2.5 px-4">
+<!-- Retraso marcado en ámbar -->
+<div class="inline-flex p-0.5 bg-surface-container-low border border-[#E8E2DC] rounded-[8px]">
+<button class="px-2.5 py-1 text-[11px] font-label text-outline hover:text-on-surface rounded-[6px]">Presente</button>
+<button class="px-2.5 py-1 text-[11px] font-button-text font-semibold rounded-[6px] bg-[#FEF3C7] text-[#B45309] shadow-sm">Retraso</button>
+<button class="px-2.5 py-1 text-[11px] font-label text-outline hover:text-on-surface rounded-[6px]">Ausente</button>
+</div>
+</td>
+<td class="py-2.5 px-5">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-[6px] bg-[#FEF3C7] text-[#B45309] font-label text-[11px] font-semibold">
+<span class="material-symbols-outlined text-[13px]">schedule</span>
+                    Llega 19:45
+                  </span>
+</td>
+</tr>
+<!-- Row 5: Carmen Rivas -->
+<tr class="hover:bg-surface-container-low/40 transition-colors h-[54px]">
+<td class="py-2.5 px-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant font-semibold flex items-center justify-center text-xs">CR</div>
+<div class="flex flex-col">
+<span class="font-button-text font-semibold text-on-surface text-[13px]">Carmen Rivas</span>
+<span class="text-[12px] text-outline font-normal">carmen.rivas@email.com</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-4">
+<span class="px-2 py-0.5 rounded-[6px] bg-surface-container text-on-surface-variant font-label text-[11px] font-medium border border-outline-variant/30">Bono</span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-[6px] bg-[#CCFBF1] text-[#0F766E] font-label text-[11px] font-semibold">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    Pagada
+                  </span>
+</td>
+<td class="py-2.5 px-4">
+<div class="inline-flex p-0.5 bg-surface-container-low border border-[#E8E2DC] rounded-[8px]">
+<button class="px-2.5 py-1 text-[11px] font-button-text font-semibold rounded-[6px] bg-[#CCFBF1] text-[#0F766E] shadow-sm">Presente</button>
+<button class="px-2.5 py-1 text-[11px] font-label text-outline hover:text-on-surface rounded-[6px]">Retraso</button>
+<button class="px-2.5 py-1 text-[11px] font-label text-outline hover:text-on-surface rounded-[6px]">Ausente</button>
+</div>
+</td>
+<td class="py-2.5 px-5">
+<button class="flex items-center gap-1 text-outline hover:text-primary transition-colors text-[12px]">
+<span class="material-symbols-outlined text-[16px]">add_comment</span>
+<span>Añadir nota</span>
+</button>
+</td>
+</tr>
+<!-- Row 6: Mateo Gil (Ausente MARCADO ROJO) -->
+<tr class="hover:bg-surface-container-low/40 transition-colors h-[54px] bg-[#FEF2F2]/40">
+<td class="py-2.5 px-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-[#FEE2E2] text-[#B91C1C] font-semibold flex items-center justify-center text-xs">MG</div>
+<div class="flex flex-col">
+<span class="font-button-text font-semibold text-on-surface text-[13px]">Mateo Gil</span>
+<span class="text-[12px] text-outline font-normal">mateo.gil@email.com</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-4">
+<span class="px-2 py-0.5 rounded-[6px] bg-surface-container text-on-surface-variant font-label text-[11px] font-medium border border-outline-variant/30">Suelta</span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-[6px] bg-[#CCFBF1] text-[#0F766E] font-label text-[11px] font-semibold">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    Pagada
+                  </span>
+</td>
+<td class="py-2.5 px-4">
+<!-- Ausente marcado en rojo -->
+<div class="inline-flex p-0.5 bg-surface-container-low border border-[#E8E2DC] rounded-[8px]">
+<button class="px-2.5 py-1 text-[11px] font-label text-outline hover:text-on-surface rounded-[6px]">Presente</button>
+<button class="px-2.5 py-1 text-[11px] font-label text-outline hover:text-on-surface rounded-[6px]">Retraso</button>
+<button class="px-2.5 py-1 text-[11px] font-button-text font-semibold rounded-[6px] bg-[#FEE2E2] text-[#B91C1C] shadow-sm">Ausente</button>
+</div>
+</td>
+<td class="py-2.5 px-5">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-[6px] bg-[#FEE2E2] text-[#B91C1C] font-label text-[11px] font-semibold">
+<span class="material-symbols-outlined text-[13px]">medical_services</span>
+                    Avisó ausencia médica
+                  </span>
+</td>
+</tr>
+<!-- Row 7: Sofía Navarro -->
+<tr class="hover:bg-surface-container-low/40 transition-colors h-[54px]">
+<td class="py-2.5 px-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant font-semibold flex items-center justify-center text-xs">SN</div>
+<div class="flex flex-col">
+<span class="font-button-text font-semibold text-on-surface text-[13px]">Sofía Navarro</span>
+<span class="text-[12px] text-outline font-normal">sofia.navarro@email.com</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-4">
+<span class="px-2 py-0.5 rounded-[6px] bg-surface-container text-on-surface-variant font-label text-[11px] font-medium border border-outline-variant/30">Bono</span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-[6px] bg-[#CCFBF1] text-[#0F766E] font-label text-[11px] font-semibold">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    Pagada
+                  </span>
+</td>
+<td class="py-2.5 px-4">
+<div class="inline-flex p-0.5 bg-surface-container-low border border-[#E8E2DC] rounded-[8px]">
+<button class="px-2.5 py-1 text-[11px] font-button-text font-semibold rounded-[6px] bg-[#CCFBF1] text-[#0F766E] shadow-sm">Presente</button>
+<button class="px-2.5 py-1 text-[11px] font-label text-outline hover:text-on-surface rounded-[6px]">Retraso</button>
+<button class="px-2.5 py-1 text-[11px] font-label text-outline hover:text-on-surface rounded-[6px]">Ausente</button>
+</div>
+</td>
+<td class="py-2.5 px-5">
+<button class="flex items-center gap-1 text-outline hover:text-primary transition-colors text-[12px]">
+<span class="material-symbols-outlined text-[16px]">add_comment</span>
+<span>Añadir nota</span>
+</button>
+</td>
+</tr>
+<!-- Row 8: Alejandro Morales -->
+<tr class="hover:bg-surface-container-low/40 transition-colors h-[54px]">
+<td class="py-2.5 px-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant font-semibold flex items-center justify-center text-xs">AM</div>
+<div class="flex flex-col">
+<span class="font-button-text font-semibold text-on-surface text-[13px]">Alejandro Morales</span>
+<span class="text-[12px] text-outline font-normal">alejandro.morales@email.com</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-4">
+<span class="px-2 py-0.5 rounded-[6px] bg-surface-container text-on-surface-variant font-label text-[11px] font-medium border border-outline-variant/30">Bono</span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-[6px] bg-[#CCFBF1] text-[#0F766E] font-label text-[11px] font-semibold">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    Pagada
+                  </span>
+</td>
+<td class="py-2.5 px-4">
+<div class="inline-flex p-0.5 bg-surface-container-low border border-[#E8E2DC] rounded-[8px]">
+<button class="px-2.5 py-1 text-[11px] font-button-text font-semibold rounded-[6px] bg-[#CCFBF1] text-[#0F766E] shadow-sm">Presente</button>
+<button class="px-2.5 py-1 text-[11px] font-label text-outline hover:text-on-surface rounded-[6px]">Retraso</button>
+<button class="px-2.5 py-1 text-[11px] font-label text-outline hover:text-on-surface rounded-[6px]">Ausente</button>
+</div>
+</td>
+<td class="py-2.5 px-5">
+<button class="flex items-center gap-1 text-outline hover:text-primary transition-colors text-[12px]">
+<span class="material-symbols-outlined text-[16px]">add_comment</span>
+<span>Añadir nota</span>
+</button>
+</td>
+</tr>
+<!-- Row 9: Marta Castillo (Pago pendiente) -->
+<tr class="hover:bg-surface-container-low/40 transition-colors h-[54px]">
+<td class="py-2.5 px-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant font-semibold flex items-center justify-center text-xs">MC</div>
+<div class="flex flex-col">
+<span class="font-button-text font-semibold text-on-surface text-[13px]">Marta Castillo</span>
+<span class="text-[12px] text-outline font-normal">marta.castillo@email.com</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-4">
+<span class="px-2 py-0.5 rounded-[6px] bg-surface-container text-on-surface-variant font-label text-[11px] font-medium border border-outline-variant/30">Suelta</span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-[6px] bg-[#FEF3C7] text-[#B45309] font-label text-[11px] font-semibold">
+<span class="material-symbols-outlined text-[13px]">pending</span>
+                    Pendiente
+                  </span>
+</td>
+<td class="py-2.5 px-4">
+<div class="inline-flex p-0.5 bg-surface-container-low border border-[#E8E2DC] rounded-[8px]">
+<button class="px-2.5 py-1 text-[11px] font-button-text font-semibold rounded-[6px] bg-[#CCFBF1] text-[#0F766E] shadow-sm">Presente</button>
+<button class="px-2.5 py-1 text-[11px] font-label text-outline hover:text-on-surface rounded-[6px]">Retraso</button>
+<button class="px-2.5 py-1 text-[11px] font-label text-outline hover:text-on-surface rounded-[6px]">Ausente</button>
+</div>
+</td>
+<td class="py-2.5 px-5">
+<button class="flex items-center gap-1 text-outline hover:text-primary transition-colors text-[12px]">
+<span class="material-symbols-outlined text-[16px]">add_comment</span>
+<span>Añadir nota</span>
+</button>
+</td>
+</tr>
+<!-- Row 10: Daniel Ortiz -->
+<tr class="hover:bg-surface-container-low/40 transition-colors h-[54px]">
+<td class="py-2.5 px-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant font-semibold flex items-center justify-center text-xs">DO</div>
+<div class="flex flex-col">
+<span class="font-button-text font-semibold text-on-surface text-[13px]">Daniel Ortiz</span>
+<span class="text-[12px] text-outline font-normal">daniel.ortiz@email.com</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-4">
+<span class="px-2 py-0.5 rounded-[6px] bg-surface-container text-on-surface-variant font-label text-[11px] font-medium border border-outline-variant/30">Bono</span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-[6px] bg-[#CCFBF1] text-[#0F766E] font-label text-[11px] font-semibold">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    Pagada
+                  </span>
+</td>
+<td class="py-2.5 px-4">
+<div class="inline-flex p-0.5 bg-surface-container-low border border-[#E8E2DC] rounded-[8px]">
+<button class="px-2.5 py-1 text-[11px] font-button-text font-semibold rounded-[6px] bg-[#CCFBF1] text-[#0F766E] shadow-sm">Presente</button>
+<button class="px-2.5 py-1 text-[11px] font-label text-outline hover:text-on-surface rounded-[6px]">Retraso</button>
+<button class="px-2.5 py-1 text-[11px] font-label text-outline hover:text-on-surface rounded-[6px]">Ausente</button>
+</div>
+</td>
+<td class="py-2.5 px-5">
+<button class="flex items-center gap-1 text-outline hover:text-primary transition-colors text-[12px]">
+<span class="material-symbols-outlined text-[16px]">add_comment</span>
+<span>Añadir nota</span>
+</button>
+</td>
+</tr>
+<!-- Row 11: Irene Vega -->
+<tr class="hover:bg-surface-container-low/40 transition-colors h-[54px]">
+<td class="py-2.5 px-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant font-semibold flex items-center justify-center text-xs">IV</div>
+<div class="flex flex-col">
+<span class="font-button-text font-semibold text-on-surface text-[13px]">Irene Vega</span>
+<span class="text-[12px] text-outline font-normal">irene.vega@email.com</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-4">
+<span class="px-2 py-0.5 rounded-[6px] bg-surface-container text-on-surface-variant font-label text-[11px] font-medium border border-outline-variant/30">Bono</span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-[6px] bg-[#CCFBF1] text-[#0F766E] font-label text-[11px] font-semibold">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    Pagada
+                  </span>
+</td>
+<td class="py-2.5 px-4">
+<div class="inline-flex p-0.5 bg-surface-container-low border border-[#E8E2DC] rounded-[8px]">
+<button class="px-2.5 py-1 text-[11px] font-button-text font-semibold rounded-[6px] bg-[#CCFBF1] text-[#0F766E] shadow-sm">Presente</button>
+<button class="px-2.5 py-1 text-[11px] font-label text-outline hover:text-on-surface rounded-[6px]">Retraso</button>
+<button class="px-2.5 py-1 text-[11px] font-label text-outline hover:text-on-surface rounded-[6px]">Ausente</button>
+</div>
+</td>
+<td class="py-2.5 px-5">
+<button class="flex items-center gap-1 text-outline hover:text-primary transition-colors text-[12px]">
+<span class="material-symbols-outlined text-[16px]">add_comment</span>
+<span>Añadir nota</span>
+</button>
+</td>
+</tr>
+<!-- Row 12: Pablo Domínguez -->
+<tr class="hover:bg-surface-container-low/40 transition-colors h-[54px]">
+<td class="py-2.5 px-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant font-semibold flex items-center justify-center text-xs">PD</div>
+<div class="flex flex-col">
+<span class="font-button-text font-semibold text-on-surface text-[13px]">Pablo Domínguez</span>
+<span class="text-[12px] text-outline font-normal">pablo.dominguez@email.com</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-4">
+<span class="px-2 py-0.5 rounded-[6px] bg-surface-container text-on-surface-variant font-label text-[11px] font-medium border border-outline-variant/30">Suelta</span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-[6px] bg-[#CCFBF1] text-[#0F766E] font-label text-[11px] font-semibold">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    Pagada
+                  </span>
+</td>
+<td class="py-2.5 px-4">
+<div class="inline-flex p-0.5 bg-surface-container-low border border-[#E8E2DC] rounded-[8px]">
+<button class="px-2.5 py-1 text-[11px] font-button-text font-semibold rounded-[6px] bg-[#CCFBF1] text-[#0F766E] shadow-sm">Presente</button>
+<button class="px-2.5 py-1 text-[11px] font-label text-outline hover:text-on-surface rounded-[6px]">Retraso</button>
+<button class="px-2.5 py-1 text-[11px] font-label text-outline hover:text-on-surface rounded-[6px]">Ausente</button>
+</div>
+</td>
+<td class="py-2.5 px-5">
+<button class="flex items-center gap-1 text-outline hover:text-primary transition-colors text-[12px]">
+<span class="material-symbols-outlined text-[16px]">add_comment</span>
+<span>Añadir nota</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Sticky / Card-Footer Summary & Confirmation Toolbar -->
+<div class="p-4 sm:px-6 py-4 bg-surface-container-low/60 border-t border-[#E8E2DC] flex items-center justify-between flex-wrap gap-4">
+<!-- Real-time metrics breakdown in tabular figures -->
+<div class="flex items-center gap-5 text-on-surface">
+<span class="font-label text-label uppercase tracking-wider text-outline">ESTADO ACTUAL:</span>
+<div class="flex items-center gap-4 font-label-tabular text-[13px] font-semibold tabular-nums">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#0F766E]"></span>
+<span>Presentes <strong class="text-on-surface">10</strong></span>
+</div>
+<span class="text-outline-variant">·</span>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#B45309]"></span>
+<span>Retrasos <strong class="text-on-surface">1</strong></span>
+</div>
+<span class="text-outline-variant">·</span>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#B91C1C]"></span>
+<span>Ausencias <strong class="text-on-surface">1</strong></span>
+</div>
+</div>
+</div>
+<!-- Bottom Operational Action Buttons -->
+<div class="flex items-center gap-3">
+<button class="h-[44px] px-4 rounded-[10px] border border-[#E8E2DC] bg-white text-on-surface font-button-text text-button-text flex items-center gap-2 hover:bg-surface-container-low transition-all shadow-sm active:scale-95">
+<span class="material-symbols-outlined text-[18px] text-secondary">done_all</span>
+<span>Marcar todos presentes</span>
+</button>
+<button class="h-[44px] px-5 rounded-[10px] bg-[#C2410C] text-white font-button-text text-button-text flex items-center gap-2 hover:bg-primary transition-all shadow-sm active:scale-95">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span>Guardar asistencia</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,313 @@
+{
+  "projects": {
+    "access": {
+      "title": "Salsa Studio Manager - Acceso y usuarios",
+      "projectId": "6775861207096503195",
+      "summary": "Login, student sign-up, password recovery, and the three role-aware home screens plus profile settings.",
+      "assetId": "ef9fee23b77b4be1a75efdc46fa1d84b",
+      "designMdScreenInstance": null,
+      "screens": [
+        {
+          "id": "02-registro-alumno",
+          "title": "Registro de alumno",
+          "screenId": "bcf78897c12c4f96b8938597b944eaee",
+          "name": "projects/6775861207096503195/screens/bcf78897c12c4f96b8938597b944eaee",
+          "stitchTitle": "Registro de Alumno - Estudio Salsa",
+          "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sX2FiNjNjZDM1MTg0NzQxMjJiYjJmODBkZWRlZjg5MWYzEgsSBxC0s9jluBMYAZIBIwoKcHJvamVjdF9pZBIVQhM2Nzc1ODYxMjA3MDk2NTAzMTk1&filename=&opi=96797242",
+          "imageUrl": "https://lh3.googleusercontent.com/aida/AEtjO1V3ROCVe6OtbEe04agxRCphYBzg4K0xIW7n3DAsBBm_cpEU4LU5W4OsK4-4tXM-_Kyj1akIxrNOXols3JoD9j5p1rpumYf7FUnVbmJlf9qucqwsRqzNgWpK209XD8bh_cGNP4PTUlcXuIiEoz9CqsBMmb5SMZl8uLVrYl0RyPKwy-q7NI40fhsP660vJ23cevx3k9oY2ccsJGKgGAUcvfklSm3ak8hxbbTvqdJNsc-AepLUD_99aQp6ScM",
+          "width": "2560",
+          "height": "2048",
+          "durationMs": 107476
+        },
+        {
+          "id": "01-inicio-sesion",
+          "title": "Inicio de sesión",
+          "screenId": "67ac9843435a4463a3ef478be8c2dc8c",
+          "name": "projects/6775861207096503195/screens/67ac9843435a4463a3ef478be8c2dc8c",
+          "stitchTitle": "Estudio Salsa - Inicia sesión (Acceso)",
+          "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sX2ExYWJmY2M0MWJlNjQ3OGNiNTYyYmQ0MzRjNWE2NmJkEgsSBxC0s9jluBMYAZIBIwoKcHJvamVjdF9pZBIVQhM2Nzc1ODYxMjA3MDk2NTAzMTk1&filename=&opi=96797242",
+          "imageUrl": "https://lh3.googleusercontent.com/aida/AEtjO1XRXsJVu45KvdVazIl89iCyrPgAylVgtvvO_h2G-Jr5bkhkGcZjOdcQ4HvO2eTCw3Y2NRxM1lsS-DeV6RFXXrHCLoekJhhLN-w-1eTF3qy8oTzR0JFsWePWwjQJSeOaoJSyz1t5i4Rz2dUH-NtudD2M1cPxO1X6UzqLl638bh5xCWdrTFgBy6AkQxvdm5dN9a3zPGNETzNzPwnsT9SuTfH6A_mLS-gHgC7Dselc5NzWsfhS9kU-1BKOkrQ",
+          "width": "2560",
+          "height": "2048",
+          "durationMs": 124060
+        },
+        {
+          "id": "03-recuperar-contrasena",
+          "title": "Recuperar contraseña",
+          "screenId": "ad5b5d9f9b9449518e64b4deaa27f455",
+          "name": "projects/6775861207096503195/screens/ad5b5d9f9b9449518e64b4deaa27f455",
+          "stitchTitle": "Recuperación de contraseña - Estudio Salsa",
+          "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sX2RiM2YwMDAyYzEyYTQzODdhZTk5YmVkYjYxNzBmNDk0EgsSBxC0s9jluBMYAZIBIwoKcHJvamVjdF9pZBIVQhM2Nzc1ODYxMjA3MDk2NTAzMTk1&filename=&opi=96797242",
+          "imageUrl": "https://lh3.googleusercontent.com/aida/AEtjO1U1jKq0WYgZGKNDCt0WrGfMVdX78czqrOScOrOnypwzSCMWPBrvfj8bEkU4EXzbgGAaqXLNM_aWisOUt_32qZ09Y6fwf_4e8hZWm5KWYFk-DGqWziZOMRD-7G_itjlq-p20CsZ6Irmk1SHPnqFa_p7MBzj3FKn6sCfZz-EDJnr6HZZFueQZOltMAvhvwV3QLno0JnG_kEaetviATUCAny-vsejILht3a84gzK0EHRK-KgivgAf_j_76Gw",
+          "width": "2560",
+          "height": "2048",
+          "durationMs": 140433
+        },
+        {
+          "id": "05-inicio-profesor",
+          "title": "Inicio - profesor",
+          "screenId": "61f7ef4c6fc14b59a87b69a92f293cd7",
+          "name": "projects/6775861207096503195/screens/61f7ef4c6fc14b59a87b69a92f293cd7",
+          "stitchTitle": "Inicio Profesor - Estudio Salsa",
+          "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzk4M2FhNzhjNTdmYzQyNmFhYTk3MmZmOTU4ZTMyZWM0EgsSBxC0s9jluBMYAZIBIwoKcHJvamVjdF9pZBIVQhM2Nzc1ODYxMjA3MDk2NTAzMTk1&filename=&opi=96797242",
+          "imageUrl": "https://lh3.googleusercontent.com/aida/AEtjO1WAPEMZ-6vmBqBrsNamTlho-KGEL4kaqJicTkUYJFLoMTQGQV61qc6NLFxBjGZjlow_2tNnkc9CVtc-LplTV8gAaAYHLORf8bp7-pYgvTuwlrUlBdIZF8mbZ6JdTOhuew3TAnipBjLjSvzaitnhCFp1pHZkOR5QEEFTkc48O4hsMDSo-_wO7WPgmr03e3H9v8Bk6R0V2ITGNcDymllNBEZXt8pN-nvUsV-rlQ9q2Lt4799o_x-ScTJoH20",
+          "width": "2560",
+          "height": "2048",
+          "durationMs": 112345
+        },
+        {
+          "id": "04-inicio-alumno",
+          "title": "Inicio - alumno",
+          "screenId": "4c9d10347f5d48d09309fbf88b4c3451",
+          "name": "projects/6775861207096503195/screens/4c9d10347f5d48d09309fbf88b4c3451",
+          "stitchTitle": "Inicio del Alumno - Estudio Salsa",
+          "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzQwOTM4ODU0MDRmOTRlMTliZDcwOTdkY2MxZTkxNzZiEgsSBxC0s9jluBMYAZIBIwoKcHJvamVjdF9pZBIVQhM2Nzc1ODYxMjA3MDk2NTAzMTk1&filename=&opi=96797242",
+          "imageUrl": "https://lh3.googleusercontent.com/aida/AEtjO1VbYdcPuzrwK_y9y5-8CktiZYk_YwNjzOKtvafOBwZ-2K4ffl_3i4FfNnkFuNW0RBNMcxMCQjLKfCtOPkptLhA5hi62A5oRSxg78U5roYwztJMNsO31YdnAhzeyX0aSC496-UavoEc5LtRvoqA5yhAlbHsMNMYxmq_GRms_EkxRxv7Xb1U-YJVh4uZesXtWPDn9DXrg7DL0WMERnZqYMgxnOwutAEk8iKfjBwmoFZAPVQb6kptbouK_94k",
+          "width": "2560",
+          "height": "2048",
+          "durationMs": 144677
+        },
+        {
+          "id": "06-inicio-administracion",
+          "title": "Inicio - administración",
+          "screenId": "a472dad01da94bd081ef810a1081f980",
+          "name": "projects/6775861207096503195/screens/a472dad01da94bd081ef810a1081f980",
+          "stitchTitle": "Panel de Administración - Resumen del Estudio",
+          "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sX2E4MDU3OGFiMmMzYTQyMTI4OWRhYWMwM2Y4Y2E3MThhEgsSBxC0s9jluBMYAZIBIwoKcHJvamVjdF9pZBIVQhM2Nzc1ODYxMjA3MDk2NTAzMTk1&filename=&opi=96797242",
+          "imageUrl": "https://lh3.googleusercontent.com/aida/AEtjO1VO9xe-e02T0fEHDGCQCOgI6Th_ax0aTbbVn6tQ1SfcEaABzNjkbmH6aXcQ7UdP-KZg9qKxcezZa7I3xXQmNywt9-AlbjDxZjLh9ul7bsHx9ERPFqzpfEY3cDeMF47Ycfi6n2HmwHWn5tShuo8m1Tg1SVl8ex8Ok6LdLsIrF_lVfJR7rrigVes5tIwTGEny-jiK1bWZ_pBU0bH0bewAYp7QSmB6M4U5Hj7CXwwpQqjEC_oShpK1p-wra70",
+          "width": "2560",
+          "height": "2048",
+          "durationMs": 125462
+        },
+        {
+          "id": "07-perfil-y-ajustes",
+          "title": "Perfil y ajustes",
+          "screenId": "8b54b32a63dc488dbeb34ddf8051528d",
+          "name": "projects/6775861207096503195/screens/8b54b32a63dc488dbeb34ddf8051528d",
+          "stitchTitle": "Ajustes y Perfil - Estudio Salsa",
+          "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sX2NjY2U1ZTJlOGNlODRhMjk5MzU3MTU3N2Y4MDQ0OTNkEgsSBxC0s9jluBMYAZIBIwoKcHJvamVjdF9pZBIVQhM2Nzc1ODYxMjA3MDk2NTAzMTk1&filename=&opi=96797242",
+          "imageUrl": "https://lh3.googleusercontent.com/aida/AEtjO1XEotZFCOzUXVSwDsGFREPBChlZK__IuWIaOQhIUb6NVcpdGSqKEjA-E3-vLc3X4GqQ4G3Zd3MY86OJ6-Bgy5TmKXQpK8bMQywhrZ1E6JgfhH0wq75dNtYXIAZ2YEh4LOgKQgE9eG-sUbQL0sHfvBXKcCGSiqjtQWP7oOER-muEMhnxb3BpR3Sp8cy-qqHLKSpjT1qFEmRflxzC42nI4HTlnhoolAbcYl9GtrNTpxORTdjWWStfsIcdRIs",
+          "width": "2560",
+          "height": "2396",
+          "durationMs": 207019
+        }
+      ]
+    },
+    "calendar": {
+      "title": "Salsa Studio Manager - Calendario y clases",
+      "projectId": "7073475385354350392",
+      "summary": "Month and week calendar, class detail and booking, student bookings, the create-class-by-hours builder, availability editor, roster and attendance, and the teacher week.",
+      "assetId": "8b3e71b2135846a490d9c4e258d764e6",
+      "designMdScreenInstance": {
+        "id": "4278235272351134072",
+        "sourceScreen": "projects/7073475385354350392/screens/4278235272351134072"
+      },
+      "screens": [
+        {
+          "id": "03-detalle-clase",
+          "title": "Detalle de clase y reserva",
+          "screenId": "97eaf74d69a64586a6821ea5797b252e",
+          "name": "projects/7073475385354350392/screens/97eaf74d69a64586a6821ea5797b252e",
+          "stitchTitle": "Detalle de clase - Estudio Salsa",
+          "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzkwYTdkNmViYjhiNDQ5MWM5ZmE3Y2NjMmFhYTFlM2E3EgsSBxC0s9jluBMYAZIBIwoKcHJvamVjdF9pZBIVQhM3MDczNDc1Mzg1MzU0MzUwMzky&filename=&opi=96797242",
+          "imageUrl": "https://lh3.googleusercontent.com/aida/AEtjO1VrKF2N3g75-AalcrbVvBJJkGzvjkFiqcEfKAcc9NmUwBanchRCxaTmi_v_OrcRqyql5LsDNCw6lZTkftRZJHcBpERXcO_Hmnm_-WxuXc_c66pY1pl2zPRkg6eINl-d4KDmKDHTtQ9FtUnlud2XFQR0QZQhrldUXctdWaTcBgU1lZqunG8LeDQobdCaB7wM-M4uM8h9aOPBfbEkKVPLcnazvGIbHkrVX_0WEk8RfWZBISiJvz11l7E8GvQ",
+          "width": "2560",
+          "height": "2048",
+          "durationMs": 186075
+        },
+        {
+          "id": "01-calendario-mes",
+          "title": "Calendario - mes",
+          "screenId": "866ff3b572c441cb825e35e6ae2bbe38",
+          "name": "projects/7073475385354350392/screens/866ff3b572c441cb825e35e6ae2bbe38",
+          "stitchTitle": "Calendario Mensual - Estudio Salsa",
+          "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzZjMDQzMjQ1NDc0NzQwNGZiNDMxMmY5NjEyYTUyZTQ3EgsSBxC0s9jluBMYAZIBIwoKcHJvamVjdF9pZBIVQhM3MDczNDc1Mzg1MzU0MzUwMzky&filename=&opi=96797242",
+          "imageUrl": "https://lh3.googleusercontent.com/aida/AEtjO1UztY5rEGXvfqnw77lXFKtxFs487IwcLnb0fTIEcULawHvWAeiArEFiF3vEx3G_MezWEnPYXr7YIq5rA22CFKVvXIGHxzGIZwmRMRa-oOs68zP1YxAJfZQ2D4LzF9DTkhNOyKVXKnDr_RqZCpceAyFwghMUdEw3cOdJhfQJkgZgP0r_39diRjZjp6BvKR9p2bXvftwdD0tKeoSbQWl_H6WkXxAysxEeCxuyEEqA2ovdzs6xnSnnJJK2LG8",
+          "width": "2560",
+          "height": "2048",
+          "durationMs": 204054
+        },
+        {
+          "id": "02-calendario-semana",
+          "title": "Calendario - semana",
+          "screenId": "770bca08e0dd48ffbfd63491e0e5afa1",
+          "name": "projects/7073475385354350392/screens/770bca08e0dd48ffbfd63491e0e5afa1",
+          "stitchTitle": "Calendario Semanal - Estudio Salsa",
+          "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzE0MDE4NmNlMTFiNjRmZjlhOTI1ZDhiZDJkZThiM2RiEgsSBxC0s9jluBMYAZIBIwoKcHJvamVjdF9pZBIVQhM3MDczNDc1Mzg1MzU0MzUwMzky&filename=&opi=96797242",
+          "imageUrl": "https://lh3.googleusercontent.com/aida/AEtjO1UW05SLEAOEmuGP1vkI7B7LOa7YUzYTbOy8jC0QObgCwCC3OEcfK0yE-yURvU1ml_AGBUp4HZLwzjgK2t_OaocrUFgRL2nV8niLaZ0gQqoZnx0piQlN2vV96-Lt--ZJJucoFyMIkvRDBbmtvyoXhK0VI987aR-DOrNxdhY200JjAya77gqA1kx25QgayPZuh6ra3AbP75RU6WCq1E5oy0-29TlyGIZUkZBxbVOLgYfRRqA9AAbO1nt8zMs",
+          "width": "2560",
+          "height": "2048",
+          "durationMs": 209856
+        },
+        {
+          "id": "04-mis-reservas",
+          "title": "Mis reservas",
+          "screenId": "190798207e6f4063b79619d23c4d1b5a",
+          "name": "projects/7073475385354350392/screens/190798207e6f4063b79619d23c4d1b5a",
+          "stitchTitle": "Mis reservas - Estudio Salsa",
+          "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzA2YTNjYTdjNDJiMTQ5MWNhNTZjZWFmNjRlMWJmZmE5EgsSBxC0s9jluBMYAZIBIwoKcHJvamVjdF9pZBIVQhM3MDczNDc1Mzg1MzU0MzUwMzky&filename=&opi=96797242",
+          "imageUrl": "https://lh3.googleusercontent.com/aida/AEtjO1X8tJAsY7va3ZMWRGbvD3FU7fM90vkcSiK4d8BpwazyCvI9uJHhEZn1Zgle6XQsjS4OxXc8rSefSAbrgc41LSuq-uP9xGX9pJK-aJkzOmOerxihd2RmpzXGcF-la964LlbIiP_if_EBV33mzYt1hlwGtPKJSDiGjj6xxhqjVrV_ivSbCDJk33D8EsCzOuMNReByfl7hJXc7-zJ1YcWOJQShl5EfEntr1M45b_193byVadFd0_ix0y6rQg",
+          "width": "2560",
+          "height": "2900",
+          "durationMs": 160386
+        },
+        {
+          "id": "05-crear-clase",
+          "title": "Crear clase por horas",
+          "screenId": "732f1d54e0794ab98be9418b3c2e19bc",
+          "name": "projects/7073475385354350392/screens/732f1d54e0794ab98be9418b3c2e19bc",
+          "stitchTitle": "Constructor de clases - Estudio Salsa",
+          "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzExMzliZjgzOWFiNzQ1ZjA4MTYxOWRjOTgxODFiYzRiEgsSBxC0s9jluBMYAZIBIwoKcHJvamVjdF9pZBIVQhM3MDczNDc1Mzg1MzU0MzUwMzky&filename=&opi=96797242",
+          "imageUrl": "https://lh3.googleusercontent.com/aida/AEtjO1WZ_gPf11O5H1aXsedebweJSxpeCTHx-eCNEPn4wM2MuvkERT6YhBRMD8qkTRddVaNaW7VJGJy3MD33359aDHwQyI98kWFtj8p3BAKWYeYI8UU6xFen3Bg0a3i5CNWZipzizFb0UTxOVF3Bt1cHlO6S54L-UEnsf2f-jBHXOS9MBV7hEPVnkf86E_7YaPE-YT9Q0wFNoMG2SqWoq6MhbwVmts2fHGz2W8wW2v4JgndRthSF8agEtD89v7Q",
+          "width": "2560",
+          "height": "3340",
+          "durationMs": 193266
+        },
+        {
+          "id": "06-editor-disponibilidad",
+          "title": "Editor de disponibilidad",
+          "screenId": "4ffdeedea57c46c58c03cbad77883dee",
+          "name": "projects/7073475385354350392/screens/4ffdeedea57c46c58c03cbad77883dee",
+          "stitchTitle": "Disponibilidad - Estudio Salsa",
+          "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sX2I5YjlmYzMxZmUwYjRmMzk5ZjM2OGQ1MDYwYTlmM2FiEgsSBxC0s9jluBMYAZIBIwoKcHJvamVjdF9pZBIVQhM3MDczNDc1Mzg1MzU0MzUwMzky&filename=&opi=96797242",
+          "imageUrl": "https://lh3.googleusercontent.com/aida/AEtjO1VDcMSNmj4TeQ3DH_16j1Rm7AfQdOgZHULKYg6SsNppmdszO6wTZyeZYcRVrL3hbOnYu4KVkFvzMx0Ggzq3KygWDOr20yOCzAe7CsYAVMN7e2YPX2G-Zvlh8lXRts_o2EEFrdIm1A3k2FDHwAVRIzu6DKmk6jdLy4jnIhLvfid0coPZ6MHudLZHeTn01PZWD53-_PR9t56xY6_adZS8DjUvs1tPhog5eLKWPgb6WEAgip8MFHhyhwB9tw",
+          "width": "2560",
+          "height": "2048",
+          "durationMs": 204765
+        },
+        {
+          "id": "08-mi-semana-profesor",
+          "title": "Mi semana - profesor",
+          "screenId": "ba480bceaaad43ada62048ffb384cd5e",
+          "name": "projects/7073475385354350392/screens/ba480bceaaad43ada62048ffb384cd5e",
+          "stitchTitle": "Mi semana - Estudio Salsa",
+          "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzY1NTRkMzIzNjg1ZjQ5MGY4Mjc1YWUxYzYwYTAyOTY3EgsSBxC0s9jluBMYAZIBIwoKcHJvamVjdF9pZBIVQhM3MDczNDc1Mzg1MzU0MzUwMzky&filename=&opi=96797242",
+          "imageUrl": "https://lh3.googleusercontent.com/aida/AEtjO1V_DeOa86QQO3e4PM25cJEtUlHNcE0ceF-TJeWriFK1y0ZOTz-C3nFaMZ68Y4J7ZYBbt-VCx88zQZ-2R9UulGkSJRU2z-2_lelpxqHzadYYLvj86WUYArZvoqAIFaNTVBYRK5zuupKP4zKCNhB5kgi5vcBCvATaXIae6rNvC51-zyF2h4hZG9wmQoCxgTSxek4Ht8kV9Q6nI1rw8bbDae2wZxWkDM-GJ5fXV6tr-qNC1uiy2dGOMdBHX1M",
+          "width": "2560",
+          "height": "2048",
+          "durationMs": 189333
+        },
+        {
+          "id": "07-lista-y-asistencia",
+          "title": "Lista de clase y asistencia",
+          "screenId": "89db51af794f44f7924723d9cb981d61",
+          "name": "projects/7073475385354350392/screens/89db51af794f44f7924723d9cb981d61",
+          "stitchTitle": "Control de asistencia - Estudio Salsa",
+          "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzcwNjhjMDA5YTAwYzQ4NjM5OGVlNzJmZWFhNjM5MjkyEgsSBxC0s9jluBMYAZIBIwoKcHJvamVjdF9pZBIVQhM3MDczNDc1Mzg1MzU0MzUwMzky&filename=&opi=96797242",
+          "imageUrl": "https://lh3.googleusercontent.com/aida/AEtjO1XIH5s5zvMzLcpEhnGyQ13NqEG-HfB3KpjzjXctIF1c1OT07KJIN1DrfR6bUdhekwLdTs45fS6rd9Wb27P1ft_Jjl5ouHwIdosQMibC0VOjo_SAmCT4VgKWJV5_56OCy-HdDOlw1ZSUgddzPkYbIU_hQ6OKCu9EOQsjScBU8QddE0ru6VsfuAlYXjHnoVUn89zj1leGu38nAMHPpephB1q9gMy6yQY6urqLXFMuwskIvOgbV8T9egiYKPk",
+          "width": "2560",
+          "height": "2048",
+          "durationMs": 259692
+        }
+      ]
+    },
+    "billing": {
+      "title": "Salsa Studio Manager - Facturacion",
+      "projectId": "2093881141495994042",
+      "summary": "Public pricing, checkout, payment result, the student billing account, invoice detail, and the admin revenue dashboard, invoice list and manual payment entry.",
+      "assetId": "525ed1d326274f1b81ab1966c0fb119f",
+      "designMdScreenInstance": {
+        "id": "7971978537288753407",
+        "sourceScreen": "projects/2093881141495994042/screens/7971978537288753407"
+      },
+      "screens": [
+        {
+          "id": "01-tarifas",
+          "title": "Tarifas y bonos",
+          "screenId": "fb31bbe23f3e4c14b1b45a5b421e2006",
+          "name": "projects/2093881141495994042/screens/fb31bbe23f3e4c14b1b45a5b421e2006",
+          "stitchTitle": "Tarifas y Planes - Estudio Salsa",
+          "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzRlYmU1ZDZjZDJhMDQwNTliYWYyN2M4MzQ4YzlhNzYyEgsSBxC0s9jluBMYAZIBIwoKcHJvamVjdF9pZBIVQhMyMDkzODgxMTQxNDk1OTk0MDQy&filename=&opi=96797242",
+          "imageUrl": "https://lh3.googleusercontent.com/aida/AEtjO1WouPoJqS-E_iqF6CxiKn6QQmFluUMJIz8dULWmBE2oPw8zuajUtKumH2sZ0k3JOG9U-JYRxDNZbZq1tppPLwApC4dk-n9uYorAlnT9dHMTYV3y95LRHvhSiitUDudTN4VQQ0kMeO1bPmxps7wKrK7ha0Nlez0uRT4QimudPu8eUR0C6AOZEMGMiuWPcvG7oPiYk67qnRWLkKupT9xYPBOVtV1wyFVQr2QojHVMRtgZSfAkKAHaiOn4",
+          "width": "2560",
+          "height": "5576"
+        },
+        {
+          "id": "03-resultado-pago",
+          "title": "Resultado del pago",
+          "screenId": "83ab9c49247e4dca81cc9d1052391f5f",
+          "name": "projects/2093881141495994042/screens/83ab9c49247e4dca81cc9d1052391f5f",
+          "stitchTitle": "Resultado del Pago - Estudio Salsa",
+          "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sX2YyN2Y5MTJiYTdiODQzZjc5MmFlYWU4YjE0NmI0ODQ4EgsSBxC0s9jluBMYAZIBIwoKcHJvamVjdF9pZBIVQhMyMDkzODgxMTQxNDk1OTk0MDQy&filename=&opi=96797242",
+          "imageUrl": "https://lh3.googleusercontent.com/aida/AEtjO1VVbpwkOUMcQGHrlPwy0mst_nhDsLhfivneNu3rfO45ikSGauQBdqJTVoW-Ez3-e5Vj7ty7utv4E4N6Wbsbd5EVodfb6-Re7z7vWb5grS9o_nfZC0kQf8dc8irkcnKoB6rrS-MtK5YUNfqItI3LWd5zZcYH9qtbezETp4vZ1CZ9xyx1CWPh_CFUGnWTgYakaRsOkBSRPmlYtWJbfRNg0tuIEwj-1vvzAa1iFousefTs00W_gsGq1Br8_p0",
+          "width": "2560",
+          "height": "2048",
+          "durationMs": 106650
+        },
+        {
+          "id": "02-pago",
+          "title": "Pago",
+          "screenId": "f32d661c2c35485ba0c133bb0520c5ee",
+          "name": "projects/2093881141495994042/screens/f32d661c2c35485ba0c133bb0520c5ee",
+          "stitchTitle": "Pasarela de Pago - Estudio Salsa",
+          "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzAyM2VkOTFkNGIyZDQyYWQ5OTA0YmM4ZmU3OTVkMzRiEgsSBxC0s9jluBMYAZIBIwoKcHJvamVjdF9pZBIVQhMyMDkzODgxMTQxNDk1OTk0MDQy&filename=&opi=96797242",
+          "imageUrl": "https://lh3.googleusercontent.com/aida/AEtjO1WlZaEsRNlc0XYhbC_s-U41Xo2fj_DoRn3nQxNKSV-cSa8kfRgw-Jx446BLQ7Tf5a68iU1o1xxX2t_hzeSD5FyBId7B3hzGeLucy5rb8A7dtYwBiGx4YhFk9Xgp90WzIWGm9jrthbRNrNDZQny5_vRTxiINIWkgWztwNb_Tjn1M2f1iAQkEYh5ATDnE0XGnsmdmdvX1julHPdnSd_7aw8DJz82dH2tXgidc5_c4qmIz6pIpbqaH0R3KrM0",
+          "width": "2560",
+          "height": "2246",
+          "durationMs": 141091
+        },
+        {
+          "id": "04-mi-facturacion",
+          "title": "Mi facturación",
+          "screenId": "b5be6bbe080b4c9a997f020061765908",
+          "name": "projects/2093881141495994042/screens/b5be6bbe080b4c9a997f020061765908",
+          "stitchTitle": "Mi Facturación - Estudio Salsa",
+          "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzBjNDUxMzI0ZWFhMDRkZWY4NWFjNDdiMGU3ZjQ4ZmFjEgsSBxC0s9jluBMYAZIBIwoKcHJvamVjdF9pZBIVQhMyMDkzODgxMTQxNDk1OTk0MDQy&filename=&opi=96797242",
+          "imageUrl": "https://lh3.googleusercontent.com/aida/AEtjO1VFnkCN6C1_gDTGn--AdFpOdZ6BdXwAgvitpL3Vr4OIEe0SWG5S6t__5sYNW4kATp7UYgnm5noMCI_mRyO52ZWF7hbOHTDOWBJRzBKtsxLpaapgEWl01jt2W0pSQcAySQdcjEuFxgfq0_iPmCyW54fvkWj5YplYGOpBB2Zw18F1itWHmoxjnvuJ6jJZWPw2kJlTa2eGc_uJjGmX8A8XuEzdLB6R45qYzgsDhcVJw-B4-W8WPhOITBfiM-s",
+          "width": "2560",
+          "height": "2048",
+          "durationMs": 194590
+        },
+        {
+          "id": "05-detalle-factura",
+          "title": "Detalle de factura",
+          "screenId": "0fe8b74d70e74897b98ee5bb6f127a65",
+          "name": "projects/2093881141495994042/screens/0fe8b74d70e74897b98ee5bb6f127a65",
+          "stitchTitle": "Detalle de Factura V-2026-0184 - Estudio Salsa",
+          "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzNmMTQyY2E4NGQzNTQ4NTFiNzY2MzFiYmQwYWFiNjMyEgsSBxC0s9jluBMYAZIBIwoKcHJvamVjdF9pZBIVQhMyMDkzODgxMTQxNDk1OTk0MDQy&filename=&opi=96797242",
+          "imageUrl": "https://lh3.googleusercontent.com/aida/AEtjO1XkYqcGWuv4O5UlSl6pboTlK-PKrbQs-IakfjSHHOHGnsx7dflhRcLuNjzBqMia2gsR7Vw4KmI3_SGDu_-8OMk2MMWKVw6oRuW0pE9Sg6Hxghr2htmTfVsJ2byMCEZsHAIZwXTCDmgMtyTA7_6YCMYcH-DESDBNOtAQ4ddCU8Eq9g18FGCQkUz28aJZDc5SI0eyW3yxUoeSl5FnSdBnzzCVIk3gIUnv8JMVeOBhpR91V_A6BDkrB_w3W5g",
+          "width": "2560",
+          "height": "2048",
+          "durationMs": 115888
+        },
+        {
+          "id": "06-ingresos",
+          "title": "Panel de ingresos",
+          "screenId": "17909ba43281480f8e03fe8368000141",
+          "name": "projects/2093881141495994042/screens/17909ba43281480f8e03fe8368000141",
+          "stitchTitle": "Panel de Ingresos - Estudio Salsa",
+          "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sX2I5ZTY4MzJkMmU2YTQ4NGI5ZWUzODNjNjYyMDhlMzViEgsSBxC0s9jluBMYAZIBIwoKcHJvamVjdF9pZBIVQhMyMDkzODgxMTQxNDk1OTk0MDQy&filename=&opi=96797242",
+          "imageUrl": "https://lh3.googleusercontent.com/aida/AEtjO1Vo8Qzw4SyVvYALAM3N10yth2OoX1yLZbWKlNZsoSK5f9CWfcNnHzLq0itsCQ3iKkpGTMl291dHAxWXuYpowxfqMxqytn0HSOICHlmuaDcU_MtNYUDsdcSlLMEF9RACj7RbYhyerWdyVblkXT1CqyImqCQhk-wQmQfDATXtM8k-AVlpSvKLMmllhoKeih2c7EZXpvtnQr1fTSsURIUt7OylebmrTv6tO3Pw6vO7532KaIUjYHhqejzMTrw",
+          "width": "2560",
+          "height": "2660",
+          "durationMs": 172790
+        },
+        {
+          "id": "07-facturas",
+          "title": "Facturas - administración",
+          "screenId": "33de591bdb8d42ab807322edc629b670",
+          "name": "projects/2093881141495994042/screens/33de591bdb8d42ab807322edc629b670",
+          "stitchTitle": "Gestión de Facturas - Estudio Salsa",
+          "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sX2FlMjUwMmNhMzQ3ZTQzNGQ4NzQyYjcyYmQzN2NkODNkEgsSBxC0s9jluBMYAZIBIwoKcHJvamVjdF9pZBIVQhMyMDkzODgxMTQxNDk1OTk0MDQy&filename=&opi=96797242",
+          "imageUrl": "https://lh3.googleusercontent.com/aida/AEtjO1W7JmMYlHo2logk3gP4LoACBa9AmP0ZzMGnSbQXNMO6S9vzp-JysVTyu9l6HJree1fMQp4tAuBqPtoFfIwy-Kp1YbImLPolDVpL7EGa13D5pgVzAhSn3CQv9hHOIMvNgTp7u6SFH2CuZyiJY38jD30omEIpUTkJYGRygFQBoeTmSlROFGRheu8gzLQ5jmF3-j1KdNUeVyrqkBvqcfuO0mSwlXmtRjsuiJA7m66MiF2ABg3SxMI8S3PMKhE",
+          "width": "2560",
+          "height": "2510",
+          "durationMs": 200436
+        },
+        {
+          "id": "08-registrar-pago",
+          "title": "Registrar pago manual",
+          "screenId": "62fb962986424c109f1daeb70c4d51c6",
+          "name": "projects/2093881141495994042/screens/62fb962986424c109f1daeb70c4d51c6",
+          "stitchTitle": "Registrar pago - Gestión Estudio Salsa",
+          "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzgwMmVlZDBhZWNhNzQyMWZhZTE4MDU5MDg2NTNjMzNlEgsSBxC0s9jluBMYAZIBIwoKcHJvamVjdF9pZBIVQhMyMDkzODgxMTQxNDk1OTk0MDQy&filename=&opi=96797242",
+          "imageUrl": "https://lh3.googleusercontent.com/aida/AEtjO1UpNmZ1VQZ8JOSP84lWFXBkVSZ9WfSJsCjKTXjmjIks3VM67bWy2VnflauaYAEElqYAmqFQZKqlt_oBBaOEDJNnd98DmS_8Ky7d888hFD9SKvi5ynJ7Rbu7OjdzhU65R8lQXoz0T2PYySnLTgGtn06vofgPmvnb1eJcnvm91crUlL1CT7DTg-5R-BWCt4ql4GfsESp3geX1i4nziFGtuxpPYmjam8h5BS1AQ7U1BdaCuBClUk8450i5MQ",
+          "width": "2560",
+          "height": "2048",
+          "durationMs": 207323
+        }
+      ]
+    }
+  },
+  "updatedAt": "2026-10-11T16:23:04.030Z"
+}

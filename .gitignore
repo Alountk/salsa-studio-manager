@@ -1,0 +1,4 @@
+node_modules/
+designs/**/raw/
+.DS_Store
+designs/generate.log

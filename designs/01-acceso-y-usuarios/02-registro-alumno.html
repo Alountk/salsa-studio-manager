@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Registro de Alumno — Estudio Salsa</title>
+<!-- Google Fonts: Inter & Outfit -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Outfit:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-tertiary-fixed": "#331200",
+            "on-secondary-fixed-variant": "#00504a",
+            "surface-container-high": "#eae8e5",
+            "on-tertiary": "#ffffff",
+            "surface-container": "#f6f1eb",
+            "surface-variant": "#f3ede7",
+            "tertiary-container": "#fef3c7",
+            "surface-bright": "#ffffff",
+            "secondary": "#006a63",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#ccfbf1",
+            "on-secondary-container": "#0b4f4a",
+            "surface-tint": "#c2410c",
+            "inverse-surface": "#31302f",
+            "inverse-primary": "#ffb59d",
+            "inverse-on-surface": "#f7f2ed",
+            "background": "#faf7f4",
+            "surface-container-low": "#faf7f4",
+            "on-surface": "#161311",
+            "surface-dim": "#ede7e1",
+            "primary": "#c2410c",
+            "on-primary": "#ffffff",
+            "primary-container": "#fde8dd",
+            "on-primary-container": "#7a2a0c",
+            "primary-fixed": "#ffdbd0",
+            "on-primary-fixed": "#390c00",
+            "primary-fixed-dim": "#ffb59d",
+            "on-primary-fixed-variant": "#832600",
+            "tertiary": "#8c3d00",
+            "on-tertiary-container": "#7a3e06",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-highest": "#e5e2df",
+            "outline-variant": "#e8e2dc",
+            "outline": "#8b8079",
+            "on-background": "#1c1c1a",
+            "on-surface-variant": "#6b625c",
+            "error-container": "#fee2e2",
+            "on-error": "#ffffff",
+            "error": "#b91c1c",
+            "on-error-container": "#7f1d1d",
+            "surface": "#ffffff"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem",
+            "card": "14px",
+            "input": "6px",
+            "btn": "10px"
+          },
+          fontFamily: {
+            "body-lg": ["Inter", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "body-sm": ["Inter", "sans-serif"],
+            "label": ["Inter", "sans-serif"],
+            "button-text": ["Inter", "sans-serif"],
+            "label-tabular": ["Inter", "sans-serif"],
+            "display": ["Outfit", "sans-serif"],
+            "headline-lg": ["Outfit", "sans-serif"],
+            "headline-md": ["Outfit", "sans-serif"],
+            "headline-sm": ["Outfit", "sans-serif"],
+            "metric": ["Outfit", "sans-serif"]
+          },
+          fontSize: {
+            "body-lg": ["16px", { lineHeight: "26px", fontWeight: "400" }],
+            "body-md": ["15px", { lineHeight: "24px", fontWeight: "400" }],
+            "body-sm": ["13px", { lineHeight: "20px", fontWeight: "400" }],
+            "label": ["12px", { lineHeight: "16px", letterSpacing: "0.04em", fontWeight: "600" }],
+            "button-text": ["14px", { lineHeight: "20px", fontWeight: "600" }],
+            "label-tabular": ["13px", { lineHeight: "18px", fontWeight: "500" }],
+            "headline-sm": ["18px", { lineHeight: "26px", fontWeight: "600" }],
+            "headline-md": ["22px", { lineHeight: "28px", fontWeight: "600" }],
+            "headline-lg": ["28px", { lineHeight: "36px", letterSpacing: "-0.015em", fontWeight: "600" }],
+            "display": ["34px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "700" }],
+            "metric": ["40px", { lineHeight: "44px", letterSpacing: "-0.02em", fontWeight: "700" }]
+          },
+          boxShadow: {
+            "warm-card": "0 1px 2px rgba(22,19,17,0.06), 0 8px 24px -12px rgba(22,19,17,0.12)"
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      font-size: 18px;
+      line-height: 1;
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus {
+      -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
+      -webkit-text-fill-color: #161311;
+    }
+  </style>
+</head>
+<body class="h-full bg-background text-on-surface antialiased font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<main class="min-h-screen w-full flex flex-col lg:flex-row">
+<!-- PANEL IZQUIERDO: 45% Desktop Auth Panel -->
+<section class="relative w-full lg:w-[45%] min-h-[520px] lg:min-h-screen flex flex-col justify-between p-8 lg:p-14 overflow-hidden text-surface">
+<!-- Fondo: Imagen documental + Overlay oscuro 55% (#322c28) -->
+<div class="absolute inset-0 z-0">
+<img alt="Bailarines de salsa en pareja dentro de sala de madera con espejos y luces cálidas" class="w-full h-full object-cover object-center scale-105" src="https://lh3.googleusercontent.com/aida/AEtjO1XwhgnRJpxXdIQcKYvNwkmETgyl-AW7xLKDpcjY98J6xM6efRyS8V-VWPfdfb1qNkxM-TmdVjuOGm2dz4DrqCmWTAQiVhHGAXOUv_gJj-nGwFW9WkN5IT6wsE9ceEnz3hiRDaR5tl1MxBlrD7SdBA2YT3QNADUoElFknbUYzOq5fSAp91-tEs64Yw_h5Leq5PeIOq6BHAPfCMgyzJjeg1_awytVluSUjZstWl4Mea-rzDTmkI5pIiGxg_s"/>
+<div class="absolute inset-0 bg-[#322c28]/55 backdrop-contrast-[1.05]"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-[#1b1715]/80 via-transparent to-[#1b1715]/40"></div>
+</div>
+<!-- Cabecera del Panel Izquierdo: Marca y Enlace de sesión -->
+<header class="relative z-10 flex items-start justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-[10px] bg-primary flex items-center justify-center text-on-primary shadow-sm">
+<span class="material-symbols-outlined !text-[22px]" style="font-variation-settings: 'FILL' 1;">music_note</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md tracking-tight font-bold text-surface leading-tight">Estudio Salsa</span>
+<span class="font-label text-[10px] tracking-widest uppercase font-semibold text-primary-fixed">Academia &amp; Social Dance</span>
+</div>
+</div>
+<a class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[6px] text-body-sm font-button-text text-surface/90 hover:text-surface bg-surface/10 hover:bg-surface/20 transition-colors backdrop-blur-xs" href="#login">
+<span>¿Ya tienes cuenta?</span>
+<span class="font-semibold text-primary-fixed underline underline-offset-2">Iniciar sesión</span>
+</a>
+</header>
+<!-- Bloque Central: Titular, Argumentos de Valor & Testimonio -->
+<div class="relative z-10 my-auto py-12 max-w-xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface/15 backdrop-blur-sm border border-surface/20 text-surface text-body-sm font-label mb-6">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span>Matrícula abierta • Temporada 2024 / 2025</span>
+</div>
+<h1 class="font-display text-display lg:text-[40px] lg:leading-[46px] font-bold text-surface tracking-tight mb-5">
+          Siente el ritmo.<br/>Domina la pista.
+        </h1>
+<!-- Píldoras de Valor Operativas -->
+<div class="flex flex-wrap items-center gap-2.5 mb-8">
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface/10 border border-surface/15 backdrop-blur-xs text-body-sm text-surface font-medium">
+<span class="material-symbols-outlined !text-[16px] text-primary-fixed" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span>+1.200 alumnos activos</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface/10 border border-surface/15 backdrop-blur-xs text-body-sm text-surface font-medium">
+<span class="material-symbols-outlined !text-[16px] text-primary-fixed" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span>Profesores certificados</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface/10 border border-surface/15 backdrop-blur-xs text-body-sm text-surface font-medium">
+<span class="material-symbols-outlined !text-[16px] text-primary-fixed" style="font-variation-settings: 'FILL' 1;">layers</span>
+<span>Salas con suelo flotante</span>
+</div>
+</div>
+<!-- Tarjeta Testimonio Verídico -->
+<div class="bg-surface/10 backdrop-blur-md border border-surface/15 rounded-card p-5 relative">
+<span class="material-symbols-outlined absolute right-4 top-4 text-surface/20 !text-3xl">format_quote</span>
+<p class="font-body-md text-body-md text-surface/95 italic mb-3 pr-8 leading-relaxed">
+            «Aprender a bailar salsa en Estudio Salsa transformó mis fines de semana y mi seguridad al salir a bailar social. Los profes tienen una paciencia infinita y el ambiente es inmejorable.»
+          </p>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xs ring-2 ring-primary">
+              LR
+            </div>
+<div>
+<p class="font-button-text text-body-sm font-semibold text-surface">Lucía Ramos</p>
+<p class="font-body-sm text-[12px] text-surface/75">Alumna Nivel Intermedio (Estilo Cubano &amp; Bachata)</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Pie del Panel Izquierdo: Ubicación y Contacto -->
+<footer class="relative z-10 pt-6 border-t border-surface/15 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-body-sm text-surface/80">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined !text-[18px] text-primary-fixed">location_on</span>
+<span>Calle Gran Vía 42, 2ª Planta, Madrid</span>
+</div>
+<div class="flex items-center gap-2 font-label-tabular">
+<span class="material-symbols-outlined !text-[18px] text-primary-fixed">call</span>
+<span>Atención: +34 912 345 678</span>
+</div>
+</footer>
+</section>
+<!-- PANEL DERECHO: Formulario de Registro 420px centrado en lienzo #FAF7F4 -->
+<section class="w-full lg:w-[55%] bg-background flex flex-col justify-center items-center px-4 py-12 lg:px-12 min-h-screen overflow-y-auto">
+<div class="w-full max-w-[420px] flex flex-col items-center">
+<!-- Tarjeta de Registro Principal: Exactamente 420px, radio 14px, borde 1px #E8E2DC, sombra suave cálida -->
+<div class="w-full bg-surface border border-outline-variant rounded-card p-8 shadow-warm-card">
+<div class="mb-6">
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">
+              Crea tu cuenta de alumno
+            </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1.5">
+              Empieza hoy y reserva tu primera clase de prueba sin compromiso.
+            </p>
+</div>
+<form action="#" class="space-y-4" method="POST" onsubmit="event.preventDefault();">
+<!-- Nombre y Apellidos (2 columnas) -->
+<div class="grid grid-cols-2 gap-3">
+<div>
+<label class="block font-label text-label uppercase text-on-surface-variant mb-1.5" for="first-name">
+                  Nombre
+                </label>
+<input class="w-full h-[44px] px-3.5 bg-surface text-on-surface font-body-md text-body-md border border-outline-variant rounded-input focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors" id="first-name" name="first_name" required="" type="text" value="Lucía"/>
+</div>
+<div>
+<label class="block font-label text-label uppercase text-on-surface-variant mb-1.5" for="last-name">
+                  Apellidos
+                </label>
+<input class="w-full h-[44px] px-3.5 bg-surface text-on-surface font-body-md text-body-md border border-outline-variant rounded-input focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors" id="last-name" name="last_name" required="" type="text" value="Moreno Delgado"/>
+</div>
+</div>
+<!-- Correo Electrónico -->
+<div>
+<label class="block font-label text-label uppercase text-on-surface-variant mb-1.5" for="email">
+                Correo electrónico
+              </label>
+<div class="relative">
+<input class="w-full h-[44px] pl-3.5 pr-10 bg-surface text-on-surface font-body-md text-body-md border border-outline-variant rounded-input focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors" id="email" name="email" required="" type="email" value="lucia.moreno@ejemplo.es"/>
+<div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-secondary">
+<span class="material-symbols-outlined !text-[18px]">check_circle</span>
+</div>
+</div>
+</div>
+<!-- Teléfono de Contacto con prefijo -->
+<div>
+<label class="block font-label text-label uppercase text-on-surface-variant mb-1.5" for="phone-number">
+                Teléfono de contacto
+              </label>
+<div class="flex">
+<div class="relative flex-shrink-0">
+<select class="h-[44px] pl-3 pr-7 bg-surface-container text-on-surface font-body-sm border border-r-0 border-outline-variant rounded-l-input focus:outline-none focus:border-primary focus:ring-0 cursor-pointer appearance-none text-label-tabular" id="phone-prefix" name="phone_prefix">
+<option selected="" value="+34">🇪🇸 +34</option>
+<option value="+351">🇵🇹 +351</option>
+<option value="+33">🇫🇷 +33</option>
+<option value="+44">🇬🇧 +44</option>
+<option value="+1">🇺🇸 +1</option>
+</select>
+<span class="material-symbols-outlined absolute right-1.5 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none !text-[16px]">expand_more</span>
+</div>
+<input class="w-full h-[44px] px-3.5 bg-surface text-on-surface font-body-md text-body-md font-label-tabular border border-outline-variant rounded-r-input focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors" id="phone-number" name="phone_number" required="" type="tel" value="612 345 678"/>
+</div>
+</div>
+<!-- Contraseña & Medidor de Seguridad -->
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<label class="block font-label text-label uppercase text-on-surface-variant" for="password">
+                  Contraseña
+                </label>
+<span class="text-[11px] font-body-sm text-on-surface-variant">Mín. 8 caracteres</span>
+</div>
+<div class="relative">
+<input class="w-full h-[44px] pl-3.5 pr-11 bg-surface text-on-surface font-body-md text-body-md border border-outline-variant rounded-input focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors" id="password" name="password" required="" type="password" value="RitmoSalsa2024!"/>
+<button aria-label="Ver u ocultar contraseña" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-on-surface-variant hover:text-on-surface transition-colors" id="toggle-password" type="button">
+<span class="material-symbols-outlined !text-[20px]" id="eye-icon">visibility</span>
+</button>
+</div>
+<!-- Medidor de Fortaleza (4 segmentos rectangulares: 3 teal (#0F766E/secondary), 1 vacío) -->
+<div class="mt-2.5">
+<div class="grid grid-cols-4 gap-1.5 h-1.5 w-full">
+<div class="h-full bg-secondary rounded-[1px]"></div>
+<div class="h-full bg-secondary rounded-[1px]"></div>
+<div class="h-full bg-secondary rounded-[1px]"></div>
+<div class="h-full bg-outline-variant rounded-[1px]"></div>
+</div>
+<div class="flex items-center justify-between mt-2 text-[12px] font-body-sm">
+<div class="flex items-center gap-1.5 text-secondary font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary inline-block"></span>
+<span>Seguridad: alta</span>
+</div>
+<span class="text-on-surface-variant text-[11px]">Incluye mayúsculas, números y símbolo</span>
+</div>
+</div>
+</div>
+<!-- Casilla de verificación: Condiciones y Privacidad -->
+<div class="pt-1">
+<label class="flex items-start gap-2.5 cursor-pointer select-none">
+<input checked="" class="mt-0.5 w-4 h-4 rounded text-primary focus:ring-primary/25 border-outline-variant focus:ring-offset-0 cursor-pointer" required="" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant leading-snug">
+                  Acepto las <a class="text-on-surface font-medium underline underline-offset-2 hover:text-primary" href="#terminos">condiciones del servicio</a> y la <a class="text-on-surface font-medium underline underline-offset-2 hover:text-primary" href="#privacidad">política de privacidad</a> de Estudio Salsa.
+                </span>
+</label>
+</div>
+<!-- Botón Primario: 44px, radio 10px, Terracota #C2410C -->
+<button class="w-full h-[44px] rounded-btn bg-primary hover:bg-[#e0561f] active:bg-[#9a3412] text-on-primary font-button-text text-button-text flex items-center justify-center gap-2 transition-all shadow-sm active:scale-[0.99] focus:outline-none focus:ring-3 focus:ring-primary/25 mt-2" type="submit">
+<span>Crear cuenta</span>
+<span class="material-symbols-outlined !text-[18px]">arrow_forward</span>
+</button>
+</form>
+<!-- Separador -->
+<div class="relative my-5 text-center">
+<div aria-hidden="true" class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-outline-variant"></div>
+</div>
+<div class="relative flex justify-center">
+<span class="bg-surface px-2.5 text-[11px] font-label uppercase tracking-wider text-on-surface-variant font-medium">
+                O si perteneces al equipo
+              </span>
+</div>
+</div>
+<!-- Bloque de llamada al pie de la tarjeta: Profesores y Administradores -->
+<div class="bg-surface-container rounded-input p-3 border border-outline-variant flex items-center justify-between gap-3">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-on-surface-variant !text-[18px]">badge</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">¿Eres profesor o gestor?</span>
+</div>
+<a class="font-button-text text-body-sm text-primary hover:text-[#e0561f] font-semibold whitespace-nowrap flex items-center gap-1 underline underline-offset-2" href="#staff-access">
+              Solicita acceso
+              <span class="material-symbols-outlined !text-[14px]">open_in_new</span>
+</a>
+</div>
+</div>
+<!-- Enlaces exteriores al pie (Fuera de la tarjeta) -->
+<footer class="mt-6 w-full flex flex-col sm:flex-row items-center justify-between text-body-sm text-on-surface-variant text-[12px] gap-2 px-1">
+<span>© 2024 Estudio Salsa S.L.</span>
+<nav class="flex items-center gap-4">
+<a class="hover:text-on-surface transition-colors" href="#seguridad">Seguridad</a>
+<span class="text-outline-variant">•</span>
+<a class="hover:text-on-surface transition-colors" href="#ayuda">Ayuda</a>
+<span class="text-outline-variant">•</span>
+<a class="hover:text-on-surface transition-colors" href="#contacto">Contacto</a>
+</nav>
+</footer>
+</div>
+</section>
+</main>
+<!-- Script interactivo mínimo para alternar visibilidad de contraseña -->
+<script>
+    const toggleBtn = document.getElementById('toggle-password');
+    const passwordInput = document.getElementById('password');
+    const eyeIcon = document.getElementById('eye-icon');
+
+    if (toggleBtn && passwordInput && eyeIcon) {
+      toggleBtn.addEventListener('click', () => {
+        const isPassword = passwordInput.getAttribute('type') === 'password';
+        passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+        eyeIcon.textContent = isPassword ? 'visibility_off' : 'visibility';
+      });
+    }
+  </script>
+</body></html>

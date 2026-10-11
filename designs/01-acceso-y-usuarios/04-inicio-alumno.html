@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-background" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Portal del Alumno | Estudio Salsa</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Outfit:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary-container": "#ccfbf1",
+            "on-error-container": "#7f1d1d",
+            "on-primary-container": "#7a2a0c",
+            "error-container": "#ffdad6",
+            "surface-container": "#f0edea",
+            "primary-fixed-dim": "#ffb59d",
+            "secondary-fixed": "#9cf2e8",
+            "on-tertiary-fixed-variant": "#763300",
+            "surface-bright": "#ffffff",
+            "on-error": "#ffffff",
+            "tertiary-fixed": "#ffdbca",
+            "on-primary": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "secondary-fixed-dim": "#80d5cb",
+            "surface-tint": "#c2410c",
+            "on-secondary-fixed-variant": "#00504a",
+            "on-tertiary": "#ffffff",
+            "tertiary-fixed-dim": "#ffb68e",
+            "outline-variant": "#e1bfb5",
+            "outline": "#8b8079",
+            "inverse-surface": "#31302f",
+            "background": "#fcf9f6",
+            "surface-container-low": "#faf7f4",
+            "tertiary": "#8c3d00",
+            "primary-container": "#c2410c",
+            "on-secondary": "#ffffff",
+            "on-surface": "#1c1c1a",
+            "error": "#b91c1c",
+            "surface-variant": "#f3ede7",
+            "surface-container-high": "#eae8e5",
+            "inverse-primary": "#ffb59d",
+            "primary-fixed": "#ffdbd0",
+            "tertiary-container": "#fef3c7",
+            "surface-container-highest": "#e5e2df",
+            "surface": "#ffffff",
+            "surface-dim": "#dcdad7",
+            "on-primary-fixed": "#390c00",
+            "on-tertiary-container": "#7a3e06",
+            "on-secondary-container": "#006f67",
+            "primary": "#9b2f00",
+            "on-secondary-fixed": "#00201d",
+            "secondary": "#006a63",
+            "on-surface-variant": "#59413a",
+            "on-primary-fixed-variant": "#832600",
+            "on-tertiary-fixed": "#331200",
+            "inverse-on-surface": "#f3f0ed",
+            "on-background": "#1c1c1a"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-2xl": "3rem",
+            "gutter": "1rem",
+            "gutter-desktop": "1.5rem",
+            "margin-desktop": "2rem",
+            "space-xl": "2rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "margin": "1rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "headline-md": ["Outfit"],
+            "body-sm": ["Inter"],
+            "body-md": ["Inter"],
+            "display-mobile": ["Outfit"],
+            "display": ["Outfit"],
+            "body-lg": ["Inter"],
+            "metric": ["Outfit"],
+            "label-tabular": ["Inter"],
+            "label": ["Inter"],
+            "button-text": ["Inter"],
+            "headline-lg": ["Outfit"],
+            "headline-sm": ["Outfit"]
+          },
+          "fontSize": {
+            "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "display-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display": ["34px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+            "metric": ["40px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "label-tabular": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+            "label": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "button-text": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "headline-sm": ["18px", { "lineHeight": "26px", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      line-height: 1;
+    }
+    .tnum {
+      font-variant-numeric: tabular-nums;
+    }
+    .custom-shadow {
+      box-shadow: 0 1px 2px rgba(22,19,17,0.06), 0 8px 24px -12px rgba(22,19,17,0.12);
+    }
+  </style>
+</head>
+<body class="h-full font-body-md text-on-surface bg-background antialiased overflow-x-hidden">
+<!-- ========================================================================= -->
+<!-- APP SHELL: SIDEBAR (240px fija, autoridad según Shared Components JSON)   -->
+<!-- ========================================================================= -->
+<aside class="fixed top-0 left-0 h-screen w-60 z-30 bg-surface border-r border-outline-variant flex flex-col justify-between p-4">
+<div>
+<!-- Cabecera de la Barra Lateral -->
+<div class="flex items-center gap-3 px-2 py-2 mb-6">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary font-bold font-headline-md tracking-tight shadow-sm">
+<span class="material-symbols-outlined" data-icon="sports_kabaddi" style="font-variation-settings: 'FILL' 1;">sports_kabaddi</span>
+</div>
+<div>
+<span class="block text-headline-sm font-headline-sm font-bold text-primary tracking-tight">Estudio Salsa</span>
+<span class="block text-label font-label text-on-surface-variant font-medium">Gestión Operativa</span>
+</div>
+</div>
+<!-- Botón CTA según Shared Components JSON -->
+<div class="mb-5">
+<button class="w-full flex items-center justify-center gap-2 h-11 px-4 rounded-[10px] bg-primary text-on-primary font-button-text text-button-text hover:bg-[#e0561f] active:scale-[0.99] transition-all duration-150 shadow-sm" type="button">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+<span>Nueva Clase</span>
+</button>
+</div>
+<!-- Lista de Navegación Primaria -->
+<nav class="space-y-1">
+<!-- Inicio (ACTIVO: coincidencia exacta con pantalla del alumno) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-container text-primary font-semibold transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-primary" data-icon="dashboard">dashboard</span>
+<span class="font-button-text text-button-text">Inicio</span>
+</a>
+<!-- Calendario -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-button-text text-button-text">Calendario</span>
+</a>
+<!-- Clases -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="sports_kabaddi">sports_kabaddi</span>
+<span class="font-button-text text-button-text">Clases</span>
+</a>
+<!-- Alumnos -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-button-text text-button-text">Alumnos</span>
+</a>
+<!-- Facturación -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-button-text text-button-text">Facturación</span>
+</a>
+<!-- Ajustes -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-button-text text-button-text">Ajustes</span>
+</a>
+</nav>
+</div>
+<!-- Pie de Barra Lateral -->
+<div class="pt-4 border-t border-outline-variant space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-button-text text-button-text">Soporte</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-button-text text-button-text">Cerrar sesión</span>
+</a>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- APP SHELL: TOP BAR (64px de alto, anclada en left-60 a right-0)           -->
+<!-- ========================================================================= -->
+<header class="fixed top-0 left-60 right-0 h-16 z-20 bg-surface border-b border-outline-variant flex justify-between items-center px-8">
+<!-- Migas y Título de contexto -->
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="text-label font-label text-on-surface-variant uppercase tracking-wider">Portal del Alumno</span>
+<span class="text-on-surface-variant">/</span>
+<span class="text-headline-sm font-headline-sm font-semibold text-on-surface">Inicio</span>
+</div>
+<!-- Buscador -->
+<div class="relative ml-4">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-80 h-10 pl-9 pr-4 rounded-xl border border-outline-variant bg-surface text-body-sm font-body-sm text-on-surface placeholder-on-surface-variant focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-150" placeholder="Buscar clases, profesores o recibos..." type="search"/>
+</div>
+</div>
+<!-- Acciones secundarias & Perfil de Usuario -->
+<div class="flex items-center gap-4">
+<!-- Campana con badge sutil -->
+<button aria-label="Notificaciones" class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors duration-150" type="button">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary ring-2 ring-surface"></span>
+</button>
+<div class="h-6 w-px bg-outline-variant"></div>
+<!-- Avatar & Datos del Alumno (Lucía Moreno) -->
+<div class="flex items-center gap-3 pl-1">
+<div class="w-9 h-9 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-bold text-xs ring-2 ring-outline-variant">
+          LM
+        </div>
+<div class="text-left">
+<p class="text-button-text font-button-text text-on-surface leading-tight">Lucía Moreno</p>
+<p class="text-label font-label text-on-surface-variant">Alumna</p>
+</div>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- MAIN CONTENT CANVAS (Fondo #FAF7F4, ml-60, pt-16, max-w-1280px)           -->
+<!-- ========================================================================= -->
+<main class="ml-60 pt-16 min-h-screen bg-surface-container-low">
+<div class="max-w-[1280px] mx-auto p-8 space-y-8">
+<!-- ENCABEZADO DE BIENVENIDA & ACCIÓN RÁPIDA -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-2">
+<div>
+<h1 class="text-display font-display text-on-surface tracking-tight">Hola, Lucía</h1>
+<p class="text-body-md font-body-md text-on-surface-variant mt-1">Tienes 3 clases reservadas esta semana</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="h-11 px-5 rounded-[10px] bg-primary text-on-primary font-button-text text-button-text flex items-center gap-2 hover:bg-[#e0561f] active:scale-[0.99] transition-all duration-150 shadow-sm" type="button">
+<span class="material-symbols-outlined" data-icon="event_available">event_available</span>
+<span>Reservar nueva clase</span>
+</button>
+</div>
+</div>
+<!-- GRID ASIMÉTRICO PRINCIPAL (Columna Izquierda 7 cols / Columna Derecha 5 cols) -->
+<div class="grid grid-cols-12 gap-6">
+<!-- ================================================================= -->
+<!-- COLUMNA IZQUIERDA: Próxima clase + Agenda semanal                  -->
+<!-- ================================================================= -->
+<div class="col-span-12 lg:col-span-8 space-y-6">
+<!-- 1. TARJETA ANCHA: TU PRÓXIMA CLASE -->
+<div class="bg-surface border border-outline-variant rounded-[14px] p-6 custom-shadow">
+<!-- Cabecera de la tarjeta con chips de estado -->
+<div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant text-label font-label uppercase">
+                  Salsa en línea
+                </span>
+<span class="px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container text-label font-label uppercase">
+                  Intermedio
+                </span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary-container text-on-tertiary-container text-label font-label font-semibold">
+<span class="material-symbols-outlined text-[15px]" data-icon="schedule">schedule</span>
+<span>En 2 días</span>
+</div>
+</div>
+<!-- Título de la clase -->
+<div class="mb-5">
+<h2 class="text-headline-lg font-headline-lg text-on-surface">Salsa Intermedio</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Módulo de giros sincronizados y dinámica de pareja en tiempo 1.</p>
+</div>
+<!-- Fila de metadatos de la clase -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-xl bg-surface-container-low border border-outline-variant mb-6">
+<!-- Profesor -->
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs">
+                  MD
+                </div>
+<div>
+<span class="block text-label font-label text-on-surface-variant uppercase">Profesor</span>
+<span class="block text-body-sm font-body-sm font-medium text-on-surface">Marcos Delgado</span>
+</div>
+</div>
+<!-- Espacio / Sala -->
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="meeting_room">meeting_room</span>
+</div>
+<div>
+<span class="block text-label font-label text-on-surface-variant uppercase">Espacio</span>
+<span class="block text-body-sm font-body-sm font-medium text-on-surface">Sala 1 (Planta Baja)</span>
+</div>
+</div>
+<!-- Fecha -->
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="calendar_today">calendar_today</span>
+</div>
+<div>
+<span class="block text-label font-label text-on-surface-variant uppercase">Fecha</span>
+<span class="block text-body-sm font-body-sm font-medium text-on-surface">martes, 13/10/2026</span>
+</div>
+</div>
+<!-- Horario -->
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="schedule">schedule</span>
+</div>
+<div>
+<span class="block text-label font-label text-on-surface-variant uppercase">Horario</span>
+<span class="block text-headline-sm font-headline-sm text-primary font-bold tnum">19:30 - 21:00</span>
+</div>
+</div>
+</div>
+<!-- Botones de Acción -->
+<div class="flex items-center gap-3">
+<button class="h-11 px-6 rounded-[10px] bg-primary text-on-primary font-button-text text-button-text hover:bg-[#e0561f] active:scale-[0.99] transition-all duration-150" type="button">
+                Ver clase
+              </button>
+<button class="h-11 px-5 rounded-[10px] bg-surface border border-outline-variant text-on-surface font-button-text text-button-text hover:bg-surface-container active:scale-[0.99] transition-all duration-150 flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-lg" data-icon="calendar_add_on">calendar_add_on</span>
+<span>Añadir al calendario</span>
+</button>
+</div>
+</div>
+<!-- 2. SECCIÓN: TU SEMANA (Agenda Lunes - Viernes) -->
+<div class="bg-surface border border-outline-variant rounded-[14px] p-6 custom-shadow">
+<div class="flex items-center justify-between mb-5">
+<div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Tu semana (Lunes 12 - Domingo 18 de octubre)</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Progreso semanal y clases agendadas</p>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant text-label font-label text-on-surface-variant">
+<span class="material-symbols-outlined text-base" data-icon="date_range">date_range</span>
+<span>Semana 42</span>
+</div>
+</div>
+<!-- 5 TARJETAS DE DÍA EN FILA HORIZONTAL -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3">
+<!-- Lunes 12 OCT: Bachata Sensual Iniciación -->
+<div class="rounded-xl border border-outline-variant p-3.5 bg-surface flex flex-col justify-between h-[180px]">
+<div>
+<div class="flex items-center justify-between text-on-surface-variant mb-2">
+<span class="text-label font-label uppercase">LUN</span>
+<span class="text-body-sm font-body-sm font-bold text-on-surface tnum">12 OCT</span>
+</div>
+<p class="font-headline-sm text-body-sm font-semibold text-on-surface leading-snug line-clamp-2">Bachata Sensual Iniciación</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1.5 tnum">20:00 - 21:00</p>
+<p class="text-label font-label text-outline mt-0.5">Sala 2</p>
+</div>
+<div class="pt-2">
+<span class="inline-block px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container text-label font-label">
+                    Confirmada
+                  </span>
+</div>
+</div>
+<!-- Martes 13 OCT (Destacada / Próxima) -->
+<div class="rounded-xl border-2 border-primary p-3.5 bg-surface-container-low flex flex-col justify-between h-[180px] shadow-sm relative">
+<div class="absolute -top-2.5 right-2 px-2 py-0.5 rounded-full bg-primary text-on-primary text-[10px] font-bold uppercase tracking-wider">
+                  En 2 días
+                </div>
+<div>
+<div class="flex items-center justify-between text-on-surface-variant mb-2">
+<span class="text-label font-label uppercase text-primary font-bold">MAR</span>
+<span class="text-body-sm font-body-sm font-bold text-primary tnum">13 OCT</span>
+</div>
+<p class="font-headline-sm text-body-sm font-bold text-on-surface leading-snug line-clamp-2">Salsa Intermedio</p>
+<p class="text-body-sm font-body-sm font-medium text-primary mt-1.5 tnum">19:30 - 21:00</p>
+<p class="text-label font-label text-on-surface-variant mt-0.5">Sala 1</p>
+</div>
+<div class="pt-2">
+<span class="inline-block px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant text-label font-label font-semibold">
+                    Próxima
+                  </span>
+</div>
+</div>
+<!-- Miércoles 14 OCT: Libre -->
+<div class="rounded-xl border border-dashed border-outline-variant p-3.5 bg-surface-container-low flex flex-col justify-between h-[180px]">
+<div>
+<div class="flex items-center justify-between text-on-surface-variant mb-2">
+<span class="text-label font-label uppercase">MIÉ</span>
+<span class="text-body-sm font-body-sm font-medium text-on-surface-variant tnum">14 OCT</span>
+</div>
+<p class="text-body-sm font-body-sm text-outline italic">Libre</p>
+</div>
+<button class="w-full py-1.5 rounded-lg border border-outline-variant bg-surface text-label font-label text-on-surface-variant hover:text-primary hover:border-primary transition-colors duration-150 text-center" type="button">
+                  + Reservar
+                </button>
+</div>
+<!-- Jueves 15 OCT: Estilo Femenino y Giros -->
+<div class="rounded-xl border border-outline-variant p-3.5 bg-surface flex flex-col justify-between h-[180px]">
+<div>
+<div class="flex items-center justify-between text-on-surface-variant mb-2">
+<span class="text-label font-label uppercase">JUE</span>
+<span class="text-body-sm font-body-sm font-bold text-on-surface tnum">15 OCT</span>
+</div>
+<p class="font-headline-sm text-body-sm font-semibold text-on-surface leading-snug line-clamp-2">Estilo Femenino y Giros</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1.5 tnum">18:30 - 19:30</p>
+<p class="text-label font-label text-outline mt-0.5">Sala 3</p>
+</div>
+<div class="pt-2">
+<span class="inline-block px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container text-label font-label">
+                    Confirmada
+                  </span>
+</div>
+</div>
+<!-- Viernes 16 OCT: Libre -->
+<div class="rounded-xl border border-dashed border-outline-variant p-3.5 bg-surface-container-low flex flex-col justify-between h-[180px]">
+<div>
+<div class="flex items-center justify-between text-on-surface-variant mb-2">
+<span class="text-label font-label uppercase">VIE</span>
+<span class="text-body-sm font-body-sm font-medium text-on-surface-variant tnum">16 OCT</span>
+</div>
+<p class="text-body-sm font-body-sm text-outline italic">Libre</p>
+</div>
+<button class="w-full py-1.5 rounded-lg border border-outline-variant bg-surface text-label font-label text-on-surface-variant hover:text-primary hover:border-primary transition-colors duration-150 text-center" type="button">
+                  + Reservar
+                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- ================================================================= -->
+<!-- COLUMNA DERECHA: Bono Activo & Pase Rápido QR                     -->
+<!-- ================================================================= -->
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<!-- TARJETA: BONO ACTIVO -->
+<div class="bg-surface border border-outline-variant rounded-[14px] p-6 custom-shadow">
+<div class="flex items-center justify-between mb-4">
+<span class="text-label font-label text-on-surface-variant uppercase">Bono activo</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container text-label font-label">Activo</span>
+</div>
+<!-- Progreso circular y métricas -->
+<div class="flex items-center gap-6 py-2">
+<!-- Anillo de progreso SVG (6 de 10 = 60%) -->
+<div class="relative w-28 h-28 flex-shrink-0">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 100 100">
+<!-- Fondo del anillo -->
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#eae8e5" stroke-width="9"></circle>
+<!-- Progreso Terracota (Perímetro ~251.2, 60% = 150.7 stroke-dasharray) -->
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#c2410c" stroke-dasharray="150.72 251.2" stroke-linecap="round" stroke-width="9"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="text-headline-md font-headline-md font-bold text-on-surface tnum">6/10</span>
+<span class="text-[10px] text-on-surface-variant uppercase font-medium">Clases</span>
+</div>
+</div>
+<!-- Explicación de créditos -->
+<div class="space-y-1">
+<div class="text-headline-sm font-headline-sm font-bold text-primary tnum">
+                  4 clases
+                </div>
+<div class="text-body-sm font-body-sm font-medium text-on-surface">
+                  disponibles para usar
+                </div>
+<div class="text-label font-label text-on-surface-variant pt-1">
+                  6 consumidas este periodo
+                </div>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant">Vencimiento del bono:</span>
+<span class="font-medium text-on-surface tnum">31/10/2026</span>
+</div>
+<div class="mt-5">
+<button class="w-full h-11 rounded-[10px] bg-primary text-on-primary font-button-text text-button-text hover:bg-[#e0561f] active:scale-[0.99] transition-all duration-150 shadow-sm flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-lg" data-icon="shopping_bag">shopping_bag</span>
+<span>Comprar bono</span>
+</button>
+</div>
+</div>
+<!-- TARJETA ACCESORIA: PASE RÁPIDO QR -->
+<div class="bg-surface border border-outline-variant rounded-[14px] p-5 custom-shadow flex items-center gap-4">
+<!-- Icono simulado de Código QR -->
+<div class="w-16 h-16 rounded-xl bg-surface-container flex items-center justify-center flex-shrink-0 border border-outline-variant">
+<span class="material-symbols-outlined text-3xl text-on-surface" data-icon="qr_code_2">qr_code_2</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="text-button-text font-button-text text-on-surface">Pase rápido QR</span>
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5 truncate">Acceso directo al torno y vestuarios</p>
+<button class="text-label font-label text-primary hover:underline mt-1 inline-flex items-center gap-1" type="button">
+                Ampliar código
+                <span class="material-symbols-outlined text-xs" data-icon="open_in_new">open_in_new</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- ===================================================================== -->
+<!-- FILA INFERIOR: Siguiente pago & Últimas facturas (2 columnas simétricas)-->
+<!-- ===================================================================== -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- TARJETA: SIGUIENTE PAGO -->
+<div class="bg-surface border border-outline-variant rounded-[14px] p-6 custom-shadow">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Siguiente pago</h3>
+<span class="px-2.5 py-0.5 rounded-full bg-tertiary-container text-on-tertiary-container text-label font-label font-semibold">
+              Programado
+            </span>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant mb-4">
+<div class="flex items-baseline justify-between mb-1">
+<span class="text-body-sm font-body-sm text-on-surface-variant">Concepto: Cuota mensual estándar</span>
+<span class="text-headline-lg font-headline-lg font-bold text-on-surface tnum">79,00 €</span>
+</div>
+<p class="text-label font-label text-on-surface-variant">Facturación recurrente mensual sin permanencia</p>
+</div>
+<div class="space-y-2.5 text-body-sm font-body-sm">
+<div class="flex items-center justify-between py-1">
+<span class="text-on-surface-variant">Fecha de cargo estimada</span>
+<span class="font-medium text-on-surface tnum">01/11/2026</span>
+</div>
+<div class="flex items-center justify-between py-1 border-t border-outline-variant">
+<span class="text-on-surface-variant">Método de pago asociado</span>
+<div class="flex items-center gap-2 font-medium text-on-surface">
+<span class="material-symbols-outlined text-base text-outline" data-icon="account_balance">account_balance</span>
+<span>SEPA Direct Debit (•••• 4892)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- TARJETA: ÚLTIMAS FACTURAS -->
+<div class="bg-surface border border-outline-variant rounded-[14px] p-6 custom-shadow flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Últimas facturas</h3>
+<a class="text-button-text font-button-text text-primary hover:underline flex items-center gap-1" href="#">
+<span>Ver todas</span>
+<span class="material-symbols-outlined text-base" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<!-- Tabla compacta de facturas -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant text-label font-label text-on-surface-variant uppercase">
+<th class="py-2 font-medium">Ref.</th>
+<th class="py-2 font-medium">Fecha</th>
+<th class="py-2 font-medium">Concepto</th>
+<th class="py-2 font-medium text-right">Importe</th>
+<th class="py-2 font-medium text-center">Estado</th>
+<th class="py-2 font-medium text-right"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant text-body-sm font-body-sm">
+<!-- Fila 1: Octubre -->
+<tr class="hover:bg-surface-container-low transition-colors duration-150">
+<td class="py-3 font-medium text-on-surface tnum">V-2026-0184</td>
+<td class="py-3 text-on-surface-variant tnum">01/10/2026</td>
+<td class="py-3 text-on-surface">Cuota Octubre</td>
+<td class="py-3 text-right font-medium text-on-surface tnum">79,00 €</td>
+<td class="py-3 text-center">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container text-label font-label">
+                        Pagada
+                      </span>
+</td>
+<td class="py-3 text-right">
+<button class="p-1 rounded text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-150" title="Descargar PDF" type="button">
+<span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+</button>
+</td>
+</tr>
+<!-- Fila 2: Septiembre -->
+<tr class="hover:bg-surface-container-low transition-colors duration-150">
+<td class="py-3 font-medium text-on-surface tnum">V-2026-0171</td>
+<td class="py-3 text-on-surface-variant tnum">01/09/2026</td>
+<td class="py-3 text-on-surface">Cuota Septiembre</td>
+<td class="py-3 text-right font-medium text-on-surface tnum">79,00 €</td>
+<td class="py-3 text-center">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container text-label font-label">
+                        Pagada
+                      </span>
+</td>
+<td class="py-3 text-right">
+<button class="p-1 rounded text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-150" title="Descargar PDF" type="button">
+<span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="pt-3 border-t border-outline-variant flex items-center justify-between text-label font-label text-on-surface-variant">
+<span>¿Necesitas factura rectificativa con NIF?</span>
+<a class="text-primary hover:underline font-semibold" href="#">Contactar con administración</a>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

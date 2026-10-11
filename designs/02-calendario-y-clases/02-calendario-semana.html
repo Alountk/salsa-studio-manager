@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-background" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Estudio Salsa - Calendario Semanal</title>
+<!-- Google Fonts: Outfit (Headlines & Metrics) & Inter (Labels & Body) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Outfit:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary-fixed": "#001a41",
+            "primary": "#9b2f00",
+            "surface-container-high": "#fce3db",
+            "on-tertiary-container": "#ecf0ff",
+            "tertiary": "#b45309",
+            "surface-bright": "#fff8f6",
+            "primary-fixed": "#ffdbd0",
+            "on-secondary-fixed": "#00201d",
+            "on-primary-fixed": "#390c00",
+            "on-secondary-fixed-variant": "#00504a",
+            "on-secondary": "#ffffff",
+            "surface-tint": "#ac3400",
+            "outline-variant": "#e1bfb5",
+            "on-tertiary": "#ffffff",
+            "on-primary": "#ffffff",
+            "outline": "#8b8079",
+            "on-secondary-container": "#006f67",
+            "tertiary-container": "#0069de",
+            "inverse-on-surface": "#ffede8",
+            "on-tertiary-fixed-variant": "#004494",
+            "secondary": "#006a63",
+            "surface": "#ffffff",
+            "primary-container": "#c2410c",
+            "surface-container": "#ffe9e3",
+            "secondary-fixed": "#9cf2e8",
+            "secondary-fixed-dim": "#80d5cb",
+            "error-container": "#ffdad6",
+            "tertiary-fixed-dim": "#adc6ff",
+            "surface-container-highest": "#f7ddd6",
+            "surface-dim": "#eed5cd",
+            "tertiary-fixed": "#d8e2ff",
+            "on-primary-fixed-variant": "#832600",
+            "on-background": "#261814",
+            "on-primary-container": "#ffece7",
+            "on-error-container": "#93000a",
+            "on-surface": "#261814",
+            "secondary-container": "#99efe5",
+            "inverse-primary": "#ffb59d",
+            "background": "#fff8f6",
+            "surface-container-low": "#fff1ed",
+            "surface-container-lowest": "#ffffff",
+            "primary-fixed-dim": "#ffb59d",
+            "on-surface-variant": "#59413a",
+            "inverse-surface": "#3c2d28",
+            "surface-variant": "#f7ddd6",
+            "error": "#b91c1c",
+            "on-error": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-2xl": "3rem",
+            "space-xl": "2rem",
+            "gutter-desktop": "1.5rem",
+            "gutter": "1rem",
+            "space-sm": "0.5rem",
+            "margin-desktop": "2rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "margin": "1rem"
+          },
+          "fontFamily": {
+            "metric": ["Outfit"],
+            "button-text": ["Inter"],
+            "label": ["Inter"],
+            "headline-lg": ["Outfit"],
+            "headline-md": ["Outfit"],
+            "headline-sm": ["Outfit"],
+            "display-mobile": ["Outfit"],
+            "display": ["Outfit"],
+            "body-sm": ["Inter"],
+            "body-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-tabular": ["Inter"]
+          },
+          "fontSize": {
+            "metric": ["40px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "button-text": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "headline-sm": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+            "display-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display": ["34px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+            "label-tabular": ["13px", { "lineHeight": "18px", "fontWeight": "500" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Tabular numbers for clean calendar grids and timestamps */
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+    /* Custom subtle scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #e1bfb5;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #8b8079;
+    }
+  </style>
+</head>
+<body class="h-full bg-background text-on-surface antialiased overflow-hidden font-body-md text-body-md flex">
+<!-- ========================================================================= -->
+<!-- SHARED COMPONENT: SideNavBar (desktop_drawer, 240px width, fixed left)    -->
+<!-- ========================================================================= -->
+<aside class="fixed top-0 left-0 h-screen w-60 z-30 bg-surface-container-low flex flex-col justify-between p-4 border-r-0 select-none">
+<!-- Top Brand & Creation Action -->
+<div class="flex flex-col gap-5">
+<!-- Header Brand -->
+<div class="flex items-center gap-3 px-2 py-1">
+<div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[24px]">sports_kabaddi</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm font-bold text-primary leading-tight">Estudio Salsa</span>
+<span class="font-label text-[11px] text-on-surface-variant font-medium">Gestión Integral</span>
+</div>
+</div>
+<!-- Quick Action CTA -->
+<button class="w-full flex items-center justify-center gap-2 bg-primary-container hover:bg-primary text-on-primary py-2.5 px-4 rounded-lg font-button-text text-button-text shadow-sm transition-all duration-150 active:scale-95">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Crear clase</span>
+</button>
+<!-- Main Navigation Menu (Active: 'Calendario') -->
+<nav class="flex flex-col gap-1 mt-1">
+<!-- 1. Inicio (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-body-md text-body-md hover:bg-surface-container hover:text-on-surface transition-colors duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[22px]">home</span>
+<span>Inicio</span>
+</a>
+<!-- 2. Calendario (Active - Match exact instructions from JSON & styling) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary-container text-on-primary-container font-button-text text-button-text transition-all duration-150 active:scale-95 shadow-sm" href="#">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span>Calendario</span>
+</a>
+<!-- 3. Clases (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-body-md text-body-md hover:bg-surface-container hover:text-on-surface transition-colors duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[22px]">sports_kabaddi</span>
+<span>Clases</span>
+</a>
+<!-- 4. Alumnos (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-body-md text-body-md hover:bg-surface-container hover:text-on-surface transition-colors duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[22px]">groups</span>
+<span>Alumnos</span>
+</a>
+<!-- 5. Facturación (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-body-md text-body-md hover:bg-surface-container hover:text-on-surface transition-colors duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[22px]">receipt_long</span>
+<span>Facturación</span>
+</a>
+<!-- 6. Ajustes (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-body-md text-body-md hover:bg-surface-container hover:text-on-surface transition-colors duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span>Ajustes</span>
+</a>
+</nav>
+</div>
+<!-- Footer Area: Help, Logout, User Profile -->
+<div class="flex flex-col gap-2 pt-4 border-t border-outline-variant/40">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-body-md text-body-md hover:bg-surface-container hover:text-on-surface transition-colors duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span class="text-sm">Ayuda</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-body-md text-body-md hover:bg-surface-container hover:text-on-surface transition-colors duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+<span class="text-sm">Cerrar sesión</span>
+</a>
+<!-- User Card -->
+<div class="mt-2 pt-2 border-t border-outline-variant/30 flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-surface-container/60 transition-colors cursor-pointer">
+<img class="w-9 h-9 rounded-full object-cover ring-2 ring-primary/20" data-alt="A portrait photograph of an elegant Spanish dance studio administrator named Carmen Rivas with warm studio lighting, smiling warmly in front of a warm terracotta toned dance background with modern minimalist studio interior." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFmh3T5gmfScRKfKhPDNkNFsGPBz2WEFkM7xiZ2z58LIWqd2f00imcJswST87mQqJgF7tWNsunagvDfjkEfUCaKIiaXJ0q_N8iNGFWRg1weagP292x_E3g5pn3wv6UvsoWLKDrupHlGVrzhpOq8LarkOfFcQRxp7DAIfaLCZ2di6yS4b76VN0B4MHAhUaHvzhDdGlMz_Uy-TajLVwsRM-ooI65VxvjurZiu116q62FD5izAUbrctIAVeGq6y4a7kSClA0NWMCAZXI"/>
+<div class="flex flex-col min-w-0">
+<span class="font-button-text text-xs text-on-surface truncate font-semibold">Carmen Rivas</span>
+<span class="font-label text-[11px] text-on-surface-variant truncate">Administradora</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- MAIN WORKSPACE CONTAINER (Left margin 240px for SideNavBar)               -->
+<!-- ========================================================================= -->
+<div class="ml-60 flex-1 flex flex-col h-screen overflow-hidden bg-background">
+<!-- ======================================================================= -->
+<!-- SHARED COMPONENT: TopNavBar (desktop_header, 64px height)               -->
+<!-- ======================================================================= -->
+<header class="fixed top-0 left-60 right-0 h-16 z-20 bg-surface shadow-sm border-b-0 flex items-center justify-between px-8">
+<!-- Search Input on Left -->
+<div class="flex items-center w-96 relative">
+<span class="material-symbols-outlined absolute left-3 text-outline text-[20px]">search</span>
+<input class="w-full bg-surface-container-low pl-10 pr-4 py-2 rounded-lg text-sm text-on-surface placeholder:text-outline border-0 focus:ring-2 focus:ring-primary focus:bg-surface transition-all font-body-sm" placeholder="Buscar por clase, profesor, sala..." type="text"/>
+</div>
+<!-- Center / Sede Switcher -->
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container cursor-pointer transition-colors text-on-surface">
+<span class="material-symbols-outlined text-primary text-[20px]">location_on</span>
+<span class="font-button-text text-sm font-semibold">Sede Centro</span>
+<span class="text-outline text-xs">• C/ Mayor 42</span>
+<span class="material-symbols-outlined text-outline text-[18px]">expand_more</span>
+</div>
+<!-- Trailing Action Cluster -->
+<div class="flex items-center gap-4">
+<!-- Notification button with indicator dot -->
+<button aria-label="Notificaciones" class="relative p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-lg transition-colors duration-150">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary-container ring-2 ring-surface"></span>
+</button>
+<!-- Quick Top Action CTA -->
+<button class="flex items-center gap-2 bg-primary-container hover:bg-primary text-on-primary px-3.5 py-1.5 rounded-lg font-button-text text-sm transition-all duration-150 active:scale-95 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>Crear clase</span>
+</button>
+<!-- Mini profile avatar badge -->
+<div class="flex items-center gap-2 pl-2 border-l border-outline-variant/50">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="Close up thumbnail of admin studio director Carmen Rivas wearing terracotta top against neutral warm background in professional dance academy atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2bKx5SQMITfjZPghdXvEsRZy-2gchQUo9dJ-wcsKMxCE1Eo1FUGBxYCjqO45Q4gX_Qpy7xXYo8yYm-UXK2kC6yWb-Si9jyiv93in00leco6zn2tOJ0KEtLwKtzWXq2PHXDVlawrtmiWjEm5lCxTjvXgn9AATouttxwfLRzOI6zB_xUk_1NXfa2eqWyvn2l3rAKVX60b3T3d7yrSlzmeFmIIzktDm3XvOomWjHKKhJT4GL7b-j8cJ2AXNxnyS1W4b6IKx_VvYwceE"/>
+</div>
+</div>
+</header>
+<!-- ======================================================================= -->
+<!-- CALENDAR CONTENT CANVAS (Padded 32px, scrollable, high-density)         -->
+<!-- ======================================================================= -->
+<main class="mt-16 flex-1 flex flex-col overflow-hidden p-8 bg-background">
+<!-- CALENDAR HEADER & CONTROLS SECTION -->
+<div class="flex flex-col gap-5 flex-shrink-0 mb-4">
+<!-- Top Title & Subtitle -->
+<div class="flex items-center justify-between">
+<div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">Calendario de Clases</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">Programación semanal de salas, profesorado y aforos en tiempo real</p>
+</div>
+<!-- Fast Quick Actions -->
+<div class="flex items-center gap-2.5">
+<button class="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface hover:bg-surface-container-low text-on-surface border border-outline-variant/60 font-button-text text-button-text shadow-sm transition-all">
+<span class="material-symbols-outlined text-[18px]">print</span>
+<span>Imprimir / Exportar</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-button-text text-button-text shadow-sm transition-all active:scale-95">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>+ Añadir evento</span>
+</button>
+</div>
+</div>
+<!-- Toolbar: Date Nav, Segmented View, Filters -->
+<div class="flex flex-wrap items-center justify-between gap-4 bg-surface p-3 rounded-xl shadow-sm border border-outline-variant/30">
+<!-- Date Navigator -->
+<div class="flex items-center gap-3">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-primary font-button-text text-sm transition-colors">
+              Hoy
+            </button>
+<div class="flex items-center bg-surface-container-low rounded-lg p-0.5">
+<button class="p-1 hover:bg-surface rounded text-on-surface-variant transition-colors" title="Semana anterior">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="p-1 hover:bg-surface rounded text-on-surface-variant transition-colors" title="Semana siguiente">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+<div class="font-headline-md text-headline-sm font-bold text-on-surface ml-1 tracking-tight">
+              12 - 18 de octubre de 2026
+            </div>
+</div>
+<!-- Segmented View Switcher: Mes / Semana (Active) / Día / Agenda -->
+<div class="flex items-center bg-surface-container-low p-1 rounded-lg">
+<button class="px-3 py-1 text-sm font-label text-on-surface-variant hover:text-on-surface rounded-md transition-colors">Mes</button>
+<button class="px-3.5 py-1 text-sm font-button-text text-primary bg-surface shadow-xs rounded-md font-semibold">Semana</button>
+<button class="px-3 py-1 text-sm font-label text-on-surface-variant hover:text-on-surface rounded-md transition-colors">Día</button>
+<button class="px-3 py-1 text-sm font-label text-on-surface-variant hover:text-on-surface rounded-md transition-colors">Agenda</button>
+</div>
+<!-- Filter Dropdowns Cluster -->
+<div class="flex items-center gap-2">
+<!-- Room Filter -->
+<div class="relative flex items-center">
+<select class="appearance-none bg-surface-container-low hover:bg-surface-container text-on-surface font-body-sm text-xs rounded-lg pl-3 pr-8 py-2 border-0 focus:ring-1 focus:ring-primary cursor-pointer font-medium">
+<option>Todas las salas (1, 2 y 3)</option>
+<option>Sala 1 • Habana (Aforo 24)</option>
+<option>Sala 2 • Santiago (Aforo 18)</option>
+<option>Sala 3 • Cali (Aforo 12)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 pointer-events-none text-outline text-[16px]">expand_more</span>
+</div>
+<!-- Instructor Filter -->
+<div class="relative flex items-center">
+<select class="appearance-none bg-surface-container-low hover:bg-surface-container text-on-surface font-body-sm text-xs rounded-lg pl-3 pr-8 py-2 border-0 focus:ring-1 focus:ring-primary cursor-pointer font-medium">
+<option>Todos los profesores</option>
+<option>Carlos Rivas (Salsa On2)</option>
+<option>Elena Vega (Bachata Sensual)</option>
+<option>Marcos &amp; Laura (Kizomba)</option>
+<option>Javier Sanz (Timba Cubana)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 pointer-events-none text-outline text-[16px]">expand_more</span>
+</div>
+<!-- Advanced Filters -->
+<button class="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-body-sm text-xs transition-colors font-medium">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+<span>Filtros</span>
+</button>
+</div>
+</div>
+</div>
+<!-- CALENDAR GRID CONTAINER (Fixed day header + Scrollable time body) -->
+<div class="flex-1 bg-surface rounded-xl shadow-sm border border-outline-variant/40 flex flex-col overflow-hidden">
+<!-- STICKY WEEKDAY HEADER (7 Columns) -->
+<div class="flex border-b border-outline-variant/50 bg-surface-container-lowest flex-shrink-0 z-10">
+<!-- Time Column Header Placeholder (Width: 64px) -->
+<div class="w-16 flex-shrink-0 border-r border-outline-variant/30 flex items-center justify-center p-2 text-outline">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+</div>
+<!-- Day Columns (7 Columns Equal Flex) -->
+<div class="flex-1 grid grid-cols-7 divide-x divide-outline-variant/30 text-center">
+<!-- LUN 12 -->
+<div class="py-2.5 px-2 flex flex-col items-center justify-center">
+<span class="font-label text-[11px] text-outline font-semibold tracking-wider">LUN</span>
+<span class="font-headline-sm text-base text-on-surface font-bold mt-0.5">12</span>
+</div>
+<!-- MAR 13 -->
+<div class="py-2.5 px-2 flex flex-col items-center justify-center">
+<span class="font-label text-[11px] text-outline font-semibold tracking-wider">MAR</span>
+<span class="font-headline-sm text-base text-on-surface font-bold mt-0.5">13</span>
+</div>
+<!-- MIÉ 14 (HOY - Highlighted with terracotta circle indicator) -->
+<div class="py-2.5 px-2 flex flex-col items-center justify-center bg-surface-container-low/50">
+<span class="font-label text-[11px] text-primary font-bold tracking-wider">MIÉ</span>
+<span class="w-7 h-7 rounded-full bg-primary-container text-on-primary font-headline-sm text-sm font-bold flex items-center justify-center mt-0.5 shadow-sm">
+                14
+              </span>
+</div>
+<!-- JUE 15 -->
+<div class="py-2.5 px-2 flex flex-col items-center justify-center">
+<span class="font-label text-[11px] text-outline font-semibold tracking-wider">JUE</span>
+<span class="font-headline-sm text-base text-on-surface font-bold mt-0.5">15</span>
+</div>
+<!-- VIE 16 -->
+<div class="py-2.5 px-2 flex flex-col items-center justify-center">
+<span class="font-label text-[11px] text-outline font-semibold tracking-wider">VIE</span>
+<span class="font-headline-sm text-base text-on-surface font-bold mt-0.5">16</span>
+</div>
+<!-- SÁB 17 -->
+<div class="py-2.5 px-2 flex flex-col items-center justify-center bg-surface-container-low/20">
+<span class="font-label text-[11px] text-outline font-semibold tracking-wider">SÁB</span>
+<span class="font-headline-sm text-base text-on-surface font-bold mt-0.5">17</span>
+</div>
+<!-- DOM 18 -->
+<div class="py-2.5 px-2 flex flex-col items-center justify-center bg-surface-container-low/20">
+<span class="font-label text-[11px] text-outline font-semibold tracking-wider">DOM</span>
+<span class="font-headline-sm text-base text-on-surface font-bold mt-0.5">18</span>
+</div>
+</div>
+</div>
+<!-- SCROLLABLE TIME & CLASSES GRID (07:00 to 23:00 -> 16 hours * 56px = 896px canvas) -->
+<div class="flex-1 overflow-y-auto relative flex select-none" id="calendarScrollCanvas">
+<!-- TIME LABELS COLUMN (Width: 64px, row height: exactly 56px) -->
+<div class="w-16 flex-shrink-0 border-r border-outline-variant/30 bg-surface-container-lowest flex flex-col">
+<!-- 07:00 -->
+<div class="h-14 flex items-start justify-end pr-2 pt-1 font-label-tabular text-[11px] text-outline border-b border-outline-variant/20">07:00</div>
+<!-- 08:00 -->
+<div class="h-14 flex items-start justify-end pr-2 pt-1 font-label-tabular text-[11px] text-outline border-b border-outline-variant/20">08:00</div>
+<!-- 09:00 -->
+<div class="h-14 flex items-start justify-end pr-2 pt-1 font-label-tabular text-[11px] text-outline border-b border-outline-variant/20">09:00</div>
+<!-- 10:00 -->
+<div class="h-14 flex items-start justify-end pr-2 pt-1 font-label-tabular text-[11px] text-outline border-b border-outline-variant/20">10:00</div>
+<!-- 11:00 -->
+<div class="h-14 flex items-start justify-end pr-2 pt-1 font-label-tabular text-[11px] text-outline border-b border-outline-variant/20">11:00</div>
+<!-- 12:00 -->
+<div class="h-14 flex items-start justify-end pr-2 pt-1 font-label-tabular text-[11px] text-outline border-b border-outline-variant/20">12:00</div>
+<!-- 13:00 -->
+<div class="h-14 flex items-start justify-end pr-2 pt-1 font-label-tabular text-[11px] text-outline border-b border-outline-variant/20">13:00</div>
+<!-- 14:00 -->
+<div class="h-14 flex items-start justify-end pr-2 pt-1 font-label-tabular text-[11px] text-outline border-b border-outline-variant/20">14:00</div>
+<!-- 15:00 -->
+<div class="h-14 flex items-start justify-end pr-2 pt-1 font-label-tabular text-[11px] text-outline border-b border-outline-variant/20">15:00</div>
+<!-- 16:00 -->
+<div class="h-14 flex items-start justify-end pr-2 pt-1 font-label-tabular text-[11px] text-outline border-b border-outline-variant/20">16:00</div>
+<!-- 17:00 -->
+<div class="h-14 flex items-start justify-end pr-2 pt-1 font-label-tabular text-[11px] text-outline border-b border-outline-variant/20">17:00</div>
+<!-- 18:00 -->
+<div class="h-14 flex items-start justify-end pr-2 pt-1 font-label-tabular text-[11px] text-outline border-b border-outline-variant/20">18:00</div>
+<!-- 19:00 -->
+<div class="h-14 flex items-start justify-end pr-2 pt-1 font-label-tabular text-[11px] text-outline border-b border-outline-variant/20">19:00</div>
+<!-- 20:00 -->
+<div class="h-14 flex items-start justify-end pr-2 pt-1 font-label-tabular text-[11px] text-outline border-b border-outline-variant/20">20:00</div>
+<!-- 21:00 -->
+<div class="h-14 flex items-start justify-end pr-2 pt-1 font-label-tabular text-[11px] text-outline border-b border-outline-variant/20">21:00</div>
+<!-- 22:00 -->
+<div class="h-14 flex items-start justify-end pr-2 pt-1 font-label-tabular text-[11px] text-outline border-b border-outline-variant/20">22:00</div>
+</div>
+<!-- 7-DAY COLUMNS GRID -->
+<div class="flex-1 grid grid-cols-7 divide-x divide-outline-variant/30 relative" style="height: 896px;">
+<!-- BACKGROUND HORIZONTAL GRID LINES (Every 56px) -->
+<div class="absolute inset-0 pointer-events-none flex flex-col z-0">
+<div class="h-14 border-b border-outline-variant/20"></div>
+<div class="h-14 border-b border-outline-variant/20"></div>
+<div class="h-14 border-b border-outline-variant/20"></div>
+<div class="h-14 border-b border-outline-variant/20"></div>
+<div class="h-14 border-b border-outline-variant/20"></div>
+<div class="h-14 border-b border-outline-variant/20"></div>
+<div class="h-14 border-b border-outline-variant/20"></div>
+<div class="h-14 border-b border-outline-variant/20"></div>
+<div class="h-14 border-b border-outline-variant/20"></div>
+<div class="h-14 border-b border-outline-variant/20"></div>
+<div class="h-14 border-b border-outline-variant/20"></div>
+<div class="h-14 border-b border-outline-variant/20"></div>
+<div class="h-14 border-b border-outline-variant/20"></div>
+<div class="h-14 border-b border-outline-variant/20"></div>
+<div class="h-14 border-b border-outline-variant/20"></div>
+<div class="h-14 border-b border-outline-variant/20"></div>
+</div>
+<!-- CURRENT TIME INDICATOR LINE (Across all days at 18:45 -> 11.75 hours from 07:00 = 658px) -->
+<div class="absolute left-0 right-0 z-20 pointer-events-none flex items-center" style="top: 658px;">
+<div class="w-3 h-3 rounded-full bg-primary-container -ml-1.5 ring-4 ring-primary-container/20"></div>
+<div class="flex-1 h-0.5 bg-primary-container"></div>
+<span class="bg-primary-container text-on-primary text-[10px] font-bold px-1.5 py-0.5 rounded shadow-sm mr-2 font-label-tabular">18:45</span>
+</div>
+<!-- ============================================== -->
+<!-- COL 1: LUNES 12                                 -->
+<!-- ============================================== -->
+<div class="relative h-full px-1">
+<!-- Class: 10:00 - 11:30 (3 hours from 07:00 = 168px top, 1.5h = 84px height) -->
+<div class="absolute left-1 right-1 rounded-md p-2 shadow-xs transition-all cursor-pointer z-10 flex flex-col justify-between" style="top: 168px; height: 84px; background-color: #FEF3C7; border-left: 4px solid #B45309;">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-tabular text-[11px] font-semibold text-[#78350F]">10:00 - 11:30</span>
+<span class="text-[10px] font-bold px-1.5 py-0.2 rounded bg-amber-200/80 text-[#78350F] tabular-nums">12/16</span>
+</div>
+<h4 class="font-headline-sm text-xs font-bold text-[#451A03] truncate mt-0.5">Salsa Cubana Básico</h4>
+</div>
+<div class="flex items-center justify-between text-[11px] text-[#78350F] font-medium">
+<span class="truncate">Sala 1 • Habana</span>
+<span class="font-semibold">Carlos R.</span>
+</div>
+</div>
+<!-- Class: 18:00 - 19:30 (11 hours from 07:00 = 616px top, 1.5h = 84px height) -->
+<div class="absolute left-1 right-1 rounded-md p-2 shadow-xs transition-all cursor-pointer z-10 flex flex-col justify-between" style="top: 616px; height: 84px; background-color: #FDE8DD; border-left: 4px solid #C2410C;">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-tabular text-[11px] font-semibold text-primary">18:00 - 19:30</span>
+<span class="text-[10px] font-bold px-1.5 py-0.2 rounded bg-primary-container/20 text-primary tabular-nums">16/16</span>
+</div>
+<h4 class="font-headline-sm text-xs font-bold text-on-surface truncate mt-0.5">Bachata Sensual</h4>
+</div>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant font-medium">
+<span class="truncate">Sala 2 • Santiago</span>
+<span class="font-semibold">Elena Vega</span>
+</div>
+</div>
+<!-- Class: 20:00 - 21:00 (13 hours = 728px top, 1h = 56px height) -->
+<div class="absolute left-1 right-1 rounded-md p-2 shadow-xs transition-all cursor-pointer z-10 flex flex-col justify-between" style="top: 728px; height: 56px; background-color: #CCFBF1; border-left: 4px solid #0F766E;">
+<div class="flex items-center justify-between">
+<span class="font-label-tabular text-[11px] font-semibold text-[#0F766E]">20:00 - 21:00</span>
+<span class="text-[10px] font-bold px-1.5 py-0.2 rounded bg-teal-200/80 text-[#0F766E] tabular-nums">14/14</span>
+</div>
+<div class="flex items-center justify-between">
+<h4 class="font-headline-sm text-xs font-bold text-[#134E4A] truncate">Mambo Footwork</h4>
+<span class="text-[10px] text-[#0F766E] font-medium">Sala 1</span>
+</div>
+</div>
+</div>
+<!-- ============================================== -->
+<!-- COL 2: MARTES 13                                -->
+<!-- ============================================== -->
+<div class="relative h-full px-1">
+<!-- Class: 11:30 - 12:30 (4.5h = 252px top, 1h = 56px height) -->
+<div class="absolute left-1 right-1 rounded-md p-2 shadow-xs transition-all cursor-pointer z-10 flex flex-col justify-between" style="top: 252px; height: 56px; background-color: #FEF3C7; border-left: 4px solid #B45309;">
+<div class="flex items-center justify-between">
+<span class="font-label-tabular text-[11px] font-semibold text-[#78350F]">11:30 - 12:30</span>
+<span class="text-[10px] font-bold px-1.5 py-0.2 rounded bg-amber-200/80 text-[#78350F] tabular-nums">10/18</span>
+</div>
+<div class="flex items-center justify-between">
+<h4 class="font-headline-sm text-xs font-bold text-[#451A03] truncate">Kizomba Básico</h4>
+<span class="text-[10px] text-[#78350F]">Sala 3</span>
+</div>
+</div>
+<!-- Class: 17:00 - 18:30 (10h = 560px top, 1.5h = 84px height) -->
+<div class="absolute left-1 right-1 rounded-md p-2 shadow-xs transition-all cursor-pointer z-10 flex flex-col justify-between" style="top: 560px; height: 84px; background-color: #FDE8DD; border-left: 4px solid #C2410C;">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-tabular text-[11px] font-semibold text-primary">17:00 - 18:30</span>
+<span class="text-[10px] font-bold px-1.5 py-0.2 rounded bg-primary-container/20 text-primary tabular-nums">15/18</span>
+</div>
+<h4 class="font-headline-sm text-xs font-bold text-on-surface truncate mt-0.5">Salsa Estilo Chicas</h4>
+</div>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant font-medium">
+<span class="truncate">Sala 1 • Habana</span>
+<span class="font-semibold">Lucía M.</span>
+</div>
+</div>
+<!-- Class: 19:00 - 20:30 (12h = 672px top, 1.5h = 84px height) -->
+<div class="absolute left-1 right-1 rounded-md p-2 shadow-xs transition-all cursor-pointer z-10 flex flex-col justify-between" style="top: 672px; height: 84px; background-color: #FDE8DD; border-left: 4px solid #C2410C;">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-tabular text-[11px] font-semibold text-primary">19:00 - 20:30</span>
+<span class="text-[10px] font-bold px-1.5 py-0.2 rounded bg-error text-white tabular-nums tracking-wide">LLENO</span>
+</div>
+<h4 class="font-headline-sm text-xs font-bold text-on-surface truncate mt-0.5">Salsa On2 - Timba</h4>
+</div>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant font-medium">
+<span class="truncate">Sala 1 • Habana</span>
+<span class="font-semibold">Javier Sanz</span>
+</div>
+</div>
+</div>
+<!-- ============================================== -->
+<!-- COL 3: MIÉRCOLES 14 (HOY & SELECTED CARD)       -->
+<!-- ============================================== -->
+<div class="relative h-full px-1 bg-surface-container-low/20">
+<!-- Class: 09:30 - 11:00 (2.5h = 140px top, 1.5h = 84px height) -->
+<div class="absolute left-1 right-1 rounded-md p-2 shadow-xs transition-all cursor-pointer z-10 flex flex-col justify-between" style="top: 140px; height: 84px; background-color: #FEF3C7; border-left: 4px solid #B45309;">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-tabular text-[11px] font-semibold text-[#78350F]">09:30 - 11:00</span>
+<span class="text-[10px] font-bold px-1.5 py-0.2 rounded bg-amber-200/80 text-[#78350F] tabular-nums">8/14</span>
+</div>
+<h4 class="font-headline-sm text-xs font-bold text-[#451A03] truncate mt-0.5">Bachata Tradicional</h4>
+</div>
+<div class="flex items-center justify-between text-[11px] text-[#78350F] font-medium">
+<span class="truncate">Sala 2 • Santiago</span>
+<span class="font-semibold">Elena Vega</span>
+</div>
+</div>
+<!-- FREE GAP: 12:00 to 17:00 (5 hours = 280px height starting at 5h = 280px top) -->
+<div class="absolute left-1 right-1 rounded-lg border-2 border-dashed border-outline-variant/60 hover:border-primary/50 hover:bg-surface-container-low/60 transition-all flex flex-col items-center justify-center p-3 text-center cursor-pointer group z-5" style="top: 280px; height: 280px;">
+<div class="w-8 h-8 rounded-full bg-surface-container group-hover:bg-primary-container text-on-surface-variant group-hover:text-on-primary flex items-center justify-center transition-all mb-1">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</div>
+<span class="font-button-text text-xs text-on-surface-variant group-hover:text-primary font-medium">+ Añadir clase</span>
+<span class="font-label text-[10px] text-outline mt-0.5">Espacio libre de 12:00 a 17:00</span>
+</div>
+<!-- SELECTED CARD (MANDATORY REQUIREMENT): Salsa Intermedio at 19:30 - 21:00 -->
+<!-- Starts at 12.5h (19:30) = 700px top, 1.5h = 84px height -->
+<!-- Featured with 2px Terracotta border, visible Drag Handle at top, and high active depth -->
+<div class="absolute left-0.5 right-0.5 rounded-lg p-2.5 shadow-md transition-all cursor-pointer z-30 flex flex-col justify-between ring-2 ring-primary-container" style="top: 700px; height: 84px; background-color: #FDE8DD; border-left: 5px solid #C2410C;">
+<!-- Drag Handle & Top Indicators -->
+<div>
+<div class="flex items-center justify-between pb-0.5">
+<!-- Grip Dots Icon for Drag Handle -->
+<div class="flex items-center gap-1 text-primary cursor-grab active:cursor-grabbing" title="Arrastrar para mover horario">
+<span class="material-symbols-outlined text-[16px]">drag_indicator</span>
+<span class="font-label-tabular text-[11px] font-bold text-primary">19:30 - 21:00</span>
+</div>
+<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-primary-container text-on-primary tabular-nums shadow-xs">
+                      14/16
+                    </span>
+</div>
+<h4 class="font-headline-sm text-xs font-bold text-on-surface truncate">Salsa Intermedio II</h4>
+</div>
+<!-- Footer with details -->
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant font-medium pt-0.5 border-t border-primary/10">
+<div class="flex items-center gap-1 truncate text-primary font-semibold">
+<span class="material-symbols-outlined text-[13px]">meeting_room</span>
+<span>Sala 1 • Habana</span>
+</div>
+<span class="font-semibold text-on-surface">Carlos R.</span>
+</div>
+</div>
+</div>
+<!-- ============================================== -->
+<!-- COL 4: JUEVES 15                                -->
+<!-- ============================================== -->
+<div class="relative h-full px-1">
+<!-- Class: 16:30 - 18:00 (9.5h = 532px top, 1.5h = 84px height) -->
+<div class="absolute left-1 right-1 rounded-md p-2 shadow-xs transition-all cursor-pointer z-10 flex flex-col justify-between" style="top: 532px; height: 84px; background-color: #CCFBF1; border-left: 4px solid #0F766E;">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-tabular text-[11px] font-semibold text-[#0F766E]">16:30 - 18:00</span>
+<span class="text-[10px] font-bold px-1.5 py-0.2 rounded bg-teal-200/80 text-[#0F766E] tabular-nums">18/20</span>
+</div>
+<h4 class="font-headline-sm text-xs font-bold text-[#134E4A] truncate mt-0.5">Masterclass Giros On1</h4>
+</div>
+<div class="flex items-center justify-between text-[11px] text-[#0F766E] font-medium">
+<span class="truncate">Sala 1 • Habana</span>
+<span class="font-semibold">Invitado INT</span>
+</div>
+</div>
+<!-- Class: 18:30 - 20:00 (11.5h = 644px top, 1.5h = 84px height) -->
+<div class="absolute left-1 right-1 rounded-md p-2 shadow-xs transition-all cursor-pointer z-10 flex flex-col justify-between" style="top: 644px; height: 84px; background-color: #FDE8DD; border-left: 4px solid #C2410C;">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-tabular text-[11px] font-semibold text-primary">18:30 - 20:00</span>
+<span class="text-[10px] font-bold px-1.5 py-0.2 rounded bg-primary-container/20 text-primary tabular-nums">12/16</span>
+</div>
+<h4 class="font-headline-sm text-xs font-bold text-on-surface truncate mt-0.5">Bachata Sensual Pro</h4>
+</div>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant font-medium">
+<span class="truncate">Sala 2 • Santiago</span>
+<span class="font-semibold">Elena Vega</span>
+</div>
+</div>
+</div>
+<!-- ============================================== -->
+<!-- COL 5: VIERNES 16                               -->
+<!-- ============================================== -->
+<div class="relative h-full px-1">
+<!-- Class: 17:30 - 19:00 (10.5h = 588px top, 1.5h = 84px height) -->
+<div class="absolute left-1 right-1 rounded-md p-2 shadow-xs transition-all cursor-pointer z-10 flex flex-col justify-between" style="top: 588px; height: 84px; background-color: #FEF3C7; border-left: 4px solid #B45309;">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-tabular text-[11px] font-semibold text-[#78350F]">17:30 - 19:00</span>
+<span class="text-[10px] font-bold px-1.5 py-0.2 rounded bg-amber-200/80 text-[#78350F] tabular-nums">16/16</span>
+</div>
+<h4 class="font-headline-sm text-xs font-bold text-[#451A03] truncate mt-0.5">Salsa Caleña Intro</h4>
+</div>
+<div class="flex items-center justify-between text-[11px] text-[#78350F] font-medium">
+<span class="truncate">Sala 3 • Cali</span>
+<span class="font-semibold">Mateo G.</span>
+</div>
+</div>
+<!-- Class: 20:00 - 22:00 (13h = 728px top, 2h = 112px height) - Special Workshop -->
+<div class="absolute left-1 right-1 rounded-md p-2.5 shadow-sm transition-all cursor-pointer z-10 flex flex-col justify-between" style="top: 728px; height: 112px; background-color: #EEF2FF; border-left: 4px solid #6366F1;">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-tabular text-[11px] font-bold text-[#4338CA]">20:00 - 22:00</span>
+<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-indigo-200 text-[#4338CA] tabular-nums">24/24</span>
+</div>
+<h4 class="font-headline-sm text-xs font-bold text-[#312E81] mt-1 leading-snug">Social Pre-Fiesta &amp; Rueda</h4>
+<p class="text-[10px] text-[#4F46E5] truncate mt-0.5">Taller abierto a todos los niveles</p>
+</div>
+<div class="flex items-center justify-between text-[11px] text-[#4338CA] font-medium pt-1 border-t border-indigo-200/50">
+<span class="truncate">Sala 1 • Gran Pista</span>
+<span class="font-bold">Todos los Profs</span>
+</div>
+</div>
+</div>
+<!-- ============================================== -->
+<!-- COL 6: SÁBADO 17                                -->
+<!-- ============================================== -->
+<div class="relative h-full px-1 bg-surface-container-low/10">
+<!-- Class: 10:30 - 12:30 (3.5h = 196px top, 2h = 112px height) -->
+<div class="absolute left-1 right-1 rounded-md p-2.5 shadow-xs transition-all cursor-pointer z-10 flex flex-col justify-between" style="top: 196px; height: 112px; background-color: #CCFBF1; border-left: 4px solid #0F766E;">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-tabular text-[11px] font-bold text-[#0F766E]">10:30 - 12:30</span>
+<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-error text-white tabular-nums tracking-wide">LLENO</span>
+</div>
+<h4 class="font-headline-sm text-xs font-bold text-[#134E4A] mt-1 leading-snug">Intensivo Pachanga &amp; Musicalidad</h4>
+<p class="text-[10px] text-[#0F766E] truncate mt-0.5">Nivel Avanzado / Formación</p>
+</div>
+<div class="flex items-center justify-between text-[11px] text-[#0F766E] font-medium pt-1 border-t border-teal-200/50">
+<span class="truncate">Sala 1 • Habana</span>
+<span class="font-semibold">Carlos R.</span>
+</div>
+</div>
+<!-- Class: 17:00 - 18:30 (10h = 560px top, 1.5h = 84px height) -->
+<div class="absolute left-1 right-1 rounded-md p-2 shadow-xs transition-all cursor-pointer z-10 flex flex-col justify-between" style="top: 560px; height: 84px; background-color: #FDE8DD; border-left: 4px solid #C2410C;">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-tabular text-[11px] font-semibold text-primary">17:00 - 18:30</span>
+<span class="text-[10px] font-bold px-1.5 py-0.2 rounded bg-primary-container/20 text-primary tabular-nums">11/15</span>
+</div>
+<h4 class="font-headline-sm text-xs font-bold text-on-surface truncate mt-0.5">Lady Styling Bachata</h4>
+</div>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant font-medium">
+<span class="truncate">Sala 2 • Santiago</span>
+<span class="font-semibold">Elena Vega</span>
+</div>
+</div>
+</div>
+<!-- ============================================== -->
+<!-- COL 7: DOMINGO 18                               -->
+<!-- ============================================== -->
+<div class="relative h-full px-1 bg-surface-container-low/10">
+<!-- Class: 11:00 - 12:30 (4h = 224px top, 1.5h = 84px height) -->
+<div class="absolute left-1 right-1 rounded-md p-2 shadow-xs transition-all cursor-pointer z-10 flex flex-col justify-between" style="top: 224px; height: 84px; background-color: #FEF3C7; border-left: 4px solid #B45309;">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-tabular text-[11px] font-semibold text-[#78350F]">11:00 - 12:30</span>
+<span class="text-[10px] font-bold px-1.5 py-0.2 rounded bg-amber-200/80 text-[#78350F] tabular-nums">9/16</span>
+</div>
+<h4 class="font-headline-sm text-xs font-bold text-[#451A03] truncate mt-0.5">Salsa Cero (Iniciación)</h4>
+</div>
+<div class="flex items-center justify-between text-[11px] text-[#78350F] font-medium">
+<span class="truncate">Sala 1 • Habana</span>
+<span class="font-semibold">Carlos R.</span>
+</div>
+</div>
+<!-- Class: 18:00 - 20:00 (11h = 616px top, 2h = 112px height) - Masterclass Especial -->
+<div class="absolute left-1 right-1 rounded-md p-2.5 shadow-sm transition-all cursor-pointer z-10 flex flex-col justify-between" style="top: 616px; height: 112px; background-color: #EEF2FF; border-left: 4px solid #6366F1;">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-tabular text-[11px] font-bold text-[#4338CA]">18:00 - 20:00</span>
+<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-error text-white tabular-nums tracking-wide">LLENO</span>
+</div>
+<h4 class="font-headline-sm text-xs font-bold text-[#312E81] mt-1 leading-snug">Masterclass de Rumba &amp; Afro</h4>
+<p class="text-[10px] text-[#4F46E5] truncate mt-0.5">Profesor Invitado de La Habana</p>
+</div>
+<div class="flex items-center justify-between text-[11px] text-[#4338CA] font-medium pt-1 border-t border-indigo-200/50">
+<span class="truncate">Sala 1 • Habana</span>
+<span class="font-bold">Maestro Yanier</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- =================================================================== -->
+<!-- CALENDAR FOOTER LEGEND (Clean horizontal bar with indicators)       -->
+<!-- =================================================================== -->
+<footer class="h-12 border-t border-outline-variant/30 bg-surface-container-lowest flex items-center justify-between px-6 flex-shrink-0 z-10">
+<div class="flex items-center gap-6">
+<span class="font-label text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Leyenda de niveles:</span>
+<!-- Principiante -->
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-xs bg-[#FEF3C7] border-l-2 border-[#B45309]"></span>
+<span class="font-body-sm text-xs text-on-surface">Principiante</span>
+</div>
+<!-- Intermedio -->
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-xs bg-[#FDE8DD] border-l-2 border-[#C2410C]"></span>
+<span class="font-body-sm text-xs text-on-surface">Intermedio</span>
+</div>
+<!-- Avanzado -->
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-xs bg-[#CCFBF1] border-l-2 border-[#0F766E]"></span>
+<span class="font-body-sm text-xs text-on-surface">Avanzado</span>
+</div>
+<!-- Masterclass / Taller especial -->
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-xs bg-[#EEF2FF] border-l-2 border-[#6366F1]"></span>
+<span class="font-body-sm text-xs text-on-surface">Masterclass / Taller especial</span>
+</div>
+</div>
+<!-- Aforo Completo status -->
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="px-1.5 py-0.2 rounded text-[10px] font-bold bg-error text-white tracking-wider">LLENO</span>
+<span class="font-body-sm text-xs text-on-surface">Aforo Completo</span>
+</div>
+<div class="text-xs text-outline font-label-tabular">
+              Zona horaria: <span class="font-medium text-on-surface">Madrid (GMT+2)</span>
+</div>
+</div>
+</footer>
+</div>
+</main>
+</div>
+<!-- Micro-interaction script: Scroll to current active time on load -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const canvas = document.getElementById('calendarScrollCanvas');
+      if (canvas) {
+        // Smoothly position viewport near the active evening classes (around 16:00 -> ~500px)
+        canvas.scrollTop = 420;
+      }
+    });
+  </script>
+</body></html>

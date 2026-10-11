@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checkout | Estudio Salsa</title>
+<!-- Fonts: Outfit (Headlines & Display) and Inter (Body & Tabular) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Outfit:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Forms & Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface": "#ffffff",
+            "surface-container": "#f6f1eb",
+            "primary-container": "#c2410c",
+            "on-surface": "#261814",
+            "surface-container-lowest": "#ffffff",
+            "inverse-primary": "#ffb59d",
+            "outline-variant": "#e1bfb5",
+            "on-primary": "#ffffff",
+            "surface-container-low": "#fff1ed",
+            "surface-container-highest": "#f7ddd6",
+            "surface-variant": "#f7ddd6",
+            "on-secondary-fixed": "#00201d",
+            "secondary-fixed-dim": "#80d5cb",
+            "tertiary": "#b45309",
+            "secondary": "#006a63",
+            "on-secondary": "#ffffff",
+            "tertiary-container": "#0069de",
+            "tertiary-fixed-dim": "#adc6ff",
+            "surface-bright": "#fff8f6",
+            "surface-dim": "#eed5cd",
+            "inverse-surface": "#3c2d28",
+            "surface-container-high": "#fce3db",
+            "on-primary-fixed-variant": "#832600",
+            "inverse-on-surface": "#ffede8",
+            "primary-fixed": "#ffdbd0",
+            "on-background": "#261814",
+            "on-tertiary-fixed-variant": "#004494",
+            "primary": "#9b2f00",
+            "on-secondary-fixed-variant": "#00504a",
+            "on-error-container": "#93000a",
+            "on-tertiary": "#ffffff",
+            "on-primary-container": "#ffece7",
+            "on-secondary-container": "#006f67",
+            "outline": "#8b8079",
+            "surface-tint": "#ac3400",
+            "on-tertiary-container": "#ecf0ff",
+            "on-surface-variant": "#59413a",
+            "error-container": "#ffdad6",
+            "tertiary-fixed": "#d8e2ff",
+            "background": "#faf7f4",
+            "on-primary-fixed": "#390c00",
+            "secondary-container": "#99efe5",
+            "on-tertiary-fixed": "#001a41",
+            "on-error": "#ffffff",
+            "error": "#ba1a1a",
+            "secondary-fixed": "#9cf2e8",
+            "primary-fixed-dim": "#ffb59d"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "1rem",
+            "space-2xl": "3rem",
+            "gutter-desktop": "1.5rem",
+            "space-xl": "2rem",
+            "margin-desktop": "2rem",
+            "gutter": "1rem",
+            "space-sm": "0.5rem",
+            "space-lg": "1.5rem",
+            "space-md": "1rem",
+            "space-xs": "0.25rem"
+          },
+          "fontFamily": {
+            "headline-md": ["Outfit"],
+            "headline-lg": ["Outfit"],
+            "display-mobile": ["Outfit"],
+            "body-sm": ["Inter"],
+            "display": ["Outfit"],
+            "body-md": ["Inter"],
+            "label-tabular": ["Inter"],
+            "headline-sm": ["Outfit"],
+            "button-text": ["Inter"],
+            "metric": ["Outfit"],
+            "label": ["Inter"],
+            "body-lg": ["Inter"]
+          },
+          "fontSize": {
+            "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "display-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "display": ["34px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-tabular": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+            "headline-sm": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+            "button-text": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "metric": ["40px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "label": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-full flex flex-col font-body-md text-body-md selection:bg-surface-container-high selection:text-primary">
+<!-- Minimalist Checkout Top Navigation (Compliant with Shared Component TopNavBar) -->
+<header class="w-full bg-surface border-b border-outline-variant h-16 sticky top-0 z-30">
+<div class="w-full px-4 md:px-8 max-w-7xl mx-auto flex items-center justify-between h-16">
+<!-- Brand Logo Anchor -->
+<a class="flex items-center gap-2.5 group transition-transform duration-100 active:scale-[0.98]" href="#">
+<div class="w-9 h-9 rounded-lg bg-primary-container text-on-primary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[20px]" data-icon="music_note">music_note</span>
+</div>
+<span class="text-headline-md font-headline-md text-primary tracking-tight">Estudio Salsa</span>
+</a>
+<!-- Centered Modern Checkout Stepper -->
+<nav aria-label="Progreso del pedido" class="hidden md:flex items-center gap-3">
+<!-- Step 1: Carrito (Completed) -->
+<div class="flex items-center gap-2">
+<span aria-hidden="true" class="w-6 h-6 rounded-full bg-secondary text-on-secondary flex items-center justify-center text-[12px] font-semibold">
+<span class="material-symbols-outlined text-[15px]" data-icon="check" style="font-variation-settings: 'FILL' 1;">check</span>
+</span>
+<span class="text-body-sm font-body-sm font-semibold text-secondary">Carrito</span>
+</div>
+<div class="w-8 h-0.5 bg-secondary rounded-full"></div>
+<!-- Step 2: Pago (Completed/In transition) -->
+<div class="flex items-center gap-2">
+<span aria-hidden="true" class="w-6 h-6 rounded-full bg-secondary text-on-secondary flex items-center justify-center text-[12px] font-semibold">
+<span class="material-symbols-outlined text-[15px]" data-icon="check" style="font-variation-settings: 'FILL' 1;">check</span>
+</span>
+<span class="text-body-sm font-body-sm font-semibold text-secondary">Pago</span>
+</div>
+<div class="w-8 h-0.5 bg-primary-container rounded-full"></div>
+<!-- Step 3: Confirmación (Current active checkpoint) -->
+<div class="flex items-center gap-2">
+<span aria-current="step" class="w-6 h-6 rounded-full bg-primary-container text-on-primary flex items-center justify-center text-[12px] font-semibold ring-4 ring-surface-container-high">
+            3
+          </span>
+<span class="text-body-sm font-body-sm font-semibold text-primary-container">Confirmación</span>
+</div>
+</nav>
+<!-- Right Trailing Meta & Actions -->
+<div class="flex items-center gap-5">
+<div class="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container border border-outline-variant text-on-surface-variant text-label font-label">
+<span class="material-symbols-outlined text-[16px] text-secondary" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span>Pago seguro SSL 256-bit</span>
+</div>
+<a class="text-on-surface-variant font-medium text-body-sm font-body-sm hover:text-primary transition-colors duration-150 flex items-center gap-1 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_back">arrow_back</span>
+<span>Volver a Precios</span>
+</a>
+</div>
+</div>
+</header>
+<!-- Mobile Stepper Banner (Visible on small screens) -->
+<div class="md:hidden bg-surface-container border-b border-outline-variant px-4 py-2.5 flex items-center justify-between text-body-sm font-body-sm">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded-full bg-primary-container text-on-primary flex items-center justify-center text-[11px] font-bold">3</span>
+<span class="font-semibold text-primary-container">Paso 3: Confirmación y Pago</span>
+</div>
+<span class="text-label font-label text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified_user">verified_user</span>
+      SSL Activo
+    </span>
+</div>
+<!-- Main Checkout Container Canvas (Desktop 1440px target, max-w-5xl 1080px content) -->
+<main class="flex-1 w-full max-w-[1080px] mx-auto px-4 sm:px-6 lg:px-8 mt-8 mb-16">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Payment Method & Billing Details (~640px / 7 cols) -->
+<section class="lg:col-span-7 flex flex-col gap-6">
+<!-- Card 1: Método de Pago -->
+<article class="bg-surface border border-[#E8E2DC] rounded-[14px] p-6 shadow-sm">
+<div class="flex items-center justify-between pb-4 border-b border-outline-variant/60">
+<h2 class="text-headline-sm font-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container" data-icon="credit_card">credit_card</span>
+              Método de pago
+            </h2>
+<span class="text-label font-label text-on-surface-variant bg-surface-container px-2.5 py-1 rounded">Transacción Segura</span>
+</div>
+<!-- Tabs de Selección -->
+<div aria-label="Opciones de método de pago" class="mt-5 flex gap-2 p-1 bg-surface-container rounded-lg" role="tablist">
+<button aria-selected="true" class="flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-md bg-surface-container-high text-primary font-semibold text-button-text font-button-text shadow-xs transition-all" role="tab" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="credit_card">credit_card</span>
+              Tarjeta
+            </button>
+<button aria-selected="false" class="flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-md text-on-surface-variant hover:text-on-surface font-medium text-button-text font-button-text transition-colors" role="tab" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="account_balance">account_balance</span>
+              Domiciliación SEPA
+            </button>
+</div>
+<!-- Formulario de Tarjeta -->
+<form class="mt-6 space-y-4" onsubmit="event.preventDefault();">
+<!-- Nombre del titular -->
+<div>
+<label class="block text-label font-label text-on-surface uppercase tracking-wider mb-1.5" for="card-holder">
+                Nombre del titular
+              </label>
+<input autocomplete="cc-name" class="w-full h-[44px] px-3.5 rounded-[6px] border border-outline bg-surface text-on-surface text-body-md font-body-md placeholder:text-outline focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-colors" id="card-holder" name="card_holder" required="" type="text" value="Elena Morales Gómez"/>
+</div>
+<!-- Número de tarjeta -->
+<div>
+<label class="block text-label font-label text-on-surface uppercase tracking-wider mb-1.5" for="card-number">
+                Número de tarjeta
+              </label>
+<div class="relative">
+<input autocomplete="cc-number" class="w-full h-[44px] pl-3.5 pr-24 rounded-[6px] border border-outline bg-surface text-on-surface font-mono text-body-md tracking-wider focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-colors" id="card-number" name="card_number" required="" type="text" value="4242 4242 4242 4242"/>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5 pointer-events-none">
+<!-- Visa SVG Badge -->
+<span class="px-1.5 py-0.5 rounded bg-surface border border-outline-variant flex items-center h-6" title="Visa">
+<svg class="h-3.5 w-auto" fill="none" viewbox="0 0 36 12" xmlns="http://www.w3.org/2000/svg">
+<path d="M14.6 0.5L9.6 11.5H6.3L3.8 2.5C3.7 2 3.5 1.7 3.1 1.5C2.4 1.1 1.1 0.7 0 0.5L0.1 0.1H5.5C6.2 0.1 6.8 0.6 7 1.4L8.3 8.2L11.5 0.5H14.6ZM27.4 8C27.5 5 23.3 4.8 23.3 3.5C23.3 3.1 23.7 2.6 24.6 2.5C25.1 2.4 26.4 2.4 27.8 3L28.4 0.9C27.6 0.6 26.6 0.3 25.3 0.3C22.3 0.3 20.1 1.9 20.1 4.2C20.1 5.9 21.6 6.9 22.8 7.5C24 8.1 24.4 8.5 24.4 9C24.4 9.8 23.4 10.2 22.5 10.2C20.9 10.2 20 9.9 19.3 9.6L18.7 11.8C19.5 12.1 21 12.4 22.5 12.4C25.8 12.3 27.4 10.7 27.4 8ZM35.6 11.5H32.8C32.1 11.5 31.6 11.1 31.3 10.5L26.7 0.5H30L31.8 7.9L35.6 0.5H38.5L35.6 11.5ZM18.7 0.5L16.2 11.5H13.2L15.7 0.5H18.7Z" fill="#1434CB"></path>
+</svg>
+</span>
+<!-- Mastercard SVG Badge -->
+<span class="px-1 py-0.5 rounded bg-surface border border-outline-variant flex items-center h-6" title="Mastercard">
+<svg class="h-4 w-auto" fill="none" viewbox="0 0 24 16" xmlns="http://www.w3.org/2000/svg">
+<rect fill="white" height="16" rx="2" width="24"></rect>
+<circle cx="8" cy="8" fill="#EB001B" r="6"></circle>
+<circle cx="16" cy="8" fill="#F79E1B" fill-opacity="0.9" r="6"></circle>
+</svg>
+</span>
+</div>
+</div>
+</div>
+<!-- Caducidad y CVC -->
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-label font-label text-on-surface uppercase tracking-wider mb-1.5" for="card-expiry">
+                  Caducidad
+                </label>
+<input autocomplete="cc-exp" class="w-full h-[44px] px-3.5 rounded-[6px] border border-outline bg-surface text-on-surface font-mono text-body-md focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-colors" id="card-expiry" name="card_expiry" placeholder="MM/AA" required="" type="text" value="12/28"/>
+</div>
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<label class="block text-label font-label text-on-surface uppercase tracking-wider" for="card-cvc">
+                    CVC
+                  </label>
+<button class="text-on-surface-variant hover:text-primary transition-colors" title="Código de seguridad de 3 dígitos situado en el reverso" type="button">
+<span class="material-symbols-outlined text-[16px]" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+<div class="relative">
+<input autocomplete="cc-csc" class="w-full h-[44px] pl-3.5 pr-10 rounded-[6px] border border-outline bg-surface text-on-surface font-mono text-body-md focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-colors" id="card-cvc" maxlength="4" name="card_cvc" placeholder="•••" required="" type="password" value="423"/>
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-outline flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-[18px]" data-icon="lock">lock</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Checkbox: Guardar tarjeta -->
+<div class="pt-2">
+<label class="relative flex items-center gap-3 cursor-pointer select-none">
+<input checked="" class="w-4 h-4 rounded text-primary-container focus:ring-primary-container border-outline cursor-pointer accent-primary-container" type="checkbox"/>
+<span class="text-body-sm font-body-sm text-on-surface font-medium">
+                  Guardar esta tarjeta para futuros pagos y cuotas
+                </span>
+</label>
+</div>
+</form>
+</article>
+<!-- Card 2: Datos de facturación -->
+<article class="bg-surface border border-[#E8E2DC] rounded-[14px] p-6 shadow-sm">
+<div class="flex items-center justify-between pb-4 border-b border-outline-variant/60">
+<h2 class="text-headline-sm font-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container" data-icon="receipt_long">receipt_long</span>
+              Datos de facturación
+            </h2>
+<span class="text-label font-label text-secondary flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-[15px]" data-icon="shield">shield</span>
+              Factura legal en España
+            </span>
+</div>
+<form class="mt-6 space-y-4" onsubmit="event.preventDefault();">
+<!-- Tipo de documento -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block text-label font-label text-on-surface uppercase tracking-wider mb-1.5" for="doc-type">
+                  Tipo de documento
+                </label>
+<div class="relative">
+<select class="w-full h-[44px] pl-3.5 pr-10 rounded-[6px] border border-outline bg-surface text-on-surface text-body-md font-body-md focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none appearance-none cursor-pointer" id="doc-type" name="doc_type">
+<option selected="" value="particular">Particular (DNI / NIE)</option>
+<option value="empresa">Empresa / Autónomo (CIF)</option>
+</select>
+<span class="material-symbols-outlined text-[18px] text-outline absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<!-- NIF / CIF -->
+<div>
+<label class="block text-label font-label text-on-surface uppercase tracking-wider mb-1.5" for="nif-input">
+                  NIF / NIE
+                </label>
+<input class="w-full h-[44px] px-3.5 rounded-[6px] border border-outline bg-surface text-on-surface font-mono text-body-md focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-colors" id="nif-input" name="nif" required="" type="text" value="12345678Z"/>
+</div>
+</div>
+<!-- Nombre Completo -->
+<div>
+<label class="block text-label font-label text-on-surface uppercase tracking-wider mb-1.5" for="billing-name">
+                Nombre completo o Razón Social
+              </label>
+<input class="w-full h-[44px] px-3.5 rounded-[6px] border border-outline bg-surface text-on-surface text-body-md font-body-md focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-colors" id="billing-name" name="billing_name" required="" type="text" value="Elena Morales Gómez"/>
+</div>
+<!-- Dirección -->
+<div>
+<label class="block text-label font-label text-on-surface uppercase tracking-wider mb-1.5" for="billing-address">
+                Dirección fiscal
+              </label>
+<input class="w-full h-[44px] px-3.5 rounded-[6px] border border-outline bg-surface text-on-surface text-body-md font-body-md focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-colors" id="billing-address" name="billing_address" required="" type="text" value="Calle Bailén 14, 2º B, 28005 Madrid"/>
+</div>
+</form>
+</article>
+</section>
+<!-- Right Column: Resumen del Pedido (~400px / 5 cols) -->
+<aside class="lg:col-span-5 lg:sticky lg:top-24 space-y-4">
+<article class="bg-surface border border-[#E8E2DC] rounded-[14px] p-6 shadow-sm">
+<div class="flex items-center justify-between pb-4 border-b border-outline-variant/60">
+<h2 class="text-headline-sm font-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container" data-icon="shopping_basket">shopping_basket</span>
+              Resumen del pedido
+            </h2>
+<span class="text-label font-label text-secondary font-semibold bg-secondary-container/40 px-2.5 py-1 rounded">1 artículo</span>
+</div>
+<!-- Detalle del Producto Comprado -->
+<div class="mt-5 p-4 rounded-xl bg-surface-container-high/40 border border-outline-variant/50 flex items-start gap-3.5">
+<div class="w-11 h-11 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]" data-icon="confirmation_number">confirmation_number</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-baseline justify-between gap-2">
+<h3 class="text-button-text font-button-text text-on-surface font-semibold truncate">Bono de 10 clases</h3>
+<span class="font-mono text-body-md font-bold text-on-surface tabular-nums">120,00 €</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-tertiary" data-icon="schedule">schedule</span>
+                Validez 3 meses · Acceso total
+              </p>
+<div class="mt-2 flex gap-1.5 flex-wrap">
+<span class="text-[11px] font-semibold tracking-wide bg-surface border border-outline-variant text-on-surface-variant px-2 py-0.5 rounded-full">Salsa Cubana</span>
+<span class="text-[11px] font-semibold tracking-wide bg-surface border border-outline-variant text-on-surface-variant px-2 py-0.5 rounded-full">Bachata</span>
+<span class="text-[11px] font-semibold tracking-wide bg-surface border border-outline-variant text-on-surface-variant px-2 py-0.5 rounded-full">Rueda</span>
+</div>
+</div>
+</div>
+<!-- Desglose de Precios -->
+<div class="mt-5 space-y-2.5 text-body-sm font-body-sm">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span>Subtotal base</span>
+<span class="font-mono font-medium tabular-nums text-on-surface">120,00 €</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="flex items-center gap-1">
+                IVA (21 %)
+                <span class="material-symbols-outlined text-[14px] text-outline cursor-help" title="Impuesto sobre el Valor Añadido aplicado en España">info</span>
+</span>
+<span class="font-mono font-medium tabular-nums text-on-surface">25,20 €</span>
+</div>
+<div class="border-t border-[#E8E2DC] my-3 pt-3 flex justify-between items-baseline">
+<div>
+<span class="text-headline-sm font-headline-sm text-on-surface">Total</span>
+<span class="block text-label font-label text-on-surface-variant">Impuestos y tasas incluidos</span>
+</div>
+<div class="text-right">
+<span class="text-[26px] leading-none font-bold text-[#161311] font-headline-lg tabular-nums">145,20 €</span>
+</div>
+</div>
+</div>
+<!-- Código Promocional -->
+<div class="mt-5 pt-4 border-t border-outline-variant/60">
+<label class="block text-label font-label text-on-surface-variant uppercase tracking-wider mb-1.5" for="promo-code">
+              ¿Tienes un código de descuento?
+            </label>
+<div class="flex gap-2">
+<div class="relative flex-1">
+<input class="w-full h-[44px] px-3 rounded-[6px] border border-outline bg-surface text-on-surface text-body-sm font-body-sm placeholder:text-outline focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none uppercase tracking-wider transition-colors" id="promo-code" name="promo_code" placeholder="Código promocional" type="text"/>
+</div>
+<button class="h-[44px] px-4 rounded-[6px] border border-outline-variant bg-surface hover:bg-surface-container text-on-surface font-semibold text-button-text font-button-text active:scale-[0.98] transition-all shadow-2xs" type="button">
+                Aplicar
+              </button>
+</div>
+</div>
+<!-- Botón Primario de Pago -->
+<div class="mt-6">
+<button class="w-full h-[44px] rounded-[10px] bg-primary-container hover:bg-[#E0561F] text-on-primary font-bold text-button-text font-button-text flex items-center justify-center gap-2 shadow-md transition-all duration-150 active:scale-[0.99] group" type="button">
+<span>Pagar 145,20 €</span>
+<span class="material-symbols-outlined text-[18px] transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- Aviso de Seguridad -->
+<div class="mt-4 p-3 rounded-lg bg-surface-container flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-secondary shrink-0 mt-0.5" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<p class="text-body-sm font-body-sm text-on-surface-variant leading-tight">
+              Pago seguro cifrado con protocolo TLS. No almacenamos los datos completos de tu tarjeta de crédito.
+            </p>
+</div>
+<!-- Sellos de Confianza y Cumplimiento -->
+<div class="mt-5 pt-4 border-t border-outline-variant/60 flex items-center justify-center gap-4 text-outline text-[11px] font-semibold uppercase tracking-wider">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]" data-icon="security">security</span>
+<span>PCI DSS Compliant</span>
+</div>
+<span class="text-outline-variant">•</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]" data-icon="verified">verified</span>
+<span>3D Secure 2.0</span>
+</div>
+</div>
+</article>
+<!-- Micro-tarjeta de Garantía o Soporte -->
+<div class="p-4 rounded-xl border border-outline-variant bg-surface flex items-center justify-between text-body-sm font-body-sm">
+<div class="flex items-center gap-2.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px] text-primary" data-icon="support_agent">support_agent</span>
+<span>¿Dudas con tu pago o bono?</span>
+</div>
+<a class="text-primary font-semibold hover:underline flex items-center gap-0.5" href="#">
+<span>Ayuda</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+</aside>
+</div>
+</main>
+<!-- Checkout Minimal Footer (Compliant with Shared Component Footer) -->
+<footer class="mt-auto w-full bg-surface-container border-t border-outline-variant">
+<div class="w-full px-4 md:px-8 py-8 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="text-headline-sm font-headline-sm text-on-surface">Estudio Salsa</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">· Gestión de clases de baile y eventos</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant text-center md:text-left">
+        © 2024 Estudio Salsa. Todos los derechos reservados. Pago seguro con encriptación SSL de 256 bits.
+      </p>
+<div class="flex flex-wrap items-center justify-center gap-6 text-body-sm font-body-sm">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-150" href="#">Términos y Condiciones</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-150" href="#">Política de Privacidad</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-150" href="#">Soporte Técnico</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-150" href="#">Contacto</a>
+</div>
+</div>
+</footer>
+</body></html>

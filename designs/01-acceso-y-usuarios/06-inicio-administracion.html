@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-background" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Estudio Salsa - Operaciones y Gestión</title>
+<!-- Google Fonts: Outfit & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Outfit:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary": "#006a63",
+            "error": "#b91c1c",
+            "secondary-container": "#ccfbf1",
+            "surface-variant": "#e5e2df",
+            "on-surface-variant": "#59413a",
+            "on-primary-fixed-variant": "#832600",
+            "on-primary-container": "#7a2a0c",
+            "on-primary": "#ffffff",
+            "primary-container": "#c2410c",
+            "surface-dim": "#dcdad7",
+            "surface-tint": "#ac3400",
+            "inverse-on-surface": "#f3f0ed",
+            "on-secondary": "#ffffff",
+            "surface-container-low": "#f6f3f0",
+            "secondary-fixed-dim": "#80d5cb",
+            "surface-container": "#f6f1eb",
+            "on-tertiary-container": "#7a3e06",
+            "outline-variant": "#e8e2dc",
+            "on-surface": "#1c1c1a",
+            "primary-fixed-dim": "#ffb59d",
+            "tertiary-container": "#fef3c7",
+            "on-tertiary-fixed-variant": "#763300",
+            "background": "#fcf9f6",
+            "surface-bright": "#fcf9f6",
+            "inverse-primary": "#ffb59d",
+            "primary": "#9b2f00",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "surface": "#ffffff",
+            "on-secondary-fixed": "#00201d",
+            "tertiary-fixed-dim": "#ffb68e",
+            "on-secondary-fixed-variant": "#00504a",
+            "outline": "#8b8079",
+            "inverse-surface": "#322c28",
+            "surface-container-high": "#f0eae3",
+            "on-tertiary-fixed": "#331200",
+            "on-error-container": "#93000a",
+            "on-error": "#ffffff",
+            "on-background": "#1c1c1a",
+            "on-secondary-container": "#0b4f4a",
+            "secondary-fixed": "#9cf2e8",
+            "error-container": "#fee2e2",
+            "primary-fixed": "#ffdbd0",
+            "on-primary-fixed": "#390c00",
+            "surface-container-highest": "#e9e2da",
+            "tertiary-fixed": "#ffdbca",
+            "tertiary": "#8c3d00"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem",
+            "card": "14px",
+            "button": "10px",
+            "input": "6px"
+          },
+          "spacing": {
+            "space-2xl": "3rem",
+            "gutter-desktop": "1.5rem",
+            "gutter": "1rem",
+            "margin-desktop": "2rem",
+            "margin": "1rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-xl": "2rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "metric": ["Outfit", "sans-serif"],
+            "label-tabular": ["Inter", "sans-serif"],
+            "headline-md": ["Outfit", "sans-serif"],
+            "body-sm": ["Inter", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "headline-sm": ["Outfit", "sans-serif"],
+            "headline-lg": ["Outfit", "sans-serif"],
+            "label": ["Inter", "sans-serif"],
+            "button-text": ["Inter", "sans-serif"],
+            "display": ["Outfit", "sans-serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "display-mobile": ["Outfit", "sans-serif"]
+          },
+          "fontSize": {
+            "metric": ["40px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "label-tabular": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-sm": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "label": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "button-text": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "display": ["34px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+            "display-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .tnum { font-feature-settings: 'tnum' 1, 'lnum' 1; }
+    .card-shadow { box-shadow: 0 1px 2px rgba(22,19,17,0.06), 0 8px 24px -12px rgba(22,19,17,0.12); }
+  </style>
+</head>
+<body class="h-full bg-background text-on-surface antialiased font-body-md text-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- 1. BARRA LATERAL FIJA (SideNavBar: 240px) -->
+<aside class="fixed top-0 left-0 h-screen w-60 z-30 bg-surface border-r border-outline-variant flex flex-col justify-between p-4">
+<!-- Bloque Superior: Logo + Menú Principal -->
+<div class="flex flex-col gap-6">
+<!-- Identidad de Marca -->
+<div class="flex items-center gap-3 px-2 pt-1">
+<div class="w-10 h-10 rounded-lg bg-primary-container text-on-primary flex items-center justify-center font-headline-md font-bold text-headline-md shadow-sm">
+<span class="material-symbols-outlined text-[24px]">sports_kabaddi</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm font-bold text-primary tracking-tight leading-tight">Estudio Salsa</span>
+<span class="font-label text-label text-on-surface-variant text-[11px] font-medium tracking-normal">Operaciones y Gestión</span>
+</div>
+</div>
+<!-- Navegación Primaria -->
+<nav aria-label="Navegación principal" class="flex flex-col space-y-1">
+<!-- Inicio (ACTIVO por coincidencia exacta con el panel principal) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-[#FDE8DD] text-[#C2410C] font-semibold transition-all duration-150 ease-in-out active:scale-[0.99]" href="#inicio">
+<span class="material-symbols-outlined text-[20px] text-[#C2410C]" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-button-text text-button-text">Inicio</span>
+</a>
+<!-- Calendario -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container font-medium hover:text-on-surface transition-colors duration-150 ease-in-out active:scale-[0.99]" href="#calendario">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+<span class="font-button-text text-button-text">Calendario</span>
+</a>
+<!-- Clases -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container font-medium hover:text-on-surface transition-colors duration-150 ease-in-out active:scale-[0.99]" href="#clases">
+<span class="material-symbols-outlined text-[20px]">sports_kabaddi</span>
+<span class="font-button-text text-button-text">Clases</span>
+</a>
+<!-- Alumnos -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container font-medium hover:text-on-surface transition-colors duration-150 ease-in-out active:scale-[0.99]" href="#alumnos">
+<span class="material-symbols-outlined text-[20px]">groups</span>
+<span class="font-button-text text-button-text">Alumnos</span>
+</a>
+<!-- Facturación -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container font-medium hover:text-on-surface transition-colors duration-150 ease-in-out active:scale-[0.99]" href="#facturacion">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+<span class="font-button-text text-button-text">Facturación</span>
+</a>
+<!-- Ajustes -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container font-medium hover:text-on-surface transition-colors duration-150 ease-in-out active:scale-[0.99]" href="#ajustes">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="font-button-text text-button-text">Ajustes</span>
+</a>
+</nav>
+</div>
+<!-- Zona Inferior: Soporte + Selector Sede activa -->
+<div class="flex flex-col gap-3 pt-3 border-t border-outline-variant">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container font-medium hover:text-on-surface transition-colors duration-150" href="#soporte">
+<span class="material-symbols-outlined text-[20px]">help_outline</span>
+<span class="font-button-text text-button-text">Soporte</span>
+</a>
+<!-- Badge de Sede Activa -->
+<div class="p-3 bg-surface-container-low rounded-lg border border-outline-variant flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label text-label text-on-surface truncate font-semibold">Madrid Centro</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate text-[11px]">Sede Malasaña</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- 2. BARRA SUPERIOR STICKY (TopNavBar: 64px) -->
+<header class="sticky top-0 h-16 w-[calc(100%-15rem)] ml-60 z-20 bg-surface border-b border-outline-variant flex items-center justify-between px-8">
+<!-- Izquierda: Título y Buscador -->
+<div class="flex items-center gap-6 flex-1 max-w-2xl">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface whitespace-nowrap">Resumen del estudio</span>
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+<input class="w-full h-10 pl-9 pr-4 rounded-[6px] bg-surface border border-outline-variant font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all" placeholder="Buscar alumno, clase o factura..." type="text"/>
+</div>
+</div>
+<!-- Derecha: Acciones, Notificaciones con badge y Perfil -->
+<div class="flex items-center gap-4">
+<button class="h-9 px-3.5 rounded-[10px] bg-surface hover:bg-surface-container border border-outline-variant text-on-surface font-button-text text-button-text flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[17px] text-on-surface-variant">swap_horiz</span>
+<span>Cambiar Sede</span>
+</button>
+<!-- Campana de Notificaciones con Badge -->
+<div class="relative">
+<button aria-label="Notificaciones" class="w-9 h-9 rounded-[10px] hover:bg-surface-container flex items-center justify-center text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface"></span>
+</div>
+<!-- Avatar & Info de Usuario -->
+<div class="flex items-center gap-3 pl-2 border-l border-outline-variant">
+<div class="w-8 h-8 rounded-full bg-primary-fixed text-primary font-headline-sm text-[12px] font-bold flex items-center justify-center ring-2 ring-outline-variant">
+          LM
+        </div>
+<div class="flex flex-col text-left">
+<span class="font-button-text text-button-text text-on-surface leading-tight">Lucía Martínez</span>
+<span class="font-label text-label text-on-surface-variant text-[11px] font-normal leading-tight">Administración</span>
+</div>
+</div>
+</div>
+</header>
+<!-- 3. CONTENIDO PRINCIPAL (Canvas 1440px desktop con padding de 32px) -->
+<main class="ml-60 min-h-[calc(100vh-4rem)] p-8 bg-background">
+<div class="max-w-[1280px] mx-auto space-y-6">
+<!-- Cabecera de Página & Selector de Período -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-2">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight font-bold">Resumen del estudio</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+            Bienvenida de nuevo, Lucía. Tienes <span class="font-semibold text-error">3 incidencias prioritarias</span> para resolver hoy.
+          </p>
+</div>
+<!-- Filtros y Período Operativo -->
+<div class="flex items-center gap-2 bg-surface p-1.5 rounded-[10px] border border-outline-variant shadow-sm">
+<div class="flex items-center gap-1 bg-surface-container-low px-2.5 py-1.5 rounded-[6px] border border-outline-variant/60">
+<span class="material-symbols-outlined text-primary-container text-[18px]">calendar_month</span>
+<span class="font-button-text text-button-text text-on-surface font-semibold">Octubre 2026</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">arrow_drop_down</span>
+</div>
+<div class="h-5 w-[1px] bg-outline-variant mx-1"></div>
+<button class="px-3 py-1.5 rounded-[6px] bg-[#FDE8DD] text-[#C2410C] font-button-text text-[13px] font-semibold transition-colors" type="button">
+            Este mes
+          </button>
+<button class="px-3 py-1.5 rounded-[6px] text-on-surface-variant hover:bg-surface-container font-button-text text-[13px] transition-colors" type="button">
+            Semana actual
+          </button>
+</div>
+</section>
+<!-- Fila 1: 4 Tarjetas de Métricas -->
+<section aria-label="Métricas principales" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- 1) Clases este mes -->
+<article class="bg-surface rounded-card border border-outline-variant p-6 card-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label text-label uppercase text-on-surface-variant">Clases este mes</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[12px] font-semibold bg-[#CCFBF1] text-[#0F766E] tnum">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+              +12
+            </span>
+</div>
+<div class="mt-4">
+<div class="font-metric text-metric text-on-surface tnum">184</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1.5">Programadas 100% vs. septiembre (172)</p>
+</div>
+</article>
+<!-- 2) Reservas -->
+<article class="bg-surface rounded-card border border-outline-variant p-6 card-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label text-label uppercase text-on-surface-variant">Reservas</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[12px] font-semibold bg-[#CCFBF1] text-[#0F766E] tnum">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+              +8 %
+            </span>
+</div>
+<div class="mt-4">
+<div class="font-metric text-metric text-on-surface tnum">1.247</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1.5">94,2 % ocupación media</p>
+</div>
+</article>
+<!-- 3) Ingresos del mes -->
+<article class="bg-surface rounded-card border border-outline-variant p-6 card-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label text-label uppercase text-on-surface-variant">Ingresos del mes</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[12px] font-semibold bg-[#CCFBF1] text-[#0F766E] tnum">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+              +5 %
+            </span>
+</div>
+<div class="mt-4">
+<div class="font-metric text-metric text-on-surface tnum">14.320 €</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1.5">Cobrado por remesa y TPV</p>
+</div>
+</article>
+<!-- 4) Facturas pendientes -->
+<article class="bg-surface rounded-card border border-outline-variant p-6 card-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label text-label uppercase text-on-surface-variant">Facturas pendientes</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[12px] font-semibold bg-[#FEE2E2] text-[#B91C1C] tnum">
+<span class="material-symbols-outlined text-[14px]">arrow_downward</span>
+              -0,4 %
+            </span>
+</div>
+<div class="mt-4">
+<div class="font-metric text-metric text-on-surface tnum">3.180 €</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1.5">12 recibos por conciliar</p>
+</div>
+</article>
+</section>
+<!-- Fila 2: Grid asimétrico (65% Calendario Semana / 35% Requiere Atención) -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- Columna Izquierda: Calendario Semana en curso (approx 65% = 8 cols) -->
+<article class="lg:col-span-8 bg-surface rounded-card border border-outline-variant p-6 card-shadow flex flex-col">
+<!-- Encabezado de Calendario -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-outline-variant gap-3">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">calendar_view_week</span>
+<h2 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Semana en curso</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">12 al 18 de octubre 2026</p>
+</div>
+<!-- Controles de Navegación -->
+<div class="flex items-center gap-1.5">
+<button aria-label="Semana anterior" class="w-8 h-8 rounded-[6px] border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="px-3 h-8 rounded-[6px] border border-outline-variant font-button-text text-[13px] text-on-surface hover:bg-surface-container font-medium transition-colors" type="button">
+                Hoy
+              </button>
+<button aria-label="Semana siguiente" class="w-8 h-8 rounded-[6px] border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Grilla de 7 Columnas de Días -->
+<div class="grid grid-cols-7 gap-2.5 pt-4">
+<!-- Lun 12 -->
+<div class="flex flex-col rounded-lg bg-surface-container-low p-2 border border-outline-variant/60 min-h-[300px]">
+<div class="text-center pb-2 border-b border-outline-variant/50">
+<span class="font-label text-[11px] text-on-surface-variant block uppercase font-medium">Lun</span>
+<span class="font-headline-sm text-[16px] text-on-surface font-semibold tnum">12</span>
+<span class="font-label text-[10px] text-outline block tnum">4 clases</span>
+</div>
+<div class="mt-2 space-y-1.5">
+<div class="p-1.5 rounded-[6px] bg-[#FDE8DD] border-l-2 border-[#C2410C] text-[11px]">
+<p class="font-semibold text-on-surface leading-tight">Salsa Cubana</p>
+<p class="text-on-surface-variant tnum mt-0.5">18:00 · 16/16</p>
+</div>
+<div class="p-1.5 rounded-[6px] bg-[#FEF3C7] border-l-2 border-[#B45309] text-[11px]">
+<p class="font-semibold text-on-surface leading-tight">Bachata I</p>
+<p class="text-on-surface-variant tnum mt-0.5">19:15 · 14/16</p>
+</div>
+</div>
+</div>
+<!-- Mar 13 -->
+<div class="flex flex-col rounded-lg bg-surface-container-low p-2 border border-outline-variant/60 min-h-[300px]">
+<div class="text-center pb-2 border-b border-outline-variant/50">
+<span class="font-label text-[11px] text-on-surface-variant block uppercase font-medium">Mar</span>
+<span class="font-headline-sm text-[16px] text-on-surface font-semibold tnum">13</span>
+<span class="font-label text-[10px] text-outline block tnum">5 clases</span>
+</div>
+<div class="mt-2 space-y-1.5">
+<div class="p-1.5 rounded-[6px] bg-[#FDE8DD] border-l-2 border-[#C2410C] text-[11px]">
+<p class="font-semibold text-on-surface leading-tight">Salsa Línea II</p>
+<p class="text-on-surface-variant tnum mt-0.5">17:30 · 12/14</p>
+</div>
+<div class="p-1.5 rounded-[6px] bg-[#E9E2DA] border-l-2 border-[#7A3E06] text-[11px]">
+<p class="font-semibold text-on-surface leading-tight">Mambo On2</p>
+<p class="text-on-surface-variant tnum mt-0.5">19:00 · 10/12</p>
+</div>
+</div>
+</div>
+<!-- Mié 14 -->
+<div class="flex flex-col rounded-lg bg-surface-container-low p-2 border border-outline-variant/60 min-h-[300px]">
+<div class="text-center pb-2 border-b border-outline-variant/50">
+<span class="font-label text-[11px] text-on-surface-variant block uppercase font-medium">Mié</span>
+<span class="font-headline-sm text-[16px] text-on-surface font-semibold tnum">14</span>
+<span class="font-label text-[10px] text-outline block tnum">3 clases</span>
+</div>
+<div class="mt-2 space-y-1.5">
+<div class="p-1.5 rounded-[6px] bg-[#FEF3C7] border-l-2 border-[#B45309] text-[11px]">
+<p class="font-semibold text-on-surface leading-tight">Bachata Sensual</p>
+<p class="text-on-surface-variant tnum mt-0.5">18:00 · 15/16</p>
+</div>
+<div class="p-1.5 rounded-[6px] bg-[#FDE8DD] border-l-2 border-[#C2410C] text-[11px]">
+<p class="font-semibold text-on-surface leading-tight">Rueda Casino</p>
+<p class="text-on-surface-variant tnum mt-0.5">20:15 · 18/20</p>
+</div>
+</div>
+</div>
+<!-- Jue 15 (HOY DESTACADO CON BADGE TERRACOTA) -->
+<div class="flex flex-col rounded-lg bg-surface border-2 border-primary-container p-2 shadow-sm min-h-[300px] relative ring-1 ring-primary-container/20">
+<div class="text-center pb-2 border-b border-primary-container/30">
+<div class="inline-block px-1.5 py-0.2 bg-[#C2410C] text-white rounded font-label text-[9px] uppercase font-bold tracking-wider mb-0.5">Hoy</div>
+<span class="font-label text-[11px] text-primary-container block uppercase font-bold">Jue</span>
+<span class="font-headline-sm text-[17px] text-[#C2410C] font-bold tnum">15</span>
+<span class="font-label text-[10px] text-on-surface-variant font-medium block tnum">6 clases</span>
+</div>
+<div class="mt-2 space-y-1.5">
+<div class="p-1.5 rounded-[6px] bg-[#FDE8DD] border-l-2 border-[#C2410C] text-[11px]">
+<p class="font-semibold text-on-surface leading-tight">Salsa Cubana</p>
+<p class="text-on-surface-variant tnum mt-0.5">18:00 · 16/16</p>
+</div>
+<div class="p-1.5 rounded-[6px] bg-[#FEF3C7] border-l-2 border-[#B45309] text-[11px]">
+<p class="font-semibold text-on-surface leading-tight">Bachata Sensual</p>
+<p class="text-on-surface-variant tnum mt-0.5">19:15 · 16/16</p>
+</div>
+<div class="p-1.5 rounded-[6px] bg-[#FEE2E2] border-l-2 border-error text-[11px]">
+<p class="font-semibold text-error leading-tight flex items-center justify-between">
+<span>Salsa L.A.</span>
+<span class="material-symbols-outlined text-[13px]">warning</span>
+</p>
+<p class="text-on-surface-variant tnum mt-0.5">20:00 · Sin profe</p>
+</div>
+</div>
+</div>
+<!-- Vie 16 -->
+<div class="flex flex-col rounded-lg bg-surface-container-low p-2 border border-outline-variant/60 min-h-[300px]">
+<div class="text-center pb-2 border-b border-outline-variant/50">
+<span class="font-label text-[11px] text-on-surface-variant block uppercase font-medium">Vie</span>
+<span class="font-headline-sm text-[16px] text-on-surface font-semibold tnum">16</span>
+<span class="font-label text-[10px] text-outline block tnum">4 clases</span>
+</div>
+<div class="mt-2 space-y-1.5">
+<div class="p-1.5 rounded-[6px] bg-[#E9E2DA] border-l-2 border-[#7A3E06] text-[11px]">
+<p class="font-semibold text-on-surface leading-tight">Mambo Shines</p>
+<p class="text-on-surface-variant tnum mt-0.5">18:30 · 11/14</p>
+</div>
+<div class="p-1.5 rounded-[6px] bg-[#FDE8DD] border-l-2 border-[#C2410C] text-[11px]">
+<p class="font-semibold text-on-surface leading-tight">Social Práctica</p>
+<p class="text-on-surface-variant tnum mt-0.5">20:30 · 24/30</p>
+</div>
+</div>
+</div>
+<!-- Sáb 17 (AVISO DE CONFLICTO) -->
+<div class="flex flex-col rounded-lg bg-surface-container-low p-2 border border-outline-variant/60 min-h-[300px]">
+<div class="text-center pb-2 border-b border-outline-variant/50">
+<span class="font-label text-[11px] text-on-surface-variant block uppercase font-medium">Sáb</span>
+<span class="font-headline-sm text-[16px] text-on-surface font-semibold tnum">17</span>
+<span class="font-label text-[10px] text-error font-medium block tnum">Solapamiento</span>
+</div>
+<div class="mt-2 space-y-1.5">
+<div class="p-1.5 rounded-[6px] bg-[#FEE2E2] border-l-2 border-error text-[11px]">
+<p class="font-semibold text-error leading-tight">Taller Intensivo</p>
+<p class="text-on-surface-variant tnum mt-0.5">18:00 · Conflicto</p>
+</div>
+<div class="p-1.5 rounded-[6px] bg-[#FDE8DD] border-l-2 border-[#C2410C] text-[11px]">
+<p class="font-semibold text-on-surface leading-tight">Rueda Avanzada</p>
+<p class="text-on-surface-variant tnum mt-0.5">18:30 · Sala Mal.</p>
+</div>
+</div>
+</div>
+<!-- Dom 18 -->
+<div class="flex flex-col rounded-lg bg-surface-container-low p-2 border border-outline-variant/60 min-h-[300px]">
+<div class="text-center pb-2 border-b border-outline-variant/50">
+<span class="font-label text-[11px] text-on-surface-variant block uppercase font-medium">Dom</span>
+<span class="font-headline-sm text-[16px] text-on-surface font-semibold tnum">18</span>
+<span class="font-label text-[10px] text-outline block tnum">2 clases</span>
+</div>
+<div class="mt-2 space-y-1.5">
+<div class="p-1.5 rounded-[6px] bg-[#FEF3C7] border-l-2 border-[#B45309] text-[11px]">
+<p class="font-semibold text-on-surface leading-tight">Bachata Domin.</p>
+<p class="text-on-surface-variant tnum mt-0.5">12:00 · 14/16</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Leyenda Inferior y Enlace -->
+<div class="flex items-center justify-between pt-4 mt-4 border-t border-outline-variant">
+<div class="flex items-center gap-4 text-[12px] text-on-surface-variant font-label">
+<span class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#C2410C]"></span>
+                Salsa
+              </span>
+<span class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#B45309]"></span>
+                Bachata
+              </span>
+<span class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#7A3E06]"></span>
+                Rueda / Mambo
+              </span>
+</div>
+<a class="font-button-text text-button-text text-primary hover:text-primary-container flex items-center gap-1 font-semibold group transition-colors" href="#calendario">
+<span>Ver calendario completo</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Columna Derecha: Tarjeta 'Requiere atención' (approx 35% = 4 cols) -->
+<article class="lg:col-span-4 bg-surface rounded-card border border-outline-variant p-6 card-shadow flex flex-col justify-between">
+<div>
+<!-- Cabecera de la tarjeta con badge contador -->
+<div class="flex items-center justify-between pb-3 border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-[22px]">notification_important</span>
+<h2 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Requiere atención</h2>
+</div>
+<span class="w-6 h-6 rounded-full bg-error text-white font-headline-sm text-[12px] font-bold flex items-center justify-center tnum">
+                3
+              </span>
+</div>
+<!-- Lista de Incidencias Prioritarias -->
+<div class="divide-y divide-outline-variant">
+<!-- Fila 1: Factura Vencida -->
+<div class="py-3.5 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-[#FEE2E2] text-[#B91C1C] flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">error</span>
+                    Vencida
+                  </span>
+<button class="px-2.5 py-1 rounded-[6px] border border-outline-variant bg-surface hover:bg-surface-container font-button-text text-[12px] text-on-surface font-medium transition-colors" type="button">
+                    Resolver
+                  </button>
+</div>
+<div>
+<h3 class="font-button-text text-button-text font-semibold text-on-surface leading-tight">
+                    Factura V-2026-0179 vencida hace 6 días
+                  </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-[12px] mt-0.5">
+                    Alumno: <span class="text-on-surface font-medium">Marcos Solís</span> · <span class="font-semibold text-error tnum">320,00 €</span> SEPA rechazada
+                  </p>
+</div>
+</div>
+<!-- Fila 2: Sin Asignar -->
+<div class="py-3.5 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-[#FEF3C7] text-[#B45309] flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">person_alert</span>
+                    Sin asignar
+                  </span>
+<button class="px-2.5 py-1 rounded-[6px] border border-outline-variant bg-surface hover:bg-surface-container font-button-text text-[12px] text-on-surface font-medium transition-colors" type="button">
+                    Resolver
+                  </button>
+</div>
+<div>
+<h3 class="font-button-text text-button-text font-semibold text-on-surface leading-tight">
+                    Clase del jueves 20:00 sin profesor asignado
+                  </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-[12px] mt-0.5">
+                    Sala Malasaña · Salsa Estilo Los Ángeles, <span class="font-medium text-on-surface tnum">14 alumnos confirmados</span>
+</p>
+</div>
+</div>
+<!-- Fila 3: Conflicto -->
+<div class="py-3.5 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-[#FEE2E2] text-[#B91C1C] flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">meeting_room</span>
+                    Conflicto
+                  </span>
+<button class="px-2.5 py-1 rounded-[6px] border border-outline-variant bg-surface hover:bg-surface-container font-button-text text-[12px] text-on-surface font-medium transition-colors" type="button">
+                    Resolver
+                  </button>
+</div>
+<div>
+<h3 class="font-button-text text-button-text font-semibold text-on-surface leading-tight">
+                    Conflicto de sala el sábado de 18:00 a 19:30
+                  </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-[12px] mt-0.5">
+                    Solapada con Taller intensivo en <span class="font-medium text-on-surface">Sala Malasaña</span>
+</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Pie de tarjeta: Sincronización e Historial -->
+<div class="pt-3 mt-2 border-t border-outline-variant flex items-center justify-between text-body-sm text-[12px]">
+<span class="text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-outline">sync</span>
+              Última sincronización: <strong class="tnum font-medium">10:42</strong>
+</span>
+<a class="text-primary hover:text-primary-container font-medium hover:underline" href="#incidencias">
+              Ver historial de incidencias
+            </a>
+</div>
+</article>
+</section>
+<!-- Fila 3: Tarjeta de Acciones Rápidas -->
+<section class="bg-surface rounded-card border border-outline-variant p-6 card-shadow flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">bolt</span>
+<h2 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Acciones rápidas</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Operaciones frecuentes del estudio</p>
+</div>
+<!-- 3 Botones: 44px de alto, radio 10px -->
+<div class="flex items-center flex-wrap gap-3">
+<!-- 1) Nueva Factura -->
+<button class="h-11 px-4 rounded-[10px] bg-surface hover:bg-surface-container border border-outline-variant text-on-surface font-button-text text-button-text flex items-center gap-2 transition-all active:scale-[0.98]" type="button">
+<span class="material-symbols-outlined text-[19px] text-on-surface-variant">receipt</span>
+<span>Nueva factura</span>
+</button>
+<!-- 2) Invitar Profesor -->
+<button class="h-11 px-4 rounded-[10px] bg-surface hover:bg-surface-container border border-outline-variant text-on-surface font-button-text text-button-text flex items-center gap-2 transition-all active:scale-[0.98]" type="button">
+<span class="material-symbols-outlined text-[19px] text-on-surface-variant">person_add</span>
+<span>Invitar profesor</span>
+</button>
+<!-- 3) Crear Clase (PRIMARIO terracota) -->
+<button class="h-11 px-5 rounded-[10px] bg-[#C2410C] hover:bg-[#E0561F] text-white font-button-text text-button-text flex items-center gap-2 shadow-sm transition-all active:scale-[0.98] ring-offset-2 focus:ring-2 focus:ring-[#C2410C]/30" type="button">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span class="font-semibold">Crear clase</span>
+</button>
+</div>
+</section>
+</div>
+</main>
+</body></html>

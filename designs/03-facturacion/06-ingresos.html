@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-background" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Estudio Salsa - Panel de Facturación e Ingresos</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Outfit:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "error-container": "#ffdad6",
+            "on-secondary-fixed": "#00201d",
+            "primary-fixed-dim": "#ffb59d",
+            "surface-container-lowest": "#ffffff",
+            "on-error": "#ffffff",
+            "on-primary-fixed-variant": "#832600",
+            "primary-fixed": "#ffdbd0",
+            "outline": "#8b8079",
+            "surface-bright": "#fff8f6",
+            "on-tertiary-fixed": "#001a41",
+            "secondary-container": "#99efe5",
+            "on-primary-fixed": "#390c00",
+            "tertiary-fixed-dim": "#adc6ff",
+            "on-surface": "#261814",
+            "on-secondary-fixed-variant": "#00504a",
+            "on-primary-container": "#ffece7",
+            "error": "#ba1a1a",
+            "primary-container": "#c2410c",
+            "surface-variant": "#f7ddd6",
+            "surface-dim": "#eed5cd",
+            "surface-tint": "#ac3400",
+            "on-secondary-container": "#006f67",
+            "tertiary": "#b45309",
+            "outline-variant": "#e1bfb5",
+            "surface": "#ffffff",
+            "secondary": "#006a63",
+            "inverse-on-surface": "#ffede8",
+            "on-tertiary-fixed-variant": "#004494",
+            "tertiary-container": "#0069de",
+            "surface-container-high": "#fce3db",
+            "surface-container-highest": "#f7ddd6",
+            "secondary-fixed": "#9cf2e8",
+            "on-primary": "#ffffff",
+            "secondary-fixed-dim": "#80d5cb",
+            "background": "#faf7f4",
+            "primary": "#9b2f00",
+            "on-tertiary-container": "#ecf0ff",
+            "on-tertiary": "#ffffff",
+            "on-background": "#261814",
+            "surface-container-low": "#fff1ed",
+            "tertiary-fixed": "#d8e2ff",
+            "surface-container": "#ffe9e3",
+            "on-surface-variant": "#59413a",
+            "on-secondary": "#ffffff",
+            "on-error-container": "#93000a",
+            "inverse-surface": "#3c2d28",
+            "inverse-primary": "#ffb59d",
+            "warm-border": "#E8E2DC",
+            "warm-action": "#C2410C",
+            "warm-action-hover": "#E0561F",
+            "warm-tint": "#FDE8DD",
+            "warm-tint-text": "#7A2A0C",
+            "state-teal": "#0F766E",
+            "state-teal-bg": "#CCFBF1",
+            "state-amber": "#B45309",
+            "state-amber-bg": "#FEF3C7",
+            "state-red": "#B91C1C",
+            "state-red-bg": "#FEE2E2",
+            "app-text": "#161311",
+            "app-muted": "#6B625C"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "card": "14px",
+            "btn": "10px",
+            "input": "6px",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xs": "0.25rem",
+            "gutter-desktop": "1.5rem",
+            "space-md": "1rem",
+            "margin-desktop": "2rem",
+            "margin": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2rem",
+            "space-sm": "0.5rem",
+            "space-2xl": "3rem",
+            "gutter": "1rem"
+          },
+          "fontFamily": {
+            "body-sm": ["Inter", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "label-tabular": ["Inter", "sans-serif"],
+            "metric": ["Outfit", "sans-serif"],
+            "headline-sm": ["Outfit", "sans-serif"],
+            "headline-md": ["Outfit", "sans-serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "headline-lg": ["Outfit", "sans-serif"],
+            "button-text": ["Inter", "sans-serif"],
+            "label": ["Inter", "sans-serif"],
+            "display-mobile": ["Outfit", "sans-serif"],
+            "display": ["Outfit", "sans-serif"]
+          },
+          "fontSize": {
+            "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-tabular": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+            "metric": ["36px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-sm": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "button-text": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "display-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display": ["34px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+          },
+          "boxShadow": {
+            "warm-card": "0 1px 2px rgba(22, 19, 17, 0.05), 0 8px 24px -12px rgba(22, 19, 17, 0.08)",
+            "subtle-card": "0 1px 3px rgba(22, 19, 17, 0.04)"
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-full bg-background text-app-text font-body-md antialiased flex">
+<!-- ========================================================================= -->
+<!-- 1. BARRA LATERAL FIJA (SideNavBar: w-60 / 240px)                          -->
+<!-- ========================================================================= -->
+<aside class="fixed top-0 left-0 w-60 h-screen z-40 bg-surface flex flex-col justify-between p-space-md border-r border-warm-border">
+<!-- Top section: Logo and Nav -->
+<div class="flex flex-col gap-6">
+<!-- Brand Header -->
+<div class="flex items-center gap-3 px-2 pt-1">
+<div class="w-10 h-10 rounded-xl bg-warm-action flex items-center justify-center text-white font-headline-md font-bold shadow-sm">
+<span class="material-symbols-outlined text-[24px]">sports_kabaddi</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-[19px] font-bold text-warm-action tracking-tight leading-tight">Estudio Salsa</span>
+<span class="font-label text-[11px] text-app-muted uppercase tracking-wider font-semibold">Panel Administrativo</span>
+</div>
+</div>
+<!-- Main Navigation Items -->
+<nav aria-label="Navegación principal" class="flex flex-col gap-1.5">
+<!-- Inicio -->
+<a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface transition-colors duration-150 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px] text-app-muted">dashboard</span>
+<span class="font-body-md text-sm">Inicio</span>
+</a>
+<!-- Calendario -->
+<a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface transition-colors duration-150 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px] text-app-muted">calendar_today</span>
+<span class="font-body-md text-sm">Calendario</span>
+</a>
+<!-- Clases -->
+<a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface transition-colors duration-150 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px] text-app-muted">sports_kabaddi</span>
+<span class="font-body-md text-sm">Clases</span>
+</a>
+<!-- Alumnos -->
+<a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface transition-colors duration-150 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px] text-app-muted">group</span>
+<span class="font-body-md text-sm">Alumnos</span>
+</a>
+<!-- Facturación (ACTIVA) -->
+<a aria-current="page" class="flex items-center gap-space-sm px-space-md py-2.5 rounded-lg bg-warm-tint text-warm-action font-semibold transition-colors duration-150 shadow-sm active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px] text-warm-action" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span class="font-body-md text-sm text-warm-tint-text">Facturación</span>
+</a>
+</nav>
+</div>
+<!-- Bottom section: CTA & Ajustes -->
+<div class="flex flex-col gap-2 pt-4 border-t border-warm-border">
+<!-- Quick Action CTA -->
+<button class="w-full h-10 px-3 flex items-center justify-center gap-2 bg-warm-action text-white rounded-btn hover:bg-warm-action-hover font-button-text text-sm transition-all shadow-sm active:scale-95">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Nueva Reserva</span>
+</button>
+<!-- Ajustes -->
+<a class="flex items-center gap-space-sm px-space-md py-2 rounded-lg text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[20px] text-app-muted">settings</span>
+<span class="font-body-md text-sm">Ajustes</span>
+</a>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- 2. BARRA SUPERIOR FIJA (TopNavBar: h-16 / left-60)                       -->
+<!-- ========================================================================= -->
+<header class="fixed top-0 left-60 right-0 h-16 z-30 bg-surface border-b border-warm-border flex items-center justify-between px-8">
+<!-- Left: Search and Section -->
+<div class="flex items-center gap-6 flex-1 max-w-xl">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[20px] text-app-muted pointer-events-none">search</span>
+<input class="w-full h-11 pl-10 pr-4 text-sm bg-background border border-warm-border rounded-input text-app-text placeholder:text-app-muted focus:outline-none focus:ring-2 focus:ring-warm-action focus:border-warm-action transition-all" placeholder="Buscar facturas, alumnos, recibos..." type="text"/>
+</div>
+</div>
+<!-- Right: Notifications & Profile -->
+<div class="flex items-center gap-4">
+<!-- Notification Icon with Badge -->
+<button aria-label="Notificaciones" class="relative w-10 h-10 rounded-btn flex items-center justify-center text-app-text hover:bg-surface-container-low transition-colors duration-150 active:scale-95">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-warm-action ring-2 ring-surface"></span>
+</button>
+<!-- Vertical Divider -->
+<div class="h-6 w-px bg-warm-border"></div>
+<!-- Admin User Pill -->
+<div class="flex items-center gap-3 pl-1">
+<div class="w-9 h-9 rounded-full bg-warm-tint text-warm-action flex items-center justify-center font-headline-sm text-xs font-bold ring-2 ring-warm-action/20">
+          CR
+        </div>
+<div class="flex flex-col text-left">
+<span class="font-body-sm font-semibold text-app-text text-[13px] leading-tight">Carmen R.</span>
+<span class="font-label text-[11px] text-app-muted">Administrador</span>
+</div>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- 3. CONTENIDO PRINCIPAL (Desktop 1440px Canvas)                           -->
+<!-- ========================================================================= -->
+<main class="ml-60 pt-16 flex-1 bg-background min-h-screen">
+<div class="max-w-[1280px] mx-auto px-8 py-8 space-y-6">
+<!-- ================= CABECERA DE LA PÁGINA ================= -->
+<section class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div>
+<h1 class="font-headline-lg text-3xl font-bold text-app-text tracking-tight">Ingresos</h1>
+<p class="font-body-md text-sm text-app-muted mt-1">Supervisión económica, evolución mensual y control de cobros del estudio</p>
+</div>
+<div class="flex items-center gap-3">
+<!-- Dropdown Period Selector -->
+<div class="relative">
+<select class="h-11 pl-3.5 pr-8 bg-surface border border-warm-border rounded-input text-sm font-medium text-app-text appearance-none focus:outline-none focus:ring-2 focus:ring-warm-action focus:border-warm-action cursor-pointer shadow-sm">
+<option selected="">Últimos 12 meses</option>
+<option>Año actual (2026)</option>
+<option>Trimestre en curso (Q4)</option>
+<option>Mes anterior (Septiembre 2026)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-[18px] text-app-muted pointer-events-none">expand_more</span>
+</div>
+<!-- Botón Exportar CSV -->
+<button class="h-11 px-4 bg-surface border border-warm-border text-app-text rounded-btn hover:bg-surface-container-low transition-colors duration-150 flex items-center gap-2 font-button-text text-sm shadow-sm active:scale-95">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Exportar CSV</span>
+</button>
+<!-- Botón Nueva Factura -->
+<button class="h-11 px-4 bg-warm-action hover:bg-warm-action-hover text-white rounded-btn transition-colors duration-150 flex items-center gap-2 font-button-text text-sm shadow-sm active:scale-95">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>Nueva factura</span>
+</button>
+</div>
+</section>
+<!-- ================= FILA 1: 4 TARJETAS DE MÉTRICAS ================= -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Tarjeta 1: Ingresos recurrentes -->
+<div class="bg-surface border border-warm-border rounded-card p-5 shadow-warm-card flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label text-xs uppercase tracking-wider text-app-muted font-semibold">Ingresos recurrentes</span>
+<span class="material-symbols-outlined text-[20px] text-app-muted">sync</span>
+</div>
+<div class="my-2">
+<div class="font-metric text-3xl font-bold text-app-text tabular-nums tracking-tight">8.340 €</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-state-teal-bg text-state-teal text-xs font-semibold">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+<span>+6,2 %</span>
+</div>
+<span class="font-body-sm text-[12px] text-app-muted">MRR suscripciones</span>
+</div>
+</div>
+<!-- Tarjeta 2: Ingresos del mes -->
+<div class="bg-surface border border-warm-border rounded-card p-5 shadow-warm-card flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label text-xs uppercase tracking-wider text-app-muted font-semibold">Ingresos del mes</span>
+<span class="material-symbols-outlined text-[20px] text-warm-action">payments</span>
+</div>
+<div class="my-2">
+<div class="font-metric text-3xl font-bold text-app-text tabular-nums tracking-tight">14.320 €</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-state-teal-bg text-state-teal text-xs font-semibold">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+<span>+5,1 %</span>
+</div>
+<span class="font-body-sm text-[12px] text-app-muted">Octubre 2026 en curso</span>
+</div>
+</div>
+<!-- Tarjeta 3: Pendiente de cobro -->
+<div class="bg-surface border border-warm-border rounded-card p-5 shadow-warm-card flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label text-xs uppercase tracking-wider text-app-muted font-semibold">Pendiente de cobro</span>
+<span class="material-symbols-outlined text-[20px] text-state-amber">pending_actions</span>
+</div>
+<div class="my-2">
+<div class="font-metric text-3xl font-bold text-app-text tabular-nums tracking-tight">3.180 €</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-state-amber-bg text-state-amber text-xs font-semibold">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span>3 emitidas</span>
+</div>
+<span class="font-body-sm text-[12px] text-app-muted">Sin liquidar</span>
+</div>
+</div>
+<!-- Tarjeta 4: Bajas / Churn -->
+<div class="bg-surface border border-warm-border rounded-card p-5 shadow-warm-card flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label text-xs uppercase tracking-wider text-app-muted font-semibold">Bajas (Churn)</span>
+<span class="material-symbols-outlined text-[20px] text-app-muted">person_remove</span>
+</div>
+<div class="my-2">
+<div class="font-metric text-3xl font-bold text-app-text tabular-nums tracking-tight">2,4 %</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-state-teal-bg text-state-teal text-xs font-semibold">
+<span class="material-symbols-outlined text-[14px]">arrow_downward</span>
+<span>-0,3 %</span>
+</div>
+<span class="font-body-sm text-[12px] text-app-muted">vs. sept. 2026</span>
+</div>
+</div>
+</section>
+<!-- ================= FILA 2: EVOLUCIÓN (8 COLS) + REPARTO POR PLAN (4 COLS) ================= -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Columna Izquierda: Evolución de ingresos (8 cols) -->
+<div class="lg:col-span-8 bg-surface border border-warm-border rounded-card p-6 shadow-warm-card flex flex-col justify-between">
+<!-- Encabezado del gráfico -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-warm-border/60">
+<div>
+<h2 class="font-headline-sm text-lg font-bold text-app-text">Evolución de ingresos</h2>
+<p class="font-body-sm text-xs text-app-muted">Facturación mensual consolidada por tipo de producto</p>
+</div>
+<!-- Leyenda de colores -->
+<div class="flex items-center flex-wrap gap-4 text-xs font-medium text-app-muted">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-sm bg-[#C2410C]"></span>
+<span class="text-app-text font-medium">Suscripciones</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-sm bg-[#FB923C]"></span>
+<span class="text-app-text font-medium">Bonos &amp; Clases</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-4 h-0.5 border-t border-dashed border-[#8B8079]"></span>
+<span>Media: <strong class="tabular-nums text-app-text">12.850 €</strong></span>
+</div>
+</div>
+</div>
+<!-- Canvas / SVG Chart de Barras de 12 Meses -->
+<div class="relative pt-6 pb-2">
+<!-- Guías horizontales de importe -->
+<div class="relative h-64 w-full">
+<!-- Eje Y con líneas punteadas sutiles -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none text-[11px] font-label-tabular text-app-muted">
+<div class="border-b border-warm-border/60 flex items-center justify-between pb-0.5">
+<span>20 k€</span>
+</div>
+<div class="border-b border-warm-border/60 flex items-center justify-between pb-0.5">
+<span>15 k€</span>
+</div>
+<!-- Línea de Media (12.850 €) en ~48% desde abajo -->
+<div class="border-b-2 border-dashed border-[#8B8079]/70 flex items-center justify-end pb-0.5 relative z-10" style="margin-top: 10px;">
+<span class="bg-surface px-1.5 py-0.5 text-[10px] text-app-muted font-medium rounded border border-warm-border">Media mensual 12.850 €</span>
+</div>
+<div class="border-b border-warm-border/60 flex items-center justify-between pb-0.5">
+<span>10 k€</span>
+</div>
+<div class="border-b border-warm-border/60 flex items-center justify-between pb-0.5">
+<span>5 k€</span>
+</div>
+<div class="border-b border-warm-border flex items-center justify-between pb-0.5">
+<span>0 k€</span>
+</div>
+</div>
+<!-- Barras Apiladas Distribuidas (12 meses) -->
+<div class="absolute inset-0 flex items-end justify-between pl-8 pr-2 gap-2">
+<!-- Mes 1: Nov 25 (~11.200 €) -->
+<div class="flex-1 flex flex-col items-center h-full justify-end group">
+<div class="w-full max-w-[28px] flex flex-col justify-end h-[56%] rounded-t-sm overflow-hidden transition-all duration-150 group-hover:opacity-90">
+<div class="w-full h-[32%] bg-[#FB923C]" title="Bonos: 3.584 €"></div>
+<div class="w-full h-[68%] bg-[#C2410C]" title="Suscripciones: 7.616 €"></div>
+</div>
+<span class="mt-2 text-[11px] text-app-muted font-medium">Nov</span>
+</div>
+<!-- Mes 2: Dic 25 (~12.600 €) -->
+<div class="flex-1 flex flex-col items-center h-full justify-end group">
+<div class="w-full max-w-[28px] flex flex-col justify-end h-[63%] rounded-t-sm overflow-hidden transition-all duration-150 group-hover:opacity-90">
+<div class="w-full h-[30%] bg-[#FB923C]"></div>
+<div class="w-full h-[70%] bg-[#C2410C]"></div>
+</div>
+<span class="mt-2 text-[11px] text-app-muted font-medium">Dic</span>
+</div>
+<!-- Mes 3: Ene 26 (~13.100 €) -->
+<div class="flex-1 flex flex-col items-center h-full justify-end group">
+<div class="w-full max-w-[28px] flex flex-col justify-end h-[65.5%] rounded-t-sm overflow-hidden transition-all duration-150 group-hover:opacity-90">
+<div class="w-full h-[35%] bg-[#FB923C]"></div>
+<div class="w-full h-[65%] bg-[#C2410C]"></div>
+</div>
+<span class="mt-2 text-[11px] text-app-muted font-medium">Ene</span>
+</div>
+<!-- Mes 4: Feb 26 (~11.900 €) -->
+<div class="flex-1 flex flex-col items-center h-full justify-end group">
+<div class="w-full max-w-[28px] flex flex-col justify-end h-[59.5%] rounded-t-sm overflow-hidden transition-all duration-150 group-hover:opacity-90">
+<div class="w-full h-[28%] bg-[#FB923C]"></div>
+<div class="w-full h-[72%] bg-[#C2410C]"></div>
+</div>
+<span class="mt-2 text-[11px] text-app-muted font-medium">Feb</span>
+</div>
+<!-- Mes 5: Mar 26 (~12.400 €) -->
+<div class="flex-1 flex flex-col items-center h-full justify-end group">
+<div class="w-full max-w-[28px] flex flex-col justify-end h-[62%] rounded-t-sm overflow-hidden transition-all duration-150 group-hover:opacity-90">
+<div class="w-full h-[29%] bg-[#FB923C]"></div>
+<div class="w-full h-[71%] bg-[#C2410C]"></div>
+</div>
+<span class="mt-2 text-[11px] text-app-muted font-medium">Mar</span>
+</div>
+<!-- Mes 6: Abr 26 (~13.500 €) -->
+<div class="flex-1 flex flex-col items-center h-full justify-end group">
+<div class="w-full max-w-[28px] flex flex-col justify-end h-[67.5%] rounded-t-sm overflow-hidden transition-all duration-150 group-hover:opacity-90">
+<div class="w-full h-[33%] bg-[#FB923C]"></div>
+<div class="w-full h-[67%] bg-[#C2410C]"></div>
+</div>
+<span class="mt-2 text-[11px] text-app-muted font-medium">Abr</span>
+</div>
+<!-- Mes 7: May 26 (~14.100 €) -->
+<div class="flex-1 flex flex-col items-center h-full justify-end group">
+<div class="w-full max-w-[28px] flex flex-col justify-end h-[70.5%] rounded-t-sm overflow-hidden transition-all duration-150 group-hover:opacity-90">
+<div class="w-full h-[30%] bg-[#FB923C]"></div>
+<div class="w-full h-[70%] bg-[#C2410C]"></div>
+</div>
+<span class="mt-2 text-[11px] text-app-muted font-medium">May</span>
+</div>
+<!-- Mes 8: Jun 26 (~14.500 €) -->
+<div class="flex-1 flex flex-col items-center h-full justify-end group">
+<div class="w-full max-w-[28px] flex flex-col justify-end h-[72.5%] rounded-t-sm overflow-hidden transition-all duration-150 group-hover:opacity-90">
+<div class="w-full h-[34%] bg-[#FB923C]"></div>
+<div class="w-full h-[66%] bg-[#C2410C]"></div>
+</div>
+<span class="mt-2 text-[11px] text-app-muted font-medium">Jun</span>
+</div>
+<!-- Mes 9: Jul 26 (~10.800 €) -->
+<div class="flex-1 flex flex-col items-center h-full justify-end group">
+<div class="w-full max-w-[28px] flex flex-col justify-end h-[54%] rounded-t-sm overflow-hidden transition-all duration-150 group-hover:opacity-90">
+<div class="w-full h-[25%] bg-[#FB923C]"></div>
+<div class="w-full h-[75%] bg-[#C2410C]"></div>
+</div>
+<span class="mt-2 text-[11px] text-app-muted font-medium">Jul</span>
+</div>
+<!-- Mes 10: Ago 26 (~9.200 €) -->
+<div class="flex-1 flex flex-col items-center h-full justify-end group">
+<div class="w-full max-w-[28px] flex flex-col justify-end h-[46%] rounded-t-sm overflow-hidden transition-all duration-150 group-hover:opacity-90">
+<div class="w-full h-[20%] bg-[#FB923C]"></div>
+<div class="w-full h-[80%] bg-[#C2410C]"></div>
+</div>
+<span class="mt-2 text-[11px] text-app-muted font-medium">Ago</span>
+</div>
+<!-- Mes 11: Sep 26 (~13.620 €) -->
+<div class="flex-1 flex flex-col items-center h-full justify-end group">
+<div class="w-full max-w-[28px] flex flex-col justify-end h-[68.1%] rounded-t-sm overflow-hidden transition-all duration-150 group-hover:opacity-90">
+<div class="w-full h-[38%] bg-[#FB923C]"></div>
+<div class="w-full h-[62%] bg-[#C2410C]"></div>
+</div>
+<span class="mt-2 text-[11px] text-app-muted font-medium">Sep</span>
+</div>
+<!-- Mes 12: Oct 26 (MES ACTUAL - 14.320 € con Destacado) -->
+<div class="flex-1 flex flex-col items-center h-full justify-end relative">
+<!-- Tag flotante Mes actual -->
+<div class="absolute -top-7 px-2 py-0.5 rounded bg-warm-tint text-warm-tint-text text-[10px] font-bold shadow-xs whitespace-nowrap">
+                    14.320 €
+                  </div>
+<div class="w-full max-w-[28px] flex flex-col justify-end h-[71.6%] rounded-t-md overflow-hidden ring-2 ring-warm-action ring-offset-2 ring-offset-surface">
+<div class="w-full h-[42%] bg-[#FB923C]" title="Bonos &amp; Clases: 6.014 €"></div>
+<div class="w-full h-[58%] bg-warm-action" title="Suscripciones: 8.306 €"></div>
+</div>
+<span class="mt-2 text-[11px] text-warm-action font-bold">Oct 26</span>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-3 border-t border-warm-border/60 flex items-center justify-between text-xs text-app-muted">
+<span>Rango analizado: Noviembre 2025 – Octubre 2026</span>
+<span class="text-state-teal font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+              Crecimiento interanual +27,8 %
+            </span>
+</div>
+</div>
+<!-- Columna Derecha: Reparto por plan (4 cols) -->
+<div class="lg:col-span-4 bg-surface border border-warm-border rounded-card p-6 shadow-warm-card flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-1">
+<h2 class="font-headline-sm text-lg font-bold text-app-text">Reparto por plan</h2>
+<span class="text-xs font-semibold px-2 py-0.5 rounded bg-surface-container-low text-app-muted">Octubre</span>
+</div>
+<p class="font-body-sm text-xs text-app-muted mb-4">Total facturado este mes</p>
+<!-- Donut Chart SVG -->
+<div class="relative flex items-center justify-center my-4">
+<svg class="w-44 h-44 -rotate-90 transform" viewbox="0 0 100 100">
+<!-- Background track -->
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#FAF7F4" stroke-width="12"></circle>
+<!-- Segmento 1: Mensual ilimitado (58%) -> stroke-dasharray = 145.7 251.3 -->
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#C2410C" stroke-dasharray="145.7 251.3" stroke-dashoffset="0" stroke-linecap="round" stroke-width="12"></circle>
+<!-- Segmento 2: Bono de 10 clases (27%) -> 67.8 251.3 offset -145.7 -->
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#0F766E" stroke-dasharray="67.8 251.3" stroke-dashoffset="-148" stroke-linecap="round" stroke-width="12"></circle>
+<!-- Segmento 3: Clase suelta (15%) -> 37.7 251.3 offset -213.5 -->
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#FB923C" stroke-dasharray="37.7 251.3" stroke-dashoffset="-218" stroke-linecap="round" stroke-width="12"></circle>
+</svg>
+<!-- Donut Center Content -->
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="font-label text-[11px] uppercase tracking-wider text-app-muted font-medium">Facturado</span>
+<span class="font-metric text-xl font-bold text-app-text tabular-nums leading-tight">14.320 €</span>
+<span class="font-body-sm text-[11px] text-state-teal font-semibold">184 alumnos</span>
+</div>
+</div>
+</div>
+<!-- Leyenda Desglosada -->
+<div class="space-y-3 pt-3 border-t border-warm-border">
+<!-- Plan 1 -->
+<div class="flex items-center justify-between text-xs">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-warm-action"></span>
+<span class="font-medium text-app-text">Mensual ilimitado</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-bold text-app-text tabular-nums">8.305,60 €</span>
+<span class="text-app-muted tabular-nums w-8 text-right font-medium">58 %</span>
+</div>
+</div>
+<!-- Plan 2 -->
+<div class="flex items-center justify-between text-xs">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-state-teal"></span>
+<span class="font-medium text-app-text">Bono 10 clases</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-bold text-app-text tabular-nums">3.866,40 €</span>
+<span class="text-app-muted tabular-nums w-8 text-right font-medium">27 %</span>
+</div>
+</div>
+<!-- Plan 3 -->
+<div class="flex items-center justify-between text-xs">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-[#FB923C]"></span>
+<span class="font-medium text-app-text">Clase suelta</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-bold text-app-text tabular-nums">2.148,00 €</span>
+<span class="text-app-muted tabular-nums w-8 text-right font-medium">15 %</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ================= FILA 3: DEUDORES (7-8 COLS) + MÉTODOS DE PAGO (4-5 COLS) ================= -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Columna Izquierda: Deudores y cobros pendientes (7 cols) -->
+<div class="lg:col-span-7 bg-surface border border-warm-border rounded-card p-6 shadow-warm-card flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<div>
+<h2 class="font-headline-sm text-lg font-bold text-app-text">Deudores y cobros pendientes</h2>
+<p class="font-body-sm text-xs text-app-muted">Facturas con liquidación pendiente o rechazo bancario</p>
+</div>
+<a class="font-button-text text-xs text-warm-action hover:text-warm-action-hover font-semibold flex items-center gap-1 transition-colors" href="#">
+<span>Ver todas las facturas</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- Tabla de deudores -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-warm-border text-[11px] font-label text-app-muted uppercase tracking-wider">
+<th class="py-2.5 px-2 font-semibold">Alumno &amp; Ref.</th>
+<th class="py-2.5 px-2 font-semibold">Importe</th>
+<th class="py-2.5 px-2 font-semibold">Retraso</th>
+<th class="py-2.5 px-2 font-semibold">Estado</th>
+<th class="py-2.5 px-1 font-semibold text-right">Acción</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-warm-border/70 text-xs">
+<!-- Alumno 1 -->
+<tr class="hover:bg-background/80 transition-colors">
+<td class="py-3 px-2">
+<div class="font-semibold text-app-text text-[13px]">Lucía Navarro Sanz</div>
+<div class="text-[11px] text-app-muted font-mono">FAC-2026-0891</div>
+</td>
+<td class="py-3 px-2 font-bold tabular-nums text-app-text">89,00 €</td>
+<td class="py-3 px-2 text-app-muted tabular-nums">14 días</td>
+<td class="py-3 px-2">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-state-red-bg text-state-red text-[11px] font-bold">
+<span class="material-symbols-outlined text-[13px]">error</span>
+                        Vencida
+                      </span>
+</td>
+<td class="py-3 px-1 text-right">
+<button class="w-8 h-8 rounded-btn hover:bg-surface-container-low text-app-muted hover:text-warm-action inline-flex items-center justify-center transition-colors" title="Reclamar o reintentar cobro">
+<span class="material-symbols-outlined text-[18px]">replay</span>
+</button>
+</td>
+</tr>
+<!-- Alumno 2 -->
+<tr class="hover:bg-background/80 transition-colors">
+<td class="py-3 px-2">
+<div class="font-semibold text-app-text text-[13px]">Marcos Delgado Ruiz</div>
+<div class="text-[11px] text-app-muted font-mono">FAC-2026-0874</div>
+</td>
+<td class="py-3 px-2 font-bold tabular-nums text-app-text">120,00 €</td>
+<td class="py-3 px-2 text-app-muted tabular-nums">21 días</td>
+<td class="py-3 px-2">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-state-red-bg text-state-red text-[11px] font-bold">
+<span class="material-symbols-outlined text-[13px]">error</span>
+                        Vencida
+                      </span>
+</td>
+<td class="py-3 px-1 text-right">
+<button class="w-8 h-8 rounded-btn hover:bg-surface-container-low text-app-muted hover:text-warm-action inline-flex items-center justify-center transition-colors" title="Reclamar o reintentar cobro">
+<span class="material-symbols-outlined text-[18px]">replay</span>
+</button>
+</td>
+</tr>
+<!-- Alumno 3 -->
+<tr class="hover:bg-background/80 transition-colors">
+<td class="py-3 px-2">
+<div class="font-semibold text-app-text text-[13px]">Sofía Valdés Mena</div>
+<div class="text-[11px] text-app-muted font-mono">FAC-2026-0852</div>
+</td>
+<td class="py-3 px-2 font-bold tabular-nums text-app-text">89,00 €</td>
+<td class="py-3 px-2 text-app-muted tabular-nums">28 días</td>
+<td class="py-3 px-2">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-state-red-bg text-state-red text-[11px] font-bold">
+<span class="material-symbols-outlined text-[13px]">error</span>
+                        Vencida
+                      </span>
+</td>
+<td class="py-3 px-1 text-right">
+<button class="w-8 h-8 rounded-btn hover:bg-surface-container-low text-app-muted hover:text-warm-action inline-flex items-center justify-center transition-colors" title="Reclamar o reintentar cobro">
+<span class="material-symbols-outlined text-[18px]">replay</span>
+</button>
+</td>
+</tr>
+<!-- Alumno 4 -->
+<tr class="hover:bg-background/80 transition-colors">
+<td class="py-3 px-2">
+<div class="font-semibold text-app-text text-[13px]">Alejandro Ortiz Gil</div>
+<div class="text-[11px] text-app-muted font-mono">FAC-2026-0820</div>
+</td>
+<td class="py-3 px-2 font-bold tabular-nums text-app-text">145,20 €</td>
+<td class="py-3 px-2 text-app-muted tabular-nums">35 días</td>
+<td class="py-3 px-2">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-state-red-bg text-state-red text-[11px] font-bold">
+<span class="material-symbols-outlined text-[13px]">error</span>
+                        Vencida
+                      </span>
+</td>
+<td class="py-3 px-1 text-right">
+<button class="w-8 h-8 rounded-btn hover:bg-surface-container-low text-app-muted hover:text-warm-action inline-flex items-center justify-center transition-colors" title="Reclamar o reintentar cobro">
+<span class="material-symbols-outlined text-[18px]">replay</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Total pendiente pie de tarjeta -->
+<div class="mt-4 pt-3 border-t border-warm-border flex items-center justify-between text-xs">
+<span class="text-app-muted">Total pendiente mostrado: <strong class="text-app-text">443,20 €</strong> (4 de 3.180 € acumulados)</span>
+<button class="px-2.5 py-1 bg-warm-tint text-warm-tint-text font-semibold rounded-btn hover:bg-warm-action hover:text-white transition-colors duration-150">
+              Notificar a todos por WhatsApp
+            </button>
+</div>
+</div>
+<!-- Columna Derecha: Métodos de pago (5 cols) -->
+<div class="lg:col-span-5 bg-surface border border-warm-border rounded-card p-6 shadow-warm-card flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-1">
+<h2 class="font-headline-sm text-lg font-bold text-app-text">Métodos de pago</h2>
+<span class="material-symbols-outlined text-[20px] text-app-muted">account_balance_wallet</span>
+</div>
+<p class="font-body-sm text-xs text-app-muted mb-5">Distribución de transacciones del periodo actual</p>
+<!-- Barra apilada horizontal estilizada -->
+<div class="w-full h-3.5 bg-background rounded-full overflow-hidden flex shadow-inner">
+<div class="h-full bg-warm-action transition-all" style="width: 64%" title="Tarjeta: 64%"></div>
+<div class="h-full bg-state-teal transition-all" style="width: 28%" title="Domiciliación SEPA: 28%"></div>
+<div class="h-full bg-[#D97706] transition-all" style="width: 8%" title="Efectivo / Mostrador: 8%"></div>
+</div>
+<div class="flex items-center justify-between text-[11px] text-app-muted mt-2 font-medium px-0.5">
+<span>64% Tarjeta</span>
+<span>28% SEPA</span>
+<span>8% Efectivo</span>
+</div>
+<!-- Lista / Leyenda detallada para cada método -->
+<div class="space-y-4 mt-6">
+<!-- Tarjeta Bancaria (64%) -->
+<div class="p-3 rounded-lg bg-background border border-warm-border/70 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-warm-tint text-warm-action flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">credit_card</span>
+</div>
+<div>
+<h3 class="font-body-md text-xs font-bold text-app-text">Tarjeta bancaria</h3>
+<p class="text-[11px] text-state-teal font-medium">99,4 % tasa de cobro</p>
+</div>
+</div>
+<div class="text-right">
+<div class="font-bold text-xs text-app-text tabular-nums">9.164,80 €</div>
+<div class="text-[11px] text-app-muted tabular-nums">118 pagos</div>
+</div>
+</div>
+<!-- Domiciliación SEPA (28%) -->
+<div class="p-3 rounded-lg bg-background border border-warm-border/70 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-state-teal-bg text-state-teal flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">account_balance</span>
+</div>
+<div>
+<h3 class="font-body-md text-xs font-bold text-app-text">Domiciliación SEPA</h3>
+<p class="text-[11px] text-state-teal font-medium">94,8 % tasa de cobro</p>
+</div>
+</div>
+<div class="text-right">
+<div class="font-bold text-xs text-app-text tabular-nums">4.009,60 €</div>
+<div class="text-[11px] text-app-muted tabular-nums">52 remesas</div>
+</div>
+</div>
+<!-- Efectivo / Recepción (8%) -->
+<div class="p-3 rounded-lg bg-background border border-warm-border/70 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-[#FEF3C7] text-[#D97706] flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">payments</span>
+</div>
+<div>
+<h3 class="font-body-md text-xs font-bold text-app-text">Efectivo / Mostrador</h3>
+<p class="text-[11px] text-app-muted font-medium">Liquidación en caja diaria</p>
+</div>
+</div>
+<div class="text-right">
+<div class="font-bold text-xs text-app-text tabular-nums">1.145,60 €</div>
+<div class="text-[11px] text-app-muted tabular-nums">14 cobros</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pie informativo -->
+<div class="mt-4 pt-3 border-t border-warm-border flex items-center justify-between text-[11px] text-app-muted">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-state-teal">verified</span>
+              Stripe Connect &amp; Redsys activos
+            </span>
+<a class="text-warm-action font-semibold hover:underline" href="#">Configurar pasarelas</a>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

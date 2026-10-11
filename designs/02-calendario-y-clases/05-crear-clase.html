@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-background" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Constructor de clases · Estudio Salsa</title>
+<!-- Google Fonts: Outfit & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Outfit:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container": "#f6f1eb",
+            "primary-fixed": "#ffdbd0",
+            "on-secondary-fixed": "#00201d",
+            "on-tertiary-container": "#ecf0ff",
+            "on-surface-variant": "#59413a",
+            "error-container": "#ffdad6",
+            "on-tertiary-fixed": "#001a41",
+            "on-primary-container": "#ffece7",
+            "on-error": "#ffffff",
+            "on-secondary-fixed-variant": "#00504a",
+            "secondary-container": "#99efe5",
+            "secondary": "#006a63",
+            "tertiary": "#b45309",
+            "on-primary": "#ffffff",
+            "outline-variant": "#e1bfb5",
+            "on-secondary": "#ffffff",
+            "background": "#fff8f6",
+            "surface-variant": "#f7ddd6",
+            "inverse-surface": "#3c2d28",
+            "error": "#b91c1c",
+            "on-secondary-container": "#006f67",
+            "secondary-fixed": "#9cf2e8",
+            "on-background": "#261814",
+            "on-surface": "#261814",
+            "surface-container-highest": "#f7ddd6",
+            "outline": "#8b8079",
+            "on-tertiary-fixed-variant": "#004494",
+            "primary-container": "#c2410c",
+            "on-error-container": "#93000a",
+            "surface": "#ffffff",
+            "surface-dim": "#eed5cd",
+            "surface-container-high": "#fce3db",
+            "primary": "#9b2f00",
+            "tertiary-container": "#0069de",
+            "inverse-primary": "#ffb59d",
+            "tertiary-fixed-dim": "#adc6ff",
+            "on-primary-fixed-variant": "#832600",
+            "tertiary-fixed": "#d8e2ff",
+            "surface-tint": "#ac3400",
+            "on-primary-fixed": "#390c00",
+            "surface-container-lowest": "#ffffff",
+            "inverse-on-surface": "#ffede8",
+            "surface-bright": "#fff8f6",
+            "on-tertiary": "#ffffff",
+            "surface-container-low": "#fff1ed",
+            "primary-fixed-dim": "#ffb59d",
+            "secondary-fixed-dim": "#80d5cb"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "gutter": "1rem",
+            "space-lg": "1.5rem",
+            "gutter-desktop": "1.5rem",
+            "margin": "1rem",
+            "space-xs": "0.25rem",
+            "margin-desktop": "2rem",
+            "space-md": "1rem",
+            "space-xl": "2rem",
+            "space-2xl": "3rem"
+          },
+          "fontFamily": {
+            "label-tabular": ["Inter"],
+            "headline-sm": ["Outfit"],
+            "display": ["Outfit"],
+            "body-sm": ["Inter"],
+            "metric": ["Outfit"],
+            "button-text": ["Inter"],
+            "headline-md": ["Outfit"],
+            "body-md": ["Inter"],
+            "label": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-lg": ["Outfit"],
+            "display-mobile": ["Outfit"]
+          },
+          "fontSize": {
+            "label-tabular": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+            "headline-sm": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+            "display": ["34px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "metric": ["40px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "button-text": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "display-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-full bg-[#FAF7F4] text-on-surface font-body-md text-body-md antialiased flex">
+<!-- ========================================================================= -->
+<!-- SIDE NAV BAR (Shared Component Source of Truth) -->
+<!-- ========================================================================= -->
+<aside class="w-60 h-screen fixed left-0 top-0 z-30 p-4 bg-surface-container-low flex flex-col justify-between select-none">
+<div class="flex flex-col gap-5">
+<!-- Header / Logo -->
+<div class="flex items-center gap-3 px-2 pt-1 pb-2">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm flex-shrink-0">
+<span class="material-symbols-outlined text-2xl" data-icon="sports_kabaddi">sports_kabaddi</span>
+</div>
+<div class="flex flex-col overflow-hidden">
+<span class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight truncate">Estudio Salsa</span>
+<span class="font-label text-label text-on-surface-variant font-medium">Gestión de Estudio</span>
+</div>
+</div>
+<!-- CTA -->
+<button class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-primary text-on-primary font-button-text text-button-text hover:bg-primary-container active:scale-[0.99] transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+<span>Nueva Clase</span>
+</button>
+<!-- Navigation Tabs -->
+<nav class="flex flex-col gap-1">
+<!-- Inicio -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-button-text text-button-text hover:bg-surface-container-high hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="home">home</span>
+<span>Inicio</span>
+</a>
+<!-- Calendario (ACTIVE TAB: Exact match with JSON style_active_navigation) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-primary-container text-on-primary-container font-button-text text-button-text shadow-sm relative overflow-hidden active:scale-[0.99]" href="#">
+<span class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 bg-on-primary-container rounded-r-full"></span>
+<span class="material-symbols-outlined text-xl" data-icon="calendar_month" data-weight="fill" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="font-semibold">Calendario</span>
+</a>
+<!-- Clases -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-button-text text-button-text hover:bg-surface-container-high hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="sports_kabaddi">sports_kabaddi</span>
+<span>Clases</span>
+</a>
+<!-- Alumnos -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-button-text text-button-text hover:bg-surface-container-high hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="groups">groups</span>
+<span>Alumnos</span>
+</a>
+<!-- Facturación -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-button-text text-button-text hover:bg-surface-container-high hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="receipt_long">receipt_long</span>
+<span>Facturación</span>
+</a>
+<!-- Ajustes -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-button-text text-button-text hover:bg-surface-container-high hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="settings">settings</span>
+<span>Ajustes</span>
+</a>
+</nav>
+</div>
+<!-- Footer SideNav -->
+<div class="flex flex-col gap-3 pt-3">
+<!-- Selector de Sede -->
+<div class="bg-surface rounded-xl p-2.5 flex items-center justify-between border border-outline-variant/40 shadow-xs">
+<div class="flex items-center gap-2 overflow-hidden">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="location_on">location_on</span>
+<div class="flex flex-col truncate">
+<span class="text-[11px] font-semibold text-on-surface-variant tracking-wider uppercase">Sede Activa</span>
+<span class="font-button-text text-xs text-on-surface font-semibold truncate">Gran Vía, Madrid</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-base" data-icon="unfold_more">unfold_more</span>
+</div>
+<div class="flex flex-col gap-1 border-t border-outline-variant/30 pt-2">
+<!-- Ayuda y Soporte -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-xl text-on-surface-variant font-button-text text-body-sm hover:bg-surface-container-high hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="help">help</span>
+<span>Ayuda y Soporte</span>
+</a>
+<!-- Cerrar sesión -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-xl text-on-surface-variant/80 font-button-text text-body-sm hover:text-error hover:bg-error-container/40 transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="logout">logout</span>
+<span>Cerrar sesión</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- MAIN LAYOUT WRAPPER -->
+<!-- ========================================================================= -->
+<div class="ml-60 flex-1 flex flex-col min-h-screen">
+<!-- TopNavBar (Fixed at Top, Left 60 = 240px) -->
+<header class="h-16 fixed top-0 right-0 left-60 z-20 bg-surface flex justify-between items-center px-8 shadow-sm">
+<!-- Left: Breadcrumb / Path -->
+<div class="flex items-center gap-3">
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1.5 font-medium" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="calendar_month">calendar_month</span>
+          Calendario
+        </a>
+<span class="text-outline-variant font-light">/</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Nueva clase</span>
+</div>
+<!-- Center: Search Input -->
+<div class="w-80 relative">
+<span class="material-symbols-outlined text-outline absolute left-3 top-1/2 -translate-y-1/2 text-lg pointer-events-none" data-icon="search">search</span>
+<input class="w-full bg-[#FAF7F4] border border-[#E8E2DC] rounded-lg pl-9 pr-12 py-1.5 text-body-sm text-on-surface placeholder-on-surface-variant/60 focus:bg-white focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-xs" placeholder="Buscar alumnos, profes o estilos..." type="text"/>
+<kbd class="absolute right-2.5 top-1/2 -translate-y-1/2 font-label-tabular text-[10px] text-outline bg-surface px-1.5 py-0.5 rounded border border-[#E8E2DC]">⌘K</kbd>
+</div>
+<!-- Right: Trailing Actions & Profile -->
+<div class="flex items-center gap-4">
+<!-- Notification button -->
+<button aria-label="Notificaciones" class="relative p-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors active:scale-95" type="button">
+<span class="material-symbols-outlined text-xl" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<!-- Help icon action -->
+<button aria-label="Centro de ayuda" class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors active:scale-95" type="button">
+<span class="material-symbols-outlined text-xl" data-icon="help">help</span>
+</button>
+<!-- Divider -->
+<div class="w-px h-6 bg-[#E8E2DC]"></div>
+<!-- User Profile Pill -->
+<div class="flex items-center gap-3 pl-1">
+<div class="w-9 h-9 rounded-full bg-secondary-container text-on-secondary-container font-headline-sm text-xs font-bold flex items-center justify-center ring-2 ring-white">
+            MC
+          </div>
+<div class="flex flex-col leading-tight">
+<span class="font-button-text text-xs text-on-surface font-semibold">Marta Castillo</span>
+<span class="text-[11px] text-on-surface-variant">Coordinadora</span>
+</div>
+</div>
+</div>
+</header>
+<!-- ======================================================================= -->
+<!-- CONTENT CANVAS (Margin Top 64px, Max Width 1280px, Padding 32px) -->
+<!-- ======================================================================= -->
+<main class="mt-16 flex-1 px-8 py-8 w-full max-w-[1280px] mx-auto">
+<!-- Page Header: Title + Action Bar -->
+<section class="flex items-center justify-between pb-8">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">Nueva clase</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Programa una sesión individual o recurrente en el cuadrante del estudio.</p>
+</div>
+<!-- Action Bar -->
+<div class="flex items-center gap-3">
+<button class="px-5 py-2.5 rounded-[10px] bg-transparent text-on-surface hover:bg-surface-container font-button-text text-button-text transition-colors" type="button">
+            Cancelar
+          </button>
+<button class="h-11 px-6 rounded-[10px] bg-primary-container text-on-primary font-button-text text-button-text font-semibold flex items-center gap-2 shadow-sm hover:opacity-95 active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-lg" data-icon="save">save</span>
+<span>Crear clase</span>
+</button>
+</div>
+</section>
+<!-- Two-Column Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-[720px_380px] gap-8 items-start">
+<!-- =================================================================== -->
+<!-- LEFT COLUMN: Form Container (720px) -->
+<!-- =================================================================== -->
+<div class="bg-surface rounded-[14px] border border-[#E8E2DC] p-7 shadow-xs space-y-7">
+<!-- SECCIÓN: «Qué clase» -->
+<fieldset class="space-y-4">
+<legend class="font-headline-sm text-headline-sm text-on-surface font-semibold flex items-center gap-2 mb-2">
+<span class="w-6 h-6 rounded-md bg-primary-container/10 text-primary flex items-center justify-center font-bold text-xs">1</span>
+              Qué clase
+            </legend>
+<!-- Título de la clase -->
+<div>
+<label class="block font-label text-label text-on-surface-variant mb-1.5 uppercase tracking-wider" for="titulo-clase">
+                Título de la clase
+              </label>
+<input class="w-full h-11 px-3.5 rounded-[6px] border border-[#E8E2DC] bg-surface text-on-surface font-body-md text-body-md font-medium focus:ring-1 focus:ring-primary focus:border-primary transition-all" id="titulo-clase" type="text" value="Salsa Intermedio"/>
+</div>
+<!-- Fila: Estilo de baile & Nivel -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-label text-label text-on-surface-variant mb-1.5 uppercase tracking-wider" for="estilo-baile">
+                  Estilo de baile
+                </label>
+<div class="relative">
+<select class="w-full h-11 px-3.5 pr-10 rounded-[6px] border border-[#E8E2DC] bg-surface text-on-surface font-body-md text-body-md appearance-none focus:ring-1 focus:ring-primary focus:border-primary" id="estilo-baile">
+<option selected="">Salsa en línea</option>
+<option>Salsa cubana (Casino)</option>
+<option>Bachata sensual</option>
+<option>Kizomba &amp; Semba</option>
+<option>Mambo on2</option>
+</select>
+<span class="material-symbols-outlined text-outline pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xl" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<div>
+<label class="block font-label text-label text-on-surface-variant mb-1.5 uppercase tracking-wider" for="nivel-clase">
+                  Nivel
+                </label>
+<div class="relative">
+<select class="w-full h-11 px-3.5 pr-10 rounded-[6px] border border-[#E8E2DC] bg-surface text-on-surface font-body-md text-body-md appearance-none focus:ring-1 focus:ring-primary focus:border-primary" id="nivel-clase">
+<option>Iniciación (Nivel 0)</option>
+<option>Básico (Nivel 1)</option>
+<option selected="">Nivel Intermedio</option>
+<option>Avanzado / Compañía</option>
+</select>
+<span class="material-symbols-outlined text-outline pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xl" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Descripción de la sesión -->
+<div>
+<label class="block font-label text-label text-on-surface-variant mb-1.5 uppercase tracking-wider" for="desc-sesion">
+                Descripción de la sesión
+              </label>
+<textarea class="w-full p-3 rounded-[6px] border border-[#E8E2DC] bg-surface text-on-surface font-body-md text-body-md resize-none leading-relaxed focus:ring-1 focus:ring-primary focus:border-primary" id="desc-sesion" rows="3">Enfocada en giros múltiples, dinámica de pareja y disociación corporal al tiempo 1. Se requiere soltura en cross body lead y transiciones rápidas.</textarea>
+</div>
+</fieldset>
+<hr class="border-t border-[#E8E2DC]"/>
+<!-- SECCIÓN: «Cuándo» -->
+<fieldset class="space-y-4">
+<legend class="font-headline-sm text-headline-sm text-on-surface font-semibold flex items-center gap-2 mb-2">
+<span class="w-6 h-6 rounded-md bg-primary-container/10 text-primary flex items-center justify-center font-bold text-xs">2</span>
+              Cuándo
+            </legend>
+<!-- Fila Fecha & Hora de inicio -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-label text-label text-on-surface-variant mb-1.5 uppercase tracking-wider">
+                  Fecha
+                </label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined text-outline absolute left-3 text-lg pointer-events-none" data-icon="calendar_today">calendar_today</span>
+<input class="w-full h-11 pl-10 pr-3.5 rounded-[6px] border border-[#E8E2DC] bg-surface text-on-surface font-body-md text-body-md font-medium focus:ring-1 focus:ring-primary focus:border-primary" type="text" value="martes, 13/10/2026"/>
+<span class="material-symbols-outlined text-outline absolute right-3 text-lg pointer-events-none" data-icon="arrow_drop_down">arrow_drop_down</span>
+</div>
+</div>
+<div>
+<label class="block font-label text-label text-on-surface-variant mb-1.5 uppercase tracking-wider" for="hora-inicio">
+                  Hora de inicio
+                </label>
+<div class="relative">
+<span class="material-symbols-outlined text-outline absolute left-3 top-1/2 -translate-y-1/2 text-lg pointer-events-none" data-icon="schedule">schedule</span>
+<select class="w-full h-11 pl-10 pr-10 rounded-[6px] border border-[#E8E2DC] bg-surface text-on-surface font-body-md text-body-md font-medium appearance-none focus:ring-1 focus:ring-primary focus:border-primary" id="hora-inicio">
+<option>18:00</option>
+<option>18:30</option>
+<option>19:00</option>
+<option selected="">19:30</option>
+<option>20:00</option>
+<option>20:30</option>
+<option>21:00</option>
+</select>
+<span class="material-symbols-outlined text-outline pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xl" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Selector de Duración Stepper & Segmented Control -->
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<span class="font-label text-label text-on-surface-variant uppercase tracking-wider">Duración de la sesión</span>
+<button class="text-xs font-semibold text-primary hover:underline" type="button">Personalizado</button>
+</div>
+<!-- Segmented Control Buttons -->
+<div class="grid grid-cols-3 gap-2 p-1 bg-[#FAF7F4] rounded-lg border border-[#E8E2DC]">
+<button class="py-2 text-center rounded-md font-button-text text-button-text text-on-surface-variant hover:text-on-surface hover:bg-white transition-all" type="button">
+                  1 h
+                </button>
+<button class="py-2 text-center rounded-md font-button-text text-button-text bg-primary-container text-on-primary shadow-xs font-semibold transition-all" type="button">
+                  1,5 h
+                </button>
+<button class="py-2 text-center rounded-md font-button-text text-button-text text-on-surface-variant hover:text-on-surface hover:bg-white transition-all" type="button">
+                  2 h
+                </button>
+</div>
+<!-- Proportional Time Preview Bar -->
+<div class="mt-4 pt-2">
+<div class="flex justify-between items-center text-xs font-label-tabular text-on-surface-variant mb-1">
+<span class="flex items-center gap-1 font-semibold text-primary">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span> Inicio: 19:30
+                  </span>
+<span class="text-[11px] text-outline font-medium">Bloque asignado: 90 min</span>
+<span class="flex items-center gap-1 font-semibold text-on-surface">
+                    Fin estimado: 21:00 <span class="w-2 h-2 rounded-full bg-on-surface-variant"></span>
+</span>
+</div>
+<!-- Visual Time Track -->
+<div class="h-6 w-full bg-surface-container rounded-md overflow-hidden relative border border-[#E8E2DC] flex items-center px-1">
+<!-- Grid hash lines -->
+<div class="absolute inset-0 flex justify-between px-4 pointer-events-none opacity-20">
+<div class="w-px h-full bg-outline"></div>
+<div class="w-px h-full bg-outline"></div>
+<div class="w-px h-full bg-outline"></div>
+<div class="w-px h-full bg-outline"></div>
+</div>
+<!-- Selected range bar -->
+<div class="h-4 w-3/4 bg-primary-container/25 border border-primary-container/60 rounded flex items-center justify-center text-[10px] font-semibold text-primary tracking-wide transition-all">
+                    19:30 → 21:00 (1h 30m)
+                  </div>
+</div>
+</div>
+</div>
+</fieldset>
+<hr class="border-t border-[#E8E2DC]"/>
+<!-- SECCIÓN: «Dónde y quién» -->
+<fieldset class="space-y-4">
+<legend class="font-headline-sm text-headline-sm text-on-surface font-semibold flex items-center gap-2 mb-2">
+<span class="w-6 h-6 rounded-md bg-primary-container/10 text-primary flex items-center justify-center font-bold text-xs">3</span>
+              Dónde y quién
+            </legend>
+<!-- Select Sala -->
+<div>
+<div class="flex justify-between items-center mb-1.5">
+<label class="font-label text-label text-on-surface-variant uppercase tracking-wider" for="select-sala">
+                  Sala asignada
+                </label>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container/40 text-on-secondary-container text-[11px] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Libre en este horario
+                </span>
+</div>
+<div class="relative">
+<select class="w-full h-11 px-3.5 pr-10 rounded-[6px] border border-[#E8E2DC] bg-surface text-on-surface font-body-md text-body-md appearance-none focus:ring-1 focus:ring-primary focus:border-primary" id="select-sala">
+<option selected="">Sala 1 (Planta principal - Capacidad 25)</option>
+<option>Sala 2 (Tarima Flotante - Capacidad 18)</option>
+<option>Sala 3 Estudio Privado (Capacidad 10)</option>
+</select>
+<span class="material-symbols-outlined text-outline pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xl" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<!-- Select Profesor titular -->
+<div>
+<label class="block font-label text-label text-on-surface-variant mb-1.5 uppercase tracking-wider" for="select-profe">
+                Profesor titular
+              </label>
+<div class="p-3 border border-[#E8E2DC] rounded-[8px] bg-[#FAF7F4] flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-primary-container text-on-primary font-bold text-xs flex items-center justify-center tracking-wider">
+                    MD
+                  </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-button-text text-sm font-semibold text-on-surface">Marcos Delgado</span>
+<span class="material-symbols-outlined text-primary text-base" data-icon="verified" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<span class="text-xs text-on-surface-variant">Especialista en Salsa en Línea y Estilo Chico</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-[#CCFBF1] text-[#0F766E] text-xs font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#0F766E]"></span> Disponible
+                  </span>
+<button class="text-xs text-primary font-semibold hover:underline" type="button">Cambiar</button>
+</div>
+</div>
+</div>
+</fieldset>
+<hr class="border-t border-[#E8E2DC]"/>
+<!-- SECCIÓN: «Aforo y precio» -->
+<fieldset class="space-y-4">
+<legend class="font-headline-sm text-headline-sm text-on-surface font-semibold flex items-center gap-2 mb-2">
+<span class="w-6 h-6 rounded-md bg-primary-container/10 text-primary flex items-center justify-center font-bold text-xs">4</span>
+              Aforo y precio
+            </legend>
+<!-- Cuadrícula de 3 columnas compactas -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<!-- Plazas disponibles -->
+<div class="bg-[#FAF7F4] p-3 rounded-lg border border-[#E8E2DC]">
+<label class="block font-label text-label text-on-surface-variant mb-1 uppercase tracking-wider" for="plazas">
+                  Plazas disponibles
+                </label>
+<div class="relative">
+<input class="w-full h-10 px-3 rounded-[6px] border border-[#E8E2DC] bg-white font-label-tabular text-body-md font-semibold text-on-surface focus:ring-1 focus:ring-primary focus:border-primary" id="plazas" type="number" value="16"/>
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-outline font-medium">máx. 25</span>
+</div>
+<p class="text-[11px] text-on-surface-variant/70 mt-1">Aforo sugerido para parejas</p>
+</div>
+<!-- Precio clase suelta -->
+<div class="bg-[#FAF7F4] p-3 rounded-lg border border-[#E8E2DC]">
+<label class="block font-label text-label text-on-surface-variant mb-1 uppercase tracking-wider" for="precio">
+                  Precio clase suelta
+                </label>
+<div class="relative">
+<input class="w-full h-10 px-3 rounded-[6px] border border-[#E8E2DC] bg-white font-label-tabular text-body-md font-semibold text-on-surface focus:ring-1 focus:ring-primary focus:border-primary" id="precio" type="text" value="15,00 €"/>
+</div>
+<p class="text-[11px] text-on-surface-variant/70 mt-1">IVA incluido (21%)</p>
+</div>
+<!-- Créditos de bono -->
+<div class="bg-[#FAF7F4] p-3 rounded-lg border border-[#E8E2DC]">
+<label class="block font-label text-label text-on-surface-variant mb-1 uppercase tracking-wider" for="creditos">
+                  Créditos de bono
+                </label>
+<div class="relative">
+<select class="w-full h-10 px-3 rounded-[6px] border border-[#E8E2DC] bg-white font-label-tabular text-body-md font-semibold text-on-surface appearance-none focus:ring-1 focus:ring-primary focus:border-primary" id="creditos">
+<option selected="">1 crédito</option>
+<option>1,5 créditos</option>
+<option>2 créditos</option>
+<option>No canjeable</option>
+</select>
+<span class="material-symbols-outlined text-outline pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-base" data-icon="unfold_more">unfold_more</span>
+</div>
+<p class="text-[11px] text-secondary font-medium mt-1">Opción preferente alumnos</p>
+</div>
+</div>
+</fieldset>
+<hr class="border-t border-[#E8E2DC]"/>
+<!-- SECCIÓN: «Repetición» -->
+<fieldset class="space-y-4">
+<legend class="font-headline-sm text-headline-sm text-on-surface font-semibold flex items-center gap-2 mb-2">
+<span class="w-6 h-6 rounded-md bg-primary-container/10 text-primary flex items-center justify-center font-bold text-xs">5</span>
+              Repetición
+            </legend>
+<!-- Radio options -->
+<div class="flex items-center gap-6">
+<label class="flex items-center gap-2.5 cursor-pointer">
+<input checked="" class="w-4 h-4 text-primary-container focus:ring-primary border-[#E8E2DC]" name="repeticion" type="radio" value="no"/>
+<span class="font-body-md text-sm font-semibold text-on-surface">No se repite</span>
+</label>
+<label class="flex items-center gap-2.5 cursor-pointer opacity-80">
+<input class="w-4 h-4 text-primary-container focus:ring-primary border-[#E8E2DC]" name="repeticion" type="radio" value="semanal"/>
+<span class="font-body-md text-sm font-medium text-on-surface">Semanal (serie recurrente)</span>
+</label>
+</div>
+<!-- Días de la semana -->
+<div class="space-y-1.5 pt-1">
+<span class="text-xs text-on-surface-variant font-medium">Días aplicables en el ciclo semanal:</span>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 rounded-lg border border-[#E8E2DC] bg-[#FAF7F4] text-xs font-semibold text-on-surface-variant hover:bg-white transition-colors" type="button">L</button>
+<button class="w-10 h-10 rounded-lg border border-primary-container bg-primary-container/15 text-xs font-bold text-primary transition-colors shadow-xs" type="button">M</button>
+<button class="w-10 h-10 rounded-lg border border-[#E8E2DC] bg-[#FAF7F4] text-xs font-semibold text-on-surface-variant hover:bg-white transition-colors" type="button">X</button>
+<button class="w-10 h-10 rounded-lg border border-[#E8E2DC] bg-[#FAF7F4] text-xs font-semibold text-on-surface-variant hover:bg-white transition-colors" type="button">J</button>
+<button class="w-10 h-10 rounded-lg border border-[#E8E2DC] bg-[#FAF7F4] text-xs font-semibold text-on-surface-variant hover:bg-white transition-colors" type="button">V</button>
+<button class="w-10 h-10 rounded-lg border border-[#E8E2DC] bg-[#FAF7F4] text-xs font-semibold text-on-surface-variant hover:bg-white transition-colors" type="button">S</button>
+<button class="w-10 h-10 rounded-lg border border-[#E8E2DC] bg-[#FAF7F4] text-xs font-semibold text-on-surface-variant hover:bg-white transition-colors" type="button">D</button>
+</div>
+</div>
+</fieldset>
+</div>
+<!-- =================================================================== -->
+<!-- RIGHT COLUMN: Preview & Summary Sidebar (380px) -->
+<!-- =================================================================== -->
+<div class="w-full space-y-4 sticky top-24">
+<!-- Card: Vista previa en el calendario -->
+<div class="bg-surface rounded-[14px] border border-[#E8E2DC] p-5 shadow-xs">
+<div class="flex items-center justify-between pb-3 border-b border-[#E8E2DC]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="visibility">visibility</span>
+<span class="font-button-text text-sm font-semibold text-on-surface">Vista previa en tiempo real</span>
+</div>
+<span class="text-[11px] font-semibold text-outline uppercase tracking-wider">Martes 13 Oct</span>
+</div>
+<!-- Mini Calendario Grid Timeline (19:00 - 21:30) -->
+<div class="mt-4 bg-[#FAF7F4] rounded-xl p-3 border border-[#E8E2DC] relative">
+<!-- Hour marks -->
+<div class="space-y-8 text-[11px] font-label-tabular text-outline select-none">
+<div class="flex items-center gap-2">
+<span class="w-10">19:00</span>
+<div class="flex-1 h-px bg-[#E8E2DC]"></div>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-10">20:00</span>
+<div class="flex-1 h-px bg-[#E8E2DC]"></div>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-10">21:00</span>
+<div class="flex-1 h-px bg-[#E8E2DC]"></div>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-10">21:30</span>
+<div class="flex-1 h-px bg-[#E8E2DC]"></div>
+</div>
+</div>
+<!-- Bloque del evento exacto de Calendario -->
+<div class="absolute top-[34px] left-[54px] right-3 bg-[#FDE8DD] border-l-4 border-primary-container rounded-r-lg p-3 shadow-xs transition-all">
+<div class="flex items-center justify-between mb-1">
+<span class="inline-block px-2 py-0.5 rounded bg-primary text-on-primary text-[10px] font-bold tracking-wide">
+                    Salsa en línea · Intermedio
+                  </span>
+<span class="text-[11px] font-label-tabular font-bold text-primary bg-white/70 px-1.5 py-0.5 rounded border border-primary/20">
+                    0/16 plazas
+                  </span>
+</div>
+<h4 class="font-headline-sm text-base font-semibold text-on-surface leading-tight mt-1">
+                  Salsa Intermedio
+                </h4>
+<div class="mt-2.5 space-y-1 text-xs text-on-surface-variant font-medium">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="schedule">schedule</span>
+<span class="font-label-tabular">19:30 - 21:00 (1,5 h)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="meeting_room">meeting_room</span>
+<span>Sala 1 (Planta principal)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="person">person</span>
+<span>Marcos Delgado</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card: Validación de Conflictos -->
+<div class="bg-[#F0FDF4] border border-[#CCFBF1] rounded-[10px] p-4 flex items-start gap-3 shadow-xs">
+<div class="w-7 h-7 rounded-full bg-[#0F766E] text-white flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-base" data-icon="check" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="flex-1">
+<span class="block text-xs font-bold text-[#0F766E] uppercase tracking-wider mb-0.5">Sin conflictos detectados</span>
+<p class="text-xs text-[#0F766E]/90 leading-relaxed font-medium">
+                Sala 1 libre de 17:00 a 21:30 y Marcos Delgado disponible sin solapamientos en cuadrante.
+              </p>
+</div>
+</div>
+<!-- Card: Resumen comercial y operativo -->
+<div class="bg-surface rounded-[14px] border border-[#E8E2DC] p-5 shadow-xs space-y-4">
+<div class="flex items-center justify-between pb-2 border-b border-[#E8E2DC]">
+<h3 class="font-button-text text-sm font-semibold text-on-surface">Resumen de sesión</h3>
+<span class="material-symbols-outlined text-outline text-lg" data-icon="analytics">analytics</span>
+</div>
+<div class="space-y-2.5 text-xs">
+<div class="flex justify-between items-center py-1">
+<span class="text-on-surface-variant font-medium">Duración calculada</span>
+<span class="font-label-tabular font-semibold text-on-surface">1,5 h (90 min)</span>
+</div>
+<div class="flex justify-between items-center py-1 border-t border-[#FAF7F4]">
+<span class="text-on-surface-variant font-medium">Plazas asignadas</span>
+<span class="font-label-tabular font-semibold text-on-surface">16 alumnos</span>
+</div>
+<div class="flex justify-between items-center py-1 border-t border-[#FAF7F4]">
+<span class="text-on-surface-variant font-medium">Precio / Tarifa</span>
+<span class="font-label-tabular font-semibold text-on-surface">15,00 € / 1 crédito</span>
+</div>
+<div class="flex justify-between items-center py-2 px-3 rounded-lg bg-surface-container-low border border-primary-container/20">
+<span class="text-primary font-semibold">Ingreso potencial máximo</span>
+<span class="font-label-tabular font-bold text-sm text-primary">240,00 €</span>
+</div>
+</div>
+<!-- Secondary CTA -->
+<button class="w-full h-11 rounded-[10px] border border-[#E8E2DC] bg-white text-on-surface font-button-text text-button-text font-semibold hover:bg-[#FAF7F4] active:scale-[0.99] transition-all flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-base" data-icon="bookmark_add">bookmark_add</span>
+<span>Guardar como plantilla</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
