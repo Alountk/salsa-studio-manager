@@ -138,9 +138,17 @@
   /* ------------------------------------------------------------- focus ring */
   --focus-ring: 0 0 0 3px rgba(194, 65, 12, 0.25);
   --focus-ring-input: 0 0 0 3px rgba(224, 86, 31, 0.3);
+}
 
-  /* ------------------------------------------------- layout constants */
-  /* DESIGN.md §Layout: 240px sidebar, 64px top bar, 1280px max content. */
+/*
+ * Layout constants — DESIGN.md §Layout: 240px sidebar, 64px top bar, 1280px
+ * max content. Declared in :root rather than @theme because Tailwind only
+ * generates a utility for namespaced theme keys (--color-*, --text-*, ...)
+ * and prunes the rest; these three have no matching namespace, so an @theme
+ * entry would be dropped before any utility could read it. Referenced from the
+ * shell with w-[var(--sidebar-width)] and friends.
+ */
+:root {
   --sidebar-width: 15rem;
   --topbar-height: 4rem;
   --content-max-width: 80rem;
