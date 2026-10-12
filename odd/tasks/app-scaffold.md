@@ -47,7 +47,7 @@ server rendering for the eventual authenticated area at no extra decision cost.
 | - | ---- | ------ | -------- |
 | 1 | Scaffold Next.js + TS + Tailwind v4 at the repository root; verify build | done | `next build` ✓ Next.js 16.4.0 + TS + 4 static pages; `eslint` 0 errors; `tsc --noEmit` clean |
 | 2 | Port `DESIGN.md` tokens into the Tailwind theme and global styles | done | `@theme` in `globals.css` with 40 color tokens, 11 text styles, radius/shadow/focus/layout; 0 hex outside `globals.css` |
-| 3 | Build the shared primitives from `DESIGN.md` §Components | pending | component files + typecheck |
+| 3 | Build the shared primitives from `DESIGN.md` §Components | done | 11 primitives in `src/components/ui/`; typecheck ✓, eslint 0, CSS output verified for every theme utility |
 | 4 | Build the shared app shell (sidebar, top bar, content frame) | pending | layout component, reused by routes |
 | 5 | Implement the seven Design 1 routes | pending | routes render, PNG spot-check |
 | 6 | Verification: lint + typecheck + build + visual spot-check | pending | command output |
