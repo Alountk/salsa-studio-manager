@@ -11,7 +11,7 @@
  *
  * Usage: node scripts/export-designs.mjs
  */
-import { readFile, writeFile, mkdir, access } from "node:fs/promises";
+import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { projects } from "./design-plan.mjs";
 
