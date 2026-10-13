@@ -1,0 +1,85 @@
+# Feature: design-2-calendar
+
+## Goal
+
+Implement Design 2 — Calendar and classes — as working routes on top of the
+existing app shell: the month and week calendars over the hour grid, the class
+detail and booking drawer, the student's own bookings, the create-class-by-hours
+builder with its live preview and conflict check, the availability editor, and
+the teacher's roster, attendance and week.
+
+Spec of record: `scripts/design-plan.mjs` (the eight screen prompts), the exported
+screens in `designs/02-calendario-y-clases/`, and `docs/flows/02-calendar-and-classes.md`.
+
+## Non-goals
+
+- Real scheduling logic: conflict detection, capacity enforcement, recurrence
+  expansion and drag-to-reschedule are presented as designed states over static
+  data. Making them work is a backend feature.
+- Designs 1 and 3 changes, and any student-profile screen (Design 2 designs none).
+- Mobile: every screen is desktop, as DESIGN.md specifies for staff surfaces.
+
+## Route mapping
+
+The sidebar keeps its six entries; these screens live underneath them.
+
+| Screen | Route |
+| ------ | ----- |
+| `01-calendario-mes` | `/calendario` (default segment) |
+| `02-calendario-semana` | `/calendario?vista=semana` |
+| `03-detalle-clase` | `/calendario?clase=<id>` — drawer over the dimmed grid |
+| `04-mis-reservas` | `/calendario/mis-reservas` |
+| `05-crear-clase` | `/clases/nueva` |
+| `06-editor-disponibilidad` | `/clases/disponibilidad` |
+| `07-lista-y-asistencia` | `/clases/lista` |
+| `08-mi-semana-profesor` | `/clases/mi-semana` |
+
+**One IA call to record:** Design 2 has no "Clases" index screen, yet the sidebar
+has a `Clases` entry that must lead somewhere once its four screens exist. `/clases`
+becomes a navigation index of those four — deliberately labelled as navigation, not
+as a designed screen. The alternative, leaving the sidebar pointing at the current
+placeholder, is worse: the shell would advertise four screens it cannot reach.
+
+## Acceptance criteria
+
+1. `npm run lint`, `npm run typecheck` and `npm run build` pass; no hex literal in
+   `src/` outside `src/app/globals.css`.
+2. The week grid is a real time grid: 07:00–23:00 at 56px per hour, seven day
+   columns, class blocks positioned and sized by their start time and duration.
+3. The create-class screen shows the hour-block duration stepper and a preview
+   whose block width tracks the chosen duration; the clean-state conflict message
+   renders.
+4. All eight designed screens are reachable from the sidebar or from Design 1,
+   and no route linked from the shell renders a placeholder.
+5. Captures at 1440px for all eight screens land in `designs/verification/` with
+   status 200 and zero console errors.
+6. No credential is written into this repository.
+
+## Tasks
+
+| # | Task | Status | Evidence |
+| - | ---- | ------ | -------- |
+| 1 | Static scheduling data for the eight screens | done | `src/lib/schedule.ts` — 19 classes, 3 rooms/teachers, availability, roster, bookings; derived totals reproduce the designed 32 h / 6,5 h / 25,5 h exactly; tsc ✓ eslint ✓ |
+| 2 | Month view (`01`) and week grid (`02`) with the segmented control | pending | time grid geometry verified |
+| 3 | Class detail drawer (`03`) and student bookings (`04`) | pending | routes build, drawer state |
+| 4 | Create class by hours (`05`) with duration stepper and live preview | pending | preview tracks duration |
+| 5 | Availability editor (`06`) | pending | route builds |
+| 6 | Roster and attendance (`07`) plus teacher week (`08`) | pending | routes build |
+| 7 | Clases index and Design 1 cross-links | pending | no shell link reaches a placeholder |
+| 8 | Verification: lint, typecheck, build, 8 captures | pending | command output |
+
+Each task closes with a work-unit commit on `feat/design-2-calendar`.
+
+**Scope change on task 1**: the original title promised "data + route
+scaffolding". Routes are built together with their own screen instead of being
+stubs filled in later, so no route ships half-implemented and nothing exists only
+to be replaced. The task therefore delivered the data module alone.
+
+## Notes
+
+- Reuse the primitives in `src/components/ui/` rather than re-deriving styles; add
+  new primitives there only when two screens need the same thing.
+- Times, capacities and money are tabular by rule — use `tabular-figures`.
+- Native review remains blocked by `package-local-binary-missing` in this Pi
+  session; `/reload` is required before `gentle_review inspect` can open a
+  candidate.
