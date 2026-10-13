@@ -1,9 +1,9 @@
-import Link from "next/link";
 import {
   Avatar,
   Button,
   Card,
   CardHeader,
+  LinkButton,
   ProgressRing,
   StatusPill,
   type StatusKind,
@@ -54,9 +54,9 @@ export default function MyBookingsPage() {
             6 créditos disponibles
           </p>
         </div>
-        <Link href="/calendario">
-          <Button icon="add">Reservar clase</Button>
-        </Link>
+        <LinkButton href="/calendario" icon="add">
+          Reservar clase
+        </LinkButton>
       </header>
 
       {/* Summary row */}

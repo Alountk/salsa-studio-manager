@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { Button } from "@/components/ui";
+import { Button, LinkButton } from "@/components/ui";
 import { CreateClassForm } from "@/components/classes/create-class-form";
 
 /**
@@ -21,9 +20,9 @@ export default function CreateClassPage() {
           </p>
         </div>
         <div className="flex gap-3">
-          <Link href="/calendario">
-            <Button variant="ghost">Cancelar</Button>
-          </Link>
+          <LinkButton href="/calendario" variant="ghost">
+            Cancelar
+          </LinkButton>
           <Button type="submit" form="create-class">
             Crear clase
           </Button>

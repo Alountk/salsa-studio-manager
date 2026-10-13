@@ -41,6 +41,8 @@ const ROUTES = [
   { id: "06-editor-disponibilidad", path: "/clases/disponibilidad" },
   { id: "07-lista-y-asistencia", path: "/clases/lista" },
   { id: "08-mi-semana-profesor", path: "/clases/mi-semana" },
+  // Navigation index added by design-2-calendar task 7 (not a designed screen)
+  { id: "09-clases-indice", path: "/clases" },
 ];
 
 const require = createRequire(`${PW_DIR}/`);

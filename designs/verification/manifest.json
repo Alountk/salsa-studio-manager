@@ -118,5 +118,13 @@
     "title": "Estudio Salsa — Gestión de clases de salsa",
     "consoleErrors": [],
     "file": "designs/verification/08-mi-semana-profesor.png"
+  },
+  {
+    "id": "09-clases-indice",
+    "path": "/clases",
+    "status": 200,
+    "title": "Estudio Salsa — Gestión de clases de salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/09-clases-indice.png"
   }
 ]

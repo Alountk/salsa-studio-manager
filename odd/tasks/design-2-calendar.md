@@ -50,7 +50,11 @@ placeholder, is worse: the shell would advertise four screens it cannot reach.
    whose block width tracks the chosen duration; the clean-state conflict message
    renders.
 4. All eight designed screens are reachable from the sidebar or from Design 1,
-   and no route linked from the shell renders a placeholder.
+   and no Design 2 route renders a placeholder. Two routes the shell links to
+   remain placeholders on purpose: `/facturacion` belongs to Design 3 and
+   `/alumnos` is designed by none of the three features — both out of scope here.
+   (Amended: the original wording said no shell link at all could render a
+   placeholder, which this feature cannot satisfy.)
 5. Captures at 1440px for all eight screens land in `designs/verification/` with
    status 200 and zero console errors.
 6. No credential is written into this repository.
@@ -65,7 +69,7 @@ placeholder, is worse: the shell would advertise four screens it cannot reach.
 | 4 | Create class by hours (`05`) with duration stepper and live preview | done | bar measured 50/75/100% and block 18/28/38px for 1/1,5/2h; end time updates; 12 captures 200/0 console errors |
 | 5 | Availability editor (`06`) | done | summary computed at exactly 32 h / 6,5 h / 25,5 h; day header `6 h · 6 h · 6 h · 6 h · 6 h · 2 h · —`; 14 hour labels, 0 clipped; 13 captures 200/0 |
 | 6 | Roster and attendance (`07`) plus teacher week (`08`) | done | tally initialises at exactly `Presentes 10 · Retrasos 1 · Ausencias 1` and recomputes live (9/1/2 after a mark); teacher week shows 6,5 h / 42 / 25,5 h agreeing with screen 06; 15 captures 200/0 |
-| 7 | Clases index and Design 1 cross-links | pending | no shell link reaches a placeholder |
+| 7 | Clases index and Design 1 cross-links | done | `/clases` replaced by a four-entry index; crawl of 14 linked routes: 0 non-200, all 8 Design 2 screens reachable; the 2 remaining placeholders are `/alumnos` and `/facturacion`, both out of scope |
 | 8 | Verification: lint, typecheck, build, 8 captures | pending | command output |
 
 Each task closes with a work-unit commit on `feat/design-2-calendar`.
@@ -141,6 +145,20 @@ Each was caught by a measurement or a screenshot, not by reading the code:
 15. **Missing `TR` import broke typecheck**, and two unused imports in the
     teacher week. Both caught by `tsc` and `eslint` after the harness started
     reporting npm's exit code correctly.
+16. **The placeholder crawl reported a false pass.** It searched for "Pertenece
+    al Diseño" while the component renders "Pendiente del Diseño", so every
+    placeholder looked clean and the check printed 0 problems. Re-run with the
+    real marker: 14 linked routes, 2 placeholders (`/alumnos`, `/facturacion`),
+    both out of this feature's scope.
+17. **Acceptance criterion 4 was unachievable as written.** It demanded that no
+    shell link render a placeholder, which cannot hold while Design 3 is not
+    built. Amended to the scope this feature actually owns rather than claimed
+    as met.
+18. **`<Link><Button /></Link>` was invalid HTML in three places.** A button
+    nested inside an anchor gives assistive technology two conflicting roles and
+    two focus stops. `LinkButton` now shares one `buttonClasses` with `Button`, so
+    a link that looks like a button is a single anchor; all three call sites were
+    converted.
 
 ## Notes
 

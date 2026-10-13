@@ -1,4 +1,4 @@
-import { Button, Card, CardHeader, MetricCard, StatusPill } from "@/components/ui";
+import { Button, Card, CardHeader, LinkButton, MetricCard, StatusPill } from "@/components/ui";
 
 /**
  * Design 1, screen 06 — Inicio · administración.
@@ -130,12 +130,12 @@ export function AdminHome() {
           <Card>
             <CardHeader title="Acciones rápidas" />
             <div className="grid gap-3">
-              <Button variant="secondary" icon="add" fullWidth>
+              <LinkButton href="/clases/nueva" variant="secondary" icon="add" fullWidth>
                 Crear clase
-              </Button>
-              <Button variant="secondary" icon="receipt_long" fullWidth>
+              </LinkButton>
+              <LinkButton href="/facturacion" variant="secondary" icon="receipt_long" fullWidth>
                 Nueva factura
-              </Button>
+              </LinkButton>
               <Button variant="secondary" icon="person_add" fullWidth>
                 Invitar profesor
               </Button>
