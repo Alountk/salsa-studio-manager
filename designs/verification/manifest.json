@@ -86,5 +86,13 @@
     "title": "Estudio Salsa — Gestión de clases de salsa",
     "consoleErrors": [],
     "file": "designs/verification/04-mis-reservas.png"
+  },
+  {
+    "id": "05-crear-clase",
+    "path": "/clases/nueva",
+    "status": 200,
+    "title": "Estudio Salsa — Gestión de clases de salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/05-crear-clase.png"
   }
 ]

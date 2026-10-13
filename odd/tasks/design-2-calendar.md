@@ -62,7 +62,7 @@ placeholder, is worse: the shell would advertise four screens it cannot reach.
 | 1 | Static scheduling data for the eight screens | done | `src/lib/schedule.ts` — 19 classes, 3 rooms/teachers, availability, roster, bookings; derived totals reproduce the designed 32 h / 6,5 h / 25,5 h exactly; tsc ✓ eslint ✓ |
 | 2 | Month view (`01`) and week grid (`02`) with the segmented control | done | 15 hour rows measured at exactly 56px, 0 header/label overlaps, 19 blocks sized by duration with 0 clipped, 9 captures 200/0 console errors |
 | 3 | Class detail drawer (`03`) and student bookings (`04`) | done | drawer over dimmed grid driven by `?clase=`; occupancy bar measured 75% (324/432px, 12 de 16); `/calendario/mis-reservas` builds; 11 captures 200/0 console errors |
-| 4 | Create class by hours (`05`) with duration stepper and live preview | pending | preview tracks duration |
+| 4 | Create class by hours (`05`) with duration stepper and live preview | done | bar measured 50/75/100% and block 18/28/38px for 1/1,5/2h; end time updates; 12 captures 200/0 console errors |
 | 5 | Availability editor (`06`) | pending | route builds |
 | 6 | Roster and attendance (`07`) plus teacher week (`08`) | pending | routes build |
 | 7 | Clases index and Design 1 cross-links | pending | no shell link reaches a placeholder |
@@ -110,6 +110,19 @@ Each was caught by a measurement or a screenshot, not by reading the code:
    October dates carry a `-<day>` suffix, which `findClass` did not resolve, so
    those clicks would have opened an empty drawer. It now resolves the suffix
    and derives the weekday from the date.
+9. **The live preview did not track duration.** A `Math.max(..., 18)` floor on a
+   9px-per-hour scale collapsed every duration to the same 18px height, so the
+   stepper moved the bar while the calendar block stood still — precisely what
+   acceptance criterion 4 asks for. Scale is now 20px per hour with content
+   revealed as the block grows: measured 18px / 28px / 38px for 1 h / 1,5 h / 2 h,
+   with the bar at 50% / 75% / 100% and the end time following.
+10. **Sub-routes showed the brand instead of the page.** `titleForPath` matched
+    exactly, so `/clases/nueva` fell back to "Estudio Salsa" in the top bar. It
+    now resolves the longest prefix, verified across five routes.
+11. **My own check harness was reading the wrong exit code.** Piping
+    `npm run typecheck | tail` reported `tail`'s status, so a genuine
+    `TS2304: Cannot find name 'i'` passed as clean until `next build` re-ran the
+    type check. Checks now capture npm's status directly.
 
 ## Notes
 

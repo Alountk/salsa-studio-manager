@@ -24,14 +24,32 @@ export const NAV_ITEMS: NavItem[] = [
 
 const TITLES: Record<string, string> = {
   "/": "Inicio",
+  "/calendario/mis-reservas": "Mis reservas",
   "/calendario": "Calendario",
+  "/clases/nueva": "Nueva clase",
+  "/clases/disponibilidad": "Disponibilidad",
+  "/clases/lista": "Lista y asistencia",
+  "/clases/mi-semana": "Mi semana",
   "/clases": "Clases",
   "/alumnos": "Alumnos",
   "/facturacion": "Facturación",
   "/ajustes": "Ajustes",
 };
 
-/** Page title shown in the top bar for a pathname. */
+/**
+ * Page title shown in the top bar for a pathname.
+ *
+ * Exact match first, then the longest prefix, so a nested route such as
+ * `/clases/nueva` reads "Nueva clase" instead of falling through to the brand
+ * — which is what it did before this took sub-paths into account.
+ */
 export function titleForPath(pathname: string): string {
-  return TITLES[pathname] ?? "Estudio Salsa";
+  const exact = TITLES[pathname];
+  if (exact) return exact;
+
+  const prefixes = Object.keys(TITLES)
+    .filter((key) => key !== "/" && pathname.startsWith(`${key}/`))
+    .sort((a, b) => b.length - a.length);
+
+  return prefixes.length > 0 ? (TITLES[prefixes[0]] as string) : "Estudio Salsa";
 }
