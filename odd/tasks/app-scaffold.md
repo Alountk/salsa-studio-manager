@@ -50,9 +50,45 @@ server rendering for the eventual authenticated area at no extra decision cost.
 | 3 | Build the shared primitives from `DESIGN.md` §Components | done | 11 primitives in `src/components/ui/`; typecheck ✓, eslint 0, CSS output verified for every theme utility |
 | 4 | Build the shared app shell (sidebar, top bar, content frame) | done | `(app)` route group + `AppShell`; 6 routes build; layout constants emitted as `:root` vars (Tailwind pruned them from `@theme`) |
 | 5 | Implement the seven Design 1 routes | done | 6 routes covering 7 screens (`/` renders the three homes via `?rol=`); build 12 pages, eslint 0, tsc clean |
-| 6 | Verification: lint + typecheck + build + visual spot-check | pending | command output |
+| 6 | Verification: lint + typecheck + build + visual spot-check | done | eslint 0 problems, tsc clean, build 12 pages; 7 screenshots at 1440px captured 200 with 0 console errors under `designs/verification/` |
 
 Each task closes with a work-unit commit on `feat/app-scaffold`.
+
+## Commits
+
+| Task | Commit | Subject |
+| ---- | ------ | ------- |
+| 1 | `4b64572` | scaffold Next.js 16 app with TypeScript and Tailwind v4 |
+| 2 | `3bf678f` | port DESIGN.md tokens into the Tailwind v4 theme |
+| 3 | `a069591` | add shared UI primitives from DESIGN.md |
+| 4 | `6efd1fa` | add the shared app shell and section placeholders |
+| 5a | `3f6db17` | implement the Design 1 access screens |
+| 5b | `be97a99` | implement the three role-aware homes and settings |
+| 6 | this commit | verification artifacts and the fixes they forced |
+
+## Defects found by verification
+
+Each was caught by a check rather than by reading the code:
+
+1. **Tailwind pruned the layout tokens.** `--sidebar-width`, `--topbar-height`
+   and `--content-max-width` were declared in `@theme`, where no utility
+   namespace matches them, so the variables were dropped before any utility
+   could read them and `w-sidebar` silently generated nothing. Moved to
+   `:root`, consumed as `w-[var(--sidebar-width)]`.
+2. **Material Symbols never loaded.** Turbopack discards a remote
+   `@import url()` from bundled CSS, so every icon rendered as its ligature
+   text (`music_note`, `visibility`). Restored as a `<link>` in the root
+   layout; the emitted HTML now carries it. The related
+   `no-page-custom-font` warning is an App Router false positive — the root
+   layout is the `_document` equivalent — suppressed with that justification.
+3. **`searchParams` blocked prerender.** Next 16 refuses to read it outside a
+   Suspense boundary; `/` is now a Partial Prerender with the role read in a
+   streamed child.
+4. **The scaffold's `.git` was copied over the repository's.** `cp -R` of a
+   create-next-app output merged a fresh Git repo into ours and repointed
+   `HEAD`. Recovered with no data loss: `git symbolic-ref` back to
+   `feat/app-scaffold`, then an index-only `git reset --mixed HEAD`; tracked
+   content was verified byte-identical to `ee8df77`.
 
 ## Notes
 

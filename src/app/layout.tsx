@@ -31,6 +31,22 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="es"
       className={`${inter.variable} ${outfit.variable} h-full antialiased`}
     >
+      <head>
+        {/*
+          Material Symbols, the icon font every primitive uses. It has to be a
+          link tag: Turbopack drops a remote @import url() from bundled CSS, and
+          next/font does not support icon fonts. Loaded here so it applies to
+          every route, not just one page.
+        */}
+        {/* eslint-disable-next-line @next/next/no-page-custom-font --
+            the App Router root layout is the _document equivalent, so this
+            link loads on every route, not just one page. The rule only knows
+            about the pages/ router. */}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
+        />
+      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

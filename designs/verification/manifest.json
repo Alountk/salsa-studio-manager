@@ -1,0 +1,58 @@
+[
+  {
+    "id": "01-inicio-sesion",
+    "path": "/login",
+    "status": 200,
+    "title": "Estudio Salsa — Gestión de clases de salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/01-inicio-sesion.png"
+  },
+  {
+    "id": "02-registro-alumno",
+    "path": "/registro",
+    "status": 200,
+    "title": "Estudio Salsa — Gestión de clases de salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/02-registro-alumno.png"
+  },
+  {
+    "id": "03-recuperar-contrasena",
+    "path": "/recuperar",
+    "status": 200,
+    "title": "Estudio Salsa — Gestión de clases de salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/03-recuperar-contrasena.png"
+  },
+  {
+    "id": "04-inicio-alumno",
+    "path": "/",
+    "status": 200,
+    "title": "Estudio Salsa — Gestión de clases de salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/04-inicio-alumno.png"
+  },
+  {
+    "id": "05-inicio-profesor",
+    "path": "/?rol=profesor",
+    "status": 200,
+    "title": "Estudio Salsa — Gestión de clases de salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/05-inicio-profesor.png"
+  },
+  {
+    "id": "06-inicio-administracion",
+    "path": "/?rol=administracion",
+    "status": 200,
+    "title": "Estudio Salsa — Gestión de clases de salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/06-inicio-administracion.png"
+  },
+  {
+    "id": "07-perfil-y-ajustes",
+    "path": "/ajustes",
+    "status": 200,
+    "title": "Estudio Salsa — Gestión de clases de salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/07-perfil-y-ajustes.png"
+  }
+]
