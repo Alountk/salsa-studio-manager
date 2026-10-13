@@ -38,6 +38,7 @@ const ROUTES = [
   { id: "03-detalle-clase", path: "/calendario?vista=semana&clase=c-m2" },
   { id: "04-mis-reservas", path: "/calendario/mis-reservas" },
   { id: "05-crear-clase", path: "/clases/nueva" },
+  { id: "06-editor-disponibilidad", path: "/clases/disponibilidad" },
 ];
 
 const require = createRequire(`${PW_DIR}/`);

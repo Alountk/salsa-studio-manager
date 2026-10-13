@@ -94,5 +94,13 @@
     "title": "Estudio Salsa — Gestión de clases de salsa",
     "consoleErrors": [],
     "file": "designs/verification/05-crear-clase.png"
+  },
+  {
+    "id": "06-editor-disponibilidad",
+    "path": "/clases/disponibilidad",
+    "status": 200,
+    "title": "Estudio Salsa — Gestión de clases de salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/06-editor-disponibilidad.png"
   }
 ]

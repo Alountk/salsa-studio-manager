@@ -63,7 +63,7 @@ placeholder, is worse: the shell would advertise four screens it cannot reach.
 | 2 | Month view (`01`) and week grid (`02`) with the segmented control | done | 15 hour rows measured at exactly 56px, 0 header/label overlaps, 19 blocks sized by duration with 0 clipped, 9 captures 200/0 console errors |
 | 3 | Class detail drawer (`03`) and student bookings (`04`) | done | drawer over dimmed grid driven by `?clase=`; occupancy bar measured 75% (324/432px, 12 de 16); `/calendario/mis-reservas` builds; 11 captures 200/0 console errors |
 | 4 | Create class by hours (`05`) with duration stepper and live preview | done | bar measured 50/75/100% and block 18/28/38px for 1/1,5/2h; end time updates; 12 captures 200/0 console errors |
-| 5 | Availability editor (`06`) | pending | route builds |
+| 5 | Availability editor (`06`) | done | summary computed at exactly 32 h / 6,5 h / 25,5 h; day header `6 h · 6 h · 6 h · 6 h · 6 h · 2 h · —`; 14 hour labels, 0 clipped; 13 captures 200/0 |
 | 6 | Roster and attendance (`07`) plus teacher week (`08`) | pending | routes build |
 | 7 | Clases index and Design 1 cross-links | pending | no shell link reaches a placeholder |
 | 8 | Verification: lint, typecheck, build, 8 captures | pending | command output |
@@ -123,6 +123,11 @@ Each was caught by a measurement or a screenshot, not by reading the code:
     `npm run typecheck | tail` reported `tail`'s status, so a genuine
     `TS2304: Cannot find name 'i'` passed as clean until `next build` re-ran the
     type check. Checks now capture npm's status directly.
+12. **The last hour label was cut in half.** `23:00` sits on the grid's bottom
+    line, so centring it pushed half below the card's `overflow-hidden`. The
+    first label now renders below its line and the last one above it: 14 labels,
+    **0 clipped**, `23:00` measured inside the card at `[954..970]` of
+    `[184..971]`.
 
 ## Notes
 
