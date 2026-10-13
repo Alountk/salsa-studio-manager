@@ -187,7 +187,7 @@ export const ROSTER: RosterEntry[] = [
   ro("Sergio Lozano", "sergio.lozano@example.com", "Bono", "paid", "present"),
   ro("Clara Molina", "clara.molina@example.com", "Suelta", "paid", "absent"),
   ro("Iván Pastor", "ivan.pastor@example.com", "Bono", "paid", "present"),
-  ro("Rocío Navarro", "rocio.navarro@example.com", "Bono", "pending", "unmarked"),
+  ro("Rocío Navarro", "rocio.navarro@example.com", "Bono", "paid", "present"),
 ];
 
 function ro(

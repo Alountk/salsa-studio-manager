@@ -64,7 +64,7 @@ placeholder, is worse: the shell would advertise four screens it cannot reach.
 | 3 | Class detail drawer (`03`) and student bookings (`04`) | done | drawer over dimmed grid driven by `?clase=`; occupancy bar measured 75% (324/432px, 12 de 16); `/calendario/mis-reservas` builds; 11 captures 200/0 console errors |
 | 4 | Create class by hours (`05`) with duration stepper and live preview | done | bar measured 50/75/100% and block 18/28/38px for 1/1,5/2h; end time updates; 12 captures 200/0 console errors |
 | 5 | Availability editor (`06`) | done | summary computed at exactly 32 h / 6,5 h / 25,5 h; day header `6 h · 6 h · 6 h · 6 h · 6 h · 2 h · —`; 14 hour labels, 0 clipped; 13 captures 200/0 |
-| 6 | Roster and attendance (`07`) plus teacher week (`08`) | pending | routes build |
+| 6 | Roster and attendance (`07`) plus teacher week (`08`) | done | tally initialises at exactly `Presentes 10 · Retrasos 1 · Ausencias 1` and recomputes live (9/1/2 after a mark); teacher week shows 6,5 h / 42 / 25,5 h agreeing with screen 06; 15 captures 200/0 |
 | 7 | Clases index and Design 1 cross-links | pending | no shell link reaches a placeholder |
 | 8 | Verification: lint, typecheck, build, 8 captures | pending | command output |
 
@@ -128,6 +128,19 @@ Each was caught by a measurement or a screenshot, not by reading the code:
     first label now renders below its line and the last one above it: 14 labels,
     **0 clipped**, `23:00` measured inside the card at `[954..970]` of
     `[184..971]`.
+13. **The exported screens contradict each other.** The availability export
+    says Marcos Delgado has **6,5 h** programmed this week; the teacher-home
+    export says **18,5 h** for the same teacher and the same week. Both cannot be
+    true, so the app computes both figures from the data — screens 06 and 08
+    agree at 6,5 h / 25,5 h — and Design 1's teacher home, which still hardcodes
+    18,5, is aligned in task 7. This is a contradiction in the source designs,
+    not a decision taken here; it is listed as an open question.
+14. **The roster tally did not sum to the designed 10/1/1.** One entry was
+    `unmarked`, giving 9/1/1/1. Marked as present so the footer matches the
+    export and the three counts still total 12.
+15. **Missing `TR` import broke typecheck**, and two unused imports in the
+    teacher week. Both caught by `tsc` and `eslint` after the harness started
+    reporting npm's exit code correctly.
 
 ## Notes
 

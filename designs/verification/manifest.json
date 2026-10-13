@@ -102,5 +102,21 @@
     "title": "Estudio Salsa — Gestión de clases de salsa",
     "consoleErrors": [],
     "file": "designs/verification/06-editor-disponibilidad.png"
+  },
+  {
+    "id": "07-lista-y-asistencia",
+    "path": "/clases/lista",
+    "status": 200,
+    "title": "Estudio Salsa — Gestión de clases de salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/07-lista-y-asistencia.png"
+  },
+  {
+    "id": "08-mi-semana-profesor",
+    "path": "/clases/mi-semana",
+    "status": 200,
+    "title": "Estudio Salsa — Gestión de clases de salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/08-mi-semana-profesor.png"
   }
 ]
