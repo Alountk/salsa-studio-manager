@@ -24,8 +24,10 @@ import {
  */
 export function WeekView({
   match,
+  onSelect,
 }: {
   match: (entry: ScheduledClass) => boolean;
+  onSelect?: (id: string) => void;
 }) {
   const hours = Array.from({ length: HOUR_END - HOUR_START }, (_, i) => HOUR_START + i);
   const totalHeight = (HOUR_END - HOUR_START) * HOUR_PX;
@@ -106,7 +108,7 @@ export function WeekView({
               {classesForDay(day.index)
                 .filter(match)
                 .map((entry) => (
-                  <WeekBlock key={entry.id} entry={entry} />
+                  <WeekBlock key={entry.id} entry={entry} onSelect={onSelect} />
                 ))}
 
               {day.index === todayIndex ? (
@@ -147,7 +149,13 @@ export function WeekView({
  * A class block. Height is proportional to duration, so a 2 h class is twice a
  * 1 h one — the geometry is the point of this screen, not decoration.
  */
-function WeekBlock({ entry }: { entry: ScheduledClass }) {
+function WeekBlock({
+  entry,
+  onSelect,
+}: {
+  entry: ScheduledClass;
+  onSelect?: (id: string) => void;
+}) {
   const tone = LEVEL_STYLE[entry.level];
   const start = minutesOf(entry.start);
   const top = ((start - HOUR_START * 60) / 60) * HOUR_PX;
@@ -155,11 +163,13 @@ function WeekBlock({ entry }: { entry: ScheduledClass }) {
   const unassigned = entry.teacherId === null;
 
   return (
-    <article
+    <button
+      type="button"
+      onClick={() => onSelect?.(entry.id)}
       className={cn(
-        "absolute inset-x-1 z-[5] overflow-hidden rounded-md px-2 py-1.5 shadow-card",
+        "absolute inset-x-1 z-[5] overflow-hidden rounded-md px-2 py-1.5 text-left shadow-card",
+        "transition-shadow hover:shadow-popover focus-visible:outline-2 focus-visible:outline-primary",
         tone.fill,
-        "outline-2 outline-offset-0 outline-transparent focus-within:outline-primary hover:outline-primary",
       )}
       style={{ top: top + 1, height: height - 3 }}
     >
@@ -189,7 +199,7 @@ function WeekBlock({ entry }: { entry: ScheduledClass }) {
           </p>
         ) : null}
       </div>
-    </article>
+    </button>
   );
 }
 

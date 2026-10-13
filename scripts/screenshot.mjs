@@ -35,6 +35,8 @@ const ROUTES = [
   // Design 2 — appended as each screen lands
   { id: "01-calendario-mes", path: "/calendario" },
   { id: "02-calendario-semana", path: "/calendario?vista=semana" },
+  { id: "03-detalle-clase", path: "/calendario?vista=semana&clase=c-m2" },
+  { id: "04-mis-reservas", path: "/calendario/mis-reservas" },
 ];
 
 const require = createRequire(`${PW_DIR}/`);

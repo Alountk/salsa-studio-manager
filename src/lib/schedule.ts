@@ -229,6 +229,23 @@ export const PAST_BOOKINGS: PastBooking[] = [
   { date: "03/10/2026", title: "Salsa Intermedio", attendance: "present" },
 ];
 
+/**
+ * Attendance over the student's full history. The list above shows only the
+ * four most recent classes, so the summary is stated separately rather than
+ * derived from a list that is deliberately truncated — otherwise the ring would
+ * contradict the rows next to it.
+ */
+export const ATTENDANCE_SUMMARY = { present: 18, late: 2, absent: 1 };
+
+export function attendanceTotal(): number {
+  return ATTENDANCE_SUMMARY.present + ATTENDANCE_SUMMARY.late + ATTENDANCE_SUMMARY.absent;
+}
+
+export function attendanceRate(): number {
+  const total = attendanceTotal();
+  return total === 0 ? 0 : Math.round((ATTENDANCE_SUMMARY.present / total) * 100);
+}
+
 /* ------------------------------------------------------------------ helpers */
 
 export function minutesOf(time: string): number {
@@ -260,7 +277,16 @@ export function classesForTeacher(teacherId: string): ScheduledClass[] {
 
 export function findClass(id: string | null | undefined): ScheduledClass | undefined {
   if (!id) return undefined;
-  return CLASSES.find((entry) => entry.id === id);
+  const direct = CLASSES.find((entry) => entry.id === id);
+  if (direct) return direct;
+  /* Month chips outside the reference week carry a `-<day>` suffix. Resolve
+     them so a chip clicked anywhere in the month opens the same drawer. */
+  const derived = id.match(/^(c-[a-z]\d)-(\d{1,2})$/);
+  if (derived) {
+    const base = CLASSES.find((entry) => entry.id === derived[1]);
+    if (base) return { ...base, id, day: weekdayIndexOf(Number(derived[2])) };
+  }
+  return undefined;
 }
 
 export function teacherName(teacherId: string | null): string {

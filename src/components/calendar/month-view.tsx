@@ -20,8 +20,10 @@ import {
  */
 export function MonthView({
   match,
+  onSelect,
 }: {
   match: (entry: ScheduledClass) => boolean;
+  onSelect?: (id: string) => void;
 }) {
   const weeks = monthGrid();
 
@@ -73,7 +75,7 @@ export function MonthView({
 
               <ul className="mt-1.5 flex flex-col gap-1">
                 {shown.map((entry) => (
-                  <MonthChip key={entry.id} entry={entry} />
+                  <MonthChip key={entry.id} entry={entry} onSelect={onSelect} />
                 ))}
                 {overflow > 0 ? (
                   <li className="px-1 text-label text-primary tabular-figures">
@@ -92,34 +94,45 @@ export function MonthView({
   );
 }
 
-function MonthChip({ entry }: { entry: ScheduledClass }) {
+function MonthChip({
+  entry,
+  onSelect,
+}: {
+  entry: ScheduledClass;
+  onSelect?: (id: string) => void;
+}) {
   const tone = LEVEL_STYLE[entry.level];
   const full = entry.booked >= entry.capacity;
 
   return (
-    <li
-      className={cn(
-        "overflow-hidden rounded-md border-l-4 py-1 pr-1.5 pl-2",
-        tone.edge,
-        tone.fill,
-      )}
-      title={`${entry.start} ${entry.title} · ${roomName(entry.roomId)}`}
-    >
-      <span className="flex items-baseline justify-between gap-1">
-        <span className="shrink-0 text-label tabular-figures text-on-surface-variant">
-          {entry.start}
+    <li>
+      <button
+        type="button"
+        onClick={() => onSelect?.(entry.id)}
+        title={`${entry.start} ${entry.title} · ${roomName(entry.roomId)}`}
+        className={cn(
+          "block w-full overflow-hidden rounded-md border-l-4 py-1 pr-1.5 pl-2 text-left",
+          "transition-shadow hover:shadow-card focus-visible:outline-2 focus-visible:outline-primary",
+          tone.edge,
+          tone.fill,
+        )}
+      >
+        <span className="flex items-baseline justify-between gap-1">
+          <span className="shrink-0 text-label tabular-figures text-on-surface-variant">
+            {entry.start}
+          </span>
+          <span
+            className={cn(
+              "shrink-0 text-label tabular-figures",
+              full ? "text-on-surface" : "text-on-surface-variant",
+            )}
+            title={`${entry.booked} de ${entry.capacity} plazas`}
+          >
+            {entry.booked}/{entry.capacity}
+          </span>
         </span>
-        <span
-          className={cn(
-            "shrink-0 text-label tabular-figures",
-            full ? "text-on-surface" : "text-on-surface-variant",
-          )}
-          title={`${entry.booked} de ${entry.capacity} plazas`}
-        >
-          {entry.booked}/{entry.capacity}
-        </span>
-      </span>
-      <span className={cn("block truncate text-label", tone.text)}>{entry.title}</span>
+        <span className={cn("block truncate text-label", tone.text)}>{entry.title}</span>
+      </button>
     </li>
   );
 }

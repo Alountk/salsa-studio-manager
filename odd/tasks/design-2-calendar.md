@@ -61,7 +61,7 @@ placeholder, is worse: the shell would advertise four screens it cannot reach.
 | - | ---- | ------ | -------- |
 | 1 | Static scheduling data for the eight screens | done | `src/lib/schedule.ts` — 19 classes, 3 rooms/teachers, availability, roster, bookings; derived totals reproduce the designed 32 h / 6,5 h / 25,5 h exactly; tsc ✓ eslint ✓ |
 | 2 | Month view (`01`) and week grid (`02`) with the segmented control | done | 15 hour rows measured at exactly 56px, 0 header/label overlaps, 19 blocks sized by duration with 0 clipped, 9 captures 200/0 console errors |
-| 3 | Class detail drawer (`03`) and student bookings (`04`) | pending | routes build, drawer state |
+| 3 | Class detail drawer (`03`) and student bookings (`04`) | done | drawer over dimmed grid driven by `?clase=`; occupancy bar measured 75% (324/432px, 12 de 16); `/calendario/mis-reservas` builds; 11 captures 200/0 console errors |
 | 4 | Create class by hours (`05`) with duration stepper and live preview | pending | preview tracks duration |
 | 5 | Availability editor (`06`) | pending | route builds |
 | 6 | Roster and attendance (`07`) plus teacher week (`08`) | pending | routes build |
@@ -102,6 +102,14 @@ Each was caught by a measurement or a screenshot, not by reading the code:
    "tinted by class level" but names no hues. The three level colours are
    implementation tokens in `globals.css`; putting them in DESIGN.md would
    rewrite the theme the three Stitch projects were generated from.
+7. **The drawer's occupancy bar rendered empty.** The fill was a `<span>`, which
+   is inline, so its `width` was ignored. Measured after the fix: 324px fill in
+   a 432px track — exactly 75% for 12 de 16 — in amber `#B45309`, the colour
+   reserved for four or fewer places left.
+8. **Month chips outside the reference week could not open.** Chips for other
+   October dates carry a `-<day>` suffix, which `findClass` did not resolve, so
+   those clicks would have opened an empty drawer. It now resolves the suffix
+   and derives the weekday from the date.
 
 ## Notes
 

@@ -70,5 +70,21 @@
     "title": "Estudio Salsa — Gestión de clases de salsa",
     "consoleErrors": [],
     "file": "designs/verification/02-calendario-semana.png"
+  },
+  {
+    "id": "03-detalle-clase",
+    "path": "/calendario?vista=semana&clase=c-m2",
+    "status": 200,
+    "title": "Estudio Salsa — Gestión de clases de salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/03-detalle-clase.png"
+  },
+  {
+    "id": "04-mis-reservas",
+    "path": "/calendario/mis-reservas",
+    "status": 200,
+    "title": "Estudio Salsa — Gestión de clases de salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/04-mis-reservas.png"
   }
 ]

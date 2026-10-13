@@ -6,6 +6,7 @@ import { Button, Card, CardHeader, Select } from "@/components/ui";
 import { cn } from "@/lib/cn";
 import { MonthView } from "./month-view";
 import { WeekView } from "./week-view";
+import { ClassDetailDrawer } from "./class-detail-drawer";
 import { ROOMS, TEACHERS, unassignedClasses, WEEK, type ScheduledClass } from "@/lib/schedule";
 
 /**
@@ -29,10 +30,11 @@ export function CalendarView({
   const [level, setLevel] = useState("");
   const [query, setQuery] = useState("");
 
-  function navigate(next: { vista?: "mes" | "semana"; clase?: string }) {
+  function navigate(next: { vista?: "mes" | "semana"; clase?: string | null }) {
     const params = new URLSearchParams();
     const nextVista = next.vista ?? vista;
-    const nextClase = next.clase ?? clase;
+    // null clears the drawer, undefined keeps whatever is in the URL.
+    const nextClase = next.clase === null ? undefined : (next.clase ?? clase);
     if (nextVista !== "mes") params.set("vista", nextVista);
     if (nextClase) params.set("clase", nextClase);
     const search = params.toString();
@@ -185,12 +187,16 @@ export function CalendarView({
 
       {vista === "mes" ? (
         <div className="grid gap-6 xl:grid-cols-[1fr_320px]">
-          <MonthView match={match} />
+          <MonthView match={match} onSelect={(id) => navigate({ clase: id })} />
           <WaitlistAndUnassigned />
         </div>
       ) : (
-        <WeekView match={match} />
+        <WeekView match={match} onSelect={(id) => navigate({ clase: id })} />
       )}
+
+      {clase ? (
+        <ClassDetailDrawer classId={clase} onClose={() => navigate({ clase: null })} />
+      ) : null}
     </div>
   );
 }
