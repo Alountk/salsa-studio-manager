@@ -70,7 +70,20 @@ placeholder, is worse: the shell would advertise four screens it cannot reach.
 | 5 | Availability editor (`06`) | done | summary computed at exactly 32 h / 6,5 h / 25,5 h; day header `6 h · 6 h · 6 h · 6 h · 6 h · 2 h · —`; 14 hour labels, 0 clipped; 13 captures 200/0 |
 | 6 | Roster and attendance (`07`) plus teacher week (`08`) | done | tally initialises at exactly `Presentes 10 · Retrasos 1 · Ausencias 1` and recomputes live (9/1/2 after a mark); teacher week shows 6,5 h / 42 / 25,5 h agreeing with screen 06; 15 captures 200/0 |
 | 7 | Clases index and Design 1 cross-links | done | `/clases` replaced by a four-entry index; crawl of 14 linked routes: 0 non-200, all 8 Design 2 screens reachable; the 2 remaining placeholders are `/alumnos` and `/facturacion`, both out of scope |
-| 8 | Verification: lint, typecheck, build, 8 captures | pending | command output |
+| 8 | Verification: lint, typecheck, build, 8 captures | done | 15/15 checks pass: tsc 0, eslint 0 avisos, build ok, 0 hex fuera de globals, 0 credenciales, las 8 pantallas a 200 con 0 errores de consola, 16 capturas sin fallos, ninguna ruta del Diseño 2 placeholder |
+
+## Commits
+
+| Task | Commit | Subject |
+| ---- | ------ | ------- |
+| 1 | `d4822b4` | add static scheduling data for Design 2 |
+| 2 | `5172f5c` | add the calendar month and week views |
+| 3 | `b3a8409` | add the class detail drawer and student bookings |
+| 4 | `02d45a4` | add the create-class-by-hours builder |
+| 5 | `6df7b2a` | add the availability editor |
+| 6 | `c916114` | add the class roster and the teacher's week |
+| 7 | `531b96c` | add the Clases index and wire Design 1 cross-links |
+| 8 | this commit | verification evidence |
 
 Each task closes with a work-unit commit on `feat/design-2-calendar`.
 
