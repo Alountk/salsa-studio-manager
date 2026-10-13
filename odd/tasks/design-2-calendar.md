@@ -60,7 +60,7 @@ placeholder, is worse: the shell would advertise four screens it cannot reach.
 | # | Task | Status | Evidence |
 | - | ---- | ------ | -------- |
 | 1 | Static scheduling data for the eight screens | done | `src/lib/schedule.ts` — 19 classes, 3 rooms/teachers, availability, roster, bookings; derived totals reproduce the designed 32 h / 6,5 h / 25,5 h exactly; tsc ✓ eslint ✓ |
-| 2 | Month view (`01`) and week grid (`02`) with the segmented control | pending | time grid geometry verified |
+| 2 | Month view (`01`) and week grid (`02`) with the segmented control | done | 15 hour rows measured at exactly 56px, 0 header/label overlaps, 19 blocks sized by duration with 0 clipped, 9 captures 200/0 console errors |
 | 3 | Class detail drawer (`03`) and student bookings (`04`) | pending | routes build, drawer state |
 | 4 | Create class by hours (`05`) with duration stepper and live preview | pending | preview tracks duration |
 | 5 | Availability editor (`06`) | pending | route builds |
@@ -74,6 +74,34 @@ Each task closes with a work-unit commit on `feat/design-2-calendar`.
 scaffolding". Routes are built together with their own screen instead of being
 stubs filled in later, so no route ships half-implemented and nothing exists only
 to be replaced. The task therefore delivered the data module alone.
+
+## Findings
+
+Each was caught by a measurement or a screenshot, not by reading the code:
+
+1. **The sticky day header covered a row.** The card carried `overflow-hidden`
+   for its rounded corners, which makes the *card* the sticky scrollport. With
+   `top-16`, the header pinned 64px into the card while the page was still at
+   scroll 0 — measured `header 357..414` sitting over `grid 350..`, hiding the
+   `08:00` label entirely. Corners now come from `rounded-t-lg` on the header
+   and `rounded-b-lg` on a grid wrapper; after the fix `header 293..350` and
+   **0 overlapping labels**.
+2. **The first hour label was half behind the header.** A label centred on the
+   grid's first line straddles it, so `HOUR_START` now renders below its line.
+3. **Month chips were unreadable.** Time and class name shared one flex row with
+   the occupancy, so both truncated to `1 B…`. Chips are two lines now (time +
+   occupancy, then the name) with the level colour as a `border-l-4`.
+4. **One-hour week blocks clipped their last line.** Occupancy moved up beside
+   the time; the room/teacher line only renders above 60px. Verified: 19 blocks,
+   **0 with `scrollHeight > clientHeight`**.
+5. **The capture tool misrepresented the UI.** `fullPage` screenshots scroll and
+   stitch, dragging `position: sticky` elements mid-capture, so the evidence PNG
+   looked broken while the page was not. The tool now resizes the viewport to
+   the document height before shooting, so nothing scrolls.
+6. **Design-system gap, recorded not invented.** DESIGN.md says an event block is
+   "tinted by class level" but names no hues. The three level colours are
+   implementation tokens in `globals.css`; putting them in DESIGN.md would
+   rewrite the theme the three Stitch projects were generated from.
 
 ## Notes
 

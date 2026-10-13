@@ -1,11 +1,35 @@
-import { SectionPlaceholder } from "@/components/shell/section-placeholder";
+import { Suspense } from "react";
+import { CalendarView } from "@/components/calendar/calendar-view";
 
-export default function CalendarPage() {
+/**
+ * Design 2, screens 01 and 02 — Calendario (mes y semana).
+ *
+ * Both live behind one Suspense boundary: Next 16 refuses to read
+ * `searchParams` during prerender otherwise, which is the same correction
+ * `app-scaffold` had to make on `/`.
+ */
+export default function CalendarPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ vista?: string; clase?: string }>;
+}) {
   return (
-    <SectionPlaceholder
-      title="Calendario"
-      design="2 — Calendario y clases"
-      description="Vista de mes y de semana sobre la rejilla horaria de 07:00 a 23:00, filtros de sala, profesor y nivel, y las colas de listas de espera y clases sin asignar."
+    <Suspense fallback={null}>
+      <CalendarShell searchParams={searchParams} />
+    </Suspense>
+  );
+}
+
+async function CalendarShell({
+  searchParams,
+}: {
+  searchParams: Promise<{ vista?: string; clase?: string }>;
+}) {
+  const { vista, clase } = await searchParams;
+  return (
+    <CalendarView
+      vista={vista === "semana" ? "semana" : "mes"}
+      clase={clase}
     />
   );
 }

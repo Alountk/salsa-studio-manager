@@ -283,6 +283,70 @@ export function formatHours(hours: number): string {
   return `${Number.isInteger(hours) ? hours : hours.toFixed(1).replace(".", ",")} h`;
 }
 
+/* --------------------------------------------------- calendar grid support */
+
+export const YEAR = 2026;
+export const MONTH = 9; // octubre, 0-based like Date
+/** The reference "today": martes 13 October 2026, the focus day of every design. */
+export const TODAY = 13;
+/** Time shown by the week grid's current-time line. */
+export const NOW = "18:20";
+
+const DAYS_IN_MONTH = new Date(YEAR, MONTH + 1, 0).getDate();
+
+/** Weekday index, 0 = lunes, for a day of October 2026. */
+export function weekdayIndexOf(date: number): number {
+  return (new Date(YEAR, MONTH, date).getDay() + 6) % 7;
+}
+
+export interface MonthCell {
+  date: number;
+  /** False for the trailing September days and leading November day in the grid. */
+  inMonth: boolean;
+}
+
+/**
+ * Monday-first month grid as weeks of cells. Out-of-month cells keep their date
+ * number so the grid reads as a real calendar; they carry no classes.
+ */
+export function monthGrid(): MonthCell[][] {
+  const leading = weekdayIndexOf(1);
+  const cells: MonthCell[] = [];
+  const previousMonthDays = new Date(YEAR, MONTH, 0).getDate();
+  for (let i = leading - 1; i >= 0; i--) {
+    cells.push({ date: previousMonthDays - i, inMonth: false });
+  }
+  for (let date = 1; date <= DAYS_IN_MONTH; date++) {
+    cells.push({ date, inMonth: true });
+  }
+  while (cells.length % 7 !== 0) {
+    cells.push({ date: cells.length - (leading + DAYS_IN_MONTH) + 1, inMonth: false });
+  }
+  const weeks: MonthCell[][] = [];
+  for (let i = 0; i < cells.length; i += 7) weeks.push(cells.slice(i, i + 7));
+  return weeks;
+}
+
+/**
+ * Classes shown on one day of October. The reference week (12–18) returns the
+ * canonical records so every id in bookings, roster and attention links
+ * resolves; other weeks reuse that week's programme, which is what a studio
+ * running a fixed weekly timetable would show, with a deterministic occupancy
+ * variation so the month does not look cloned.
+ */
+export function classesForDate(date: number): ScheduledClass[] {
+  const base = classesForDay(weekdayIndexOf(date));
+  if (date >= 12 && date <= 18) return base;
+  return base.map((entry, index) => {
+    const variation = ((date * 7919 + index * 104729) % 5) - 2;
+    return {
+      ...entry,
+      id: `${entry.id}-${date}`,
+      booked: Math.min(entry.capacity, Math.max(0, entry.booked + variation)),
+    };
+  });
+}
+
 /**
  * The three designed problems, derived rather than hard-coded so the attention
  * list can never drift from the calendar it describes.
@@ -310,24 +374,27 @@ export function roomConflicts(): Array<{ room: ScheduledClass; clash: ScheduledC
 /** LEVEL_STYLE maps a level onto the implementation tokens in globals.css. */
 export const LEVEL_STYLE: Record<
   Level,
-  { bar: string; fill: string; text: string; border: string }
+  { bar: string; fill: string; text: string; border: string; edge: string }
 > = {
   Principiante: {
     bar: "bg-level-beginner",
     fill: "bg-level-beginner-container",
     text: "text-on-level-beginner",
     border: "border-level-beginner",
+    edge: "border-l-level-beginner",
   },
   Intermedio: {
     bar: "bg-level-intermediate",
     fill: "bg-level-intermediate-container",
     text: "text-on-level-intermediate",
     border: "border-level-intermediate",
+    edge: "border-l-level-intermediate",
   },
   Avanzado: {
     bar: "bg-level-advanced",
     fill: "bg-level-advanced-container",
     text: "text-on-level-advanced",
     border: "border-level-advanced",
+    edge: "border-l-level-advanced",
   },
 };
