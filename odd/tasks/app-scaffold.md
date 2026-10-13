@@ -49,7 +49,7 @@ server rendering for the eventual authenticated area at no extra decision cost.
 | 2 | Port `DESIGN.md` tokens into the Tailwind theme and global styles | done | `@theme` in `globals.css` with 40 color tokens, 11 text styles, radius/shadow/focus/layout; 0 hex outside `globals.css` |
 | 3 | Build the shared primitives from `DESIGN.md` §Components | done | 11 primitives in `src/components/ui/`; typecheck ✓, eslint 0, CSS output verified for every theme utility |
 | 4 | Build the shared app shell (sidebar, top bar, content frame) | done | `(app)` route group + `AppShell`; 6 routes build; layout constants emitted as `:root` vars (Tailwind pruned them from `@theme`) |
-| 5 | Implement the seven Design 1 routes | pending | routes render, PNG spot-check |
+| 5 | Implement the seven Design 1 routes | done | 6 routes covering 7 screens (`/` renders the three homes via `?rol=`); build 12 pages, eslint 0, tsc clean |
 | 6 | Verification: lint + typecheck + build + visual spot-check | pending | command output |
 
 Each task closes with a work-unit commit on `feat/app-scaffold`.
