@@ -72,6 +72,7 @@ export interface Plan {
   /** Terracotta ribbon on the highlighted plan (`"MÁS ELEGIDO"`). */
   badge: string | null;
   description: string;
+  /** Bullets; `**…**` marks the `<strong>` emphasis the export renders. */
   features: string[];
   cta: string;
   ctaVariant: "primary" | "secondary";
@@ -107,9 +108,9 @@ export const PLANS: Plan[] = [
     description:
       "La opción predilecta para aprender con constancia técnica, ritmo sólido y máxima flexibilidad de horarios.",
     features: [
-      "10 clases con 3 meses de validez",
+      "**10 clases** con 3 meses de validez",
       "Compartible con 1 acompañante",
-      "1 clase de prueba gratis",
+      "**1 clase de prueba gratis** adicional",
     ],
     cta: "Comprar bono",
     ctaVariant: "primary",
@@ -137,7 +138,12 @@ export const PLANS: Plan[] = [
 export type CompareCell =
   | { kind: "check"; note?: string }
   | { kind: "dash" }
-  | { kind: "text"; value: string };
+  | {
+      kind: "text";
+      value: string;
+      /** strong: dark semibold. accent: terracotta bold (the "10%" cell). */
+      emphasis?: "strong" | "accent";
+    };
 
 export interface CompareRow {
   feature: string;
@@ -160,7 +166,7 @@ export const PLAN_COMPARISON: CompareRow[] = [
     feature: "Validez temporal",
     cells: [
       { kind: "text", value: "30 días" },
-      { kind: "text", value: "3 meses" },
+      { kind: "text", value: "3 meses", emphasis: "strong" },
       { kind: "text", value: "Mensual renovable" },
     ],
   },
@@ -172,7 +178,7 @@ export const PLAN_COMPARISON: CompareRow[] = [
     feature: "Talleres especiales fin de semana",
     cells: [
       { kind: "dash" },
-      { kind: "text", value: "10% de descuento" },
+      { kind: "text", value: "10% de descuento", emphasis: "accent" },
       { kind: "check", note: "Acceso preferente" },
     ],
   },

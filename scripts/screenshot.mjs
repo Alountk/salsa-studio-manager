@@ -43,6 +43,8 @@ const ROUTES = [
   { id: "08-mi-semana-profesor", path: "/clases/mi-semana" },
   // Navigation index added by design-2-calendar task 7 (not a designed screen)
   { id: "09-clases-indice", path: "/clases" },
+  // Design 3 — appended as each screen lands
+  { id: "01-tarifas", path: "/tarifas" },
 ];
 
 const require = createRequire(`${PW_DIR}/`);
