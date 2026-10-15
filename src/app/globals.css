@@ -178,14 +178,16 @@
 }
 
 /*
- * Payment-network badge colors (Design 3, screen 02). The checkout draws the
- * Visa and Mastercard marks inside the card-number field and the export
- * hard-codes their brand hexes. S9 keeps hex literals out of src/, so the
- * three values live here with the same treatment as the class palette above:
- * implementation tokens, not DESIGN.md palette entries.
+ * Payment-network badge colors (Design 3, screens 02 and 04). The checkout
+ * draws the Visa and Mastercard marks inside the card-number field and the
+ * billing area renders a solid VISA badge; the exports hard-code their brand
+ * hexes. S9 keeps hex literals out of src/, so the values live here with the
+ * same treatment as the class palette above: implementation tokens, not
+ * DESIGN.md palette entries.
  */
 @theme {
   --color-brand-visa: #1434cb;
+  --color-brand-visa-navy: #1a1f71;
   --color-brand-mc-red: #eb001b;
   --color-brand-mc-orange: #f79e1b;
 }

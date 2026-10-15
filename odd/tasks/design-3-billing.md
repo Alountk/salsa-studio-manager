@@ -153,8 +153,8 @@ The public chain is reachable from the sidebar: Facturación → "Cambiar plan"
 | ---- | ---- | ----- | ------ |
 | T1 | S1-S8 | static data `src/lib/billing.ts` | `b49d306` |
 | T2 | S1 | `/tarifas` (+ public layout/nav) | `f1a7f15` |
-| T3 | S2, S3 | `/tarifas/pago`, `/tarifas/resultado` | |
-| T4 | S4, S5 | `/facturacion`, `/facturacion/facturas/<n>` | |
+| T3 | S2, S3 | `/tarifas/pago`, `/tarifas/resultado` | `769803d` |
+| T4 | S4, S5 | `/facturacion`, `/facturacion/facturas/V-2026-0184` | |
 | T5 | S6 | `/facturacion?rol=administracion` | |
 | T6 | S7, S8 | `/facturacion/facturas` + modal | |
 | T7 | S4, S6, S7 | cross-links: admin/student homes, `Cambiar plan`, nav titles | |
@@ -177,7 +177,9 @@ Each task closes with a work-unit commit on `feat/design-3-billing`.
    Moreno» — and the receipt goes to a third name, `alicia.salsa@ejemplo.com`;
    screen 02's footer also carries «© 2024» where screen 01 says «© 2025» and
    screens 03/04 say «© 2026» (extends finding 1), and its address «Calle Bailén 14,
-   2º B» adds a floor the invoice omits.
+   2º B» adds a floor the invoice omits. Screen 04's export topbar adds a *fourth*
+   identity, «Elena Martínez» / `elena.salsa@madrid.es` — the shared shell renders
+   «Lucía Moreno» instead (shell built once, app-scaffold).
 
 ## Log
 
@@ -268,3 +270,40 @@ Each task closes with a work-unit commit on `feat/design-3-billing`.
     against `designs/03-facturacion/02-pago.png` and `03-resultado-pago.png`.
   - T3's hash is filled in the Tasks table after the commit and rides with the next
     task's commit, the same way T1/T2's hashes rode with this one.
+- **L5** — **T4 complete (S4, S5).**
+  - Written: `src/components/billing/student-billing.tsx` (screen 04 canvas: plan
+    card with the 6/10 credits ring and auto-renew switch, payment-methods card with
+    the Visa/SEPA rows, six-row invoice history with filters + pagination,
+    institutional footer), `src/components/billing/invoice-document.tsx` (screen 05:
+    action bar + 800px sheet with issuer/buyer blocks, line table with the
+    highlighted first row, right-aligned totals and legal note),
+    `src/app/(app)/facturacion/page.tsx` (role routing mirroring `/` — student by
+    default, the admin slot documented for T5, `?rol=profesor` falls back to the
+    student screen per IA call 1),
+    `src/app/(app)/facturacion/facturas/V-2026-0184/page.tsx` (static segment: only
+    the designed invoice resolves, any other number is a 404 rather than an
+    invented document — non-goal, no invoice composition), screenshot routes
+    `04-mi-facturacion`/`05-detalle-factura`, and `--color-brand-visa-navy` in
+    globals.css (hex stays there — S9).
+  - **Own defect found and fixed**: the VISA badge rendered blank on the first
+    capture — `bg-brand-visa-navy` was absent from the served stylesheet because
+    the dev server's chunk cache predated the globals.css token. Rebuilding `.next`
+    regenerated it (class + var verified in the served CSS, badge verified in a
+    zoomed capture); all captures redone afterwards.
+  - **Side-by-side vs exports 04/05**: structure, copy and figures match (89,00 €,
+    6/10, 85,95/18,05/104,00 €, six rows, «Mostrando 6 de 18 facturas
+    registradas», legal note). Accepted deltas: (a) `StatusPill` renders uppercase
+    «PAGADA» where the exports show «Pagada» — shared Design-1 primitive, changing
+    it would re-open screens of Designs 1/2; (b) the shared topbar title reads
+    «Facturación» where screen 04 shows «Mi facturación» and screen 05 a
+    «Facturación › Detalle de Comprobante» breadcrumb — nav titles are T7's task;
+    (c) shared-shell chrome («Lucía Moreno» avatar, plan card in the sidebar) differs
+    from each export's own shell variant («Elena Martínez», «Sede Central»,
+    «PLATAFORMA DE GESTIÓN») — app-scaffold's "shell built once" wins, as in
+    Design 2; (d) the export PNGs are viewport captures (~1025px) that cut the
+    table mid-way, so only the region they show is compared (ours 1075px at 1280
+    for the same content region).
+  - **Evidence**: `npm run typecheck` 0, `npm run lint` 0, no hex in `src/` outside
+    `globals.css`, 21/21 captures status 200 with 0 console errors on `:3101`,
+    side-by-side against `designs/03-facturacion/04-mi-facturacion.png` and
+    `05-detalle-factura.png`.

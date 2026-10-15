@@ -47,6 +47,8 @@ const ROUTES = [
   { id: "01-tarifas", path: "/tarifas" },
   { id: "02-pago", path: "/tarifas/pago" },
   { id: "03-resultado-pago", path: "/tarifas/resultado" },
+  { id: "04-mi-facturacion", path: "/facturacion" },
+  { id: "05-detalle-factura", path: "/facturacion/facturas/V-2026-0184" },
 ];
 
 const require = createRequire(`${PW_DIR}/`);

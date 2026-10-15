@@ -150,5 +150,21 @@
     "title": "Resultado del Pago | Estudio Salsa",
     "consoleErrors": [],
     "file": "designs/verification/03-resultado-pago.png"
+  },
+  {
+    "id": "04-mi-facturacion",
+    "path": "/facturacion",
+    "status": 200,
+    "title": "Estudio Salsa — Gestión de clases de salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/04-mi-facturacion.png"
+  },
+  {
+    "id": "05-detalle-factura",
+    "path": "/facturacion/facturas/V-2026-0184",
+    "status": 200,
+    "title": "Estudio Salsa — Gestión de clases de salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/05-detalle-factura.png"
   }
 ]
