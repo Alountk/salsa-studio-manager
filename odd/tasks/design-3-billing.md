@@ -155,7 +155,7 @@ The public chain is reachable from the sidebar: Facturación → "Cambiar plan"
 | T2 | S1 | `/tarifas` (+ public layout/nav) | `f1a7f15` |
 | T3 | S2, S3 | `/tarifas/pago`, `/tarifas/resultado` | `769803d` |
 | T4 | S4, S5 | `/facturacion`, `/facturacion/facturas/V-2026-0184` | `341b01a` |
-| T5 | S6 | `/facturacion?rol=administracion` | |
+| T5 | S6 | `/facturacion?rol=administracion` | `3ecbd94` |
 | T6 | S7, S8 | `/facturacion/facturas` + modal | |
 | T7 | S4, S6, S7 | cross-links: admin/student homes, `Cambiar plan`, nav titles | |
 | T8 | S9, S10 | verification: gates, 8 captures, link crawl | |
@@ -348,3 +348,44 @@ Each task closes with a work-unit commit on `feat/design-3-billing`.
     `:3101`, side-by-side against `designs/03-facturacion/06-ingresos.png`.
   - T5's hash is filled in the Tasks table after the commit and rides with the
     next task's commit, the same way T1–T4's hashes rode with later ones.
+- **L7** — **T6 complete (S7, S8).**
+  - Written: `src/components/billing/invoice-list.tsx` (screen 07 canvas:
+    header + «42 emitidas» pill + «Exportar»/«Nueva factura»; filter bar with
+    search, the designed active Estado select (border/tint/primary label —
+    composed locally because the shared `Select` cannot restyle the control
+    without stacking conflicting colour utilities), Periodo/Método selects and
+    «Limpiar filtros»; bulk bar «3 facturas seleccionadas · Total acumulado:
+    180,00 €» with the three bulk actions; nine-column table over
+    `ADMIN_INVOICES` with checkboxes, per-row avatars, mono numbers,
+    overdue rows carrying BOTH the red pill and the 3px left bar, the export's
+    open row menu on V-2026-0179 whose «Marcar como pagada» enters the modal
+    (IA call 2); footer with recuento, 5-page pagination and «Total filtrado:
+    3.180,00 €»), `src/components/billing/register-payment-modal.tsx` (screen
+    08: 560px dialog on the `inverse-surface/45` veil + backdrop blur, context
+    line, Alumno/Importe/method selector with Efectivo active/Concepto/Fecha/
+    Factura asociada/checkboxes with designed state/Notas, Cancelar + close →
+    the list, inert «Registrar pago»), `src/app/(app)/facturacion/facturas/
+    page.tsx` (streamed `?registrar=` resolves only for ADMIN_INVOICES numbers;
+    any other value renders the plain list — no invented dialog), and the
+    screenshot routes `07-facturas` / `08-registrar-pago`.
+  - **Own defect found and fixed**: the modal's Importe initially rendered
+    `15,00 €` (full `euros()` output) where the export shows bare `15,00`
+    with the separate «EUR €» suffix — now strips the symbol; re-captured.
+  - **Side-by-side vs exports 07/08**: structure, copy and figures match
+    (42 emitidas, Estado: Vencidas, 8 rows V-2026-0179…0188 with the designed
+    statuses/dates/amounts, 180,00 € selected, 3.180,00 € filtrado, modal
+    context «Factura V-2026-0179 · Javier Ruiz · 15,00 €», «Clase suelta
+    25/09/2026», «09/10/2026», «V-2026-0179 (Pendiente - 15,00 €)», email/WhatsApp
+    hints, pre-filled Notas). Veil verified by pixel (background ≈ (162,160,158)
+    = 45% over `inverse-surface`). Accepted deltas carry over: (a) `StatusPill`
+    uppercase «VENCIDA»/«PAGADA»/«PENDIENTE» vs export sentence case (shared
+    primitive); (b) shared topbar/sidebar chrome («Lucía Moreno», student plan
+    card) vs the export's «Marta R.»/«Sede Central» shell (built once); (c)
+    export row-menu demo sits `right-6 top-10` over narrower rows — ours
+    anchors the same 48-wide menu to the acciones cell.
+  - **Evidence**: `npm run typecheck` 0, `npm run lint` 0 (2 warnings fixed in
+    pass), no hex in `src/` outside `globals.css`, 24/24 captures status 200
+    with 0 console errors on `:3101`, side-by-side against
+    `designs/03-facturacion/07-facturas.png` and `08-registrar-pago.png`.
+  - T6's hash is filled in the Tasks table after the commit and rides with the
+    next task's commit, the same way T1–T5's hashes rode with later ones.

@@ -174,5 +174,21 @@
     "title": "Estudio Salsa — Gestión de clases de salsa",
     "consoleErrors": [],
     "file": "designs/verification/06-ingresos.png"
+  },
+  {
+    "id": "07-facturas",
+    "path": "/facturacion/facturas",
+    "status": 200,
+    "title": "Estudio Salsa — Gestión de clases de salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/07-facturas.png"
+  },
+  {
+    "id": "08-registrar-pago",
+    "path": "/facturacion/facturas?registrar=V-2026-0179",
+    "status": 200,
+    "title": "Estudio Salsa — Gestión de clases de salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/08-registrar-pago.png"
   }
 ]
