@@ -31,7 +31,7 @@ screens in `designs/03-facturacion/`, and `docs/flows/03-billing.md`.
 | `07-facturas` | `/facturacion/facturas` — admin list |
 | `08-registrar-pago` | `/facturacion/facturas?registrar=<número>` — modal over the dimmed list |
 
-**Two IA calls to record:**
+**Three IA calls to record:**
 
 1. `/facturacion` is role-aware exactly like `/` (Design 1's precedent): the student
    screen by default, the admin dashboard with `?rol=administracion`. The sidebar
@@ -44,6 +44,14 @@ screens in `designs/03-facturacion/`, and `docs/flows/03-billing.md`.
    invoice (`Factura V-2026-0179 · Javier Ruiz · 15,00 €`). The bulk bar and the
    other two menu options keep their designed behaviour. No menu item is added or
    renamed.
+3. Marketing nav and CTA destinations: the export renders every link as `href="#"`.
+   Links whose destination *is* designed go to the real route — logo → `/`,
+   «Precios» → `/tarifas`, «Iniciar Sesión»/«Reservar Clase»/«Reservar suelta»/
+   «Suscribirme»/«Reservar clase de prueba» → `/login` (booking and subscribing
+   require an account), «Comprar bono» → `/tarifas/pago`. Links whose destination
+   no design covers («Clases», «Horarios», «Profesores», «Eventos», «Contactar por
+   WhatsApp», footer legal links) keep the export's inert `#` — inventing a
+   destination would promise content that does not exist.
 
 The public chain is reachable from the sidebar: Facturación → "Cambiar plan"
 (screen 04) → `/tarifas` → "Comprar bono" → `/tarifas/pago` → "Pagar 145,20 €" →
@@ -51,30 +59,45 @@ The public chain is reachable from the sidebar: Facturación → "Cambiar plan"
 
 ## Specs
 
-- **S1** — `/tarifas`: public nav bar (logo «Estudio Salsa», enlaces Clases,
-  Tarifas, Profesores, Contacto, botón primario «Reservar clase»); título «Elige
-  cómo quieres bailar», subtítulo «Sin matrícula, cancela cuando quieras»; tres
-  tarjetas: «Clase suelta» `15,00 €` «por clase», «Bono de 10 clases» `120,00 €`
-  «12,00 € por clase» con píldora «Más elegido», «Mensual ilimitado» `89,00 €`
-  «al mes»; tabla comparativa de cinco filas; FAQ con tres filas, la primera abierta
-  «¿Puedo cancelar mi suscripción cuando quiera?» → «Sí, desde tu área de
-  facturación y sin coste. Mantienes el acceso hasta el final del periodo pagado».
-- **S2** — `/tarifas/pago`: fondo `#FAF7F4`, cabecera con logo y «Volver a tarifas»,
+- **S1** — `/tarifas`: public nav (logo «Estudio Salsa», links «Clases»,
+  «Precios» (active), «Horarios», «Profesores», «Eventos», plus «Iniciar Sesión»
+  and the primary button «Reservar Clase»); hero eyebrow «PRECIOS
+  TRANSPARENTES», `h1` «Elige cómo quieres bailar», subtitle «Sin matrícula
+  previa, cuotas ocultas ni compromisos forzados. Cancela o cambia de modalidad
+  cuando quieras con total flexibilidad.», trust strip «Sin permanencia · Pago
+  seguro con tarjeta y Bizum · Reserva directa online»; three plan cards:
+  «Clase suelta» `15,00 €` «/ clase», «Bono de 10 clases» `120,00 €` «/ bono» with
+  «12,00 € por clase» + pill «Ahorro de 30 €» and the ribbon «MÁS ELEGIDO»,
+  «Mensual ilimitado» `89,00 €` «/ mes», CTAs «Reservar suelta» / «Comprar bono» /
+  «Suscribirme»; five-row comparison table with the «Bono 10 clases» column
+  highlighted; FAQ of three rows with the first open, «¿Puedo cancelar mi
+  suscripción cuando quiera?» → «Sí, desde tu área privada de facturación y sin
+  coste alguno ni penalizaciones. Mantendrás el acceso a todas las clases hasta que
+  termine el periodo mensual pagado.»; CTA band «¿Aún no sabes qué nivel o ritmo
+  elegir?» with «Reservar clase de prueba» / «Contactar por WhatsApp»; footer
+  columns «Ubicación y Sala», «Horario de Atención», «Contacto directo», legal
+  links and «© 2025 Estudio Salsa S.L.».
+- **S2** — `/tarifas/pago`: fondo `#FAF7F4`, cabecera con logo y «Volver a Precios»,
   indicador Carrito → Pago → Confirmación (tercero actual); pestañas «Tarjeta»
   (activa) / «Domiciliación SEPA»; campos con `4242 4242 4242 4242`, `12/28`, `•••`;
-  casilla «Guardar esta tarjeta para futuros pagos» marcada; «Datos de facturación»
+  casilla «Guardar esta tarjeta para futuros pagos y cuotas» marcada; «Datos de facturación»
   con Particular, `12345678Z`, `Calle Bailén 14, 2º B, 28005 Madrid`; resumen:
-  «Bono de 10 clases» `120,00 €`, «Subtotal 120,00 €», «IVA (21 %) 25,20 €», «Total
-  145,20 €»; campo promocional con «Aplicar»; botón «Pagar 145,20 €»; aviso «Pago
-  seguro cifrado. No almacenamos los datos de tu tarjeta».
+  «Bono de 10 clases» `120,00 €`, «Subtotal base 120,00 €», «IVA (21 %) 25,20 €», «Total
+  145,20 €»; campo promocional con «Aplicar»; botón «Pagar 145,20 €»; aviso «Pago seguro cifrado con protocolo TLS. No almacenamos los datos
+  completos de tu tarjeta de crédito.»; pie «© 2024 Estudio Salsa. Todos los
+  derechos reservados. Pago seguro con encriptación SSL de 256 bits.».
 - **S3** — `/tarifas/resultado`: tarjeta centrada de 560px con check teal de 72px,
   «¡Pago completado!», «Ya puedes reservar tus clases con el bono», resumen: Referencia
-  `PED-2026-0184` (monoespaciada), Concepto «Bono de 10 clases», Importe `145,20 €`,
-  Método «Visa •••• 4242», Próximo cargo `01/11/2026`; botones «Reservar mi primera
+  `PED-2026-0184` (monoespaciada), Concepto «Bono de 10 clases» con píldora «Salsa Cubana & Estilo», Importe `145,20 €`,
+  Método «Visa •••• 4242», «Próximo cargo / Validez» `01/11/2026`, aviso «Hemos
+  enviado el comprobante a alicia.salsa@ejemplo.com»; botones «Reservar mi primera
   clase», «Descargar factura», «Ir a mi cuenta»; a la derecha la tarjeta de error
   (diseñada en la misma pantalla): cross rojo, «No hemos podido procesar el pago»,
-  «Tu tarjeta ha sido rechazada por el banco. No se ha realizado ningún cargo»,
-  «Reintentar pago», «Usar otro método».
+  «Tu tarjeta ha sido rechazada por el banco. No se ha realizado ningún cargo.»,
+  «Reintentar pago», «Usar otro método»; detalle «Variante de error / Pago
+  rechazado» y «Código: ERR_CARD_DECLINED_05», enlace «¿Necesitas asistencia
+  técnica?»; pie «Transacción encriptada con cifrado SSL de 256 bits. Estudio
+  Salsa S.L. © 2026».
 - **S4** — `/facturacion` (alumno): cabecera «Mi facturación» + «Añadir método de
   pago»; tarjeta «Plan actual» con «Mensual Ilimitado», `89,00 €/mes`, anillo «6 de
   10» etiquetado «Clases del bono», «Se renueva el 01/11/2026», «Próximo cargo
@@ -128,8 +151,8 @@ The public chain is reachable from the sidebar: Facturación → "Cambiar plan"
 
 | ID | Spec | Route | Commit |
 | ---- | ---- | ----- | ------ |
-| T1 | S1-S8 | static data `src/lib/billing.ts` | |
-| T2 | S1 | `/tarifas` (+ public layout/nav) | |
+| T1 | S1-S8 | static data `src/lib/billing.ts` | `b49d306` |
+| T2 | S1 | `/tarifas` (+ public layout/nav) | `f1a7f15` |
 | T3 | S2, S3 | `/tarifas/pago`, `/tarifas/resultado` | |
 | T4 | S4, S5 | `/facturacion`, `/facturacion/facturas/<n>` | |
 | T5 | S6 | `/facturacion?rol=administracion` | |
@@ -139,6 +162,23 @@ The public chain is reachable from the sidebar: Facturación → "Cambiar plan"
 
 Each task closes with a work-unit commit on `feat/design-3-billing`.
 
+## Findings
+
+1. **Screen 01's footer contradicts the rest of the product on the studio's
+   address**: the marketing footer says «Calle del Ritmo 14, 2ª planta · 28004
+   Madrid» while screens 02/05 and Design 1's brand panel say «Calle Bailén 14 ·
+   28005 Madrid»; it also carries «© 2025» where screen 04 says «© 2026». Each
+   screen renders as designed (no silent unification — the same treatment Design 2
+   gave its 6,5 h / 18,5 h contradiction); flagged for the user to reconcile.
+
+2. **Screens 02/03 contradict screen 05 on who is paying** (same treatment: render
+   as designed, flag it): the checkout prefills cardholder and billing name «Elena
+   Morales Gómez» with NIF `12345678Z` — the same NIF screen 05 bills to «Lucía
+   Moreno» — and the receipt goes to a third name, `alicia.salsa@ejemplo.com`;
+   screen 02's footer also carries «© 2024» where screen 01 says «© 2025» and
+   screens 03/04 say «© 2026» (extends finding 1), and its address «Calle Bailén 14,
+   2º B» adds a floor the invoice omits.
+
 ## Log
 
 - **L1** — User: "sigue por la siguiente implementacion". Next implementation after
@@ -146,3 +186,85 @@ Each task closes with a work-unit commit on `feat/design-3-billing`.
   remaining designed set (8 screens in `designs/03-facturacion/`, flow doc
   `docs/flows/03-billing.md`); `/facturacion` is still the shell's last designed
   placeholder (`/alumnos` is designed by none).
+- **L2** — Copy precedence (recorded during T1, applies to every screen): where
+  `scripts/design-plan.mjs` or `docs/flows/03-billing.md` disagree with the
+  exported screen, **the export wins** — T8 compares captures side-by-side with
+  `designs/03-facturacion/*.png`. Evidence of divergence: nav (prompt «Clases,
+  Tarifas, Profesores, Contacto» vs export «Clases, Precios, Horarios, Profesores,
+  Eventos»), hero subtitle, plan units («por clase» vs «/ clase»), ribbon case
+  («Más elegido» vs «MÁS ELEGIDO»), FAQ answer. The export's Stitch theme also
+  reuses token *names* with different *values* (its `primary` is `#9b2f00` and its
+  `primary-container` is `#c2410c`, which is *our* `primary`); `src/` keeps
+  DESIGN.md tokens only (S9 forbids hex) and maps export colors by visual role.
+  S1 was rewritten to the export's literal strings.
+- **L3** — User: "actualiza el handoff para poder continuar en una session nueva".
+  Session ends mid-**T3**; this entry is the resume point for a fresh session.
+  - **Committed**: T1 `b49d306` · T2 `f1a7f15` (S1 page + public nav components +
+    capture `01-tarifas.png` + its screenshot route). S2/S3 were rewritten to the
+    export's literals alongside this entry (same treatment as S1 under L2).
+  - **On disk, uncommitted (T3 prep; `npm run typecheck` exit 0)**:
+    `src/app/globals.css` += payment-network tokens `--color-brand-visa #1434cb`,
+    `--color-brand-mc-red #eb001b`, `--color-brand-mc-orange #f79e1b` (hex lives only
+    here — S9); `src/components/ui/input.tsx` += `FieldShell.labelAction` (the CVC
+    help-button row), `Input.endAdornment` (Visa/Mastercard badges + CVC lock pinned
+    at `right-3`, `pointer-events-none`), `Input.mono` (swaps font-sans↔font-mono
+    instead of stacking families), `Input.inputClassName` (input-level `pr-24`,
+    `tracking-wider`); `src/lib/billing.ts` += `CHECKOUT_ORDER` (item/card/billing;
+    12000 / 2520 / 14520), `PAYMENT_RESULT.badge` «Salsa Cubana & Estilo» +
+    `receiptEmail` `alicia.salsa@ejemplo.com`, `PAYMENT_FAILURE`
+    (`ERR_CARD_DECLINED_05`; attempt `Visa •••• 4242` / 14520).
+  - **Not yet written**: `src/components/marketing/checkout-header.tsx` (its own
+    stepper header — Carrito ✓ → Pago ✓ → Confirmación actual — plus «Volver a
+    Precios» → `/tarifas` and the mobile banner «Paso 3: Confirmación y Pago»),
+    `src/app/tarifas/pago/page.tsx`, `src/app/tarifas/resultado/page.tsx`, and the
+    `scripts/screenshot.mjs` routes `02-pago` → `/tarifas/pago`,
+    `03-resultado-pago` → `/tarifas/resultado`.
+  - **T3 decisions**: destinations — «Volver a Precios» → `/tarifas`, «Pagar …» →
+    `/tarifas/resultado`, «Reservar mi primera clase» → `/login`, «Ir a mi cuenta» →
+    `/facturacion`, «Reintentar pago»/«Usar otro método» → `/tarifas/pago`,
+    «Descargar factura» = inert `Button` (non-goal: no real download), help/legal
+    links keep `#`. Structure — `Card` primitive for every card, `Select` for Tipo de
+    documento, 7/5 grid with `lg:sticky lg:top-24` summary aside; the result screen
+    renders *both* designed cards side by side (success `max-w-[560px]` + error
+    `lg:w-[400px]`). Type — never stack `font-bold`/`font-semibold` on tokens that
+    bake weight, skip `leading-*` on text tokens, 12px floor (export's 11px →
+    `text-label`), checkout Total uses `text-display-mobile` (26px), `font-display`
+    required with headline/display tokens. Color — export `primary-container`(#c2410c)
+    = our `primary`, export `surface-container-high`(peach) = our `primary-container`,
+    text on peach → `text-on-primary-container` (AA), hover `#e0561f` =
+    `primary-hover`, `#E8E2DC` = `outline-variant`, `#161311` = `on-surface`.
+  - **Environment**: dev server on `3101` (`npm run dev -- -p 3101`; PID 24224 at
+    handoff — restart if the session took it down); `3100` holds a stale `next start`
+    of an old build — never capture against it. Capture: `node scripts/screenshot.mjs
+    http://localhost:3101` → `designs/verification/` (+ `manifest.json`, currently the
+    T2 run; the Design 1/2 PNGs are dirty from that run — commit with T3 or refresh in
+    T8). Side-by-side compare with ffmpeg scale+hstack (T2 pattern, `/tmp/t2cmp`).
+  - **Next steps, in order**: 1) write the three files and append the two routes;
+    2) `npm run typecheck` && `npm run lint`; 3) capture screens 02/03, compare
+    against `02-pago.png` / `03-resultado-pago.png`, fix deltas; 4) fill T3's commit
+    hash in the Tasks table (T2's is already filled), commit T3 (prep + pages +
+    routes + verification PNGs), update the todo list + Engram mirror; 5) continue
+    with T4–T8.
+- **L4** — User: "puedes continuar". **T3 complete (S2, S3).**
+  - Written: `src/components/marketing/checkout-header.tsx` (brand anchor, three-step
+    stepper Carrito ✓ → Pago ✓ → Confirmación actual, SSL badge, «Volver a Precios» →
+    `/tarifas`, mobile banner), `src/app/tarifas/pago/page.tsx` (7/5 grid, card/SEPA
+    tabs, prefilled card + billing forms, sticky summary with the totals from
+    `CHECKOUT_ORDER`, promo row, «Pagar …» → `/tarifas/resultado`, TLS notice, seals,
+    support micro-card, checkout footer), `src/app/tarifas/resultado/page.tsx` (both
+    designed cards side by side: success `max-w-[560px]` + error `lg:w-[400px]`), and
+    the two screenshot routes `02-pago` / `03-resultado-pago`.
+  - **Screenshot script fix (own defect)**: each route inherited the previous route's
+    viewport, and every page has `min-height: 100%`, so short pages after tall ones
+    were captured stretched (02/03 first came out at 1440×2735 with a ~1600px phantom
+    gap). `scripts/screenshot.mjs` now resets the viewport to 1440×900 before measuring
+    each route; the Design 1/2 captures are refreshed with the fix and committed here.
+  - **Side-by-side deltas found and fixed on screen 03**: success check ring
+    `ring-[6px]` → `ring-[8px]` (export `ring-8`), error detail `text-xs` → `text-[12px]`
+    (export literal). Screen 02 matched at first pass (structure, copy, colors;
+    1122 vs 1134 px height at equal width ≈ ±1 %).
+  - **Evidence**: `npm run typecheck` 0, `npm run lint` 0, no hex in `src/` outside
+    `globals.css`, 19/19 captures 200 with 0 console errors on `:3101`, side-by-side
+    against `designs/03-facturacion/02-pago.png` and `03-resultado-pago.png`.
+  - T3's hash is filled in the Tasks table after the commit and rides with the next
+    task's commit, the same way T1/T2's hashes rode with this one.

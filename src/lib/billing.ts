@@ -219,6 +219,21 @@ export const CHECKOUT_ORDER = {
     meta: "Validez 3 meses · Acceso total",
     tags: ["Salsa Cubana", "Bachata", "Rueda"],
   },
+  /** Prefilled card fields, verbatim from the export's checkout form (screen 02). */
+  card: {
+    holder: "Elena Morales Gómez",
+    number: "4242 4242 4242 4242",
+    expiry: "12/28",
+    cvc: "423",
+    saveByDefault: true,
+  },
+  /** Prefilled billing block, verbatim from the export (screen 02). */
+  billing: {
+    docType: "particular",
+    nif: "12345678Z",
+    name: "Elena Morales Gómez",
+    address: "Calle Bailén 14, 2º B, 28005 Madrid",
+  },
   subtotalCents: 12000,
   /** `12000 → 2520` (`25,20 €`). */
   ivaCents: vatOf(12000),
@@ -231,6 +246,8 @@ export const CHECKOUT_ORDER = {
 export const PAYMENT_RESULT = {
   reference: "PED-2026-0184",
   concept: "Bono de 10 clases",
+  /** Style badge shown next to the concept on the result recap (screen 03). */
+  badge: "Salsa Cubana & Estilo",
   /** Single source: the checkout total. */
   amountCents: CHECKOUT_ORDER.totalCents,
   method: "Visa •••• 4242",

@@ -126,5 +126,29 @@
     "title": "Estudio Salsa — Gestión de clases de salsa",
     "consoleErrors": [],
     "file": "designs/verification/09-clases-indice.png"
+  },
+  {
+    "id": "01-tarifas",
+    "path": "/tarifas",
+    "status": 200,
+    "title": "Precios y Tarifas | Estudio Salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/01-tarifas.png"
+  },
+  {
+    "id": "02-pago",
+    "path": "/tarifas/pago",
+    "status": 200,
+    "title": "Checkout | Estudio Salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/02-pago.png"
+  },
+  {
+    "id": "03-resultado-pago",
+    "path": "/tarifas/resultado",
+    "status": 200,
+    "title": "Resultado del Pago | Estudio Salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/03-resultado-pago.png"
   }
 ]
