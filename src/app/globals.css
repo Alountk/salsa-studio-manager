@@ -192,6 +192,18 @@
   --color-brand-mc-orange: #f79e1b;
 }
 
+/*
+ * Chart series colors (Design 3, screen 06). The revenue chart's "Bonos &
+ * Clases" series and the payment-method bar's cash segment use hexes the
+ * export hard-codes (#FB923C and #D97706); no existing token covers them and
+ * L3's color mapping assigns no DESIGN.md role to either. Same treatment as
+ * the badges above: implementation tokens, hex stays in this file (S9).
+ */
+@theme {
+  --color-series-bonos: #fb923c;
+  --color-series-efectivo: #d97706;
+}
+
 @layer base {
   html {
     height: 100%;

@@ -154,7 +154,7 @@ The public chain is reachable from the sidebar: Facturación → "Cambiar plan"
 | T1 | S1-S8 | static data `src/lib/billing.ts` | `b49d306` |
 | T2 | S1 | `/tarifas` (+ public layout/nav) | `f1a7f15` |
 | T3 | S2, S3 | `/tarifas/pago`, `/tarifas/resultado` | `769803d` |
-| T4 | S4, S5 | `/facturacion`, `/facturacion/facturas/V-2026-0184` | |
+| T4 | S4, S5 | `/facturacion`, `/facturacion/facturas/V-2026-0184` | `341b01a` |
 | T5 | S6 | `/facturacion?rol=administracion` | |
 | T6 | S7, S8 | `/facturacion/facturas` + modal | |
 | T7 | S4, S6, S7 | cross-links: admin/student homes, `Cambiar plan`, nav titles | |
@@ -307,3 +307,44 @@ Each task closes with a work-unit commit on `feat/design-3-billing`.
     `globals.css`, 21/21 captures status 200 with 0 console errors on `:3101`,
     side-by-side against `designs/03-facturacion/04-mi-facturacion.png` and
     `05-detalle-factura.png`.
+- **L6** — **T5 complete (S6).**
+  - Written: `src/components/billing/admin-revenue.tsx` (header row with the
+    «Últimos 12 meses» select, «Exportar CSV» and «Nueva factura» → the designed
+    invoice list; four KPI cards from `KPIS` with the delta chip / «3 emitidas»
+    pill; the twelve-month stacked chart with legend, mean badge, current-month
+    ring + «14.320 €» tag and range/growth footer; the «Reparto por plan» donut
+    with its exact exported dasharray geometry and legend; the «Deudores» table
+    (four rows, `StatusPill overdue`, retry icon-button) with the
+    «443,20 € (4 de 3.180 € acumulados)» footer and the inert WhatsApp button;
+    the «Métodos de pago» stacked bar + three detail rows + gateway footer),
+    `src/app/(app)/facturacion/page.tsx` now registers `administracion:
+    <AdminRevenue />`, and `scripts/screenshot.mjs` gained `06-ingresos` →
+    `/facturacion?rol=administracion`.
+  - **globals.css tokens (S9)**: `--color-series-bonos #fb923c` (export's
+    «Bonos & Clases» bar/segment/donut legend) and `--color-series-efectivo
+    #d97706` (cash share of the payment bar) as implementation tokens — same
+    treatment as the T3 payment-network badges; no DESIGN.md role exists for
+    either hex (L3 mapping doesn't cover them).
+  - **Own defect found and fixed**: the first capture rendered the chart bars
+    single-colour, the donut's third arc and the payment bar's cash segment
+    blank — the dev server's compiled CSS chunk predated the new `@theme` block
+    (same failure class as T4's VISA badge: `grep series` = 0 in the served
+    stylesheet). Rebuilding `.next` regenerated it; `bg-series-*`, `stroke-`
+    and `text-series-efectivo` verified in the served CSS, then all captures
+    were redone. Pixel checks confirm `#fb923c`/`#c2410c` stacked segments and
+    the `#fb923c` donut arc.
+  - **Side-by-side vs export 06**: structure, copy and figures match (KPIs
+    8.340/14.320/3.180/2,4 %, «3 emitidas», chart range Nov 2025 – Oct 2026,
+    donut 8.305,60/3.866,40/2.148,00 € at 58/27/15 %, debtors 89,00/120,00/
+    89,00/145,20 € with «14/21/28/35 días», «Total pendiente mostrado: 443,20 €»,
+    payment mix 9.164,80/4.009,60/1.145,60 € at 64/28/8 %, «+27,8 %»). Accepted
+    deltas carry over from T4: (a) `StatusPill` renders uppercase «VENCIDA»
+    where the export shows «Vencida» (shared primitive); (b) the shared topbar
+    title reads «Facturación» (T7); (c) shared-shell chrome («Lucía Moreno»
+    avatar, student plan card in the sidebar) vs the export's «Carmen R.»/
+    «Panel Administrativo» — shell built once.
+  - **Evidence**: `npm run typecheck` 0, `npm run lint` 0, no hex in `src/`
+    outside `globals.css`, 22/22 captures status 200 with 0 console errors on
+    `:3101`, side-by-side against `designs/03-facturacion/06-ingresos.png`.
+  - T5's hash is filled in the Tasks table after the commit and rides with the
+    next task's commit, the same way T1–T4's hashes rode with later ones.
