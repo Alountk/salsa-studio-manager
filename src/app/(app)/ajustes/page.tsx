@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Avatar, Button, Card, CardHeader, Input, ProgressRing, Select, StatusPill, Switch } from "@/components/ui";
 
 /**
@@ -116,9 +117,9 @@ export default function SettingsPage() {
               Se renueva el 01/11/2026
             </p>
             <div className="mt-4 flex justify-between text-body-sm">
-              <button type="button" className="text-primary hover:underline">
+              <Link href="/tarifas" className="text-primary hover:underline">
                 Cambiar plan
-              </button>
+              </Link>
               <button type="button" className="text-error hover:underline">
                 Cancelar suscripción
               </button>

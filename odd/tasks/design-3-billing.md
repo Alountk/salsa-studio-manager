@@ -156,7 +156,7 @@ The public chain is reachable from the sidebar: Facturación → "Cambiar plan"
 | T3 | S2, S3 | `/tarifas/pago`, `/tarifas/resultado` | `769803d` |
 | T4 | S4, S5 | `/facturacion`, `/facturacion/facturas/V-2026-0184` | `341b01a` |
 | T5 | S6 | `/facturacion?rol=administracion` | `3ecbd94` |
-| T6 | S7, S8 | `/facturacion/facturas` + modal | |
+| T6 | S7, S8 | `/facturacion/facturas` + modal | `55ffc69` |
 | T7 | S4, S6, S7 | cross-links: admin/student homes, `Cambiar plan`, nav titles | |
 | T8 | S9, S10 | verification: gates, 8 captures, link crawl | |
 
@@ -389,3 +389,33 @@ Each task closes with a work-unit commit on `feat/design-3-billing`.
     `designs/03-facturacion/07-facturas.png` and `08-registrar-pago.png`.
   - T6's hash is filled in the Tasks table after the commit and rides with the
     next task's commit, the same way T1–T5's hashes rode with later ones.
+- **L8** — **T7 complete (cross-links + nav titles).**
+  - **Nav titles** (`src/lib/nav.ts` + `src/components/shell/topbar.tsx`):
+    `TITLES` gained `/facturacion` → «Mi facturación», `/facturacion/facturas` →
+    «Facturación» and the exact invoice path → «Facturación › Detalle de
+    Comprobante»; a new `ROLE_TITLES` map makes `/facturacion` render «Ingresos»
+    under `?rol=administracion` (IA call 1 — profesor falls back to the student
+    screen, no override). `titleForPath(pathname, rol?)` takes the optional
+    role; the Topbar reads it through `useSearchParams()` wrapped in `Suspense`
+    (fallback = plain pathname title, the final value on role-less routes —
+    Next 16 requires the boundary during prerender).
+  - **Cross-links**:
+    (a) admin home attention item «Factura V-2026-0179 vencida» →
+    `/facturacion?rol=administracion` (admin home's billing link carries the
+    role per IA call 1); (b) admin home quick action «Nueva factura» →
+    `/facturacion/facturas` (invoice list per non-goal); (c) student home
+    «Comprar bono» inert Button → `LinkButton` → `/tarifas/pago` (destination
+    designed by IA call 3); (d) ajustes «Cambiar plan» inert button → `Link`
+    → `/tarifas` (the export renders it as an `<a href="#">`, so a real link
+    is closer to the design than the button that was there); (e) already
+    correct and left untouched: student home «Ver todas» → `/facturacion`,
+    resultado «Ir a mi cuenta» → `/facturacion`, invoice document →
+    `/facturacion`, student-billing «Cambiar plan» → `/tarifas`.
+  - **Evidence**: `npm run typecheck` 0, `npm run lint` 0, 24/24 captures
+    status 200 with 0 console errors on `:3101`; topbar crops verified against
+    exports («Mi facturación» / «Facturación › Detalle de Comprobante») and
+    role check via server HTML (`?rol=administracion` → «Ingresos»); every new
+    href (`/facturacion?rol=administracion`, `/facturacion/facturas`,
+    `/tarifas/pago`, `/tarifas`) answers 200.
+  - T7's hash is filled in the Tasks table after the commit and rides with the
+    next task's commit, the same way T1–T6's hashes rode with later ones.
