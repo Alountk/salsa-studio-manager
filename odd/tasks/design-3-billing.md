@@ -157,7 +157,7 @@ The public chain is reachable from the sidebar: Facturación → "Cambiar plan"
 | T4 | S4, S5 | `/facturacion`, `/facturacion/facturas/V-2026-0184` | `341b01a` |
 | T5 | S6 | `/facturacion?rol=administracion` | `3ecbd94` |
 | T6 | S7, S8 | `/facturacion/facturas` + modal | `55ffc69` |
-| T7 | S4, S6, S7 | cross-links: admin/student homes, `Cambiar plan`, nav titles | |
+| T7 | S4, S6, S7 | cross-links: admin/student homes, `Cambiar plan`, nav titles | `ba50d7b` |
 | T8 | S9, S10 | verification: gates, 8 captures, link crawl | |
 
 Each task closes with a work-unit commit on `feat/design-3-billing`.
@@ -419,3 +419,31 @@ Each task closes with a work-unit commit on `feat/design-3-billing`.
     `/tarifas/pago`, `/tarifas`) answers 200.
   - T7's hash is filled in the Tasks table after the commit and rides with the
     next task's commit, the same way T1–T6's hashes rode with later ones.
+- **L9** — **T8 complete (S9, S10 verification).**
+  - **S9 gates**: `npm run lint` 0, `npm run typecheck` 0, `npm run build` 0
+    (22/22 static pages; the Design 3 routes report ◐ Partial Prerender —
+    static shell + streamed `searchParams`); no hex literal in `src/` outside
+    `src/app/globals.css`; no credentials in the repository (the `password`
+    hits are the login/registro form fields, not secrets).
+  - **S10 reachability + captures**: all eight designed screens answer 200 from
+    the dev server (`/tarifas`, `/tarifas/pago`, `/tarifas/resultado`,
+    `/facturacion`, `/facturacion?rol=administracion`, `/facturacion/facturas`,
+    `/facturacion/facturas/V-2026-0184`, `/facturacion/facturas?registrar=
+    V-2026-0179`); none renders placeholder copy (grep after stripping input
+    `placeholder=` attributes = 0); `/alumnos` remains the shell's only
+    placeholder, as designed. 24/24 captures status 200 with 0 console errors
+    (`manifest.json`), the eight Design 3 PNGs refreshed in
+    `designs/verification/`.
+  - **Link crawl**: every internal `href` extracted from the eight screens (14
+    distinct, including `/`, `/ajustes`, `/alumnos`, `/calendario`, `/clases`,
+    `/login`) answers 200 — no dead links; `#` anchors stay inert per the
+    feature doc's IA call 3.
+  - **Open Findings 1–2 remain unresolved by design** (address/copyright and
+    identity contradictions across screens): each screen renders as exported
+    and the contradictions stay flagged for the user — they were never ours to
+    silently unify.
+  - **Evidence**: the three S9 commands above, `node scripts/screenshot.mjs
+    http://localhost:3101` → 24 routes / 0 failures, and the scripted crawl
+    (14/14 × 200).
+  - T8's hash is filled in the Tasks table after the commit; with T8 the
+    feature's eight tasks are done, so it rides alone.
