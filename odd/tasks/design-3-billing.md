@@ -158,7 +158,7 @@ The public chain is reachable from the sidebar: Facturación → "Cambiar plan"
 | T5 | S6 | `/facturacion?rol=administracion` | `3ecbd94` |
 | T6 | S7, S8 | `/facturacion/facturas` + modal | `55ffc69` |
 | T7 | S4, S6, S7 | cross-links: admin/student homes, `Cambiar plan`, nav titles | `ba50d7b` |
-| T8 | S9, S10 | verification: gates, 8 captures, link crawl | |
+| T8 | S9, S10 | verification: gates, 8 captures, link crawl | `87b9bca` |
 
 Each task closes with a work-unit commit on `feat/design-3-billing`.
 
