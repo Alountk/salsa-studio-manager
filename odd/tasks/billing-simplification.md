@@ -25,13 +25,13 @@ Route: **inline** for all tasks (executing-plans; `subagent` tool permission-den
 
 | ID | S# | Task | Route | Status | Commit |
 |----|----|------|-------|--------|--------|
-| T1 | S1 | SQLite foundation, migrations, Vitest | inline | pending | — |
-| T2 | S1, S3 | Students + invoices repository, derived status | inline | pending | — |
-| T3 | S1, S3 | Payment recording, floored balance | inline | pending | — |
-| T4 | S1, S6 | Cuotas + idempotent generation | inline | pending | — |
-| T5 | S3 | Seed + change-password scripts | inline | pending | — |
-| T6 | S4 | Auth core: passwords, sessions, rate limit | inline | pending | — |
-| T7 | S4 | Login/logout, proxy gate, layout gate | inline | pending | — |
+| T1 | S1 | SQLite foundation, migrations, Vitest | inline | done | c8f9d3a |
+| T2 | S1, S3 | Students + invoices repository, derived status | inline | done | e9a40b6 |
+| T3 | S1, S3 | Payment recording, floored balance | inline | done | 790a39c |
+| T4 | S1, S6 | Cuotas + idempotent generation | inline | done | 5c8ac14 |
+| T5 | S3 | Seed + change-password scripts | inline | done | 2d4d091 |
+| T6 | S4 | Auth core: passwords, sessions, rate limit | inline | done | a3f9f3f |
+| T7 | S4 | Login/logout, proxy gate, layout gate | inline | done | f4c18e2 |
 | T8 | S2 | Nav trim + hidden-section redirects | inline | pending | — |
 | T9 | S3 | Inicio cobros dashboard | inline | pending | — |
 | T10 | S3 | Facturación: list, detail, create, payment | inline | pending | — |
