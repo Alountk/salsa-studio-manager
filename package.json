@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "seed": "tsx scripts/seed.ts",
+    "change-password": "tsx scripts/change-password.ts"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
