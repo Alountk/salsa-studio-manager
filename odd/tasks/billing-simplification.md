@@ -36,7 +36,7 @@ Route: **inline** for all tasks (executing-plans; `subagent` tool permission-den
 | T8 | S2 | Nav trim + hidden-section redirects | inline | done | fd931e9 |
 | T9 | S3 | Inicio cobros dashboard | inline | done | 0972cdb |
 | T10 | S3 | Facturación: list, detail, create, payment | inline | done | 866d956 |
-| T11 | S6 | Cuotas management UI | inline | pending | — |
+| T11 | S6 | Cuotas management UI | inline | done | 903cb13 |
 | T12 | S7 | Alumnos area | inline | pending | — |
 | T13 | S5 | Docker + Dokploy + startup hook | inline | pending | — |
 | T14 | S1–S7 | Closure: full suite, probe cycle, README | inline | pending | — |
