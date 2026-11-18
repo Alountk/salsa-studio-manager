@@ -1,30 +1,27 @@
-import { Button, FieldShell, Icon, Input, LinkButton, Select } from "@/components/ui";
-import { cn } from "@/lib/cn";
-import {
-  MANUAL_PAYMENT,
-  MANUAL_PAYMENT_EXTRAS,
-  type AdminInvoice,
-  euros,
-  initials,
-  manualPaymentConcept,
-  manualPaymentEmail,
-} from "@/lib/billing";
+"use client";
+
+import { useActionState, useState } from "react";
+import { Button, FieldShell, Icon, LinkButton } from "@/components/ui";
+import { euros, type AdminInvoice } from "@/lib/billing";
+import { todayIso } from "@/lib/dates";
+import { recordPaymentAction, type PaymentFormState } from "@/app/(app)/facturacion/actions";
 
 /**
- * Design 3, screen 08 — «Registrar pago» (S8). Rendered by
- * `/facturacion/facturas?registrar=<número>` over the dimmed invoice list
- * (route mapping IA call 2: entry is the row menu's «Marcar como pagada»).
- *
- * 560px dialog on a 45% `inverse-surface` veil, context line, the designed
- * form (Alumno, Importe, three-way method selector with Efectivo active,
- * Concepto/Fecha row, Factura asociada, the two checkboxes with the designed
- * state, Notas) and the footer actions. Copy and figures verbatim from
- * designs/03-facturacion/08; «Cancelar» and the close button leave the modal,
- * «Registrar pago» stays inert (non-goal: no real payment recording).
+ * Design 3, screen 08 — «Registrar pago», now recording real payments (spec
+ * S3). The designed dialog shell and context line stay; the form is reduced
+ * to what the schema stores (amount, date, note) — email/WhatsApp notices,
+ * payment methods, and the invoice selector had no backing feature and no
+ * column to write to (non-goals: no email delivery; schema: payments).
+ * Partial payments are allowed: the amount is editable and status stays
+ * Pendiente until the gross is covered.
  */
-
 export function RegisterPaymentModal({ invoice }: { invoice: AdminInvoice }) {
-  const extras = MANUAL_PAYMENT_EXTRAS[invoice.number];
+  const [state, formAction, pending] = useActionState<PaymentFormState, FormData>(
+    recordPaymentAction,
+    { error: null },
+  );
+  const [amount, setAmount] = useState(euros(invoice.amountCents, 2).replace(" €", ""));
+  const detailHref = `/facturacion/facturas/${invoice.number}`;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-inverse-surface/45 p-4 backdrop-blur-[1.5px]">
@@ -44,7 +41,7 @@ export function RegisterPaymentModal({ invoice }: { invoice: AdminInvoice }) {
               Registrar pago
             </h2>
             <LinkButton
-              href="/facturacion/facturas"
+              href={detailHref}
               variant="ghost"
               size="compact"
               aria-label="Cerrar modal"
@@ -66,126 +63,73 @@ export function RegisterPaymentModal({ invoice }: { invoice: AdminInvoice }) {
         </div>
 
         {/* Form */}
-        <div className="max-h-[70vh] space-y-4 overflow-y-auto px-7 py-5">
-          <FieldShell label="Alumno">
-            <button
-              type="button"
-              className="flex h-11 w-full cursor-pointer items-center justify-between rounded-lg border border-outline-variant bg-surface px-3.5 shadow-xs transition-colors hover:border-outline"
-            >
-              <span className="flex items-center gap-2.5">
-                <span className="flex h-7 w-7 items-center justify-center rounded-pill bg-surface-container-high text-xs font-semibold text-primary">
-                  {initials(invoice.student)}
-                </span>
-                <span className="text-body-md font-medium text-on-surface">
-                  {invoice.student}
-                </span>
-              </span>
-              <Icon name="arrow_drop_down" className="text-xl text-outline" />
-            </button>
-          </FieldShell>
+        <form
+          id="registrar-pago-form"
+          action={formAction}
+          className="max-h-[70vh] space-y-4 overflow-y-auto px-7 py-5"
+        >
+          <input type="hidden" name="invoiceNumber" value={invoice.number} />
 
-          <FieldShell label="Importe del cobro">
+          {state.error ? (
+            <p
+              role="alert"
+              className="rounded-sm bg-error-container/40 px-4 py-3 text-body-sm text-error"
+            >
+              {state.error}
+            </p>
+          ) : null}
+
+          <FieldShell label="Importe del cobro" hint="Puedes registrar un pago parcial; la factura sigue Pendiente hasta cubrir el total.">
             <div className="relative">
               <input
                 type="text"
                 inputMode="decimal"
+                name="amountEuros"
                 aria-label="Importe del cobro"
-                defaultValue={euros(invoice.amountCents, 2).replace(" €", "")}
-                className="h-12 w-full rounded-lg border border-outline-variant bg-surface pl-4 pr-16 font-display text-display-mobile tabular-figures text-on-surface outline-none transition-all focus:border-primary focus:shadow-[var(--focus-ring-input)]"
+                value={amount}
+                onChange={(event) => setAmount(event.target.value)}
+                className="h-12 w-full rounded-lg border border-outline-variant bg-surface px-4 pr-16 font-display text-display-mobile tabular-figures text-on-surface outline-none transition-all focus:border-primary focus:shadow-[var(--focus-ring-input)]"
               />
               <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-display text-headline-sm text-on-surface-variant">
-                {MANUAL_PAYMENT.currency}
+                €
               </span>
             </div>
           </FieldShell>
 
-          <FieldShell label="Método de pago">
-            <div className="grid grid-cols-3 gap-2.5">
-              {MANUAL_PAYMENT.methods.map((method) => {
-                const active = method.id === MANUAL_PAYMENT.defaultMethodId;
-                return (
-                  <button
-                    key={method.id}
-                    type="button"
-                    aria-pressed={active}
-                    className={cn(
-                      "flex flex-col items-center justify-center gap-1 rounded-lg px-3 py-2.5 transition-all",
-                      active
-                        ? "border-2 border-primary bg-primary-container font-semibold text-primary shadow-xs"
-                        : "border border-outline-variant bg-surface font-medium text-on-surface-variant hover:bg-surface-container",
-                    )}
-                  >
-                    <Icon name={method.icon} className="text-[22px]" />
-                    <span className="text-xs">{method.label}</span>
-                  </button>
-                );
-              })}
-            </div>
-          </FieldShell>
-
-          <div className="grid grid-cols-2 gap-3.5">
-            <Input label="Concepto" defaultValue={manualPaymentConcept(invoice)} />
-            <Input
-              label="Fecha de cobro"
-              defaultValue={MANUAL_PAYMENT.date}
-              endAdornment={<Icon name="calendar_today" className="text-xl text-outline" />}
-              inputClassName="pr-10 tabular-figures"
+          <div>
+            <label
+              htmlFor="paidAt"
+              className="mb-1.5 block text-label uppercase text-on-surface-variant"
+            >
+              Fecha de cobro
+            </label>
+            <input
+              id="paidAt"
+              name="paidAt"
+              type="date"
+              defaultValue={todayIso()}
+              className="h-11 w-full rounded-sm border border-outline-variant bg-surface px-4 py-3 font-sans text-body-md tabular-figures text-on-surface outline-none transition-shadow focus:border-primary focus:shadow-[var(--focus-ring-input)]"
             />
-          </div>
-
-          <Select
-            label="Factura asociada"
-            defaultValue={invoice.number}
-            className="[&>select]:pr-10"
-          >
-            <option value={invoice.number}>
-              {invoice.number} ({invoice.status === "paid" ? "Pagada" : "Pendiente"} -{" "}
-              {euros(invoice.amountCents)})
-            </option>
-            <option value="nueva">Crear nueva factura simplificada</option>
-          </Select>
-
-          <div className="space-y-2 pt-1">
-            <label className="flex cursor-pointer select-none items-start gap-2.5">
-              <input
-                type="checkbox"
-                defaultChecked
-                className="mt-0.5 h-4 w-4 rounded accent-primary"
-              />
-              <span className="text-xs leading-snug">
-                <span className="font-medium text-on-surface">Enviar recibo por correo</span>
-                <span className="ml-1 font-mono text-outline">
-                  ({manualPaymentEmail(invoice.student)})
-                </span>
-              </span>
-            </label>
-            <label className="flex cursor-pointer select-none items-start gap-2.5">
-              <input type="checkbox" className="mt-0.5 h-4 w-4 rounded accent-primary" />
-              <span className="text-xs leading-snug">
-                <span className="font-medium text-on-surface">Avisar también por WhatsApp</span>
-                {extras?.phone ? (
-                  <span className="ml-1 font-mono text-outline">({extras.phone})</span>
-                ) : null}
-              </span>
-            </label>
           </div>
 
           <FieldShell label="Notas internas (opcional)">
             <textarea
+              name="note"
               rows={2}
-              defaultValue={extras?.notes}
-              placeholder={extras?.notes}
+              placeholder="Bizum de noviembre…"
               className="w-full resize-none rounded-sm border border-outline-variant bg-surface px-3 py-2 text-body-sm text-on-surface outline-none transition-all placeholder:text-outline focus:border-primary focus:shadow-[var(--focus-ring-input)]"
             />
           </FieldShell>
-        </div>
+        </form>
 
         {/* Footer */}
         <div className="flex items-center justify-end gap-3 border-t border-outline-variant bg-background px-7 py-4">
-          <LinkButton href="/facturacion/facturas" variant="ghost">
+          <LinkButton href={detailHref} variant="ghost">
             Cancelar
           </LinkButton>
-          <Button icon="check_circle">Registrar pago</Button>
+          <Button type="submit" form="registrar-pago-form" icon="check_circle" disabled={pending}>
+            {pending ? "Registrando…" : "Registrar pago"}
+          </Button>
         </div>
       </div>
     </div>

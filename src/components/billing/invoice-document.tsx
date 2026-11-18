@@ -1,31 +1,32 @@
 import Link from "next/link";
-import { Button, Card, Icon, StatusPill, Table, TBody, TD, THead, TH, TR } from "@/components/ui";
-import {
-  INVOICE_DETAIL,
-  INVOICE_TOTALS,
-  VAT_RATE,
-  euros,
-  invoiceLineTotalCents,
-} from "@/lib/billing";
+import { Card, Icon, LinkButton, StatusPill, Table, TBody, TD, THead, TH, TR } from "@/components/ui";
+import { INVOICE_DETAIL, VAT_RATE, euros } from "@/lib/billing";
+import { formatEs } from "@/lib/dates";
+import type { InvoiceWithStatus } from "@/lib/db/invoices";
+import type { Payment } from "@/lib/db/payments";
+import type { Student } from "@/lib/db/students";
 
 /**
- * Design 3, screen 05 — invoice document (S5). The action bar (back link to
- * `/facturacion`, title + status pill, mail/PDF buttons) over the 800px
- * printable sheet: issuer block, invoice metadata, buyer block, line table and
- * the right-aligned totals. Copy and figures verbatim from
- * designs/03-facturacion/05-detalle-factura.html (Log L2: export wins).
+ * Design 3, screen 05 — invoice document over REAL data (spec S3).
  *
- * The mail and PDF buttons stay inert (non-goals: no real invoice issuance or
- * downloads); the sheet is a designed static document over INVOICE_DETAIL.
- * Structure uses the Card and Table primitives per the system-over-export rule
- * recorded in design-2's plan cards (DESIGN.md padding/headers beat the
- * export's borderless sheet and bare thead).
+ * Structure and studio identity copy follow the designed export; the buyer,
+ * line, and totals blocks come from the stored invoice + student + payments.
+ * The mail/PDF buttons are gone (non-goals: no email, no invoice issuance);
+ * the honest action is «Registrar pago» while the invoice is unpaid. When
+ * 0 < paid < gross the sheet shows «Pagado X de Y» and the status pill stays
+ * Pendiente (partial-payment UI from the plan).
  */
-export function InvoiceDocument() {
-  const { number, status, issuedOn, dueOn, paymentRef, issuer, buyer, lines, legal } =
-    INVOICE_DETAIL;
-  const { subtotalCents, vatCents, totalCents } = INVOICE_TOTALS;
-  const [buyerTaxLabel, buyerTaxValue] = buyer.taxId.split(": ");
+interface InvoiceDocumentProps {
+  invoice: InvoiceWithStatus;
+  student: Student;
+  payments: Payment[];
+}
+
+export function InvoiceDocument({ invoice, student, payments }: InvoiceDocumentProps) {
+  const { issuer, legal } = INVOICE_DETAIL;
+  const lastPayment = payments.at(-1);
+  const partial = invoice.paidCents > 0 && invoice.paidCents < invoice.grossCents;
+  const pendingCents = Math.max(invoice.grossCents - invoice.paidCents, 0);
 
   return (
     <div className="w-full">
@@ -40,21 +41,22 @@ export function InvoiceDocument() {
               name="arrow_back"
               className="text-base transition-transform group-hover:-translate-x-0.5"
             />
-            Volver a mis facturas
+            Volver a Facturación
           </Link>
           <div className="flex items-center gap-3">
             <h2 className="font-display text-headline-lg text-on-surface">
-              Factura {number}
+              Factura {invoice.number}
             </h2>
-            <StatusPill status={status} />
+            <StatusPill status={invoice.status} />
           </div>
         </div>
-        <div className="flex items-center gap-3">
-          <Button variant="secondary" icon="mail">
-            Enviar por correo
-          </Button>
-          <Button icon="download">Descargar PDF</Button>
-        </div>
+        {invoice.status !== "paid" ? (
+          <div className="flex items-center gap-3">
+            <LinkButton href={`/facturacion/facturas/${invoice.number}?registrar`} icon="check_circle">
+              Registrar pago
+            </LinkButton>
+          </div>
+        ) : null}
       </div>
 
       {/* Document sheet */}
@@ -80,42 +82,49 @@ export function InvoiceDocument() {
               Número de Factura
             </span>
             <span className="mb-2 font-display text-headline-md tracking-tight tabular-figures text-on-surface">
-              {number}
+              {invoice.number}
             </span>
             <div className="space-y-1 text-body-sm">
               <div className="flex justify-end gap-3">
                 <span className="text-on-surface-variant">Fecha de emisión:</span>
-                <span className="text-label-tabular text-on-surface">{issuedOn}</span>
+                <span className="text-label-tabular text-on-surface">{formatEs(invoice.issueDate)}</span>
               </div>
               <div className="flex justify-end gap-3">
                 <span className="text-on-surface-variant">Fecha de vencimiento:</span>
-                <span className="text-label-tabular text-on-surface">{dueOn}</span>
+                <span className="text-label-tabular text-on-surface">{formatEs(invoice.dueDate)}</span>
               </div>
               <div className="flex justify-end gap-3">
                 <span className="text-on-surface-variant">Referencia de pago:</span>
-                <span className="text-label-tabular text-secondary">{paymentRef}</span>
+                <span className="text-label-tabular text-secondary">
+                  {lastPayment ? `#${lastPayment.id} · ${formatEs(lastPayment.paidAt)}` : "—"}
+                </span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Buyer */}
+        {/* Buyer — from the stored student record */}
         <div className="border-b border-outline-variant py-7">
           <span className="mb-2 block text-label uppercase text-on-surface-variant">
             Facturado a
           </span>
-          <h3 className="font-display text-headline-sm text-on-surface">{buyer.name}</h3>
+          <h3 className="font-display text-headline-sm text-on-surface">{student.name}</h3>
           <div className="mt-0.5 space-y-0.5 text-body-sm text-on-surface-variant">
-            <p>
-              {buyerTaxLabel}:{" "}
-              <span className="text-label-tabular text-on-surface">{buyerTaxValue}</span>
-            </p>
-            <p>{buyer.address}</p>
-            <p>{buyer.city}</p>
+            {student.email ? (
+              <p>
+                Correo: <span className="text-label-tabular text-on-surface">{student.email}</span>
+              </p>
+            ) : null}
+            {student.phone ? (
+              <p>
+                Teléfono: <span className="text-label-tabular text-on-surface">{student.phone}</span>
+              </p>
+            ) : null}
+            {!student.email && !student.phone ? <p>Sin datos de contacto</p> : null}
           </div>
         </div>
 
-        {/* Lines */}
+        {/* Line — one stored concept */}
         <div className="pt-6 pb-4">
           <Table>
             <THead>
@@ -126,22 +135,15 @@ export function InvoiceDocument() {
               <TH numeric>Total</TH>
             </THead>
             <TBody>
-              {lines.map((line, index) => (
-                <TR key={line.description} className={index === 0 ? "bg-primary-container/60" : ""}>
-                  <TD className="font-medium">
-                    {line.description}
-                    <span className="block text-xs font-normal text-on-surface-variant">
-                      {line.detail}
-                    </span>
-                  </TD>
-                  <TD numeric>{line.quantity}</TD>
-                  <TD numeric>{euros(line.netCents)}</TD>
-                  <TD numeric>{Math.round(VAT_RATE * 100)} %</TD>
-                  <TD numeric className="font-semibold">
-                    {euros(invoiceLineTotalCents(line))}
-                  </TD>
-                </TR>
-              ))}
+              <TR className="bg-primary-container/60">
+                <TD className="font-medium">{invoice.concept}</TD>
+                <TD numeric>1</TD>
+                <TD numeric>{euros(invoice.netCents)}</TD>
+                <TD numeric>{Math.round(VAT_RATE * 100)} %</TD>
+                <TD numeric className="font-semibold">
+                  {euros(invoice.grossCents)}
+                </TD>
+              </TR>
             </TBody>
           </Table>
         </div>
@@ -151,18 +153,24 @@ export function InvoiceDocument() {
           <div className="w-64 space-y-2">
             <div className="flex justify-between text-body-sm text-on-surface-variant">
               <span>Subtotal:</span>
-              <span className="text-label-tabular text-on-surface">{euros(subtotalCents)}</span>
+              <span className="text-label-tabular text-on-surface">{euros(invoice.netCents)}</span>
             </div>
             <div className="flex justify-between text-body-sm text-on-surface-variant">
               <span>IVA ({Math.round(VAT_RATE * 100)} %):</span>
-              <span className="text-label-tabular text-on-surface">{euros(vatCents)}</span>
+              <span className="text-label-tabular text-on-surface">{euros(invoice.ivaCents)}</span>
             </div>
             <div className="flex items-baseline justify-between border-t border-outline-variant pt-2.5">
               <span className="font-display text-headline-sm text-on-surface">Total:</span>
               <span className="font-display text-headline-lg tabular-figures text-primary">
-                {euros(totalCents)}
+                {euros(invoice.grossCents)}
               </span>
             </div>
+            {partial ? (
+              <div className="rounded-sm bg-tertiary-container/40 px-3 py-2 text-body-sm text-on-surface">
+                <span className="font-medium">Pagado {euros(invoice.paidCents)}</span> de{" "}
+                {euros(invoice.grossCents)} · Pendiente {euros(pendingCents)}
+              </div>
+            ) : null}
             <div className="flex items-center justify-end gap-1.5 text-xs text-secondary">
               <Icon name="task_alt" className="text-sm" />
               {legal.badge}

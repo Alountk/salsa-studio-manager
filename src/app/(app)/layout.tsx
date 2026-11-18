@@ -24,13 +24,19 @@ async function RequireSession({ children }: { children: ReactNode }) {
 /**
  * Route group for the authenticated area. Group segments do not appear in the
  * URL, so `src/app/(app)/page.tsx` still serves `/`.
+ *
+ * The whole shell sits inside one Suspense: the session gate must run per
+ * request, and client shell pieces reading `usePathname` cannot enter the
+ * static prerender of dynamic routes such as `[numero]` (cacheComponents
+ * rule). The authenticated area therefore ships as a streamed shell — correct
+ * for a fully live tool, irrelevant to keep static.
  */
 export default function AuthenticatedLayout({ children }: { children: ReactNode }) {
   return (
-    <AppShell>
-      <Suspense fallback={null}>
-        <RequireSession>{children}</RequireSession>
-      </Suspense>
-    </AppShell>
+    <Suspense fallback={null}>
+      <RequireSession>
+        <AppShell>{children}</AppShell>
+      </RequireSession>
+    </Suspense>
   );
 }
