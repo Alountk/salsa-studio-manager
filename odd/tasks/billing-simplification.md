@@ -33,9 +33,9 @@ Route: **inline** for all tasks (executing-plans; `subagent` tool permission-den
 | T6 | S4 | Auth core: passwords, sessions, rate limit | inline | done | a3f9f3f |
 | T7 | S4 | Login/logout, proxy gate, layout gate | inline | done | f4c18e2 |
 | T7b | S4, S5 | Next 16.4.6 security upgrade (2 critical RCE + 1 high DoS advisories; user: "dale") | inline | done | da9b1aa |
-| T8 | S2 | Nav trim + hidden-section redirects | inline | pending | — |
-| T9 | S3 | Inicio cobros dashboard | inline | pending | — |
-| T10 | S3 | Facturación: list, detail, create, payment | inline | pending | — |
+| T8 | S2 | Nav trim + hidden-section redirects | inline | done | fd931e9 |
+| T9 | S3 | Inicio cobros dashboard | inline | done | 0972cdb |
+| T10 | S3 | Facturación: list, detail, create, payment | inline | done | 866d956 |
 | T11 | S6 | Cuotas management UI | inline | pending | — |
 | T12 | S7 | Alumnos area | inline | pending | — |
 | T13 | S5 | Docker + Dokploy + startup hook | inline | pending | — |
