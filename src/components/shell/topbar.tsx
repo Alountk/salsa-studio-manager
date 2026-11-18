@@ -2,7 +2,8 @@
 
 import { Suspense } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { Avatar, Icon } from "@/components/ui";
+import { Avatar, Button, Icon } from "@/components/ui";
+import { logout } from "@/app/(auth)/login/actions";
 import { titleForPath } from "@/lib/nav";
 
 /**
@@ -57,12 +58,18 @@ export function Topbar() {
       </button>
 
       <div className="flex items-center gap-2">
-        <Avatar name="Lucía Moreno" role="student" size={32} />
+        <Avatar name="Administración" role="admin" size={32} />
         <div className="hidden flex-col leading-tight sm:flex">
-          <span className="text-body-sm font-medium text-on-surface">Lucía Moreno</span>
-          <span className="text-label uppercase text-on-surface-variant">Alumno</span>
+          <span className="text-body-sm font-medium text-on-surface">Administración</span>
+          <span className="text-label uppercase text-on-surface-variant">Admin</span>
         </div>
       </div>
+
+      <form action={logout}>
+        <Button type="submit" variant="secondary" size="compact">
+          Cerrar sesión
+        </Button>
+      </form>
     </header>
   );
 }
