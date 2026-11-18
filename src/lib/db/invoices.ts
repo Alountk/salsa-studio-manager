@@ -100,6 +100,19 @@ export function getInvoiceByNumber(db: Database, number: string): InvoiceWithSta
 }
 
 /**
+ * Next sequential invoice number for `year`: `V-<year>-<4 digits>`.
+ * Callers must invoke this inside a transaction together with the insert.
+ */
+export function allocateInvoiceNumber(db: Database, year: string): string {
+  const prefix = `V-${year}-`;
+  const last = db
+    .prepare("SELECT number FROM invoices WHERE number LIKE ? ORDER BY number DESC LIMIT 1")
+    .get(`${prefix}%`) as { number: string } | undefined;
+  const next = last ? Number.parseInt(last.number.slice(prefix.length), 10) + 1 : 1;
+  return `${prefix}${String(next).padStart(4, "0")}`;
+}
+
+/**
  * Insert a manual invoice, allocating its sequential number inside the
  * transaction: `V-<issue year>-<4 digits>`, continuing the year's sequence.
  */
@@ -114,14 +127,7 @@ export function createManualInvoice(
   },
 ): Invoice {
   const insert = db.transaction(() => {
-    const year = input.issueDate.slice(0, 4);
-    const prefix = `V-${year}-`;
-    const last = db
-      .prepare("SELECT number FROM invoices WHERE number LIKE ? ORDER BY number DESC LIMIT 1")
-      .get(`${prefix}%`) as { number: string } | undefined;
-    const next = last ? Number.parseInt(last.number.slice(prefix.length), 10) + 1 : 1;
-    const number = `${prefix}${String(next).padStart(4, "0")}`;
-
+    const number = allocateInvoiceNumber(db, input.issueDate.slice(0, 4));
     const ivaCents = vatOf(input.netCents);
     const grossCents = grossOf(input.netCents);
 
