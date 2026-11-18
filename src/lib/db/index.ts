@@ -11,7 +11,7 @@
  * its path comes from the `DATABASE_PATH` environment variable (see the
  * Global Constraints of the implementation plan).
  */
-import { readFileSync, readdirSync } from "node:fs";
+import { readFileSync, readdirSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import Sqlite from "better-sqlite3";
 import type { Database } from "better-sqlite3";
@@ -43,6 +43,9 @@ function migrate(db: Database): void {
 
 /** Open a SQLite database at `dbPath` and bring it up to the latest migration. */
 export function openDb(dbPath: string): Database {
+  if (dbPath !== ":memory:") {
+    mkdirSync(path.dirname(dbPath), { recursive: true });
+  }
   const db = new Sqlite(dbPath);
   if (dbPath !== ":memory:") {
     db.pragma("journal_mode = WAL");

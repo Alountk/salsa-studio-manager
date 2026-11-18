@@ -6,7 +6,7 @@ import { addDays, todayIso } from "../dates";
 import { openDb } from "./index";
 import { createManualInvoice, getInvoiceByNumber } from "./invoices";
 import { createStudent } from "./students";
-import { listPayments, recordPayment, studentOutstandingCents, PaymentError } from "./payments";
+import { listPayments, recordPayment, studentOutstandingCents, collectedInMonthCents, PaymentError } from "./payments";
 import type { Database } from "better-sqlite3";
 
 function setup() {
@@ -69,5 +69,18 @@ describe("recordPayment", () => {
     });
 
     expect(studentOutstandingCents(db, student.id, todayIso())).toBe(12100);
+  });
+});
+
+describe("collectedInMonthCents", () => {
+  it("sums only the payments recorded within the month prefix", () => {
+    const { db, invoice } = setup();
+    recordPayment(db, { invoiceNumber: invoice.number, amountCents: 5000, paidAt: "2026-11-05" });
+    recordPayment(db, { invoiceNumber: invoice.number, amountCents: 2000, paidAt: "2026-11-20" });
+    recordPayment(db, { invoiceNumber: invoice.number, amountCents: 1000, paidAt: "2026-10-31" });
+
+    expect(collectedInMonthCents(db, "2026-11")).toBe(7000);
+    expect(collectedInMonthCents(db, "2026-10")).toBe(1000);
+    expect(collectedInMonthCents(db, "2026-12")).toBe(0);
   });
 });

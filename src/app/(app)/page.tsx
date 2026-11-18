@@ -1,43 +1,41 @@
-import { Suspense, type ReactNode } from "react";
-import { AdminHome } from "@/components/home/admin-home";
-import { StudentHome } from "@/components/home/student-home";
-import { TeacherHome } from "@/components/home/teacher-home";
+import { connection } from "next/server";
+import { BillingDashboard } from "@/components/home/billing-dashboard";
+import { todayIso } from "@/lib/dates";
+import { getDb } from "@/lib/db";
+import { listInvoices } from "@/lib/db/invoices";
+import { collectedInMonthCents } from "@/lib/db/payments";
+import { ensureDueInvoices } from "@/lib/db/subscriptions";
 
 /**
- * Design 1, screens 04/05/06 — the three role-aware homes.
+ * Inicio — the cobros dashboard (billing simplification, spec S3).
  *
- * Real role routing needs an auth session, which this feature does not build
- * (see non-goals). Until then the login's demo selector sets `?rol=` and this
- * page renders the matching designed screen, so all three remain reachable as
- * first-class URLs instead of hiding behind a client-side toggle.
- *
- * The role lives in `searchParams`, which Next 16 refuses to read outside a
- * Suspense boundary during prerender, so the read is isolated in a streamed
- * child and the page shell still prerenders.
+ * Replaces the three designed role homes; those components stay in
+ * `src/components/home/` unreferenced (spec non-goal: hide, don't delete).
+ * Reading this page also runs due cuota generation (spec S6: at startup and
+ * whenever billing pages are read).
  */
-export default function HomePage({
-  searchParams,
-}: {
-  searchParams: Promise<{ rol?: string }>;
-}) {
+export default async function HomePage() {
+  // cacheComponents: stop prerendering here — KPIs, `new Date()`, and SQLite
+  // queries must run per request, never bake into a static shell.
+  await connection();
+
+  const db = getDb();
+  const today = todayIso();
+  ensureDueInvoices(db, today);
+
+  const invoices = listInvoices(db);
+  const unpaid = invoices.filter((invoice) => invoice.status !== "paid");
+  const sum = (rows: typeof invoices): number =>
+    rows.reduce((total, invoice) => total + (invoice.grossCents - invoice.paidCents), 0);
+
   return (
-    <Suspense fallback={null}>
-      <RoleScreen searchParams={searchParams} />
-    </Suspense>
+    <BillingDashboard
+      kpis={{
+        pendingCents: sum(unpaid.filter((invoice) => invoice.status === "pending")),
+        overdueCents: sum(unpaid.filter((invoice) => invoice.status === "overdue")),
+        collectedMonthCents: collectedInMonthCents(db, today.slice(0, 7)),
+      }}
+      recent={invoices.slice(0, 8)}
+    />
   );
-}
-
-async function RoleScreen({
-  searchParams,
-}: {
-  searchParams: Promise<{ rol?: string }>;
-}): Promise<ReactNode> {
-  const { rol } = await searchParams;
-
-  const screen: Record<string, ReactNode> = {
-    profesor: <TeacherHome />,
-    administracion: <AdminHome />,
-  };
-
-  return screen[rol ?? "alumno"] ?? <StudentHome />;
 }

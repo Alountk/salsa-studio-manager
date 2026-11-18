@@ -82,7 +82,17 @@ export function listPayments(db: Database, invoiceId: number): Payment[] {
 }
 
 /**
- * What a student still owes: the sum of (gross − paid) over invoices issued
+ * Total payments recorded within `monthPrefix` (`"2026-11"`), by `paid_at`
+ * prefix — the dashboard's "cobrado este mes" KPI.
+ */
+export function collectedInMonthCents(db: Database, monthPrefix: string): number {
+  const row = db
+    .prepare("SELECT COALESCE(SUM(amount_cents), 0) AS total FROM payments WHERE paid_at LIKE ?")
+    .get(`${monthPrefix}%`) as { total: number };
+  return row.total;
+}
+
+/** What a student still owes: the sum of (gross − paid) over invoices issued
  * on or before `today`, floored at zero per invoice. Fully paid and
  * future-dated invoices contribute nothing.
  */
