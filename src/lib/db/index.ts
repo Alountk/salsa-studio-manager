@@ -15,6 +15,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import Sqlite from "better-sqlite3";
 import type { Database } from "better-sqlite3";
+import { ensureAdminUser } from "../auth/users";
 
 const MIGRATIONS_DIR = path.join(process.cwd(), "src/lib/db/migrations");
 
@@ -55,6 +56,12 @@ export function openDb(dbPath: string): Database {
 export function getDb(): Database {
   if (appDb === undefined) {
     appDb = openDb(process.env.DATABASE_PATH ?? "./data/studio.db");
+    // Bootstrap the single admin from env — only when the table is empty (spec S4).
+    const email = process.env.ADMIN_EMAIL;
+    const password = process.env.ADMIN_PASSWORD;
+    if (email && password) {
+      ensureAdminUser(appDb, email, password);
+    }
   }
   return appDb;
 }
