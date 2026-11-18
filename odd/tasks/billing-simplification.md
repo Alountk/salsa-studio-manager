@@ -32,6 +32,7 @@ Route: **inline** for all tasks (executing-plans; `subagent` tool permission-den
 | T5 | S3 | Seed + change-password scripts | inline | done | 2d4d091 |
 | T6 | S4 | Auth core: passwords, sessions, rate limit | inline | done | a3f9f3f |
 | T7 | S4 | Login/logout, proxy gate, layout gate | inline | done | f4c18e2 |
+| T7b | S4, S5 | Next 16.4.6 security upgrade (2 critical RCE + 1 high DoS advisories; user: "dale") | inline | done | da9b1aa |
 | T8 | S2 | Nav trim + hidden-section redirects | inline | pending | — |
 | T9 | S3 | Inicio cobros dashboard | inline | pending | — |
 | T10 | S3 | Facturación: list, detail, create, payment | inline | pending | — |
@@ -57,3 +58,5 @@ Route: **inline** for all tasks (executing-plans; `subagent` tool permission-den
 **L7 (2026-11-19):** Plan written and self-reviewed (7 fixes); user chose native execution: "me parece bien, arranca."
 
 **L8 (2026-11-19, rulings):** In-place branch instead of worktree; delivery-strategy ask deferred to first push/PR (no remote configured); subagent-based execution unavailable (permission denied) → inline route for T1–T14. See `.superpowers/sdd/2026-11-19-billing-simplification/progress.md` ledger for pre-flight interface rows and per-task rulings.
+
+**L9 (2026-11-19):** Next's build stopped with a security nudge: `pnpm audit` showed 2 critical unauthenticated RCEs in next 16.4.0 (GHSA-2464-fhr4-w9xw, GHSA-673q-mjm6-r5xr) patched at ≥16.4.1, plus 1 high DoS; latest is 16.4.6. User decision, verbatim: "dale" → upgraded to 16.4.6 as task T7b; audit clean, 36/36 tests, lint, typecheck, and build all green on the new version.
