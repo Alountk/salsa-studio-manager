@@ -38,3 +38,19 @@ describe("proxy", () => {
     expect(res.headers.get("location")).toBeNull();
   });
 });
+
+describe("proxy hidden sections", () => {
+  const HIDDEN = ["/calendario", "/clases/nueva", "/ajustes", "/tarifas", "/registro", "/recuperar"];
+
+  it.each(HIDDEN)("sends an anonymous visitor from %s to /login", (path) => {
+    const res = proxy(request(path));
+    expect(res.status).toBe(307);
+    expect(new URL(res.headers.get("location") as string).pathname).toBe("/login");
+  });
+
+  it.each(HIDDEN)("sends a session holder from %s to exactly / (never a loop partner)", (path) => {
+    const res = proxy(request(path, "any-token"));
+    expect(res.status).toBe(307);
+    expect(new URL(res.headers.get("location") as string).pathname).toBe("/");
+  });
+});
