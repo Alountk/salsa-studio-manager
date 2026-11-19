@@ -39,7 +39,7 @@ Route: **inline** for all tasks (executing-plans; `subagent` tool permission-den
 | T11 | S6 | Cuotas management UI | inline | done | 903cb13 |
 | T12 | S7 | Alumnos area | inline | done | d1554c6 |
 | T13 | S5 | Docker + Dokploy + startup hook | inline | pending | — |
-| T14 | S1–S7 | Closure: full suite, probe cycle, README | inline | done | (this commit) |
+| T14 | S1–S7 | Closure: full suite, probe cycle, README | inline | done | f087aa6 |
 
 ## Log
 
