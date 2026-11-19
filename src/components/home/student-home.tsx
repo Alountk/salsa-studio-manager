@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Avatar, Button, Card, CardHeader, Icon, LinkButton, ProgressRing, StatusPill } from "@/components/ui";
+import { Avatar, Card, CardHeader, Icon, LinkButton, ProgressRing, StatusPill } from "@/components/ui";
 
 /**
  * Design 1, screen 04 — Inicio · alumno.
@@ -150,7 +150,9 @@ export function StudentHome() {
                 Válido hasta el 01/01/2027
               </p>
             </div>
-            <Button fullWidth>Comprar bono</Button>
+            <LinkButton href="/tarifas/pago" fullWidth>
+              Comprar bono
+            </LinkButton>
           </Card>
 
           <Card>

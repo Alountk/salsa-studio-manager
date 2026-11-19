@@ -22,7 +22,9 @@ const ATTENTION = [
   {
     text: "Factura V-2026-0179 vencida hace 6 días",
     status: "overdue" as const,
-    href: "/facturacion",
+    // IA call 1: the admin home's billing link carries the role, so it lands
+    // on the revenue dashboard (screen 6) instead of the student area.
+    href: "/facturacion?rol=administracion",
   },
   {
     text: "Clase del jueves 20:00 sin profesor asignado",
@@ -133,7 +135,12 @@ export function AdminHome() {
               <LinkButton href="/clases/nueva" variant="secondary" icon="add" fullWidth>
                 Crear clase
               </LinkButton>
-              <LinkButton href="/facturacion" variant="secondary" icon="receipt_long" fullWidth>
+              <LinkButton
+                href="/facturacion/facturas"
+                variant="secondary"
+                icon="receipt_long"
+                fullWidth
+              >
                 Nueva factura
               </LinkButton>
               <Button variant="secondary" icon="person_add" fullWidth>

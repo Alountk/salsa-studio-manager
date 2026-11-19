@@ -43,6 +43,15 @@ const ROUTES = [
   { id: "08-mi-semana-profesor", path: "/clases/mi-semana" },
   // Navigation index added by design-2-calendar task 7 (not a designed screen)
   { id: "09-clases-indice", path: "/clases" },
+  // Design 3 — appended as each screen lands
+  { id: "01-tarifas", path: "/tarifas" },
+  { id: "02-pago", path: "/tarifas/pago" },
+  { id: "03-resultado-pago", path: "/tarifas/resultado" },
+  { id: "04-mi-facturacion", path: "/facturacion" },
+  { id: "05-detalle-factura", path: "/facturacion/facturas/V-2026-0184" },
+  { id: "06-ingresos", path: "/facturacion?rol=administracion" },
+  { id: "07-facturas", path: "/facturacion/facturas" },
+  { id: "08-registrar-pago", path: "/facturacion/facturas?registrar=V-2026-0179" },
 ];
 
 const require = createRequire(`${PW_DIR}/`);
@@ -125,6 +134,13 @@ async function main() {
     };
     page.on("console", onError);
 
+    /*
+     * Reset the viewport before measuring: the height set for the previous
+     * route persists, and every page has `min-height: 100%`, so a short page
+     * following a tall one would report the stale height and capture with the
+     * footer pushed to the bottom by a stretched main (a phantom gap).
+     */
+    await page.setViewportSize({ width: 1440, height: 900 });
     const response = await page.goto(url, { waitUntil: "networkidle" });
     await page.waitForTimeout(250); // let webfonts settle before capture
 

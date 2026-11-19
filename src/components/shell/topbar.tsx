@@ -1,8 +1,23 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { Suspense } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 import { Avatar, Icon } from "@/components/ui";
 import { titleForPath } from "@/lib/nav";
+
+/**
+ * Page title for the current URL, role-aware where the route is (Design 3
+ * route mapping IA call 1: `/facturacion` is the student area by default and
+ * the admin dashboard with `?rol=administracion`, so its title follows the
+ * role). `useSearchParams` needs a Suspense boundary during prerender; the
+ * fallback is the plain pathname title, which is the final value on every
+ * route without a role query.
+ */
+function PageTitle() {
+  const pathname = usePathname();
+  const rol = useSearchParams().get("rol");
+  return <>{titleForPath(pathname, rol)}</>;
+}
 
 /**
  * DESIGN.md §Layout → app shell top bar.
@@ -14,7 +29,9 @@ export function Topbar() {
   return (
     <header className="sticky top-0 z-20 flex h-[var(--topbar-height)] shrink-0 items-center gap-4 border-b border-outline-variant bg-surface px-8">
       <h1 className="font-display text-headline-sm text-on-surface">
-        {titleForPath(pathname)}
+        <Suspense fallback={titleForPath(pathname)}>
+          <PageTitle />
+        </Suspense>
       </h1>
 
       <div className="relative ml-auto w-72 max-w-full">

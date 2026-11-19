@@ -177,6 +177,33 @@
   --color-on-level-advanced: #4c1d95;
 }
 
+/*
+ * Payment-network badge colors (Design 3, screens 02 and 04). The checkout
+ * draws the Visa and Mastercard marks inside the card-number field and the
+ * billing area renders a solid VISA badge; the exports hard-code their brand
+ * hexes. S9 keeps hex literals out of src/, so the values live here with the
+ * same treatment as the class palette above: implementation tokens, not
+ * DESIGN.md palette entries.
+ */
+@theme {
+  --color-brand-visa: #1434cb;
+  --color-brand-visa-navy: #1a1f71;
+  --color-brand-mc-red: #eb001b;
+  --color-brand-mc-orange: #f79e1b;
+}
+
+/*
+ * Chart series colors (Design 3, screen 06). The revenue chart's "Bonos &
+ * Clases" series and the payment-method bar's cash segment use hexes the
+ * export hard-codes (#FB923C and #D97706); no existing token covers them and
+ * L3's color mapping assigns no DESIGN.md role to either. Same treatment as
+ * the badges above: implementation tokens, hex stays in this file (S9).
+ */
+@theme {
+  --color-series-bonos: #fb923c;
+  --color-series-efectivo: #d97706;
+}
+
 @layer base {
   html {
     height: 100%;

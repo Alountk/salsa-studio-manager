@@ -126,5 +126,69 @@
     "title": "Estudio Salsa — Gestión de clases de salsa",
     "consoleErrors": [],
     "file": "designs/verification/09-clases-indice.png"
+  },
+  {
+    "id": "01-tarifas",
+    "path": "/tarifas",
+    "status": 200,
+    "title": "Precios y Tarifas | Estudio Salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/01-tarifas.png"
+  },
+  {
+    "id": "02-pago",
+    "path": "/tarifas/pago",
+    "status": 200,
+    "title": "Checkout | Estudio Salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/02-pago.png"
+  },
+  {
+    "id": "03-resultado-pago",
+    "path": "/tarifas/resultado",
+    "status": 200,
+    "title": "Resultado del Pago | Estudio Salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/03-resultado-pago.png"
+  },
+  {
+    "id": "04-mi-facturacion",
+    "path": "/facturacion",
+    "status": 200,
+    "title": "Estudio Salsa — Gestión de clases de salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/04-mi-facturacion.png"
+  },
+  {
+    "id": "05-detalle-factura",
+    "path": "/facturacion/facturas/V-2026-0184",
+    "status": 200,
+    "title": "Estudio Salsa — Gestión de clases de salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/05-detalle-factura.png"
+  },
+  {
+    "id": "06-ingresos",
+    "path": "/facturacion?rol=administracion",
+    "status": 200,
+    "title": "Estudio Salsa — Gestión de clases de salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/06-ingresos.png"
+  },
+  {
+    "id": "07-facturas",
+    "path": "/facturacion/facturas",
+    "status": 200,
+    "title": "Estudio Salsa — Gestión de clases de salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/07-facturas.png"
+  },
+  {
+    "id": "08-registrar-pago",
+    "path": "/facturacion/facturas?registrar=V-2026-0179",
+    "status": 200,
+    "title": "Estudio Salsa — Gestión de clases de salsa",
+    "consoleErrors": [],
+    "file": "designs/verification/08-registrar-pago.png"
   }
 ]
