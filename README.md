@@ -63,3 +63,7 @@ demo affordances in favour of real data.
 - Spec (approved): `docs/superpowers/specs/2026-11-18-billing-simplification-design.md`
 - Implementation plan: `docs/superpowers/plans/2026-11-19-billing-simplification.md`
 - Feature tracking: `odd/tasks/billing-simplification.md`
+
+## License
+
+[MIT](LICENSE) — © 2026 Raul Marchan Catala.
