@@ -1,0 +1,5 @@
+allowBuilds:
+  esbuild: true
+# pnpm settings (pnpm 10+ reads them here, not in package.json).
+# esbuild's postinstall is approved so non-interactive installs (Docker CI)
+# do not fail with ERR_PNPM_IGNORED_BUILDS; tsx/vitest need esbuild.
