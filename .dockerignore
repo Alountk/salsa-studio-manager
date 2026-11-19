@@ -1,0 +1,12 @@
+# Build context hygiene — none of this belongs in the image.
+node_modules
+.next
+.git
+.gitignore
+.superpowers
+designs
+odd
+docs
+*.md
+.env*
+tsconfig.tsbuildinfo

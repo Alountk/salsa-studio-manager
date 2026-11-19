@@ -1,39 +1,38 @@
-import { Suspense, type ReactNode } from "react";
-import { AdminRevenue } from "@/components/billing/admin-revenue";
-import { StudentBilling } from "@/components/billing/student-billing";
+import { connection } from "next/server";
+import { InvoiceList } from "@/components/billing/invoice-list";
+import { todayIso } from "@/lib/dates";
+import { getDb } from "@/lib/db";
+import { listInvoices, toAdminInvoice, type InvoiceFilter } from "@/lib/db/invoices";
+import { ensureDueInvoices } from "@/lib/db/subscriptions";
 
 /**
- * `/facturacion` — Design 3, screen 04 (S4). Role-aware exactly like `/`
- * (route mapping IA call 1): the student screen by default, the admin revenue
- * dashboard with `?rol=administracion` (S6), and `?rol=profesor` falling back to
- * the student screen, mirroring the home's fallback.
+ * `/facturacion` — the real invoice list (billing simplification, spec S3).
+ * Replaces the role-aware revenue/student screens (those components stay in
+ * `src/components/billing/` unreferenced — hide, don't delete). Reading this
+ * page also runs due cuota generation (spec S6).
  *
- * The role lives in `searchParams`, which Next 16 refuses to read outside a
- * Suspense boundary during prerender — same streamed-child pattern as the
- * home and calendar pages.
+ * `await connection()` comes first (cacheComponents rule from T9): nothing
+ * below — SQLite, `new Date()`, searchParams — may run during prerender.
  */
-export default function BillingPage({
+const STATUS_FILTERS: Record<string, InvoiceFilter> = {
+  pagadas: "paid",
+  pendientes: "pending",
+  vencidas: "overdue",
+};
+
+export default async function BillingPage({
   searchParams,
 }: {
-  searchParams: Promise<{ rol?: string }>;
+  searchParams: Promise<{ estado?: string }>;
 }) {
-  return (
-    <Suspense fallback={null}>
-      <RoleScreen searchParams={searchParams} />
-    </Suspense>
-  );
-}
+  await connection();
+  const { estado } = await searchParams;
 
-async function RoleScreen({
-  searchParams,
-}: {
-  searchParams: Promise<{ rol?: string }>;
-}): Promise<ReactNode> {
-  const { rol } = await searchParams;
+  const db = getDb();
+  ensureDueInvoices(db, todayIso());
 
-  const screen: Record<string, ReactNode> = {
-    administracion: <AdminRevenue />,
-  };
+  const filter: InvoiceFilter = STATUS_FILTERS[estado ?? ""] ?? "all";
+  const invoices = listInvoices(db, filter).map(toAdminInvoice);
 
-  return screen[rol ?? "alumno"] ?? <StudentBilling />;
+  return <InvoiceList invoices={invoices} />;
 }
