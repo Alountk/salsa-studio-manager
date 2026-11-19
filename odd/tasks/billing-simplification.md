@@ -39,7 +39,7 @@ Route: **inline** for all tasks (executing-plans; `subagent` tool permission-den
 | T11 | S6 | Cuotas management UI | inline | done | 903cb13 |
 | T12 | S7 | Alumnos area | inline | done | d1554c6 |
 | T13 | S5 | Docker + Dokploy + startup hook | inline | pending | — |
-| T14 | S1–S7 | Closure: full suite, probe cycle, README | inline | pending | — |
+| T14 | S1–S7 | Closure: full suite, probe cycle, README | inline | done | (this commit) |
 
 ## Log
 
@@ -60,3 +60,5 @@ Route: **inline** for all tasks (executing-plans; `subagent` tool permission-den
 **L8 (2026-11-19, rulings):** In-place branch instead of worktree; delivery-strategy ask deferred to first push/PR (no remote configured); subagent-based execution unavailable (permission denied) → inline route for T1–T14. See `.superpowers/sdd/2026-11-19-billing-simplification/progress.md` ledger for pre-flight interface rows and per-task rulings.
 
 **L9 (2026-11-19):** Next's build stopped with a security nudge: `pnpm audit` showed 2 critical unauthenticated RCEs in next 16.4.0 (GHSA-2464-fhr4-w9xw, GHSA-673q-mjm6-r5xr) patched at ≥16.4.1, plus 1 high DoS; latest is 16.4.6. User decision, verbatim: "dale" → upgraded to 16.4.6 as task T7b; audit clean, 36/36 tests, lint, typecheck, and build all green on the new version.
+
+**L10 (2026-11-19, closure):** The T14 probe cycle against the real container found and fixed two production bugs no unit test could see: (1) with `cacheComponents` (PPR), a raw `cookies()` read in the authenticated layout threw `DYNAMIC_SERVER_USAGE` → HTTP 500 on every logged-in page; bisect probes (gate disabled/static page/cookies-only) isolated it to the PPR machinery, so the app switched to classic rendering (`cacheComponents` + `partialPrefetching` removed from next.config.ts — every route is session+db per request, the mode added nothing). (2) The restore drill exposed a redirect loop: an orphaned cookie ping-ponged between the proxy's optimistic "/login→/" bounce and `requireUser`'s authoritative redirect (ERR_TOO_MANY_REDIRECTS); `/login` is now always served, which self-heals on the next login. The restore procedure in docs/deploy/dokploy.md was corrected (stale WAL sidecars must be removed via a one-off container — `docker exec` cannot run against a stopped service). Verified end to end on the container: login/rate-limit/logout, seed, student creation, cuota → automatic invoice V-2026-0011, partial + full payment with reload persistence, hidden-route redirects (anonymous → /login, session → /), backup → volume wipe → restore → identical counts and dashboard, 0 console errors.
