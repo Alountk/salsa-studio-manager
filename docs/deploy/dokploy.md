@@ -42,9 +42,17 @@ as the database is not a backup.
 ## Restore
 
 1. Stop the service in Dokploy.
-2. Remove any stale sidecar files: `docker exec <container> rm -f /data/studio.db-wal /data/studio.db-shm` (or delete them from the volume directly).
-3. Put the backup file in place: `docker cp ./studio-backup.db <container>:/data/studio.db`.
-4. Start the service; open `/login` and verify the data.
+2. Replace the database atomically with a one-off container (removing stale
+   WAL sidecars is mandatory — a leftover `-wal` from the old file would be
+   replayed over the restored backup on the next boot):
+   ```sh
+   docker run --rm \
+     -v <volume>:/d \
+     -v "$(pwd)/studio-backup.db":/b:ro \
+     alpine sh -c "rm -f /d/studio.db* && cp /b/studio.db /d/studio.db"
+   ```
+   (`docker exec` cannot be used here: the service container is stopped.)
+3. Start the service; open `/login` and verify the data.
 
 > **The first restore must be rehearsed** before you rely on it — the feature's
 > closure probe (T14) runs one end to end. An untested backup is not a backup.

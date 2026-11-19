@@ -1,59 +1,65 @@
 # salsa_studio_manager
 
-Web application for managing a salsa dance studio: scheduling, class creation by the
-hour, student enrollment, and billing.
+Web application for managing a salsa dance studio's **billing**: students,
+invoices, manual payments, and recurring monthly fees (cuotas) — with who pays
+and who doesn't always visible at a glance.
 
-**Current stage**: design. The functional scope is expressed as three high-fidelity
-UI designs authored in Google Stitch, each covering one end-to-end user flow. No
-application code exists yet.
+**Scope after the billing simplification** (2026-11): the visible product is
+three sections — **Inicio** (cobros dashboard), **Facturación** (invoices +
+cuotas) and **Alumnos** (records, balances, history) — behind a single-admin
+login. The earlier calendar/classes/marketing work remains in the tree but is
+hidden: those routes redirect and no navigation links to them (spec decision:
+hide, don't delete).
 
-## Scope
+## Architecture
 
-The studio runs recurring and one-off classes taught by several teachers in a small
-number of rooms. The product has to answer four questions well:
+- **Next.js 16** (App Router, Server Actions, `src/proxy.ts` auth gate) +
+  React 19 + Tailwind 4.
+- **SQLite** via `better-sqlite3` — one file at `DATABASE_PATH`
+  (`/data/studio.db` in Docker), WAL mode, plain-SQL migrations applied on
+  boot (`src/lib/db/migrations/`, `PRAGMA user_version`). Repository modules
+  in `src/lib/db/` with `db` as the first parameter.
+- **Auth**: one admin (bcrypt), session = random token cookie whose SHA-256
+  lives in SQLite, 7-day expiry, 5-attempts/minute login rate limit. No
+  signup, no self-service recovery — password resets run
+  `npm run change-password` (or `docker exec … pnpm change-password`).
+- **Cuotas**: active recurring fees generate their monthly invoice
+  idempotently at server start (`src/instrumentation.ts`) and whenever billing
+  pages are read; edits affect future invoices only; billing days clamp to 1–28.
+- Rendering is classic/dynamic (`cacheComponents` is off — see the note in
+  `next.config.ts`): every authenticated page reads the session and the
+  database per request.
 
-1. **Who is this person?** — students, teachers, and studio admins see different things.
-2. **When is there a class, and where?** — a calendar over rooms, teachers, and hours.
-3. **How is a class created for a specific hour block?** — duration, capacity, price.
-4. **Who owes what?** — single-class charges, class packs, monthly subscriptions, invoices.
-
-## Design flows
-
-| # | Design | Flow | Screens | Flow doc | Stitch project |
-| - | ------ | ---- | ------- | -------- | -------------- |
-| 1 | Access and users | login, sign-up, roles, password recovery, profile | 7 | [01-access-and-users.md](docs/flows/01-access-and-users.md) | `6775861207096503195` |
-| 2 | Calendar and classes | calendar views, availability, create class by hours, booking, attendance | 8 | [02-calendar-and-classes.md](docs/flows/02-calendar-and-classes.md) | `7073475385354350392` |
-| 3 | Billing | pricing and class packs, single charge, subscription, invoices, revenue panel | 8 | [03-billing.md](docs/flows/03-billing.md) | `2093881141495994042` |
-
-## Layout
-
-```
-DESIGN.md          The design system Stitch generates from (YAML frontmatter + prose)
-designs/           23 exported screens: <id>.html and <id>.png per screen, plus manifest.json
-designs/01-acceso-y-usuarios/    Design 1 artifacts
-designs/02-calendario-y-clases/  Design 2 artifacts
-designs/03-facturacion/          Design 3 artifacts
-docs/flows/        One document per design: screens, walkthroughs, edge paths, open questions
-scripts/           Reproducible generator and exporter for the Stitch MCP server
-odd/tasks/         ODD task tracking for this feature
-```
-
-## Tooling
-
-The designs are produced through the **Google Stitch MCP server**
-(`https://stitch.googleapis.com/mcp`), registered in Pi's user-level MCP
-configuration as the `stitch` server and verified with `pi mcp list`. Authentication
-uses the `STITCH_API_KEY` environment variable; no credential is stored in this
-repository.
-
-## Reproducing or extending the designs
+## Development
 
 ```bash
-cd scripts && npm install
-node scripts/generate-designs.mjs --setup    # projects + design systems
-node scripts/generate-designs.mjs           # all 23 screens (idempotent, resumable)
-node scripts/export-designs.mjs             # download HTML + PNG into designs/
+pnpm install
+cp .env.example .env.local      # ADMIN_EMAIL / ADMIN_PASSWORD for your dev admin
+pnpm dev
+
+pnpm test                       # Vitest unit tests (repositories, auth, form cores)
+pnpm lint && pnpm typecheck && pnpm build
+pnpm seed                       # demo data (8 students, 10 invoices, 3 cuotas); skips if populated
+pnpm change-password -- <email> <newPassword>
 ```
 
-Screens are declared in `scripts/design-plan.mjs`; add an entry there and re-run the
-generator to produce only what is missing.
+## Deployment (Dokploy)
+
+Dockerfile at the repo root; persistent volume at `/data`. Environment,
+backup (WAL-safe) and the **restore procedure** are documented in
+[docs/deploy/dokploy.md](docs/deploy/dokploy.md) — rehearse the restore once
+before relying on the backup.
+
+## Design heritage
+
+The product was designed as three high-fidelity Google Stitch flows (access,
+calendar, billing) exported under `designs/`, with the design system in
+[DESIGN.md](DESIGN.md) and per-flow walkthroughs in `docs/flows/`. Billing
+screens still follow those exports; the simplification removed their inert
+demo affordances in favour of real data.
+
+## Specification and plan
+
+- Spec (approved): `docs/superpowers/specs/2026-11-18-billing-simplification-design.md`
+- Implementation plan: `docs/superpowers/plans/2026-11-19-billing-simplification.md`
+- Feature tracking: `odd/tasks/billing-simplification.md`

@@ -27,10 +27,12 @@ describe("proxy", () => {
     expect(res.status).toBe(200);
   });
 
-  it("sends a cookie holder away from /login to /", () => {
+  it("serves /login even to a cookie holder (orphaned cookies must never loop)", () => {
+    // The proxy is optimistic (no DB access): bouncing a stale cookie away
+    // from /login ping-pongs with requireUser's authoritative redirect.
     const res = proxy(request("/login", "any-token-at-all"));
-    expect(res.status).toBe(307);
-    expect(res.headers.get("location")).toMatch(/\/$/);
+    expect(res.headers.get("location")).toBeNull();
+    expect(res.status).toBe(200);
   });
 
   it("keeps an anonymous visitor on /login", () => {

@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { AppShell } from "@/components/shell/app-shell";
@@ -9,34 +8,16 @@ export const metadata: Metadata = {
 };
 
 /**
- * Authoritative session gate (spec S4). It reads cookies + SQLite, so under
- * `cacheComponents` it cannot sit in the static shell: it lives behind a
- * Suspense boundary (see docs/authentication-with-cache-components) — the
- * build prerenders only the fallback, and this subtree (including every
- * db-reading page below) renders per request. An invalid session redirects
- * from inside the stream.
- */
-async function RequireSession({ children }: { children: ReactNode }) {
-  await requireUser();
-  return <>{children}</>;
-}
-
-/**
  * Route group for the authenticated area. Group segments do not appear in the
  * URL, so `src/app/(app)/page.tsx` still serves `/`.
  *
- * The whole shell sits inside one Suspense: the session gate must run per
- * request, and client shell pieces reading `usePathname` cannot enter the
- * static prerender of dynamic routes such as `[numero]` (cacheComponents
- * rule). The authenticated area therefore ships as a streamed shell — correct
- * for a fully live tool, irrelevant to keep static.
+ * `requireUser()` runs directly in the layout (classic rendering, no
+ * cacheComponents): reading cookies here marks every route dynamic, an
+ * unauthenticated full load gets a clean 307 to `/login` before any HTML is
+ * flushed, and no Suspense shell is involved (the PPR attempt with a Suspense
+ * hole threw DYNAMIC_SERVER_USAGE — see next.config.ts's note).
  */
-export default function AuthenticatedLayout({ children }: { children: ReactNode }) {
-  return (
-    <Suspense fallback={null}>
-      <RequireSession>
-        <AppShell>{children}</AppShell>
-      </RequireSession>
-    </Suspense>
-  );
+export default async function AuthenticatedLayout({ children }: { children: ReactNode }) {
+  await requireUser();
+  return <AppShell>{children}</AppShell>;
 }

@@ -32,8 +32,13 @@ export function proxy(request: NextRequest): NextResponse {
     return NextResponse.redirect(new URL(hasSession ? "/" : "/login", request.url));
   }
 
+  // `/login` is ALWAYS served (never bounced to "/"): the proxy cannot see
+  // the database, so an orphaned cookie — expired session, restored volume —
+  // would otherwise ping-pong forever between the optimistic proxy redirect
+  // and requireUser's authoritative redirect (ERR_TOO_MANY_REDIRECTS,
+  // caught by the T14 restore drill). Serving the form is self-healing: the
+  // next successful login writes a fresh valid session over the bad cookie.
   if (pathname === "/login") {
-    if (hasSession) return NextResponse.redirect(new URL("/", request.url));
     return NextResponse.next();
   }
 
