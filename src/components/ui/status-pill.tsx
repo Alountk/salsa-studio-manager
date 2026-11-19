@@ -20,7 +20,8 @@ export type StatusKind =
   | "late"
   | "confirmed"
   | "unassigned"
-  | "conflict";
+  | "conflict"
+  | "few_spots";
 
 type Tone = "success" | "warning" | "error" | "info" | "neutral";
 
@@ -45,6 +46,7 @@ const STATUSES: Record<StatusKind, { label: string; icon: string; tone: Tone }> 
   confirmed: { label: "Confirmada", icon: "verified", tone: "success" },
   unassigned: { label: "Sin asignar", icon: "person_search", tone: "warning" },
   conflict: { label: "Conflicto", icon: "warning", tone: "error" },
+  few_spots: { label: "Pocas plazas", icon: "group", tone: "warning" },
 };
 
 export function StatusPill({

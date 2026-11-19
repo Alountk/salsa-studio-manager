@@ -7,6 +7,7 @@ export { Button, type ButtonProps, type ButtonSize, type ButtonVariant } from ".
 export { Card, CardHeader } from "./card";
 export { FieldShell, Input, type InputProps } from "./input";
 export { Icon } from "./icon";
+export { LinkButton } from "./link-button";
 export { MetricCard } from "./metric-card";
 export { ProgressRing } from "./progress-ring";
 export { Select, type SelectProps } from "./select";

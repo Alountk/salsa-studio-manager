@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, CardHeader, Icon, MetricCard, StatusPill, type StatusKind } from "@/components/ui";
+import { Avatar, Card, CardHeader, Icon, LinkButton, MetricCard, StatusPill, type StatusKind } from "@/components/ui";
 
 /**
  * Design 1, screen 05 — Inicio · profesor.
@@ -88,10 +88,16 @@ export function TeacherHome() {
                         </span>
                       </div>
                       <div className="flex gap-3">
-                        <Button size="compact" variant="secondary">
+                        <LinkButton
+                          href="/clases/lista"
+                          size="compact"
+                          variant="secondary"
+                        >
                           Ver alumnos
-                        </Button>
-                        <Button size="compact">Pasar lista</Button>
+                        </LinkButton>
+                        <LinkButton href="/clases/lista" size="compact">
+                          Pasar lista
+                        </LinkButton>
                       </div>
                     </div>
                   ) : null}
@@ -119,15 +125,20 @@ export function TeacherHome() {
           <Card>
             <CardHeader title="Acciones rápidas" />
             <div className="flex flex-col gap-3">
-              <Button variant="secondary" icon="add" fullWidth>
+              <LinkButton href="/clases/nueva" variant="secondary" icon="add" fullWidth>
                 Crear clase
-              </Button>
-              <Button variant="secondary" icon="view_week" fullWidth>
+              </LinkButton>
+              <LinkButton href="/clases/mi-semana" variant="secondary" icon="view_week" fullWidth>
                 Ver mi semana
-              </Button>
-              <Button variant="secondary" icon="edit_calendar" fullWidth>
+              </LinkButton>
+              <LinkButton
+                href="/clases/disponibilidad"
+                variant="secondary"
+                icon="edit_calendar"
+                fullWidth
+              >
                 Editar disponibilidad
-              </Button>
+              </LinkButton>
             </div>
           </Card>
         </div>

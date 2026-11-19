@@ -153,6 +153,30 @@
   --content-max-width: 80rem;
 }
 
+/*
+ * Class-level palette — an implementation token, deliberately NOT in DESIGN.md.
+ * DESIGN.md §Calendar says an event block is "tinted by class level" and its
+ * legend lists Principiante / Intermedio / Avanzado, but it never names the
+ * three hues and its frontmatter carries no level token. Inventing them in
+ * DESIGN.md would silently rewrite the design theme that the three Stitch
+ * projects were generated from, so they live here instead and the gap is
+ * recorded as an open question in odd/tasks/design-2-calendar.md.
+ *
+ * Advanced takes violet because teal and terracotta are already spoken for
+ * (secondary = success, primary = action) and amber is reserved for warnings.
+ */
+@theme {
+  --color-level-beginner: #0f766e;
+  --color-level-beginner-container: #ccfbf1;
+  --color-on-level-beginner: #0b4f4a;
+  --color-level-intermediate: #c2410c;
+  --color-level-intermediate-container: #fde8dd;
+  --color-on-level-intermediate: #7a2a0c;
+  --color-level-advanced: #6d28d9;
+  --color-level-advanced-container: #ede9fe;
+  --color-on-level-advanced: #4c1d95;
+}
+
 @layer base {
   html {
     height: 100%;

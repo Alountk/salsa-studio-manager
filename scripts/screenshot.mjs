@@ -32,6 +32,17 @@ const ROUTES = [
   { id: "05-inicio-profesor", path: "/?rol=profesor" },
   { id: "06-inicio-administracion", path: "/?rol=administracion" },
   { id: "07-perfil-y-ajustes", path: "/ajustes" },
+  // Design 2 — appended as each screen lands
+  { id: "01-calendario-mes", path: "/calendario" },
+  { id: "02-calendario-semana", path: "/calendario?vista=semana" },
+  { id: "03-detalle-clase", path: "/calendario?vista=semana&clase=c-m2" },
+  { id: "04-mis-reservas", path: "/calendario/mis-reservas" },
+  { id: "05-crear-clase", path: "/clases/nueva" },
+  { id: "06-editor-disponibilidad", path: "/clases/disponibilidad" },
+  { id: "07-lista-y-asistencia", path: "/clases/lista" },
+  { id: "08-mi-semana-profesor", path: "/clases/mi-semana" },
+  // Navigation index added by design-2-calendar task 7 (not a designed screen)
+  { id: "09-clases-indice", path: "/clases" },
 ];
 
 const require = createRequire(`${PW_DIR}/`);
@@ -116,6 +127,21 @@ async function main() {
 
     const response = await page.goto(url, { waitUntil: "networkidle" });
     await page.waitForTimeout(250); // let webfonts settle before capture
+
+    /*
+     * Resize the viewport to the full document height before shooting. A
+     * fullPage capture scrolls and stitches, which drags any position:sticky
+     * element (the week grid's day header, the app shell's top bar) to its
+     * stuck offset mid-capture and renders the page as if it were broken. With
+     * a viewport tall enough to hold the whole document there is nothing to
+     * scroll and the sticky elements stay where a reader sees them.
+     */
+    const height = await page.evaluate(() =>
+      Math.min(Math.max(document.body.scrollHeight, 900), 24000),
+    );
+    await page.setViewportSize({ width: 1440, height });
+    await page.waitForTimeout(150);
+
     const path = `${OUT}/${route.id}.png`;
     await page.screenshot({ path, fullPage: true });
     page.off("console", onError);

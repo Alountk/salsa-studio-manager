@@ -1,4 +1,5 @@
-import { Avatar, Button, Card, CardHeader, Icon, ProgressRing, StatusPill } from "@/components/ui";
+import Link from "next/link";
+import { Avatar, Button, Card, CardHeader, Icon, LinkButton, ProgressRing, StatusPill } from "@/components/ui";
 
 /**
  * Design 1, screen 04 — Inicio · alumno.
@@ -89,15 +90,25 @@ export function StudentHome() {
                 en 2 días
               </span>
               <div className="flex gap-3">
-                <Button variant="secondary">Añadir al calendario</Button>
-                <Button>Ver clase</Button>
+                <LinkButton href="/calendario" variant="secondary">
+                  Añadir al calendario
+                </LinkButton>
+                <LinkButton href="/calendario?clase=c-m2&amp;vista=semana">Ver clase</LinkButton>
               </div>
             </div>
           </Card>
 
           {/* Week strip */}
           <section>
-            <h3 className="mb-3 text-label uppercase text-on-surface-variant">Tu semana</h3>
+            <div className="mb-3 flex items-center justify-between">
+              <h3 className="text-label uppercase text-on-surface-variant">Tu semana</h3>
+              <Link
+                href="/calendario/mis-reservas"
+                className="text-body-sm text-primary hover:underline"
+              >
+                Ver mis reservas
+              </Link>
+            </div>
             <ul className="grid grid-cols-2 gap-3 sm:grid-cols-5">
               {WEEK.map((entry) => (
                 <li
